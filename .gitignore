@@ -1,5 +1,4 @@
 coverage/
-**.test.*
 # Logs
 logs
 *.log
@@ -25,4 +24,4 @@ dist-ssr
 *.sln
 *.sw?
 **.env
-backend/src/index.js
+**.js
