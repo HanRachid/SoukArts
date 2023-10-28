@@ -1,20 +1,15 @@
-import mongoose, { MongooseOptions } from "mongoose";
+import mongoose from 'mongoose';
 
-const ConnectDb = async () => {
+/**
+ * Initiate connection to database
+ */
+export const ConnectDb = async () => {
   try {
-    const connection = mongoose.connect(
-      process.env.DriveMongoDB,
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useFindAndModify: false,
-        useCreateIndex: true,
-      }
-    );
+    await mongoose.connect(process.env.DriveMongoDB);
 
-    console.log("connected to database");
+    console.log('connected to database');
   } catch (error) {
-    console.log("issue connection to database");
+    console.log('Connection failed: Connection error');
   }
 };
 
