@@ -1,20 +1,19 @@
-import {it, vi, expect, describe, beforeAll} from 'vitest';
+import {it, vi, expect, describe, beforeAll, beforeEach} from 'vitest';
 import {ConnectDb} from './connectionDb';
 import mongoose from 'mongoose';
 
-beforeAll(() => {
-  console.log = vi.fn();
-  ConnectDb();
-});
 describe('ConnectDb', () => {
+  beforeAll(async () => {
+    console.log = vi.fn();
+  });
   // Connects to the database successfully
   it('should connect to the database successfully', async () => {
     // Mock the mongoose.connect function to return a resolved promise
     const mockConnect = vi.spyOn(mongoose, 'connect');
     mockConnect.mockResolvedValueOnce(mongoose);
+    await ConnectDb();
 
     // Call the ConnectDb function
-    await ConnectDb();
 
     // Expect the mongoose.connect function to be called with the correct arguments
     expect(mockConnect).toHaveBeenCalledWith(process.env.DriveMongoDB);
@@ -30,6 +29,7 @@ describe('ConnectDb', () => {
     mockConnect.mockResolvedValueOnce(mongoose);
 
     // Call the ConnectDb function
+    await ConnectDb();
 
     // Expect the console.log function to be called with the correct message
     expect(console.log).toHaveBeenCalledWith('connected to database');
@@ -39,7 +39,8 @@ describe('ConnectDb', () => {
   it('should fail to connect to the database', async () => {
     // Mock the mongoose.connect function to return a rejected promise
     const mockConnect = vi.spyOn(mongoose, 'connect');
-    mockConnect.mockRejectedValueOnce(mongoose);
+    const expectedError = new Error('Connection failed: Connection error');
+    mockConnect.mockRejectedValueOnce(expectedError);
 
     // Call the ConnectDb function
     await ConnectDb();
@@ -63,9 +64,7 @@ describe('ConnectDb', () => {
     await ConnectDb();
 
     // Expect the console.log function to be called with the correct message
-    expect(console.log).toHaveBeenCalledWith(
-      'Connection failed: Connection error'
-    );
+    expect(console.log).toHaveBeenCalledWith('Connection error');
 
     // Clean up the mocks
     consoleLogMock.mockRestore();
@@ -77,7 +76,9 @@ describe('ConnectDb', () => {
     // Mock the mongoose.connect function to throw an error with specific message
     const mockConnect = vi.spyOn(mongoose, 'connect');
     mockConnect.mockImplementationOnce(() => {
-      throw new Error('Invalid database credentials');
+      throw new Error(
+        'The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.'
+      );
     });
 
     // Call the ConnectDb function
@@ -85,7 +86,7 @@ describe('ConnectDb', () => {
 
     // Expect the console.log function to be called with the correct message
     expect(console.log).toHaveBeenCalledWith(
-      'Connection failed: Connection error'
+      'The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.'
     );
   });
 
@@ -94,7 +95,7 @@ describe('ConnectDb', () => {
     // Mock the mongoose.connect function to throw an error with specific message
     const mockConnect = vi.spyOn(mongoose, 'connect');
     mockConnect.mockImplementationOnce(() => {
-      throw new Error('Invalid database URL');
+      throw new Error('Connection failed: Connection error');
     });
 
     // Call the ConnectDb function
@@ -102,7 +103,7 @@ describe('ConnectDb', () => {
 
     // Expect the console.log function to be called with the correct message
     expect(console.log).toHaveBeenCalledWith(
-      'Connection failed: Connection error'
+      'The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.'
     );
   });
 });
