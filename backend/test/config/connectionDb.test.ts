@@ -1,5 +1,5 @@
 import {it, vi, expect, describe, beforeAll, beforeEach} from 'vitest';
-import {ConnectDb} from './connectionDb';
+import {ConnectDb} from '../../src/config/connectionDb';
 import mongoose from 'mongoose';
 require('dotenv').config();
 const mockConnect = vi.spyOn(mongoose, 'connect');

@@ -12,5 +12,3 @@ export const ConnectDb = async (): Promise<void> => {
     throw new Error(error.message);
   }
 };
-
-export default ConnectDb;

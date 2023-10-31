@@ -1,5 +1,5 @@
 import {NextFunction, Request, Response} from 'express';
-import ConnectDb from './config/connectionDb';
+import {ConnectDb} from './config/connectionDb';
 const express = require('express');
 require('dotenv').config();
 
