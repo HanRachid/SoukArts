@@ -1,25 +1,16 @@
-import { NextFunction, Request, Response } from "express";
+import {NextFunction, Request, Response} from 'express';
+import ConnectDb from './config/connectionDb';
 const express = require('express');
+require('dotenv').config();
+
 const app = express();
 const port = process.env.PORT ?? 3000;
 
-const middle = (req: Request, res: Response, next: NextFunction): void => {
-	console.log("middleware");
-
-	try {
-		next();
-	} catch {
-		console.error('An error occurred when calling next:');
-	}
-};
-
-app.use(middle);
 app.get('/', (req: Request, res: Response) => {
-	res.send('rachdzaid');
+  res.send('Hello Worlde');
 });
 
 app.listen(3000, (): void => {
-	console.log('server running on port ' + port);
+  console.log('server running on port ' + port);
+  ConnectDb();
 });
-
-export { middle };
