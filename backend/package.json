@@ -6,7 +6,7 @@
   "scripts": {
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "serve": "concurrently -k -n tsc,nodemon \"tsc --watch\" \"nodemon src/index.js\""
+    "serve": "concurrently -k -n tsc,nodemon \"tsc --watch\" \"nodemon dist/index.js\""
   },
   "author": "HIRA",
   "license": "ISC",
