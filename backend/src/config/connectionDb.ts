@@ -5,7 +5,7 @@ import mongoose from 'mongoose';
  */
 export const connectDb = async (): Promise<void> => {
   try {
-    await mongoose.connect(process.env.DriveMongoDB + '/users');
+    await mongoose.connect(process.env.DriveMongoDB);
     console.log('connected to database');
   } catch (error) {
     throw new Error(error.message);

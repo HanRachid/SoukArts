@@ -17,7 +17,4 @@ app.listen(3000, (): void => {
   connectDb();
 });
 
-process.on('SIGINT', async () => {
-  await mongoose.connection.close();
-  process.exit(0);
-});
+const newmodel = UserModel.findModel('6542547d64cdb765de2314bb');
