@@ -1,2 +1,2 @@
-type Roles = 'client' | 'seller' | 'admin';
+type Role = 'Client' | 'Seller' | 'Admin';
 type Gender = 'Male' | 'Female' | 'Other';

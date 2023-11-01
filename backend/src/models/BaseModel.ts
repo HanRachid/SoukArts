@@ -10,6 +10,7 @@ export default interface BaseModel {
   last_name: string;
   gender: Gender;
   is_deleted: boolean;
+  role: Role;
   saveModel(): Promise<void>;
   getModel(): Promise<BaseModel>;
   updateModel(object: Partial<UserModel>): Promise<void>;

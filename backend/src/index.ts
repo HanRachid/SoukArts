@@ -16,5 +16,3 @@ app.listen(3000, (): void => {
   console.log('server running on port ' + port);
   connectDb();
 });
-
-const newmodel = UserModel.findModel('6542547d64cdb765de2314bb');
