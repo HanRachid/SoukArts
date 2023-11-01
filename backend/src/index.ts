@@ -1,5 +1,7 @@
 import {NextFunction, Request, Response} from 'express';
-import {ConnectDb} from './config/connectionDb';
+import {connectDb} from './config/connectionDb';
+import UserModel from './models/UserModel';
+import mongoose from 'mongoose';
 const express = require('express');
 require('dotenv').config();
 
@@ -12,5 +14,10 @@ app.get('/', (req: Request, res: Response) => {
 
 app.listen(3000, (): void => {
   console.log('server running on port ' + port);
-  ConnectDb();
+  connectDb();
+});
+
+process.on('SIGINT', async () => {
+  await mongoose.connection.close();
+  process.exit(0);
 });
