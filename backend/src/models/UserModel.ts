@@ -1,13 +1,12 @@
 import BaseModel from './BaseModel';
-import {connectDb} from '../config/connectionDb';
-import mongoose, {Document, Schema, disconnect} from 'mongoose';
-import {UUID} from 'mongodb';
+import mongoose from 'mongoose';
 
 /**
  * UserModel Class that describes the users .
  */
 export default class UserModel implements BaseModel {
-  id: number;
+  Model: mongoose.Model<BaseModel>;
+  _id: number;
   first_name: string;
   last_name: string;
   gender: Gender;
@@ -21,60 +20,67 @@ export default class UserModel implements BaseModel {
    * @param is_deleted
    */
   constructor(
-    id: number,
     first_name: string,
     last_name: string,
-    gender: Gender
+    gender: Gender,
+    id?: number
   ) {
-    this.id = id;
+    this.Model = mongoose.model<BaseModel>('User', UserModel.getSchema());
+    this._id = id ?? null;
     this.first_name = first_name;
     this.last_name = last_name;
     this.gender = gender;
     this.is_deleted = false;
   }
-  getSchema() {
+  static getSchema(): mongoose.Schema {
     return new mongoose.Schema({
-      id: {type: Number, required: true},
       first_name: {type: String, required: true},
       last_name: {type: String, required: true},
       gender: {type: String, required: true},
       is_deleted: {type: Boolean, required: true},
     });
   }
-  async saveModel() {
-    const Model = mongoose.model('User', this.getSchema());
+  async saveModel(): Promise<void> {
     const item = {
-      id: this.id,
       first_name: this.first_name,
       last_name: this.last_name,
       gender: this.gender,
       is_deleted: this.is_deleted,
     };
-    await Model.create(item);
+    const createModel = await this.Model.create(item);
+    this._id = createModel.get('_id');
   }
 
-  async getModel() {
-    const Model = mongoose.model('User', this.getSchema());
-    const findModel = await Model.find({id: this.id});
+  async getModel(): Promise<BaseModel> {
+    const findModel = await this.Model.findOne({_id: this._id});
     console.log(findModel);
+
+    return findModel;
   }
-  async updateModel(object: Object) {
-    const Model = mongoose.model('User', this.getSchema());
-    const updateModel = await Model.updateOne({id: this.id}, {object});
+  async updateModel(object: Partial<UserModel>): Promise<void> {
+    await this.Model.updateOne({_id: this._id}, object);
   }
-  async deleteModel() {
-    const Model = mongoose.model('User', this.getSchema());
-    const deleteModel = await Model.updateOne(
-      {id: this.id},
+  async deleteModel(): Promise<void> {
+    const deleteModel = await this.Model.updateOne(
+      {_id: this._id},
       {is_deleted: true}
     );
     console.log(deleteModel);
   }
-  async restoreModel() {
-    const Model = mongoose.model('User', this.getSchema());
-    const restoreModel = await Model.updateOne(
-      {id: this.id},
+  async restoreModel(): Promise<void> {
+    const restoreModel = await this.Model.updateOne(
+      {_id: this._id},
       {is_deleted: false}
     );
+  }
+  static async getAll(): Promise<void> {
+    const Model = mongoose.model<BaseModel>('User', this.getSchema());
+    const allModels = await Model.find();
+    console.log(allModels);
+  }
+
+  static async findModel(id: string): Promise<void> {
+    const Model = mongoose.model<BaseModel>('User', this.getSchema());
+    const foundModel: UserModel = await Model.findOne({_id: id});
   }
 }
