@@ -138,4 +138,7 @@ export default class UserModel implements BaseModel {
 
     return user;
   }
+  async removeModel(): Promise<void> {
+    const deleteModel = await UserModel.mongoModel.deleteOne({_id: this._id});
+  }
 }
