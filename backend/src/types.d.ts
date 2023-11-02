@@ -5,3 +5,17 @@ type CardInfo = {
   expiry_date: Date;
   cvv: number;
 };
+type WishlistItem = {
+  itemName: String;
+  itemPrice: Number;
+  addedAt: Date;
+  quantity: Number;
+};
+
+type OrderHistoryItem = {
+  items: WishlistItem[];
+  totalAmount: Number;
+  orderDate: Date;
+  deliveryDate?: Date;
+  status: "Pending" | "Shipped" | "Delivered" | "Cancelled";
+};

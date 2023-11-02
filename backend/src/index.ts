@@ -1,9 +1,11 @@
 import { NextFunction, Request, Response } from "express";
 import { connectDb } from "./config/connectionDb";
 import UserModel from "./models/UserModel";
-import {userRegister}  from "./routes/routeUser"
+import {userRegister,getUsers,cleanUsers}  from "./routes/routeUser"
 
 const express = require("express");
+
+
 require("dotenv").config();
 const app = express();
 const port = process.env.PORT ?? 3000;
@@ -17,6 +19,8 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.post('/register', userRegister);
+app.get("/allUers", getUsers)
+app.post("/cleanUsers",cleanUsers)
 
 app.listen(3000, (): void => {
   console.log("server running on port " + port);
