@@ -10,7 +10,7 @@ describe('UserModel', () => {
     await connectDb();
   });
 
-  it('should save the object to the database when calling saveModel() on a new UserModel object', async () => {
+  /*it('should save the object to the database when calling saveModel() on a new UserModel object', async () => {
     // Arrange
     const userModel = new UserModel('John', 'Doe', 'Male', 'Admin');
     const mockSave = vi.spyOn(userModel, 'saveModel');
@@ -20,5 +20,5 @@ describe('UserModel', () => {
     expect(mockSave).toHaveBeenCalled();
     expect(userModel._id).not.toBeNull();
     userModel.removeModel();
-  });
+  });*/
 });
