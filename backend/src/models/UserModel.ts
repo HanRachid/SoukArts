@@ -143,6 +143,10 @@ export default class UserModel implements BaseModel {
       created_at: this.created_at,
       updated_at: this.updated_at,
     };
+    if (this._id !== null) {
+      console.log('user already exists!');
+      return;
+    }
     const createModel = await UserModel.getMongoUser().create(item);
     this._id = createModel.get('_id');
     return this._id;
