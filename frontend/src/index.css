@@ -5,23 +5,9 @@
   font-weight: normal;
   font-style: normal;
 }
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  /* Colors */
-  --color-black:#292727;
-  --color-brown:#3F382B;
-  --color-gold:#B48F57;
-  --color-beige:#D8CBC4;
-  --color-light-beige:#EBEEC4;
 
-  /* Fonts */
-  --font-primary: 'Brown Sugar', sans-serif;
-  --font-secondary: 'ABeeZee', sans-serif;
 
-  /* Font-size */
-  --font-size-small: 16px;
-  --font-size-medium: 18px;
-  --font-size-large: 24px;
-  --font-size-heading: 54px;
-  --font-size-heading-XL: 65px;
-}
