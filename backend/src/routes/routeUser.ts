@@ -35,7 +35,7 @@ const userRegister = async (req: Request, res: Response) => {
       number_phone,
       hashed
     );
-    await newUser.RegisterUser();
+    await newUser.RegisterModel();
     res.status(201).json({message: 'User registered successfully'});
   } catch (error) {
     console.error(error.message);
