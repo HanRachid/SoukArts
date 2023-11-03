@@ -21,7 +21,7 @@ export default interface BaseModel {
   order_history?: OrderHistoryItem[];
   created_at?: Date;
   updated_at?: Date;
-  RegisterUser(): Promise<Object>;
+  RegisterModel(): Promise<Object>;
   getModel(): Promise<BaseModel>;
   updateModel(object: Partial<UserModel>): Promise<void>;
   deleteModel(): Promise<void>;
