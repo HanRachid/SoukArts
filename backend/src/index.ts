@@ -1,16 +1,25 @@
 import {NextFunction, Request, Response} from 'express';
 import {connectDb} from './config/connectionDb';
 import UserModel from './models/UserModel';
-import mongoose from 'mongoose';
-const express = require('express');
-require('dotenv').config();
+import {getUsers, cleanUsers, registerUser} from './routes/routeUser';
+import {BSON, ObjectId} from 'mongodb';
 
+const express = require('express');
+
+require('dotenv').config();
 const app = express();
 const port = process.env.PORT ?? 3000;
+app.use(express.json());
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello Worlde');
+app.get('/', async (req: Request, res: Response) => {
+  const foundUser = await UserModel.findModel('6544d76bf102534833e13cf8');
+  console.log(foundUser);
+  res.send(foundUser);
 });
+
+app.post('/register', registerUser);
+app.get('/allUsers', getUsers);
+app.post('/cleanUsers', cleanUsers);
 
 app.listen(3000, (): void => {
   console.log('server running on port ' + port);
