@@ -125,7 +125,11 @@ export default class UserModel implements BaseModel {
     });
   }
 
-  async RegisterUser(): Promise<Object> {
+  async RegisterModel(): Promise<Object | null> {
+    if (this._id !== null) {
+      console.log('user already exists!');
+      return;
+    }
     const item = {
       username: this.username,
       first_name: this.first_name,
@@ -143,10 +147,7 @@ export default class UserModel implements BaseModel {
       created_at: this.created_at,
       updated_at: this.updated_at,
     };
-    if (this._id !== null) {
-      console.log('user already exists!');
-      return;
-    }
+
     const createModel = await UserModel.getMongoUser().create(item);
     this._id = createModel.get('_id');
     return this._id;
@@ -193,7 +194,11 @@ export default class UserModel implements BaseModel {
       {is_deleted: false}
     );
   }
-  static async getAllUsers(): Promise<any[]> {
+  /**
+   * get all users
+   * @returns array containing all user's objects
+   */
+  static async getAllUsers(): Promise<UserModel[]> {
     const allUsers = await UserModel.getMongoUser().find();
     return allUsers;
   }
