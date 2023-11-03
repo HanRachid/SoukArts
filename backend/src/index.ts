@@ -1,7 +1,7 @@
 import {NextFunction, Request, Response} from 'express';
 import {connectDb} from './config/connectionDb';
 import UserModel from './models/UserModel';
-import {userRegister, getUsers, cleanUsers} from './routes/routeUser';
+import {getUsers, cleanUsers, registerUser} from './routes/routeUser';
 import {BSON, ObjectId} from 'mongodb';
 
 const express = require('express');
@@ -17,7 +17,7 @@ app.get('/', async (req: Request, res: Response) => {
   res.send(foundUser);
 });
 
-app.post('/register', userRegister);
+app.post('/register', registerUser);
 app.get('/allUsers', getUsers);
 app.post('/cleanUsers', cleanUsers);
 

@@ -3,7 +3,7 @@ import UserModel from '../models/UserModel';
 const bcrypt = require('bcrypt');
 require('dotenv').config();
 
-const userRegister = async (req: Request, res: Response) => {
+const registerUser = async (req: Request, res: Response) => {
   const {
     username,
     first_name,
@@ -12,11 +12,11 @@ const userRegister = async (req: Request, res: Response) => {
     profile_image,
     email,
     number_phone,
-    password,
+    hashed_password,
   } = req.body;
   let hashed: string;
   bcrypt.hash(
-    password,
+    hashed_password,
     process.env.saltRounds,
     function (err: Error, hash: string) {
       if (err) throw err;
@@ -70,4 +70,4 @@ const cleanUsers = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-export {userRegister, getUsers, cleanUsers};
+export {registerUser, getUsers, cleanUsers};
