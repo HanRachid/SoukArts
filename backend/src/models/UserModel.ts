@@ -1,3 +1,4 @@
+import {ObjectId} from 'mongodb';
 import BaseModel from './BaseModel';
 import mongoose from 'mongoose';
 
@@ -10,7 +11,7 @@ export default class UserModel implements BaseModel {
   username: string;
   first_name: string;
   last_name: string;
-  gender: string;
+  gender: Gender;
   profile_image: string;
   email: string;
   number_phone: string;
@@ -45,7 +46,7 @@ export default class UserModel implements BaseModel {
     username: string,
     first_name: string,
     last_name: string,
-    gender: string,
+    gender: Gender,
     profile_image: string,
     email: string,
     number_phone: string,
@@ -125,7 +126,7 @@ export default class UserModel implements BaseModel {
     });
   }
 
-  async RegisterModel(): Promise<Object | null> {
+  async registerModel(): Promise<Object | null> {
     if (this._id !== null) {
       console.log('user already exists!');
       return;
@@ -158,8 +159,9 @@ export default class UserModel implements BaseModel {
    * @returns current model in db
    */
   async getModel(): Promise<BaseModel> {
+    console.log(this._id);
+
     const findModel = await UserModel.getMongoUser().findOne({_id: this._id});
-    console.log(findModel);
 
     return findModel;
   }
@@ -204,10 +206,13 @@ export default class UserModel implements BaseModel {
   }
 
   static async findModel(id: string): Promise<UserModel> {
-    const foundModel: UserModel = await UserModel.getMongoUser().findOne({
+    const foundModel = await UserModel.getMongoUser().findOne({
       _id: id,
     });
-    return foundModel;
+
+    const result = await foundModel;
+
+    return result;
   }
 
   static async cleanUsers(Condition: object): Promise<void> {

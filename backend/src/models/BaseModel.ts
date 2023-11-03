@@ -9,7 +9,7 @@ export default interface BaseModel {
   username: string;
   first_name: string;
   last_name: string;
-  gender: string;
+  gender: Gender;
   profile_image: string;
   email: string;
   number_phone: string;
@@ -21,7 +21,7 @@ export default interface BaseModel {
   order_history?: OrderHistoryItem[];
   created_at?: Date;
   updated_at?: Date;
-  RegisterModel(): Promise<Object>;
+  registerModel(): Promise<Object>;
   getModel(): Promise<BaseModel>;
   updateModel(object: Partial<UserModel>): Promise<void>;
   deleteModel(): Promise<void>;
