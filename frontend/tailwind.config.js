@@ -21,7 +21,19 @@ export default {
       SizeLarge: '24px',
       SizeHeading: '54px',
       SizeHeadingXL: '65px',
+
     },
+    sizes:{
+      fontSizeSmall: '16px',
+      fontSizeMedium: '18px',
+      fontSizeLarge: '24px',
+      fontSizeHeading: '54px',
+      fontSizeHeadingXL: '65px',
+    },
+    fonts: {
+     fontPrimary: ['Brown Sugar', 'sans-serif'],
+     fontSecondary: ['ABeeZee', 'sans-serif'],
+    }
   },
   plugins: [],
 };
