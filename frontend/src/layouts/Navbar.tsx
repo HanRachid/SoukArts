@@ -1,13 +1,12 @@
 import {Link} from 'react-router-dom';
 import logolight from '../assets/logolight.svg';
+import Searchbar from '../components/Searchbar';
+
 export default function NavBar() {
   return (
     <div className='relative'>
       <div className='flex justify-around items-center '>
-        <div>
-          <label htmlFor='select'>All categories</label>
-          <select name='' id=''></select>
-        </div>
+        <Searchbar />
         <Link to='/'>
           <img src={logolight} alt='' />
         </Link>
