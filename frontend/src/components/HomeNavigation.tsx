@@ -10,6 +10,7 @@ export default function Homenavigation() {
             Home
           </Menu.Button>
         </div>
+
         <Transition
           as={Fragment}
           enter='transition ease-out duration-100'
@@ -19,12 +20,12 @@ export default function Homenavigation() {
           leaveFrom='transform opacity-100 scale-100'
           leaveTo='transform opacity-0 scale-95'
         >
-          <div className='flex '>
-            <Menu.Items className='absolute flex gap-24 justify-between  mt-2 w-max p-8  origin-top-right rounded-sm  ring-black/5 focus:outline-none  border-t-4 border-b-4 border-colorGold shadow bg-colorBeigeLight'>
+          <div className='flex absolute'>
+            <Menu.Items className='relative right-32 flex gap-24 justify-between  mt-2 w-max p-8  origin-top-right rounded-sm  ring-black/5 focus:outline-none  border-t-4 border-b-4 border-colorGold bg-colorBeigeLight shadow font-secondary text-colorBlack '>
               <div>
                 <div className=''>
                   <Menu.Item>
-                    <button className='group flex w-full items-center rounded-sm px-2 py-2 text-sm'>
+                    <button className='group flex w-full items-center rounded-sm px-2 py-2 text-large hover:border-b border-black'>
                       Categories
                     </button>
                   </Menu.Item>
@@ -34,10 +35,8 @@ export default function Homenavigation() {
                     {({active}: {active: boolean}) => (
                       <button
                         className={`${
-                          active
-                            ? ' bg-colorBeige '
-                            : 'text-gray-900 bg-colorBeigeLight '
-                        } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                          active ? ' bg-colorBeige ' : 'text-gray-900  '
+                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
                       >
                         Rugs
                       </button>
@@ -49,10 +48,8 @@ export default function Homenavigation() {
                     {({active}: {active: boolean}) => (
                       <button
                         className={`${
-                          active
-                            ? ' bg-colorBeige '
-                            : 'text-gray-900 bg-colorBeigeLight '
-                        } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                          active ? ' bg-colorBeige ' : 'text-gray-900  '
+                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
                       >
                         Poufs
                       </button>
@@ -64,10 +61,8 @@ export default function Homenavigation() {
                     {({active}: {active: boolean}) => (
                       <button
                         className={`${
-                          active
-                            ? ' bg-colorBeige '
-                            : 'text-gray-900 bg-colorBeigeLight '
-                        } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                          active ? ' bg-colorBeige ' : 'text-gray-900  '
+                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
                       >
                         Lamps
                       </button>
@@ -79,10 +74,8 @@ export default function Homenavigation() {
                     {({active}: {active: boolean}) => (
                       <button
                         className={`${
-                          active
-                            ? ' bg-colorBeige '
-                            : 'text-gray-900 bg-colorBeigeLight '
-                        } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                          active ? ' bg-colorBeige ' : 'text-gray-900  '
+                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
                       >
                         Pillows
                       </button>
@@ -94,10 +87,8 @@ export default function Homenavigation() {
                     {({active}: {active: boolean}) => (
                       <button
                         className={`${
-                          active
-                            ? ' bg-colorBeige '
-                            : 'text-gray-900 bg-colorBeigeLight '
-                        } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                          active ? ' bg-colorBeige ' : 'text-gray-900  '
+                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
                       >
                         Shoes
                       </button>
@@ -109,10 +100,8 @@ export default function Homenavigation() {
                     {({active}: {active: boolean}) => (
                       <button
                         className={`${
-                          active
-                            ? ' bg-colorBeige '
-                            : 'text-gray-900 bg-colorBeigeLight '
-                        } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                          active ? ' bg-colorBeige ' : 'text-gray-900  '
+                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
                       >
                         Bags
                       </button>
@@ -124,10 +113,8 @@ export default function Homenavigation() {
                     {({active}: {active: boolean}) => (
                       <button
                         className={`${
-                          active
-                            ? ' bg-colorBeige '
-                            : 'text-gray-900 bg-colorBeigeLight '
-                        } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                          active ? ' bg-colorBeige ' : 'text-gray-900  '
+                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
                       >
                         Jewelery
                       </button>
@@ -139,10 +126,8 @@ export default function Homenavigation() {
                     {({active}: {active: boolean}) => (
                       <button
                         className={`${
-                          active
-                            ? ' bg-colorBeige '
-                            : 'text-gray-900 bg-colorBeigeLight '
-                        } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                          active ? ' bg-colorBeige ' : 'text-gray-900  '
+                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
                       >
                         Accessories
                       </button>
@@ -153,7 +138,7 @@ export default function Homenavigation() {
               <div>
                 <div className=''>
                   <Menu.Item>
-                    <button className='group flex w-full items-center rounded-md px-2 py-2 text-sm'>
+                    <button className='group flex w-full items-center rounded-md px-2 py-2 text-large'>
                       Shop by Style
                     </button>
                   </Menu.Item>
@@ -163,10 +148,8 @@ export default function Homenavigation() {
                     {({active}: {active: boolean}) => (
                       <button
                         className={`${
-                          active
-                            ? ' bg-colorBeige '
-                            : 'text-gray-900 bg-colorBeigeLight '
-                        } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                          active ? ' bg-colorBeige ' : 'text-gray-900  '
+                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
                       >
                         Modern
                       </button>
@@ -178,10 +161,8 @@ export default function Homenavigation() {
                     {({active}: {active: boolean}) => (
                       <button
                         className={`${
-                          active
-                            ? ' bg-colorBeige '
-                            : 'text-gray-900 bg-colorBeigeLight '
-                        } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                          active ? ' bg-colorBeige ' : 'text-gray-900  '
+                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
                       >
                         Classic
                       </button>
@@ -193,10 +174,8 @@ export default function Homenavigation() {
                     {({active}: {active: boolean}) => (
                       <button
                         className={`${
-                          active
-                            ? ' bg-colorBeige '
-                            : 'text-gray-900 bg-colorBeigeLight '
-                        } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                          active ? ' bg-colorBeige ' : 'text-gray-900  '
+                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
                       >
                         Fusion
                       </button>
@@ -208,28 +187,10 @@ export default function Homenavigation() {
                     {({active}: {active: boolean}) => (
                       <button
                         className={`${
-                          active
-                            ? ' bg-colorBeige '
-                            : 'text-gray-900 bg-colorBeigeLight '
-                        } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                          active ? ' bg-colorBeige ' : 'text-gray-900  '
+                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
                       >
                         Boho
-                      </button>
-                    )}
-                  </Menu.Item>
-                </div>
-
-                <div className=''>
-                  <Menu.Item>
-                    {({active}: {active: boolean}) => (
-                      <button
-                        className={`${
-                          active
-                            ? ' bg-colorBeige '
-                            : 'text-gray-900 bg-colorBeigeLight '
-                        } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                      >
-                        Trending Search
                       </button>
                     )}
                   </Menu.Item>
@@ -238,8 +199,8 @@ export default function Homenavigation() {
               <div>
                 <div className=''>
                   <Menu.Item>
-                    <button className='group flex w-full items-center rounded-md px-2 py-2 text-sm'>
-                      Kilim Rug
+                    <button className='group flex w-full items-center rounded-md px-2 py-2 text-large'>
+                      Trending Search
                     </button>
                   </Menu.Item>
                 </div>
@@ -248,10 +209,21 @@ export default function Homenavigation() {
                     {({active}: {active: boolean}) => (
                       <button
                         className={`${
-                          active
-                            ? ' bg-colorBeige '
-                            : 'text-gray-900 bg-colorBeigeLight '
-                        } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                          active ? ' bg-colorBeige ' : 'text-gray-900  '
+                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
+                      >
+                        Kilim Rug
+                      </button>
+                    )}
+                  </Menu.Item>
+                </div>
+                <div className=''>
+                  <Menu.Item>
+                    {({active}: {active: boolean}) => (
+                      <button
+                        className={`${
+                          active ? ' bg-colorBeige ' : 'text-gray-900  '
+                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
                       >
                         Raffia Shoes
                       </button>
@@ -263,10 +235,8 @@ export default function Homenavigation() {
                     {({active}: {active: boolean}) => (
                       <button
                         className={`${
-                          active
-                            ? ' bg-colorBeige '
-                            : 'text-gray-900 bg-colorBeigeLight '
-                        } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                          active ? ' bg-colorBeige ' : 'text-gray-900  '
+                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
                       >
                         Leather Bags
                       </button>
@@ -278,10 +248,8 @@ export default function Homenavigation() {
                     {({active}: {active: boolean}) => (
                       <button
                         className={`${
-                          active
-                            ? ' bg-colorBeige '
-                            : 'text-gray-900 bg-colorBeigeLight '
-                        } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                          active ? ' bg-colorBeige ' : 'text-gray-900  '
+                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
                       >
                         Brass Lamps
                       </button>
@@ -293,10 +261,8 @@ export default function Homenavigation() {
                     {({active}: {active: boolean}) => (
                       <button
                         className={`${
-                          active
-                            ? ' bg-colorBeige '
-                            : 'text-gray-900 bg-colorBeigeLight '
-                        } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                          active ? ' bg-colorBeige ' : 'text-gray-900  '
+                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
                       >
                         Raffia Lamps
                       </button>
@@ -309,10 +275,8 @@ export default function Homenavigation() {
                     {({active}: {active: boolean}) => (
                       <button
                         className={`${
-                          active
-                            ? ' bg-colorBeige '
-                            : 'text-gray-900 bg-colorBeigeLight '
-                        } group flex w-full items-center gap-3 rounded-md px-2 py-2 text-sm `}
+                          active ? ' bg-colorBeige ' : 'text-gray-900  '
+                        } group flex text-colorBlack/80 w-full items-center gap-3 rounded-md px-2 py-2 text-sm `}
                       >
                         Shop All
                         <svg
