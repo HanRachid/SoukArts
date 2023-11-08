@@ -1,7 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=ABeeZee&display=swap');
+
 @font-face {
-  font-family: 'Brown Sugar';
-  src: url('./fonts/BrownSugar.ttf') format('truetype');
+  font-family: 'BrownSugar';
+  src: url('./assets/fonts/BrownSugar.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ABeeZee';
+  src: url('./assets/fonts/ABeeZee.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
