@@ -1,13 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=ABeeZee&display=swap');
-@font-face {
-  font-family: 'Brown Sugar';
-  src: url('./fonts/BrownSugar.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: 'Brown Sugar', 'sans-serif';
+  src: url('../src/assets/fonts/Brown-sugar.ttf') format('truetype');
+}
 
 html,
 body,
