@@ -7,7 +7,7 @@ export default function Login() {
             <div className="w-1/2 h-full px-20">
                 <div className="h-60 w-full flex-col flex items-center justify-center">
                     <img src={logo} alt="logo" />
-                    <h2 className="text-4xl mt-6">Welcome back!</h2>
+                    <h2 className="text-4xl mt-6 font-primary">Welcome back!</h2>
                 </div>
                 <div className="space-y-6 w-full">
                     <div className="w-full flex items-start justify-center flex-col">
