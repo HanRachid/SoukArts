@@ -12,7 +12,7 @@ export default function NavBar() {
         <Link to='/'>
           <img src={logolight} alt='' />
         </Link>
-        <div>
+        <div className='w-1/3'>
           <Link to='/'>Home </Link>
         </div>
       </div>
