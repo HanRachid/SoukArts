@@ -1,24 +1,20 @@
 import {Link} from 'react-router-dom';
 import logolight from '../assets/logolight.svg';
 import Searchbar from '../components/Searchbar';
-import Searchdropdown from '../components/Searchdropdown';
-import {useState} from 'react';
+import Navigation from '../components/Navigation';
 
 export default function NavBar() {
-  const [isDropDown, setIsDropDown] = useState(false);
-
   return (
     <div>
       <div className='flex justify-around items-center '>
-        <div className='flex-col h-8 w-2/3 relative'>
-          <Searchbar setIsDropDown={setIsDropDown} isDropDown={isDropDown} />
-          {isDropDown && <Searchdropdown />}
+        <div className='flex-col w-1/3 relative bg-opacity-75'>
+          <Searchbar />
         </div>
         <Link to='/'>
           <img src={logolight} alt='' />
         </Link>
-        <div>
-          <Link to='/'>Home </Link>
+        <div className='w-1/3'>
+          <Navigation />
         </div>
       </div>
     </div>
