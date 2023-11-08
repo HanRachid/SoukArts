@@ -5,7 +5,7 @@ import Home from './pages/Home.tsx';
 import DashBoard from './pages/Dashboard.tsx';
 export default function App() {
   return (
-    <div className='  h-full '>
+    <div className='bg-colorBeigeLight w-full h-full '>
       <BrowserRouter>
         <div className='flex flex-col min-h-screen'>
           <Navbar />
