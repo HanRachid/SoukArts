@@ -4,6 +4,7 @@ import Footer from './layouts/Footer.tsx';
 import Home from './pages/Home.tsx';
 import DashBoard from './pages/Dashboard.tsx';
 import Login from './pages/login';
+import Register from './pages/register.tsx';
 export default function App() {
   return (
     <div className='bg-gray-50 w-full h-full '>
@@ -15,6 +16,7 @@ export default function App() {
             <Routes>
               <Route path='/' element={<Home />} />
               <Route path='/login' element={<Login />} />
+              <Route path='/register' element={<Register />} />
               <Route path='/dashboard' element={<DashBoard />} />
             </Routes>
           </div>
