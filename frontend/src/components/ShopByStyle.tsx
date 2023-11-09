@@ -5,11 +5,11 @@ import {BiChevronRight} from "react-icons/bi"
 
 export default function ShopByStyle() {
   return (
-    <div className="">
+    <div>
       <div className="text-7xl mb-20 font-primary text-colorBrown px-28">
         Shop by style
       </div>
-      <div className="flex items-center justify-center gap-4 px-10 pl-28">
+      <div className="flex items-center justify-center gap-10">
         <div className="border-black border-2 rounded-b-xl relative overflow-hidden">
           <div className="font-primary top-0 w-full py-5 text-center absolute bg-black/30 text-white text-5xl font-medium">
             Classic
