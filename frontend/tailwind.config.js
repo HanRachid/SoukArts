@@ -11,6 +11,7 @@ export default {
         colorBeige: "#D8CBC4",
         colorBeigeLight: "#EBE6E4",
         colorLight: "#EBE6E3"
+
       },
       fontSize: {
         small: "1rem",
@@ -19,6 +20,7 @@ export default {
         extraLarge:"2.5rem",
         heading: "3.375rem",
         headingXl: "4.0625rem",
+
       },
       fontFamily: {
         primary: ["BrownSugar", "sans-serif"],
