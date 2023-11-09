@@ -1,9 +1,9 @@
 export default function Button({
   children,
-  tailwindStyle,
+  className,
 }: {
   children: React.ReactNode;
-  tailwindStyle: string;
+  className: string;
 }) {
-  return <button className={tailwindStyle}>{children}</button>;
+  return <button className={className}>{children}</button>;
 }
