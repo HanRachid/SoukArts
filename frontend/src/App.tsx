@@ -1,8 +1,9 @@
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import Navbar from './layouts/Navbar.tsx';
-import Footer from './layouts/Footer.tsx';
-import Home from './pages/Home.tsx';
-import DashBoard from './pages/Dashboard.tsx';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Navbar from "./layouts/Navbar.tsx";
+import Footer from "./layouts/Footer.tsx";
+import Home from "./pages/Home.tsx";
+import DashBoard from "./pages/Dashboard.tsx";
+
 export default function App() {
   return (
     <div className='bg-colorBeigeLight/50  w-full h-full '>
@@ -15,6 +16,8 @@ export default function App() {
               <Route path='/dashboard' element={<DashBoard />} />
             </Routes>
           </div>
+
+          
 
           <Footer />
         </div>
