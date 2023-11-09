@@ -5,7 +5,7 @@ import Navigation from "../components/Navigation";
 
 export default function NavBar() {
   return (
-    <div>
+    <div className="relative z-50">
       <div className="flex justify-around items-center ">
         <div className="flex-col w-1/3 relative ">
           <Searchbar />
