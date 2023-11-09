@@ -1,7 +1,7 @@
 /// <reference types="vite-plugin-svgr/client" />
 import Homenavigation from './HomeNavigation';
-import HeartIcon from '../assets/navbar/heart.svg?react';
-import CartIcon from '../assets/navbar/cart.svg?react';
+import HeartSVG from '../assets/navbar/heart.svg?react';
+import CartSVG from '../assets/navbar/cart.svg?react';
 import {Link} from 'react-router-dom';
 import Button from './Button';
 export default function Navigation() {
@@ -16,10 +16,10 @@ export default function Navigation() {
           </span>
         </Link>
         <Link to='/'>
-          <HeartIcon className='w-6 font-secondary hover:fill-colorGold' />
+          <HeartSVG className='w-6 font-secondary hover:fill-colorGold' />
         </Link>
         <Link to='/'>
-          <CartIcon className='w-6 font-secondary hover:fill-colorGold' />
+          <CartSVG className='w-6 font-secondary hover:fill-colorGold' />
         </Link>
         <div className='flex gap-3'>
           <Link to='/'>

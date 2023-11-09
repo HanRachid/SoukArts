@@ -1,12 +1,36 @@
+/// <reference types="vite-plugin-svgr/client" />
 import lens from '../assets/navbar/lens.svg';
 import {Menu, Transition} from '@headlessui/react';
+import CheckSVG from '../assets/navbar/check.svg?react';
 import React, {Fragment, useState} from 'react';
 
 export default function Searchbar() {
-  const [category, setCategory] = useState('All Categories');
+  const [selectedCategory, setSelectedCategory] = useState('All Categories');
+  const categories = [
+    'All categories',
+    'Rugs',
+    'Poufs',
+    'Lamps',
+    'Pillows',
+    'Shoes',
+    'Bags',
+    'Jewelry',
+    'Accessories',
+  ];
+  const unselected: string =
+    'pr-12 pl-6 categoriesAll group flex gap-3 w-full items-center rounded-md px-4 py-4 text-sm ';
+  const selected: string =
+    'pr-12 pl-6 categoriesAll group flex gap-3 w-full items-center rounded-md px-4 py-4 text-sm  ';
+
   function handleCategory(event: any) {
-    setCategory(event.target.value);
+    const value: string = event.target.value;
+    if (value === selectedCategory) {
+      return;
+    }
+    event.preventDefault();
+    setSelectedCategory(value);
   }
+
   return (
     <div className='flex items-center justify-between   h-12 rounded-3xl  bg-colorBeigeLight  focus:outline hover:outline outline-stone-400 outline-1  '>
       <img src={lens} alt='lens' className='h-4 pl-3 absolute' />
@@ -18,10 +42,10 @@ export default function Searchbar() {
         as={'div' as React.ElementType}
         className='absolute inline-block right-0 '
       >
-        <div className=' transform p-2 '>
+        <div className=' transform '>
           <Menu.Button className='  inline-flex items-center gap-2 w-full justify-center rounded-md p-2 focus:outline-none   '>
             <label htmlFor='search' className='border-l border-black pl-5 '>
-              <span className='font-secondary'>{category}</span>
+              <span className='font-secondary'>{selectedCategory}</span>
             </label>
             <svg
               className='w-4 h-4 flex items-end '
@@ -48,133 +72,39 @@ export default function Searchbar() {
           leaveFrom='transform opacity-100 scale-100'
           leaveTo='transform opacity-0 scale-95'
         >
-          <Menu.Items className='absolute right-0 mt-2 w-56 origin-top-right bg-colorBeigeLight p-3 rounded-sm  ring-black/5 focus:outline-none border  border-black text-small font-secondary'>
-            <div className=''>
-              <Menu.Item>
-                {({active}: {active: boolean}) => (
-                  <input
-                    onClick={handleCategory}
-                    value='All categories'
-                    type='button'
-                    className={`${
-                      active ? ' bg-colorBeige ' : 'text-gray-900  '
-                    }: group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                  />
-                )}
-              </Menu.Item>
-            </div>
-            <div className=''>
-              <Menu.Item>
-                {({active}: {active: boolean}) => (
-                  <input
-                    onClick={handleCategory}
-                    value='Rugs'
-                    type='button'
-                    className={`${
-                      active ? ' bg-colorBeige ' : 'text-gray-900  '
-                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                  />
-                )}
-              </Menu.Item>
-            </div>
-            <div className=''>
-              <Menu.Item>
-                {({active}: {active: boolean}) => (
-                  <input
-                    onClick={handleCategory}
-                    value='Poufs'
-                    type='button'
-                    className={`${
-                      active ? ' bg-colorBeige ' : 'text-gray-900  '
-                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                  />
-                )}
-              </Menu.Item>
-            </div>
-            <div className=''>
-              <Menu.Item>
-                {({active}: {active: boolean}) => (
-                  <input
-                    onClick={handleCategory}
-                    value='Lamps'
-                    type='button'
-                    className={`${
-                      active ? ' bg-colorBeige ' : 'text-gray-900  '
-                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                  />
-                )}
-              </Menu.Item>
-            </div>
-            <div className=''>
-              <Menu.Item>
-                {({active}: {active: boolean}) => (
-                  <input
-                    onClick={handleCategory}
-                    value='Pillows'
-                    type='button'
-                    className={`${
-                      active ? ' bg-colorBeige ' : 'text-gray-900  '
-                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                  />
-                )}
-              </Menu.Item>
-            </div>
-            <div className=''>
-              <Menu.Item>
-                {({active}: {active: boolean}) => (
-                  <input
-                    onClick={handleCategory}
-                    value='Shoes'
-                    type='button'
-                    className={`${
-                      active ? ' bg-colorBeige ' : 'text-gray-900  '
-                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                  />
-                )}
-              </Menu.Item>
-            </div>
-            <div className=''>
-              <Menu.Item>
-                {({active}: {active: boolean}) => (
-                  <input
-                    onClick={handleCategory}
-                    value='Bags'
-                    type='button'
-                    className={`${
-                      active ? ' bg-colorBeige ' : 'text-gray-900  '
-                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                  />
-                )}
-              </Menu.Item>
-            </div>
-            <div className=''>
-              <Menu.Item>
-                {({active}: {active: boolean}) => (
-                  <input
-                    onClick={handleCategory}
-                    value='Jewelry'
-                    type='button'
-                    className={`${
-                      active ? ' bg-colorBeige ' : 'text-gray-900  '
-                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                  />
-                )}
-              </Menu.Item>
-            </div>
-            <div className=''>
-              <Menu.Item>
-                {({active}: {active: boolean}) => (
-                  <input
-                    onClick={handleCategory}
-                    value='Accessories'
-                    type='button'
-                    className={`${
-                      active ? ' bg-colorBeige ' : 'text-gray-900  '
-                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                  />
-                )}
-              </Menu.Item>
-            </div>
+          <Menu.Items
+            static
+            className='absolute right-0  w-56 origin-top-right bg-colorBeigeLight  rounded-sm  ring-black/5 focus:outline-none border  border-black text-small font-secondary'
+          >
+            {categories.map((category, index) => (
+              <div key={index} className=''>
+                <Menu.Item value={category}>
+                  <div
+                    className={
+                      category == selectedCategory
+                        ? 'flex items-center  rounded-md  text-sm  bg-colorBeige'
+                        : 'flex items-center  rounded-md  text-sm  hover:bg-colorBeige'
+                    }
+                  >
+                    <CheckSVG
+                      className={
+                        category === selectedCategory
+                          ? 'ml-2 visible '
+                          : 'ml-2 invisible '
+                      }
+                    />
+                    <input
+                      className={
+                        category == selectedCategory ? selected : unselected
+                      }
+                      onClick={handleCategory}
+                      value={category}
+                      type='button'
+                    />
+                  </div>
+                </Menu.Item>
+              </div>
+            ))}
           </Menu.Items>
         </Transition>
       </Menu>

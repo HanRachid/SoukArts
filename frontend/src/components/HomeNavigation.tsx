@@ -6,7 +6,7 @@ export default function Homenavigation() {
     <>
       <Menu as={'div' as React.ElementType} className=' inline-block '>
         <div className='p-2 '>
-          <Menu.Button className='font-secondary pb-0.5 border-b-2 border-colorBeigeLight/0 hover:text-colorGold hover:border-colorGold'>
+          <Menu.Button className='font-secondary border-b-2 border-colorBeigeLight/0 hover:text-colorGold hover:border-colorGold'>
             Shop
           </Menu.Button>
         </div>
