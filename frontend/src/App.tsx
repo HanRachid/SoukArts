@@ -3,6 +3,8 @@ import Navbar from './layouts/Navbar.tsx';
 import Footer from './layouts/Footer.tsx';
 import Home from './pages/Home.tsx';
 import DashBoard from './pages/Dashboard.tsx';
+import Termsofuse from './pages/Termsofuse.tsx';
+import Privacy from './pages/Privacy.tsx';
 export default function App() {
   return (
     <div className='bg-colorBeigeLight w-full h-full '>
@@ -14,6 +16,8 @@ export default function App() {
             <Routes>
               <Route path='/' element={<Home />} />
               <Route path='/dashboard' element={<DashBoard />} />
+              <Route path='/termsofuse' element={<Termsofuse />} />
+              <Route path='/privacy' element={<Privacy />} />
             </Routes>
           </div>
 
