@@ -9,18 +9,18 @@ export default {
         colorBrown: "#3F382B",
         colorGold: "#B48F57",
         colorBeige: "#D8CBC4",
-        colorBeigeLight: "#EBE6E4"
+        colorBeigeLight: "#EBE6E4",
       },
       fontSize: {
         small: "1rem",
         medium: "1.125rem",
         large: "1.5rem",
         heading: "3.375rem",
-        headingXl: "4.0625rem"
+        headingXl: "6rem",
       },
       fontFamily: {
         primary: ["BrownSugar", "sans-serif"],
-        secondary: ["ABeeZee", "sans-serif"]
+        secondary: ["ABeeZee", "sans-serif"],
       },
     },
   },

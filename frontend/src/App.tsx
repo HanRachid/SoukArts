@@ -3,6 +3,7 @@ import Navbar from "./layouts/Navbar.tsx";
 import Footer from "./layouts/Footer.tsx";
 import Home from "./pages/Home.tsx";
 import DashBoard from "./pages/Dashboard.tsx";
+
 export default function App() {
   return (
     <div className="bg-colorBeigeLight w-full h-full ">
