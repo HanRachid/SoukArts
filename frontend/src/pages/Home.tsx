@@ -6,13 +6,14 @@ import PopularProducts from "../components/PopularProducts";
 import EarningWithSukarts from "../components/EarningWithSukarts";
 
 export default function Home() {
-  return <div> 
-    <Categories/>
-    <Header/>
-      <FeaturesShop/>
-      <ShopByStyle/>
-      <PopularProducts/>
-      <EarningWithSukarts/>
-      
-     </div>;
+  return (
+    <div>
+      <Categories />
+      <Header />
+      <FeaturesShop />
+      <ShopByStyle />
+      <PopularProducts />
+      <EarningWithSukarts />
+    </div>
+  );
 }
