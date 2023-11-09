@@ -1,4 +1,3 @@
-import React from "react";
 import bola from "../assets/home/popularProducts/bola.png";
 import wssadat from "../assets/home/popularProducts/wssadat.png";
 import zarbya from "../assets/home/popularProducts/zarbya.png";

@@ -1,4 +1,3 @@
-import React from "react";
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import video from "../assets/home/video.png";
 
