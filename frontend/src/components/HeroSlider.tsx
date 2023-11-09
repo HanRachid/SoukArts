@@ -1,13 +1,13 @@
-// Import Swiper React components
+//Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-// Import Swiper styles
+//styles
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
 
 import "./css/HeroSlider.css";
 
-// import required modules
+//required modules
 import { Autoplay, Pagination, EffectFade } from "swiper/modules";
 
 export default function HeroSlider({
@@ -39,7 +39,6 @@ export default function HeroSlider({
         pagination={{
           clickable: true,
         }}
-        //navigation={true}
         modules={[Autoplay, Pagination, EffectFade]}
         className="mySwiper"
       >
