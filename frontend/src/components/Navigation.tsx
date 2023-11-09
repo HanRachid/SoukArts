@@ -1,6 +1,7 @@
+/// <reference types="vite-plugin-svgr/client" />
 import Homenavigation from './HomeNavigation';
-import heart from '../assets/navbar/heart.svg';
-import cart from '../assets/navbar/cart.svg';
+import HeartIcon from '../assets/navbar/heart.svg?react';
+import CartIcon from '../assets/navbar/cart.svg?react';
 import {Link} from 'react-router-dom';
 import Button from './Button';
 export default function Navigation() {
@@ -10,20 +11,28 @@ export default function Navigation() {
         <Homenavigation />
 
         <Link to='/'>
-          <span className='font-secondary hover:text-colorGold'>
+          <span className='font-secondary pb-0.5 border-b-2 border-colorBeigeLight/0 hover:text-colorGold hover:border-colorGold'>
             Become a Seller
           </span>
         </Link>
         <Link to='/'>
-          <img src={heart} className='w-6 ' alt='heart' />
+          <HeartIcon className='w-6 font-secondary hover:fill-colorGold' />
         </Link>
         <Link to='/'>
-          <img src={cart} className='w-6' alt='cart' />
+          <CartIcon className='w-6 font-secondary hover:fill-colorGold' />
         </Link>
         <div className='flex gap-3'>
-          <Link to='/'>Login</Link>
+          <Link to='/'>
+            <span className='font-secondary pb-0.5 border-b-2 border-colorBeigeLight/0 hover:text-colorGold hover:border-colorGold'>
+              Login
+            </span>
+          </Link>
           <span>|</span>
-          <Link to='/'>Join In</Link>
+          <Link to='/'>
+            <span className='font-secondary pb-0.5 border-b-2 border-colorBeigeLight/0 hover:text-colorGold hover:border-colorGold'>
+              Sign In
+            </span>
+          </Link>
         </div>
         <Link to='/'>
           <Button className='bg-colorGold text-white w-fit pl-3 pr-3 p-1 rounded-tr-lg rounded-bl-lg hover:bg-opacity-70'>

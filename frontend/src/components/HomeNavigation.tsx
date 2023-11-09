@@ -5,9 +5,9 @@ export default function Homenavigation() {
   return (
     <>
       <Menu as={'div' as React.ElementType} className=' inline-block '>
-        <div className='hover:font-semibold transform p-2 '>
-          <Menu.Button className='inline-flex items-center gap-2  justify-center rounded-md p-2 focus:outline-none  '>
-            Home
+        <div className='p-2 '>
+          <Menu.Button className='font-secondary pb-0.5 border-b-2 border-colorBeigeLight/0 hover:text-colorGold hover:border-colorGold'>
+            Shop
           </Menu.Button>
         </div>
 
@@ -21,11 +21,11 @@ export default function Homenavigation() {
           leaveTo='transform opacity-0 scale-95'
         >
           <div className='flex absolute'>
-            <Menu.Items className='relative right-32 flex gap-24 justify-between  mt-2 w-max p-8  origin-top-right rounded-sm  ring-black/5 focus:outline-none  border-t-4 border-b-4 border-colorGold bg-colorBeigeLight shadow font-secondary text-colorBlack '>
+            <Menu.Items className='relative right-32 flex gap-24 justify-between  mt-2 w-max p-8  origin-top-right rounded-sm  ring-black/5 focus:outline-none  border-t-4 border-b-4 border-colorGold bg-colorBeigeLight  font-secondary text-colorBlack '>
               <div>
                 <div className=''>
                   <Menu.Item>
-                    <button className='group flex w-full items-center rounded-sm px-2 py-2 text-large hover:border-b border-black'>
+                    <button className='group flex w-full items-center  px-2 py-2 text-large  border-b-2 hover:text-colorGold hover:border-colorGold'>
                       Categories
                     </button>
                   </Menu.Item>
@@ -138,7 +138,7 @@ export default function Homenavigation() {
               <div>
                 <div className=''>
                   <Menu.Item>
-                    <button className='group flex w-full items-center rounded-md px-2 py-2 text-large'>
+                    <button className='group flex w-full items-center px-2 py-2 text-large border-b-2 hover:text-colorGold hover:border-colorGold'>
                       Shop by Style
                     </button>
                   </Menu.Item>
@@ -199,7 +199,7 @@ export default function Homenavigation() {
               <div>
                 <div className=''>
                   <Menu.Item>
-                    <button className='group flex w-full items-center rounded-md px-2 py-2 text-large'>
+                    <button className='group flex w-full items-center relative px-2 py-2 text-large border-b-2 hover:text-colorGold hover:border-colorGold'>
                       Trending Search
                     </button>
                   </Menu.Item>
