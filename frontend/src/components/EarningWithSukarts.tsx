@@ -29,7 +29,9 @@ export default function EarningWithSukarts() {
         </div>
       </div>
       <div className="w-1/2 h-auto flex items-center justify-center border-4 rounded-3xl overflow-hidden border-colorBrown">
-      <AiOutlinePlayCircle className="absolute text-white text-9xl"/>
+        <button className="absolute">
+        <AiOutlinePlayCircle className=" text-white text-9xl"/>
+        </button>
   <img src={video} alt="" className=" h-auto"/>
 </div>
     </div>

@@ -4,6 +4,7 @@ import Categories from "../components/Categories";
 import ShopByStyle from "../components/ShopByStyle";
 import PopularProducts from "../components/PopularProducts";
 import EarningWithSukarts from "../components/EarningWithSukarts";
+import AboutSoukarts from "../components/AboutSoukarts";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <ShopByStyle />
       <PopularProducts />
       <EarningWithSukarts />
+      <AboutSoukarts/>
     </div>
   );
 }
