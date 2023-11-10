@@ -2,6 +2,25 @@ import {Menu, Transition} from '@headlessui/react';
 import React, {Fragment} from 'react';
 
 export default function Homenavigation() {
+  const categories = [
+    'rugs',
+    'Poufs',
+    'Lamps',
+    'Pillows',
+    'Shoes',
+    'Bags',
+    'Jewelery',
+    'Accessories',
+  ];
+  const styles = ['Modern', 'Classic', 'Fusion', 'Boho'];
+  const trending = [
+    'Kilim Rug',
+    'Raffia Shoes',
+    'Leather Bags',
+    'Brass Lamps',
+    'Rafia Lamps',
+  ];
+
   return (
     <>
       <Menu as={'div' as React.ElementType} className=' inline-block '>
@@ -30,110 +49,21 @@ export default function Homenavigation() {
                     </button>
                   </Menu.Item>
                 </div>
-                <div className=''>
-                  <Menu.Item>
-                    {({active}: {active: boolean}) => (
-                      <button
-                        className={`${
-                          active ? ' bg-colorBeige ' : 'text-gray-900  '
-                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
-                      >
-                        Rugs
-                      </button>
-                    )}
-                  </Menu.Item>
-                </div>
-                <div className=''>
-                  <Menu.Item>
-                    {({active}: {active: boolean}) => (
-                      <button
-                        className={`${
-                          active ? ' bg-colorBeige ' : 'text-gray-900  '
-                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
-                      >
-                        Poufs
-                      </button>
-                    )}
-                  </Menu.Item>
-                </div>
-                <div className=''>
-                  <Menu.Item>
-                    {({active}: {active: boolean}) => (
-                      <button
-                        className={`${
-                          active ? ' bg-colorBeige ' : 'text-gray-900  '
-                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
-                      >
-                        Lamps
-                      </button>
-                    )}
-                  </Menu.Item>
-                </div>
-                <div className=''>
-                  <Menu.Item>
-                    {({active}: {active: boolean}) => (
-                      <button
-                        className={`${
-                          active ? ' bg-colorBeige ' : 'text-gray-900  '
-                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
-                      >
-                        Pillows
-                      </button>
-                    )}
-                  </Menu.Item>
-                </div>
-                <div className=''>
-                  <Menu.Item>
-                    {({active}: {active: boolean}) => (
-                      <button
-                        className={`${
-                          active ? ' bg-colorBeige ' : 'text-gray-900  '
-                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
-                      >
-                        Shoes
-                      </button>
-                    )}
-                  </Menu.Item>
-                </div>
-                <div className=''>
-                  <Menu.Item>
-                    {({active}: {active: boolean}) => (
-                      <button
-                        className={`${
-                          active ? ' bg-colorBeige ' : 'text-gray-900  '
-                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
-                      >
-                        Bags
-                      </button>
-                    )}
-                  </Menu.Item>
-                </div>
-                <div className=''>
-                  <Menu.Item>
-                    {({active}: {active: boolean}) => (
-                      <button
-                        className={`${
-                          active ? ' bg-colorBeige ' : 'text-gray-900  '
-                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
-                      >
-                        Jewelery
-                      </button>
-                    )}
-                  </Menu.Item>
-                </div>
-                <div className=''>
-                  <Menu.Item>
-                    {({active}: {active: boolean}) => (
-                      <button
-                        className={`${
-                          active ? ' bg-colorBeige ' : 'text-gray-900  '
-                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
-                      >
-                        Accessories
-                      </button>
-                    )}
-                  </Menu.Item>
-                </div>
+                {categories.map((category) => (
+                  <div className=''>
+                    <Menu.Item>
+                      {({active}: {active: boolean}) => (
+                        <button
+                          className={`${
+                            active ? ' bg-colorBeige ' : 'text-gray-900  '
+                          } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
+                        >
+                          {category}
+                        </button>
+                      )}
+                    </Menu.Item>
+                  </div>
+                ))}
               </div>
               <div>
                 <div className=''>
@@ -143,58 +73,21 @@ export default function Homenavigation() {
                     </button>
                   </Menu.Item>
                 </div>
-                <div className=''>
-                  <Menu.Item>
-                    {({active}: {active: boolean}) => (
-                      <button
-                        className={`${
-                          active ? ' bg-colorBeige ' : 'text-gray-900  '
-                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
-                      >
-                        Modern
-                      </button>
-                    )}
-                  </Menu.Item>
-                </div>
-                <div className=''>
-                  <Menu.Item>
-                    {({active}: {active: boolean}) => (
-                      <button
-                        className={`${
-                          active ? ' bg-colorBeige ' : 'text-gray-900  '
-                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
-                      >
-                        Classic
-                      </button>
-                    )}
-                  </Menu.Item>
-                </div>
-                <div className=''>
-                  <Menu.Item>
-                    {({active}: {active: boolean}) => (
-                      <button
-                        className={`${
-                          active ? ' bg-colorBeige ' : 'text-gray-900  '
-                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
-                      >
-                        Fusion
-                      </button>
-                    )}
-                  </Menu.Item>
-                </div>
-                <div className=''>
-                  <Menu.Item>
-                    {({active}: {active: boolean}) => (
-                      <button
-                        className={`${
-                          active ? ' bg-colorBeige ' : 'text-gray-900  '
-                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
-                      >
-                        Boho
-                      </button>
-                    )}
-                  </Menu.Item>
-                </div>
+                {styles.map((style: string) => (
+                  <div className=''>
+                    <Menu.Item>
+                      {({active}: {active: boolean}) => (
+                        <button
+                          className={`${
+                            active ? ' bg-colorBeige ' : 'text-gray-900  '
+                          } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
+                        >
+                          {style}
+                        </button>
+                      )}
+                    </Menu.Item>
+                  </div>
+                ))}
               </div>
               <div>
                 <div className=''>
@@ -204,72 +97,21 @@ export default function Homenavigation() {
                     </button>
                   </Menu.Item>
                 </div>
-                <div className=''>
-                  <Menu.Item>
-                    {({active}: {active: boolean}) => (
-                      <button
-                        className={`${
-                          active ? ' bg-colorBeige ' : 'text-gray-900  '
-                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
-                      >
-                        Kilim Rug
-                      </button>
-                    )}
-                  </Menu.Item>
-                </div>
-                <div className=''>
-                  <Menu.Item>
-                    {({active}: {active: boolean}) => (
-                      <button
-                        className={`${
-                          active ? ' bg-colorBeige ' : 'text-gray-900  '
-                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
-                      >
-                        Raffia Shoes
-                      </button>
-                    )}
-                  </Menu.Item>
-                </div>
-                <div className=''>
-                  <Menu.Item>
-                    {({active}: {active: boolean}) => (
-                      <button
-                        className={`${
-                          active ? ' bg-colorBeige ' : 'text-gray-900  '
-                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
-                      >
-                        Leather Bags
-                      </button>
-                    )}
-                  </Menu.Item>
-                </div>
-                <div className=''>
-                  <Menu.Item>
-                    {({active}: {active: boolean}) => (
-                      <button
-                        className={`${
-                          active ? ' bg-colorBeige ' : 'text-gray-900  '
-                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
-                      >
-                        Brass Lamps
-                      </button>
-                    )}
-                  </Menu.Item>
-                </div>
-                <div className=''>
-                  <Menu.Item>
-                    {({active}: {active: boolean}) => (
-                      <button
-                        className={`${
-                          active ? ' bg-colorBeige ' : 'text-gray-900  '
-                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
-                      >
-                        Raffia Lamps
-                      </button>
-                    )}
-                  </Menu.Item>
-                </div>
-
+                {trending.map((trend: string) => (
+                  <div className=''>
+                    <Menu.Item>
+                      {({active}: {active: boolean}) => (
+                        <button
+                          className={`${
+                            active ? ' bg-colorBeige ' : 'text-gray-900  '
+                          } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
+                        >
+                          {trend}
+                        </button>
+                      )}
+                    </Menu.Item>
+                  </div>
+                ))}
                 <div className='absolute bottom-0 pb-3'>
                   <Menu.Item>
                     {({active}: {active: boolean}) => (
