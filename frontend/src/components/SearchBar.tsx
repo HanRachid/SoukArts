@@ -74,7 +74,7 @@ export default function Searchbar() {
         >
           <Menu.Items
             static
-            className='absolute right-0  w-56 origin-top-right bg-colorBeigeLight  rounded-sm  ring-black/5 focus:outline-none border  border-black text-small font-secondary'
+            className='absolute right-0 p-1.5 w-56 origin-top-right bg-colorBeigeLight  rounded-sm  ring-black/5 focus:outline-none border  border-black text-small font-secondary'
           >
             {categories.map((category, index) => (
               <div key={index} className=''>
@@ -82,8 +82,8 @@ export default function Searchbar() {
                   <div
                     className={
                       category == selectedCategory
-                        ? 'flex items-center  rounded-md  text-sm  bg-colorBeige'
-                        : 'flex items-center  rounded-md  text-sm  hover:bg-colorBeige'
+                        ? 'flex items-center  rounded-md  text-sm  bg-colorBeige hover:scale-[1.02] transition-all duration-100'
+                        : 'flex items-center  rounded-md  text-sm  hover:bg-colorBeige hover:scale-[1.02] transition-all duration-100'
                     }
                   >
                     <CheckSVG

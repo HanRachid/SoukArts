@@ -22,13 +22,13 @@ export default function Navigation() {
           <CartSVG className='w-6 font-secondary hover:fill-colorGold' />
         </Link>
         <div className='flex gap-3'>
-          <Link to='/'>
+          <Link to='/login'>
             <span className='font-secondary pb-0.5 border-b-2 border-colorBeigeLight/0 hover:text-colorGold hover:border-colorGold'>
               Login
             </span>
           </Link>
           <span>|</span>
-          <Link to='/'>
+          <Link to='/register'>
             <span className='font-secondary pb-0.5 border-b-2 border-colorBeigeLight/0 hover:text-colorGold hover:border-colorGold'>
               Sign In
             </span>
