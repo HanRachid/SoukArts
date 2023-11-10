@@ -15,15 +15,3 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: 'Brown Sugar', 'sans-serif';
-  src: url('../src/assets/fonts/Brown-sugar.ttf') format('truetype');
-}
-
-html,
-body,
-#root {
-  width: 100vw;
-  height: 100vh;
-}
-
