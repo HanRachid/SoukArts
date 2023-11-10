@@ -44,8 +44,13 @@ export default function Homenavigation() {
               <div>
                 <div className=''>
                   <Menu.Item>
-                    <button className='group flex w-full items-center  px-2 py-2 text-large  border-b-2 hover:text-colorGold hover:border-colorGold'>
-                      Categories
+                    <button>
+                      <div className='group flex w-full items-center px-2 py-2 text-large relative hover:text-colorGold hover:scale-[1.02] transition-all duration-100'>
+                        <span className='relative z-10'>
+                          Categories
+                          <span className='absolute bottom-0 left-0 w-full h-0.5 bg-colorGold transform scale-x-0 origin-left transition-transform group-hover:scale-x-100'></span>
+                        </span>
+                      </div>
                     </button>
                   </Menu.Item>
                 </div>
@@ -56,7 +61,7 @@ export default function Homenavigation() {
                         <button
                           className={`${
                             active ? ' bg-colorBeige ' : 'text-gray-900  '
-                          } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
+                          } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 hover:scale-[1.02] transition-all duration-75`}
                         >
                           {category}
                         </button>
@@ -68,8 +73,13 @@ export default function Homenavigation() {
               <div>
                 <div className=''>
                   <Menu.Item>
-                    <button className='group flex w-full items-center px-2 py-2 text-large border-b-2 hover:text-colorGold hover:border-colorGold'>
-                      Shop by Style
+                    <button>
+                      <div className='group flex w-full items-center px-2 py-2 text-large relative hover:text-colorGold hover:scale-[1.02] transition-all duration-100'>
+                        <span className='relative z-10'>
+                          Shop by Style
+                          <span className='absolute bottom-0 left-0 w-full h-0.5 bg-colorGold transform scale-x-0 origin-left transition-transform group-hover:scale-x-100'></span>
+                        </span>
+                      </div>
                     </button>
                   </Menu.Item>
                 </div>
@@ -80,7 +90,7 @@ export default function Homenavigation() {
                         <button
                           className={`${
                             active ? ' bg-colorBeige ' : 'text-gray-900  '
-                          } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
+                          } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 hover:scale-[1.02] transition-all duration-75`}
                         >
                           {style}
                         </button>
@@ -92,8 +102,13 @@ export default function Homenavigation() {
               <div>
                 <div className=''>
                   <Menu.Item>
-                    <button className='group flex w-full items-center relative px-2 py-2 text-large border-b-2 hover:text-colorGold hover:border-colorGold'>
-                      Trending Search
+                    <button>
+                      <div className='group flex w-full items-center px-2 py-2 text-large relative hover:text-colorGold hover:scale-[1.02] transition-all duration-100'>
+                        <span className='relative z-10'>
+                          Trending Search
+                          <span className='absolute bottom-0 left-0 w-full h-0.5 bg-colorGold transform scale-x-0 origin-left transition-transform group-hover:scale-x-100'></span>
+                        </span>
+                      </div>
                     </button>
                   </Menu.Item>
                 </div>
@@ -104,7 +119,7 @@ export default function Homenavigation() {
                         <button
                           className={`${
                             active ? ' bg-colorBeige ' : 'text-gray-900  '
-                          } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
+                          } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 hover:scale-[1.02] transition-all duration-75`}
                         >
                           {trend}
                         </button>
@@ -118,7 +133,7 @@ export default function Homenavigation() {
                       <button
                         className={`${
                           active ? ' bg-colorBeige ' : 'text-gray-900  '
-                        } group flex text-colorBlack/80 w-full items-center gap-3 rounded-md px-2 py-2 text-sm `}
+                        } group flex text-colorBlack/80 w-full items-center gap-3 rounded-md px-2 py-2 text-sm hover:scale-[1.02] transition-all duration-75`}
                       >
                         Shop All
                         <svg
@@ -136,11 +151,10 @@ export default function Homenavigation() {
                             stroke-linejoin='round'
                           ></g>
                           <g id='SVGRepo_iconCarrier'>
-                            {' '}
                             <path
                               id='XMLID_222_'
                               d='M250.606,154.389l-150-149.996c-5.857-5.858-15.355-5.858-21.213,0.001 c-5.857,5.858-5.857,15.355,0.001,21.213l139.393,139.39L79.393,304.394c-5.857,5.858-5.857,15.355,0.001,21.213 C82.322,328.536,86.161,330,90,330s7.678-1.464,10.607-4.394l149.999-150.004c2.814-2.813,4.394-6.628,4.394-10.606 C255,161.018,253.42,157.202,250.606,154.389z'
-                            ></path>{' '}
+                            ></path>
                           </g>
                         </svg>
                       </button>
