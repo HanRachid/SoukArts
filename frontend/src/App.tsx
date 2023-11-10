@@ -3,7 +3,7 @@ import {RouteObj} from '../types';
 import routes from './routes.tsx';
 import GlobalLayout from './layouts/GlobalLayout.tsx';
 
-export default function App() {
+export default function App(): React.ReactElement {
   return (
     <>
       <BrowserRouter>

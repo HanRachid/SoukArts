@@ -1,7 +1,7 @@
 import {Menu, Transition} from '@headlessui/react';
 import React, {Fragment} from 'react';
 
-export default function Homenavigation() {
+export default function Homenavigation(): React.ReactElement {
   const categories = [
     'rugs',
     'Poufs',
@@ -40,7 +40,7 @@ export default function Homenavigation() {
           leaveTo='transform opacity-0 scale-95'
         >
           <div className='flex absolute'>
-            <Menu.Items className='relative right-32 flex gap-24 justify-between  mt-2 w-max p-8  origin-top-right rounded-sm  ring-black/5 focus:outline-none  border-t-4 border-b-4 border-colorGold bg-colorBeigeLight  font-secondary text-colorBlack '>
+            <Menu.Items className='relative right-16 flex gap-24 justify-between  mt-2 w-max p-8  origin-top-right rounded-sm  ring-black/5 focus:outline-none  border-t-4 border-b-4 border-colorGold bg-colorBeigeLight  font-secondary text-colorBlack '>
               <div>
                 <div className=''>
                   <Menu.Item>
@@ -48,7 +48,7 @@ export default function Homenavigation() {
                       <div className='group flex w-full items-center px-2 py-2 text-large relative hover:text-colorGold hover:scale-[1.02] transition-all duration-100'>
                         <span className='relative z-10'>
                           Categories
-                          <span className='absolute bottom-0 left-0 w-full h-0.5 bg-colorGold transform scale-x-0 origin-left transition-transform group-hover:scale-x-100'></span>
+                          <span className='absolute bottom-0 left-0 w-full h-0.5 bg-colorGold transform scale-x-0 origin-left transition-transform group-hover:scale-x-100 duration-300'></span>
                         </span>
                       </div>
                     </button>
@@ -77,7 +77,7 @@ export default function Homenavigation() {
                       <div className='group flex w-full items-center px-2 py-2 text-large relative hover:text-colorGold hover:scale-[1.02] transition-all duration-100'>
                         <span className='relative z-10'>
                           Shop by Style
-                          <span className='absolute bottom-0 left-0 w-full h-0.5 bg-colorGold transform scale-x-0 origin-left transition-transform group-hover:scale-x-100'></span>
+                          <span className='absolute bottom-0 left-0 w-full h-0.5 bg-colorGold transform scale-x-0 origin-left transition-transform group-hover:scale-x-100 duration-300'></span>
                         </span>
                       </div>
                     </button>
@@ -106,7 +106,7 @@ export default function Homenavigation() {
                       <div className='group flex w-full items-center px-2 py-2 text-large relative hover:text-colorGold hover:scale-[1.02] transition-all duration-100'>
                         <span className='relative z-10'>
                           Trending Search
-                          <span className='absolute bottom-0 left-0 w-full h-0.5 bg-colorGold transform scale-x-0 origin-left transition-transform group-hover:scale-x-100'></span>
+                          <span className='absolute bottom-0 left-0 w-full h-0.5 bg-colorGold transform scale-x-0 origin-left transition-transform group-hover:scale-x-100 duration-300'></span>
                         </span>
                       </div>
                     </button>

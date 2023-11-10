@@ -4,7 +4,7 @@ import HeartSVG from '../assets/navbar/heart.svg?react';
 import CartSVG from '../assets/navbar/cart.svg?react';
 import {Link} from 'react-router-dom';
 import Button from './Button';
-export default function Navigation() {
+export default function Navigation(): React.ReactElement {
   return (
     <>
       <div className='flex items-center justify-between p-4 h-10 '>
