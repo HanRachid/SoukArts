@@ -1,8 +1,7 @@
 import {NextFunction, Request, Response} from 'express';
 import {connectDb} from './config/connectionDb';
 import UserModel from './models/UserModel';
-import {getUsers, cleanUsers, registerUser} from './routes/routeUser';
-import {BSON, ObjectId} from 'mongodb';
+import {getUsers, cleanUsers, registerUser} from './routes/UserRoutes';
 
 const express = require('express');
 
