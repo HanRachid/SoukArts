@@ -58,20 +58,22 @@ export default function Register() {
             </button>
           </div>
 
-          <div className='flex items-center justify-center w-full pt-10'>
-            <p className='absolute  px-4 bg-gray-50'>Or</p>
+          <div className='flex items-center justify-center'>
+            <div className='w-full h-0.5 bg-gray-300'></div>
+
+            <p className='px-4  '>Or</p>
             <div className='w-full h-0.5 bg-gray-300'></div>
           </div>
         </div>
         <div className='w-full pt-10'>
           <div className='flex items-center gap-10 justify-center'>
-            <button className='w-full py-2  border-black border-2 rounded-bl-xl rounded-tr-xl font-medium text-lg bg-white/50 hover:scale-[1.02] transition-all duration-300'>
+            <button className='w-full py-2  border-black border-2 rounded-bl-xl rounded-tr-xl font-medium text-lg bg-white/50 hover:scale-[1.02] transition-all duration-100'>
               <div className='flex items-center justify-evenly'>
                 <img className='w-7' src={logo_gogole} alt='logo_google' />
                 <p className='font-secondary'>Sign in with Google</p>
               </div>
             </button>
-            <button className='w-full py-2  border-black border-2 rounded-bl-xl rounded-tr-xl font-medium text-lg bg-white/50 hover:scale-[1.02] transition-all duration-300'>
+            <button className='w-full py-2  border-black border-2 rounded-bl-xl rounded-tr-xl font-medium text-lg bg-white/50 hover:scale-[1.02] transition-all duration-100'>
               <div className='flex items-center justify-evenly'>
                 <img className='w-7' src={logo_apple} alt='logo_google' />
                 <p className='font-secondary'>Sign in with Apple</p>
@@ -80,7 +82,10 @@ export default function Register() {
           </div>
           <p className='text-center text-lg mt-6'>
             Don’t have an account?{' '}
-            <Link to='/login' className='text-[#0C2A92] hover:text-[#3553bd]'>
+            <Link
+              to='/login'
+              className='text-[#0C2A92] hover:text-[#3553bd] scale-[1.02] transition-all duration-100 hover:bg-opacity-90'
+            >
               Sign In
             </Link>
           </p>

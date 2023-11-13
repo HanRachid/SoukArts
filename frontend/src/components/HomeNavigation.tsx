@@ -24,11 +24,15 @@ export default function Homenavigation(): React.ReactElement {
   return (
     <>
       <Menu as={'div' as React.ElementType} className=' inline-block '>
-        <div className='p-2 '>
-          <Menu.Button className='font-secondary border-b-2 border-colorBeigeLight/0 hover:text-colorGold hover:border-colorGold'>
-            Shop
-          </Menu.Button>
-        </div>
+        <button>
+          <div className='group flex w-full items-center px-2 py-2 text-medium font-secondary hover:text-colorGold hover:scale-[1.02] transition-all duration-300'>
+            <span className='relative z-10'>
+              <Menu.Button> Shop </Menu.Button>
+
+              <span className='absolute bottom-0 left-0 w-full h-0.5 bg-colorGold transform scale-x-0 origin-left transition-transform group-hover:scale-x-100 duration-300'></span>
+            </span>
+          </div>
+        </button>
 
         <Transition
           as={Fragment}

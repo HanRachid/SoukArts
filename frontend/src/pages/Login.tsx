@@ -42,25 +42,27 @@ export default function Login() {
           </div>
 
           <div className='w-full flex items-center justify-center'>
-            <button className='w-full bg-colorGold py-2.5 rounded-bl-xl rounded-tr-xl text-gray-50 font-semibold font-secondary hover:scale-[1.02] transition-all duration-30'>
+            <button className='w-full bg-colorGold py-2.5 rounded-bl-xl rounded-tr-xl text-gray-50 font-semibold font-secondary hover:scale-[1.02] transition-all duration-100 hover:bg-opacity-90'>
               Login
             </button>
           </div>
 
-          <div className='flex items-center justify-center w-full pt-10'>
-            <p className='absolute  px-4 bg-gray-50'>Or</p>
+          <div className='flex items-center justify-center'>
+            <div className='w-full h-0.5 bg-gray-300'></div>
+
+            <p className='px-4  '>Or</p>
             <div className='w-full h-0.5 bg-gray-300'></div>
           </div>
         </div>
         <div className='w-full pt-10'>
           <div className='flex items-center gap-10 justify-center'>
-            <button className='w-full py-2  border-black border-2 rounded-bl-xl rounded-tr-xl font-medium text-lg bg-white/50 hover:scale-[1.02] transition-all duration-300'>
+            <button className='w-full py-2  border-black border-2 rounded-bl-xl rounded-tr-xl font-medium text-lg bg-white/50 hover:scale-[1.02] transition-all duration-100'>
               <div className='flex items-center justify-evenly'>
                 <img className='w-7' src={logo_gogole} alt='logo_google' />
                 <p className='font-secondary'>Sign in with Google</p>
               </div>
             </button>
-            <button className='w-full py-2  border-black border-2 rounded-bl-xl rounded-tr-xl font-medium text-lg bg-white/50 hover:scale-[1.02] transition-all duration-300'>
+            <button className='w-full py-2  border-black border-2 rounded-bl-xl rounded-tr-xl font-medium text-lg bg-white/50 hover:scale-[1.02] transition-all duration-100'>
               <div className='flex items-center justify-evenly'>
                 <img className='w-7' src={logo_apple} alt='logo_google' />
                 <p className='font-secondary'>Sign in with Apple</p>
