@@ -13,7 +13,7 @@ export default interface BaseModel {
   profile_image: string;
   email: string;
   number_phone: string;
-  hashed_password: string;
+  password: string;
   role_id?: Object;
   is_active?: boolean;
   is_deleted?: boolean;

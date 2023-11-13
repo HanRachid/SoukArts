@@ -1,25 +1,20 @@
 import {NextFunction, Request, Response} from 'express';
 import {connectDb} from './config/connectionDb';
-import UserModel from './models/UserModel';
-import {getUsers, cleanUsers, registerUser} from './routes/UserRoutes';
-
+import usersRouter from './routes/users';
+import authRouter from './routes/auth';
 const express = require('express');
-
+const cors = require('cors');
 require('dotenv').config();
 const app = express();
 const port = process.env.PORT ?? 3000;
 app.use(express.json());
+app.use(cors());
 
+app.use('/user', usersRouter);
+app.use('/auth', authRouter);
 app.get('/', async (req: Request, res: Response) => {
-  const foundUser = await UserModel.findModel('6544d76bf102534833e13cf8');
-  console.log(foundUser);
-  res.send(foundUser);
+  res.send('Hello World!');
 });
-
-app.post('/register', registerUser);
-app.get('/allUsers', getUsers);
-app.post('/cleanUsers', cleanUsers);
-
 app.listen(3000, (): void => {
   console.log('server running on port ' + port);
   connectDb();

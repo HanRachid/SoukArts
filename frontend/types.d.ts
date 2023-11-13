@@ -5,3 +5,9 @@ export type RouteObj = {
   element: ReactElement;
   hasLayout: boolean;
 };
+
+export type User = {
+  username: string;
+  email: string;
+  password: string;
+};
