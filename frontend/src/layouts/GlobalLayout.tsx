@@ -1,10 +1,11 @@
-import {Outlet} from 'react-router-dom';
 import NavBar from './NavBar';
 import Footer from './Footer';
 
 export default function GlobalLayout({
+  Component,
   hasLayout,
 }: {
+  Component: React.ComponentType;
   hasLayout: boolean;
 }): React.ReactElement {
   return (
@@ -12,7 +13,7 @@ export default function GlobalLayout({
       <div className='flex flex-col min-h-screen'>
         {hasLayout && <NavBar />}
         <div className='flex-1 flex flex-col'>
-          <Outlet />
+          <Component />
         </div>
         {hasLayout && <Footer />}
       </div>

@@ -1,4 +1,3 @@
-import {ObjectId} from 'mongodb';
 import BaseModel from './BaseModel';
 import mongoose from 'mongoose';
 
@@ -6,16 +5,16 @@ import mongoose from 'mongoose';
  * UserModel Class that describes the users .
  */
 export default class UserModel implements BaseModel {
-  private static MongoUser = null;
+  private static MongoUserModel = null;
   _id: Object;
   username: string;
   first_name: string;
   last_name: string;
-  gender: Gender;
+  gender: Gender | null;
   profile_image: string;
   email: string;
-  number_phone: string;
-  hashed_password: string;
+  phone: string;
+  password: string;
   role: Role;
   is_active: boolean;
   is_deleted: boolean;
@@ -44,14 +43,14 @@ export default class UserModel implements BaseModel {
    */
   constructor(
     username: string,
-    first_name: string,
-    last_name: string,
-    gender: Gender,
-    profile_image: string,
     email: string,
-    number_phone: string,
-    hashed_password: string,
-    role: Role = 'client'
+    password: string,
+    first_name: string = '',
+    last_name: string = '',
+    gender: Gender | null = null,
+    profile_image: string = '',
+    phone: string = '',
+    role: Role = 'Client'
   ) {
     this._id = this._id ?? null;
     this.first_name = first_name;
@@ -61,57 +60,47 @@ export default class UserModel implements BaseModel {
     this.username = username;
     this.first_name = first_name;
     this.last_name = last_name;
-    (this.gender = gender), (this.profile_image = profile_image);
+    this.gender = gender;
+    this.profile_image = profile_image;
     this.email = email;
-    this.number_phone = number_phone;
-    this.hashed_password = hashed_password;
+    this.phone = phone;
+    this.password = password;
     this.role = role;
     this.is_active = true;
     this.is_deleted = false;
-    this.card_info = {
-      card_number: '',
-      expiry_date: null,
-      cvv: 0,
-    };
-    this.order_history = [
-      {
-        items: [
-          {
-            itemName: '',
-            itemPrice: 0,
-            addedAt: null,
-            quantity: 0,
-          },
-        ],
-        totalAmount: 0,
-        orderDate: null,
-        deliveryDate: null,
-        status: null,
-      },
-    ];
+
     this.created_at = new Date();
     this.updated_at = new Date();
   }
-  static getMongoUser() {
-    UserModel.MongoUser =
-      UserModel.MongoUser ??
+  /**
+   * Gets current user's mongoDB model. If null, initiates it
+   * @returns user's current mongodb model
+   */
+  static getMongoUserModel() {
+    UserModel.MongoUserModel =
+      UserModel.MongoUserModel ??
       mongoose.model<BaseModel>('User', UserModel.getSchema());
-    return UserModel.MongoUser;
+    return UserModel.MongoUserModel;
   }
+
+  /**
+   * creates and returns the user's mongoose schema
+   * @returns User mongoose schema
+   */
   static getSchema(): mongoose.Schema {
     return new mongoose.Schema({
       username: {type: String, required: true},
-      first_name: {type: String, required: true},
-      last_name: {type: String, required: true},
-      gender: {type: String, required: true},
-      profile_image: {type: String, required: true},
+      first_name: {type: String, required: false},
+      last_name: {type: String, required: false},
+      gender: {type: String, required: false},
+      profile_image: {type: String, required: false},
       email: {type: String, required: true},
-      number_phone: {type: String, required: true},
-      hashed_password: {type: String, required: true},
+      number_phone: {type: String, required: false},
+      password: {type: String, required: true},
       role_id: {type: Object, required: false},
       is_active: {type: Boolean, required: false},
       is_deleted: {type: Boolean, required: false},
-      card_info: {
+      saved_card: {
         type: {
           card_number: {type: String, required: false},
           expiry_date: {type: Date, required: false},
@@ -126,6 +115,10 @@ export default class UserModel implements BaseModel {
     });
   }
 
+  /**
+   * Register current user object in DB.
+   * @returns if created, the user's unique ID
+   */
   async registerModel(): Promise<Object | null> {
     if (this._id !== null) {
       console.log('user already exists!');
@@ -138,8 +131,8 @@ export default class UserModel implements BaseModel {
       gender: this.gender,
       profile_image: this.profile_image,
       email: this.email,
-      number_phone: this.number_phone,
-      hashed_password: this.hashed_password,
+      number_phone: this.phone,
+      password: this.password,
       role: this.role,
       is_active: this.is_active,
       is_deleted: this.is_deleted,
@@ -149,7 +142,7 @@ export default class UserModel implements BaseModel {
       updated_at: this.updated_at,
     };
 
-    const createModel = await UserModel.getMongoUser().create(item);
+    const createModel = await UserModel.getMongoUserModel().create(item);
     this._id = createModel.get('_id');
     return this._id;
   }
@@ -161,7 +154,9 @@ export default class UserModel implements BaseModel {
   async getModel(): Promise<BaseModel> {
     console.log(this._id);
 
-    const findModel = await UserModel.getMongoUser().findOne({_id: this._id});
+    const findModel = await UserModel.getMongoUserModel().findOne({
+      _id: this._id,
+    });
 
     return findModel;
   }
@@ -171,7 +166,7 @@ export default class UserModel implements BaseModel {
    * @param object Object with edits
    */
   async updateModel(object: Partial<UserModel>): Promise<void> {
-    await UserModel.getMongoUser().updateOne(
+    await UserModel.getMongoUserModel().updateOne(
       {_id: this._id, updated_at: new Date()},
       object
     );
@@ -180,7 +175,7 @@ export default class UserModel implements BaseModel {
    * Set current model's is_deleted to true
    */
   async deleteModel(): Promise<void> {
-    const deleteModel = await UserModel.getMongoUser().updateOne(
+    const deleteModel = await UserModel.getMongoUserModel().updateOne(
       {_id: this._id},
       {is_deleted: true}
     );
@@ -191,7 +186,7 @@ export default class UserModel implements BaseModel {
    * Set current model's is_deleted to false
    */
   async restoreModel(): Promise<void> {
-    await UserModel.getMongoUser().updateOne(
+    await UserModel.getMongoUserModel().updateOne(
       {_id: this._id},
       {is_deleted: false}
     );
@@ -201,12 +196,17 @@ export default class UserModel implements BaseModel {
    * @returns array containing all user's objects
    */
   static async getAllUsers(): Promise<UserModel[]> {
-    const allUsers = await UserModel.getMongoUser().find();
+    const allUsers = await UserModel.getMongoUserModel().find();
     return allUsers;
   }
 
+  /**
+   * find model in db using id
+   * @param id
+   * @returns found model
+   */
   static async findModel(id: string): Promise<UserModel> {
-    const foundModel = await UserModel.getMongoUser().findOne({
+    const foundModel = await UserModel.getMongoUserModel().findOne({
       _id: id,
     });
 
@@ -215,10 +215,31 @@ export default class UserModel implements BaseModel {
     return result;
   }
 
+  /**
+   * find model in db using email/password combination
+   * @param id
+   * @returns found model
+   */
+  static async findModelpw(
+    usermail: string,
+    password: string
+  ): Promise<UserModel> {
+    const foundModel = await UserModel.getMongoUserModel().findOne({
+      username: usermail,
+      password: password,
+    });
+
+    return foundModel;
+  }
+  /**
+   * **DANGEROUS - WIPES ENTIRE DATABASE COLLECTION**
+   * for development usage only, wipes entire database
+   * @param Condition
+   */
   static async cleanUsers(Condition: object): Promise<void> {
     console.log('Deleting users with condition:', Condition);
 
-    const result = await UserModel.getMongoUser().deleteMany(Condition);
+    const result = await UserModel.getMongoUserModel().deleteMany(Condition);
     console.log(result);
 
     if (result.deletedCount === 0) {
@@ -227,4 +248,22 @@ export default class UserModel implements BaseModel {
       console.log(result.deletedCount + ' documents were deleted.');
     }
   }
+
+  /*static async useModel(id: string): Promise<UserModel> {
+    const Model = mongoose.model<UserModel>('User', this.getSchema());
+
+    const foundModel = await Model.findOne({_id: id});
+
+    const user = new UserModel(
+      foundModel.first_name,
+      foundModel.last_name,
+      foundModel.gender,
+      foundModel.role,
+      foundModel._id,
+      Model
+    );
+    console.log(user);
+
+    return user;
+  }*/
 }

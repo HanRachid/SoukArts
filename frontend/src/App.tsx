@@ -1,22 +1,6 @@
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import {RouteObj} from '../types';
+import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import routes from './routes.tsx';
-import GlobalLayout from './layouts/GlobalLayout.tsx';
-
+export const router = createBrowserRouter(routes);
 export default function App(): React.ReactElement {
-  return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          {routes.map((route: RouteObj, index) => (
-            <Route
-              element={<GlobalLayout key={index} hasLayout={route.hasLayout} />}
-            >
-              <Route path={route.path} element={route.element} />
-            </Route>
-          ))}
-        </Routes>
-      </BrowserRouter>
-    </>
-  );
+  return <RouterProvider router={router} />;
 }
