@@ -74,8 +74,8 @@ export default function Searchbar(): React.ReactElement {
             className='absolute right-0 p-1.5 w-56 origin-top-right bg-colorBeigeLight  rounded-sm  ring-black/5 focus:outline-none border  border-black text-small font-secondary'
           >
             {categories.map((category, index) => (
-              <div key={index} className=''>
-                <Menu.Item value={category}>
+              <div key={index}>
+                <Menu.Item>
                   <div
                     className={
                       category == selectedCategory

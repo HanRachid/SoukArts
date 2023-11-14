@@ -13,7 +13,7 @@ export default class UserModel implements BaseModel {
   gender: Gender | null;
   profile_image: string;
   email: string;
-  number_phone: string;
+  phone: string;
   password: string;
   role: Role;
   is_active: boolean;
@@ -43,13 +43,13 @@ export default class UserModel implements BaseModel {
    */
   constructor(
     username: string,
+    email: string,
+    password: string,
     first_name: string = '',
     last_name: string = '',
     gender: Gender | null = null,
     profile_image: string = '',
-    email: string,
-    number_phone: string = '',
-    password: string,
+    phone: string = '',
     role: Role = 'Client'
   ) {
     this._id = this._id ?? null;
@@ -63,7 +63,7 @@ export default class UserModel implements BaseModel {
     this.gender = gender;
     this.profile_image = profile_image;
     this.email = email;
-    this.number_phone = number_phone;
+    this.phone = phone;
     this.password = password;
     this.role = role;
     this.is_active = true;
@@ -90,17 +90,17 @@ export default class UserModel implements BaseModel {
   static getSchema(): mongoose.Schema {
     return new mongoose.Schema({
       username: {type: String, required: true},
-      first_name: {type: String, required: true},
-      last_name: {type: String, required: true},
-      gender: {type: String, required: true},
-      profile_image: {type: String, required: true},
+      first_name: {type: String, required: false},
+      last_name: {type: String, required: false},
+      gender: {type: String, required: false},
+      profile_image: {type: String, required: false},
       email: {type: String, required: true},
-      number_phone: {type: String, required: true},
-      hashed_password: {type: String, required: true},
+      number_phone: {type: String, required: false},
+      password: {type: String, required: true},
       role_id: {type: Object, required: false},
       is_active: {type: Boolean, required: false},
       is_deleted: {type: Boolean, required: false},
-      card_info: {
+      saved_card: {
         type: {
           card_number: {type: String, required: false},
           expiry_date: {type: Date, required: false},
@@ -131,7 +131,7 @@ export default class UserModel implements BaseModel {
       gender: this.gender,
       profile_image: this.profile_image,
       email: this.email,
-      number_phone: this.number_phone,
+      number_phone: this.phone,
       password: this.password,
       role: this.role,
       is_active: this.is_active,
@@ -215,6 +215,22 @@ export default class UserModel implements BaseModel {
     return result;
   }
 
+  /**
+   * find model in db using email/password combination
+   * @param id
+   * @returns found model
+   */
+  static async findModelpw(
+    usermail: string,
+    password: string
+  ): Promise<UserModel> {
+    const foundModel = await UserModel.getMongoUserModel().findOne({
+      username: usermail,
+      password: password,
+    });
+
+    return foundModel;
+  }
   /**
    * **DANGEROUS - WIPES ENTIRE DATABASE COLLECTION**
    * for development usage only, wipes entire database

@@ -25,25 +25,21 @@ export default function Footer(): React.ReactElement {
               <div className='flex gap-2'>
                 <div className='h-7 w-7 border border-colorBrown rounded-full flex justify-center items-center'>
                   <Link to=''>
-                    {' '}
                     <LuFacebook />
                   </Link>
                 </div>
                 <div className='h-7 w-7 border border-colorBrown rounded-full flex justify-center items-center'>
                   <Link to=''>
-                    {' '}
-                    <FiInstagram />{' '}
+                    <FiInstagram />
                   </Link>
                 </div>
                 <div className='h-7 w-7 border border-colorBrown rounded-full flex justify-center items-center'>
                   <Link to=''>
-                    {' '}
-                    <PiPinterestLogoBold />{' '}
+                    <PiPinterestLogoBold />
                   </Link>
                 </div>
                 <div className='h-7 w-7 border border-colorBrown rounded-full flex justify-center items-center'>
                   <Link to=''>
-                    {' '}
                     <FiTwitter />
                   </Link>
                 </div>
@@ -124,24 +120,24 @@ export default function Footer(): React.ReactElement {
             </div>
 
             <div className='flex flex-col items-center mt-5 md:flex-row md:gap-10'>
-              <p>©2023 SoukArts,Inc.</p>
+              <span>©2023 SoukArts,Inc.</span>
 
-              <p className='underline text-[12px] md:text-small font-extralight mt-3 md:mt-0'>
+              <span className='underline text-[12px] md:text-small font-extralight mt-3 md:mt-0'>
                 <Link to='/Termsofuse'>Terms of use</Link>
-              </p>
+              </span>
 
-              <p className='underline text-[12px] md:text-small font-extralight'>
+              <span className='underline text-[12px] md:text-small font-extralight'>
                 <Link to='privacy'>Privacy</Link>
-              </p>
+              </span>
 
-              <p className='underline '>
+              <span className='underline '>
                 <React.Fragment>
-                  <p
+                  <span
                     className='text-colorBeigeLight !outline-none !underline !font-secondary !font-extralight !text-[12px] md:!text-small'
                     onClick={() => setOpen(true)}
                   >
                     Regions
-                  </p>
+                  </span>
                   <Modal
                     aria-labelledby='modal-title'
                     aria-describedby='modal-desc'
@@ -169,64 +165,64 @@ export default function Footer(): React.ReactElement {
                       <Typography id='modal-desc' textColor='text.tertiary'>
                         <div className='grid grid-cols-3 gap-6 md:gap-32 text-medium font-secondary md:px-14 pt-7'>
                           <div>
-                            <p className='border-b-[1px] border-b-colorGold pb-4 mb-4 md:pb-7 md:mb-7 '>
+                            <span className='border-b-[1px] border-b-colorGold pb-4 mb-4 md:pb-7 md:mb-7 '>
                               Morocco
-                            </p>
-                            <p className='border-b-[1px] border-b-colorGold pb-4 mb-4 md:pb-7 md:mb-7 '>
+                            </span>
+                            <span className='border-b-[1px] border-b-colorGold pb-4 mb-4 md:pb-7 md:mb-7 '>
                               Bahreïn
-                            </p>
-                            <p className='border-b-[1px] border-b-colorGold pb-4 mb-4 md:pb-7 md:mb-7 '>
+                            </span>
+                            <span className='border-b-[1px] border-b-colorGold pb-4 mb-4 md:pb-7 md:mb-7 '>
                               Oman
-                            </p>
-                            <p className='border-b-[1px] border-b-colorGold pb-4 mb-4 md:pb-7 md:mb-7 '>
+                            </span>
+                            <span className='border-b-[1px] border-b-colorGold pb-4 mb-4 md:pb-7 md:mb-7 '>
                               Qatar
-                            </p>
-                            <p className='border-b-[1px] border-b-colorGold pb-4 mb-4 md:pb-7 md:mb-7 '>
+                            </span>
+                            <span className='border-b-[1px] border-b-colorGold pb-4 mb-4 md:pb-7 md:mb-7 '>
                               Koweit
-                            </p>
+                            </span>
                           </div>
 
                           <div>
-                            <p className='border-b-[1px] border-b-colorGold pb-4 mb-4 md:pb-7 md:mb-7 '>
+                            <span className='border-b-[1px] border-b-colorGold pb-4 mb-4 md:pb-7 md:mb-7 '>
                               Germany
-                            </p>
-                            <p className='border-b-[1px] border-b-colorGold pb-4 mb-4 md:pb-7 md:mb-7 '>
+                            </span>
+                            <span className='border-b-[1px] border-b-colorGold pb-4 mb-4 md:pb-7 md:mb-7 '>
                               Belgium
-                            </p>
-                            <p className='border-b-[1px] border-b-colorGold pb-4 mb-4 md:pb-7 md:mb-7 '>
+                            </span>
+                            <span className='border-b-[1px] border-b-colorGold pb-4 mb-4 md:pb-7 md:mb-7 '>
                               France
-                            </p>
-                            <p className='border-b-[1px] border-b-colorGold pb-4 mb-4 md:pb-7 md:mb-7 '>
+                            </span>
+                            <span className='border-b-[1px] border-b-colorGold pb-4 mb-4 md:pb-7 md:mb-7 '>
                               Italy
-                            </p>
-                            <p className='border-b-[1px] border-b-colorGold pb-4 mb-4 md:pb-7 md:mb-7 '>
+                            </span>
+                            <span className='border-b-[1px] border-b-colorGold pb-4 mb-4 md:pb-7 md:mb-7 '>
                               Spain
-                            </p>
+                            </span>
                           </div>
 
                           <div>
-                            <p className='border-b-[1px] border-b-colorGold pb-4 mb-4 md:pb-7 md:mb-7 '>
+                            <span className='border-b-[1px] border-b-colorGold pb-4 mb-4 md:pb-7 md:mb-7 '>
                               Japan
-                            </p>
-                            <p className='border-b-[1px] border-b-colorGold pb-4 mb-4 md:pb-7 md:mb-7 '>
+                            </span>
+                            <span className='border-b-[1px] border-b-colorGold pb-4 mb-4 md:pb-7 md:mb-7 '>
                               China
-                            </p>
-                            <p className='border-b-[1px] border-b-colorGold pb-4 mb-4 md:pb-7 md:mb-7 '>
+                            </span>
+                            <span className='border-b-[1px] border-b-colorGold pb-4 mb-4 md:pb-7 md:mb-7 '>
                               Singapour
-                            </p>
-                            <p className='border-b-[1px] border-b-colorGold pb-4 mb-4 md:pb-7 md:mb-7 '>
+                            </span>
+                            <span className='border-b-[1px] border-b-colorGold pb-4 mb-4 md:pb-7 md:mb-7 '>
                               USA
-                            </p>
-                            <p className='border-b-[1px] border-b-colorGold pb-4 mb-4 md:pb-7 md:mb-7 '>
+                            </span>
+                            <span className='border-b-[1px] border-b-colorGold pb-4 mb-4 md:pb-7 md:mb-7 '>
                               Canada
-                            </p>
+                            </span>
                           </div>
                         </div>
                       </Typography>
                     </Sheet>
                   </Modal>
                 </React.Fragment>
-              </p>
+              </span>
             </div>
           </div>
         </section>

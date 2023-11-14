@@ -24,15 +24,15 @@ export default function Homenavigation(): React.ReactElement {
   return (
     <>
       <Menu as={'div' as React.ElementType} className=' inline-block '>
-        <button>
+        <div>
           <div className='group flex w-full items-center px-2 py-2 text-medium font-secondary hover:text-colorGold hover:scale-[1.02] transition-all duration-300'>
-            <span className='relative z-10'>
+            <span className=' z-10'>
               <Menu.Button> Shop </Menu.Button>
 
               <span className='absolute bottom-0 left-0 w-full h-0.5 bg-colorGold transform scale-x-0 origin-left transition-transform group-hover:scale-x-100 duration-300'></span>
             </span>
           </div>
-        </button>
+        </div>
 
         <Transition
           as={Fragment}
@@ -50,7 +50,7 @@ export default function Homenavigation(): React.ReactElement {
                   <Menu.Item>
                     <button>
                       <div className='group flex w-full items-center px-2 py-2 text-large relative hover:text-colorGold hover:scale-[1.02] transition-all duration-100'>
-                        <span className='relative z-10'>
+                        <span className=' z-10'>
                           Categories
                           <span className='absolute bottom-0 left-0 w-full h-0.5 bg-colorGold transform scale-x-0 origin-left transition-transform group-hover:scale-x-100 duration-300'></span>
                         </span>
@@ -58,8 +58,8 @@ export default function Homenavigation(): React.ReactElement {
                     </button>
                   </Menu.Item>
                 </div>
-                {categories.map((category) => (
-                  <div className=''>
+                {categories.map((category: string, index: number) => (
+                  <div key={index}>
                     <Menu.Item>
                       {({active}: {active: boolean}) => (
                         <button
@@ -79,7 +79,7 @@ export default function Homenavigation(): React.ReactElement {
                   <Menu.Item>
                     <button>
                       <div className='group flex w-full items-center px-2 py-2 text-large relative hover:text-colorGold hover:scale-[1.02] transition-all duration-100'>
-                        <span className='relative z-10'>
+                        <span className=' z-10'>
                           Shop by Style
                           <span className='absolute bottom-0 left-0 w-full h-0.5 bg-colorGold transform scale-x-0 origin-left transition-transform group-hover:scale-x-100 duration-300'></span>
                         </span>
@@ -87,8 +87,8 @@ export default function Homenavigation(): React.ReactElement {
                     </button>
                   </Menu.Item>
                 </div>
-                {styles.map((style: string) => (
-                  <div className=''>
+                {styles.map((style: string, index: number) => (
+                  <div key={index}>
                     <Menu.Item>
                       {({active}: {active: boolean}) => (
                         <button
@@ -108,7 +108,7 @@ export default function Homenavigation(): React.ReactElement {
                   <Menu.Item>
                     <button>
                       <div className='group flex w-full items-center px-2 py-2 text-large relative hover:text-colorGold hover:scale-[1.02] transition-all duration-100'>
-                        <span className='relative z-10'>
+                        <span className=' z-10'>
                           Trending Search
                           <span className='absolute bottom-0 left-0 w-full h-0.5 bg-colorGold transform scale-x-0 origin-left transition-transform group-hover:scale-x-100 duration-300'></span>
                         </span>
@@ -116,8 +116,8 @@ export default function Homenavigation(): React.ReactElement {
                     </button>
                   </Menu.Item>
                 </div>
-                {trending.map((trend: string) => (
-                  <div className=''>
+                {trending.map((trend: string, index: number) => (
+                  <div key={index}>
                     <Menu.Item>
                       {({active}: {active: boolean}) => (
                         <button
@@ -148,11 +148,11 @@ export default function Homenavigation(): React.ReactElement {
                           viewBox='0 0 330 330'
                           className='w-3'
                         >
-                          <g id='SVGRepo_bgCarrier' stroke-width='0'></g>
+                          <g id='SVGRepo_bgCarrier' strokeWidth='0'></g>
                           <g
                             id='SVGRepo_tracerCarrier'
-                            stroke-linecap='round'
-                            stroke-linejoin='round'
+                            strokeLinecap='round'
+                            strokeLinejoin='round'
                           ></g>
                           <g id='SVGRepo_iconCarrier'>
                             <path
