@@ -1,5 +1,4 @@
 import {User} from '../../types';
-import {router} from '../App';
 const endpoint = import.meta.env.VITE_API_ENDPOINT;
 
 export async function registerUser(user: User) {
@@ -28,11 +27,12 @@ export async function loginUser(user: User) {
     },
     body: JSON.stringify(user),
     mode: 'cors',
+    credentials: 'include',
   };
 
   const register = await fetch(url, params);
   const response = await register.json();
-  router.navigate('/');
+  console.log(response);
 
   return response;
 }
