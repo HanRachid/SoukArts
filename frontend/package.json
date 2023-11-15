@@ -19,8 +19,14 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",
     "react-router-dom": "^6.18.0",
+<<<<<<< HEAD
     "swiper": "^11.0.3",
     "vite-plugin-svgr": "^4.1.0"
+=======
+    "vite-plugin-svgr": "^4.1.0",
+    "swiper": "^11.0.3",
+    "@headlessui/react": "^1.7.17"
+>>>>>>> 1d6787f86a0b7599067ae8ac497dfe45946b7b77
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
