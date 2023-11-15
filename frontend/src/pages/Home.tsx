@@ -5,10 +5,11 @@ import ShopByStyle from "../components/ShopByStyle";
 import PopularProducts from "../components/PopularProducts";
 import EarningWithSukarts from "../components/EarningWithSukarts";
 import AboutSoukarts from "../components/AboutSoukarts";
+import OurValues from "../components/OurValues";
 
 export default function Home() {
   return (
-    <div>
+    <div className="bg-colorBeigeLight">
       <Categories />
       <Header />
       <FeaturesShop />
@@ -16,6 +17,7 @@ export default function Home() {
       <PopularProducts />
       <EarningWithSukarts />
       <AboutSoukarts/>
+      <OurValues/>
     </div>
   );
 }

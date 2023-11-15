@@ -5,6 +5,7 @@ import Home from "./pages/Home.tsx";
 import DashBoard from "./pages/Dashboard.tsx";
 import Termsofuse from "./pages/Termsofuse.tsx";
 import Privacy from "./pages/Privacy.tsx";
+import PromoNav from "./components/PromoNav.tsx";
 
 export default function App() {
   return (

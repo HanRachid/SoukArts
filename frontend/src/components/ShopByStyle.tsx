@@ -5,8 +5,8 @@ import {BiChevronRight} from "react-icons/bi"
 
 export default function ShopByStyle() {
   return (
-    <div>
-      <div className="text-7xl mb-20 font-primary text-colorBrown px-28">
+    <div className="px-28">
+      <div className="text-7xl mb-20 font-primary text-colorBrown">
         Shop by style
       </div>
       <div className="flex items-center justify-center gap-10">
