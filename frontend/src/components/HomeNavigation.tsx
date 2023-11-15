@@ -1,14 +1,37 @@
 import { Menu, Transition } from "@headlessui/react";
 import React, { Fragment } from "react";
 
-export default function Homenavigation() {
+export default function Homenavigation(): React.ReactElement {
+  const categories = [
+    "rugs",
+    "Poufs",
+    "Lamps",
+    "Pillows",
+    "Shoes",
+    "Bags",
+    "Jewelery",
+    "Accessories",
+  ];
+  const styles = ["Modern", "Classic", "Fusion", "Boho"];
+  const trending = [
+    "Kilim Rug",
+    "Raffia Shoes",
+    "Leather Bags",
+    "Brass Lamps",
+    "Rafia Lamps",
+  ];
+
   return (
     <>
       <Menu as={"div" as React.ElementType} className=" inline-block ">
-        <div className="p-2 ">
-          <Menu.Button className="font-secondary border-b-2 border-colorBeigeLight/0 hover:text-colorGold hover:border-colorGold">
-            Shop
-          </Menu.Button>
+        <div>
+          <div className="group flex w-full items-center px-2 py-2 text-medium font-secondary hover:text-colorGold hover:scale-[1.02] transition-all duration-300">
+            <span className=" z-10">
+              <Menu.Button> Shop </Menu.Button>
+
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-colorGold transform scale-x-0 origin-left transition-transform group-hover:scale-x-100 duration-300"></span>
+            </span>
+          </div>
         </div>
 
         <Transition
@@ -20,263 +43,101 @@ export default function Homenavigation() {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <div className="flex absolute z-10">
-            <Menu.Items className="relative right-32 flex gap-24 justify-between  mt-2 w-max p-8  origin-top-right rounded-sm  ring-black/5 focus:outline-none  border-t-4 border-b-4 border-colorGold bg-colorBeigeLight  font-secondary text-colorBlack ">
+          <div className="flex absolute">
+            <Menu.Items className="relative right-16 flex gap-24 justify-between  mt-2 w-max p-8  origin-top-right rounded-sm  ring-black/5 focus:outline-none  border-t-4 border-b-4 border-colorGold bg-colorBeigeLight  font-secondary text-colorBlack ">
               <div>
                 <div className="">
                   <Menu.Item>
-                    <button className="group flex w-full items-center  px-2 py-2 text-large  border-b-2 hover:text-colorGold hover:border-colorGold">
-                      Categories
+                    <button>
+                      <div className="group flex w-full items-center px-2 py-2 text-large relative hover:text-colorGold hover:scale-[1.02] transition-all duration-100">
+                        <span className=" z-10">
+                          Categories
+                          <span className="absolute bottom-0 left-0 w-full h-0.5 bg-colorGold transform scale-x-0 origin-left transition-transform group-hover:scale-x-100 duration-300"></span>
+                        </span>
+                      </div>
                     </button>
                   </Menu.Item>
                 </div>
-                <div className="">
-                  <Menu.Item>
-                    {({ active }: { active: boolean }) => (
-                      <button
-                        className={`${
-                          active ? " bg-colorBeige " : "text-gray-900  "
-                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
-                      >
-                        Rugs
-                      </button>
-                    )}
-                  </Menu.Item>
-                </div>
-                <div className="">
-                  <Menu.Item>
-                    {({ active }: { active: boolean }) => (
-                      <button
-                        className={`${
-                          active ? " bg-colorBeige " : "text-gray-900  "
-                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
-                      >
-                        Poufs
-                      </button>
-                    )}
-                  </Menu.Item>
-                </div>
-                <div className="">
-                  <Menu.Item>
-                    {({ active }: { active: boolean }) => (
-                      <button
-                        className={`${
-                          active ? " bg-colorBeige " : "text-gray-900  "
-                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
-                      >
-                        Lamps
-                      </button>
-                    )}
-                  </Menu.Item>
-                </div>
-                <div className="">
-                  <Menu.Item>
-                    {({ active }: { active: boolean }) => (
-                      <button
-                        className={`${
-                          active ? " bg-colorBeige " : "text-gray-900  "
-                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
-                      >
-                        Pillows
-                      </button>
-                    )}
-                  </Menu.Item>
-                </div>
-                <div className="">
-                  <Menu.Item>
-                    {({ active }: { active: boolean }) => (
-                      <button
-                        className={`${
-                          active ? " bg-colorBeige " : "text-gray-900  "
-                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
-                      >
-                        Shoes
-                      </button>
-                    )}
-                  </Menu.Item>
-                </div>
-                <div className="">
-                  <Menu.Item>
-                    {({ active }: { active: boolean }) => (
-                      <button
-                        className={`${
-                          active ? " bg-colorBeige " : "text-gray-900  "
-                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
-                      >
-                        Bags
-                      </button>
-                    )}
-                  </Menu.Item>
-                </div>
-                <div className="">
-                  <Menu.Item>
-                    {({ active }: { active: boolean }) => (
-                      <button
-                        className={`${
-                          active ? " bg-colorBeige " : "text-gray-900  "
-                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
-                      >
-                        Jewelery
-                      </button>
-                    )}
-                  </Menu.Item>
-                </div>
-                <div className="">
-                  <Menu.Item>
-                    {({ active }: { active: boolean }) => (
-                      <button
-                        className={`${
-                          active ? " bg-colorBeige " : "text-gray-900  "
-                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
-                      >
-                        Accessories
-                      </button>
-                    )}
-                  </Menu.Item>
-                </div>
+                {categories.map((category: string, index: number) => (
+                  <div key={index}>
+                    <Menu.Item>
+                      {({ active }: { active: boolean }) => (
+                        <button
+                          className={`${
+                            active ? " bg-colorBeige " : "text-gray-900  "
+                          } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 hover:scale-[1.02] transition-all duration-75`}
+                        >
+                          {category}
+                        </button>
+                      )}
+                    </Menu.Item>
+                  </div>
+                ))}
               </div>
               <div>
                 <div className="">
                   <Menu.Item>
-                    <button className="group flex w-full items-center px-2 py-2 text-large border-b-2 hover:text-colorGold hover:border-colorGold">
-                      Shop by Style
+                    <button>
+                      <div className="group flex w-full items-center px-2 py-2 text-large relative hover:text-colorGold hover:scale-[1.02] transition-all duration-100">
+                        <span className=" z-10">
+                          Shop by Style
+                          <span className="absolute bottom-0 left-0 w-full h-0.5 bg-colorGold transform scale-x-0 origin-left transition-transform group-hover:scale-x-100 duration-300"></span>
+                        </span>
+                      </div>
                     </button>
                   </Menu.Item>
                 </div>
-                <div className="">
-                  <Menu.Item>
-                    {({ active }: { active: boolean }) => (
-                      <button
-                        className={`${
-                          active ? " bg-colorBeige " : "text-gray-900  "
-                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
-                      >
-                        Modern
-                      </button>
-                    )}
-                  </Menu.Item>
-                </div>
-                <div className="">
-                  <Menu.Item>
-                    {({ active }: { active: boolean }) => (
-                      <button
-                        className={`${
-                          active ? " bg-colorBeige " : "text-gray-900  "
-                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
-                      >
-                        Classic
-                      </button>
-                    )}
-                  </Menu.Item>
-                </div>
-                <div className="">
-                  <Menu.Item>
-                    {({ active }: { active: boolean }) => (
-                      <button
-                        className={`${
-                          active ? " bg-colorBeige " : "text-gray-900  "
-                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
-                      >
-                        Fusion
-                      </button>
-                    )}
-                  </Menu.Item>
-                </div>
-                <div className="">
-                  <Menu.Item>
-                    {({ active }: { active: boolean }) => (
-                      <button
-                        className={`${
-                          active ? " bg-colorBeige " : "text-gray-900  "
-                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
-                      >
-                        Boho
-                      </button>
-                    )}
-                  </Menu.Item>
-                </div>
+                {styles.map((style: string, index: number) => (
+                  <div key={index}>
+                    <Menu.Item>
+                      {({ active }: { active: boolean }) => (
+                        <button
+                          className={`${
+                            active ? " bg-colorBeige " : "text-gray-900  "
+                          } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 hover:scale-[1.02] transition-all duration-75`}
+                        >
+                          {style}
+                        </button>
+                      )}
+                    </Menu.Item>
+                  </div>
+                ))}
               </div>
               <div>
                 <div className="">
                   <Menu.Item>
-                    <button className="group flex w-full items-center relative px-2 py-2 text-large border-b-2 hover:text-colorGold hover:border-colorGold">
-                      Trending Search
+                    <button>
+                      <div className="group flex w-full items-center px-2 py-2 text-large relative hover:text-colorGold hover:scale-[1.02] transition-all duration-100">
+                        <span className=" z-10">
+                          Trending Search
+                          <span className="absolute bottom-0 left-0 w-full h-0.5 bg-colorGold transform scale-x-0 origin-left transition-transform group-hover:scale-x-100 duration-300"></span>
+                        </span>
+                      </div>
                     </button>
                   </Menu.Item>
                 </div>
-                <div className="">
-                  <Menu.Item>
-                    {({ active }: { active: boolean }) => (
-                      <button
-                        className={`${
-                          active ? " bg-colorBeige " : "text-gray-900  "
-                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
-                      >
-                        Kilim Rug
-                      </button>
-                    )}
-                  </Menu.Item>
-                </div>
-                <div className="">
-                  <Menu.Item>
-                    {({ active }: { active: boolean }) => (
-                      <button
-                        className={`${
-                          active ? " bg-colorBeige " : "text-gray-900  "
-                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
-                      >
-                        Raffia Shoes
-                      </button>
-                    )}
-                  </Menu.Item>
-                </div>
-                <div className="">
-                  <Menu.Item>
-                    {({ active }: { active: boolean }) => (
-                      <button
-                        className={`${
-                          active ? " bg-colorBeige " : "text-gray-900  "
-                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
-                      >
-                        Leather Bags
-                      </button>
-                    )}
-                  </Menu.Item>
-                </div>
-                <div className="">
-                  <Menu.Item>
-                    {({ active }: { active: boolean }) => (
-                      <button
-                        className={`${
-                          active ? " bg-colorBeige " : "text-gray-900  "
-                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
-                      >
-                        Brass Lamps
-                      </button>
-                    )}
-                  </Menu.Item>
-                </div>
-                <div className="">
-                  <Menu.Item>
-                    {({ active }: { active: boolean }) => (
-                      <button
-                        className={`${
-                          active ? " bg-colorBeige " : "text-gray-900  "
-                        } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 text-`}
-                      >
-                        Raffia Lamps
-                      </button>
-                    )}
-                  </Menu.Item>
-                </div>
-
+                {trending.map((trend: string, index: number) => (
+                  <div key={index}>
+                    <Menu.Item>
+                      {({ active }: { active: boolean }) => (
+                        <button
+                          className={`${
+                            active ? " bg-colorBeige " : "text-gray-900  "
+                          } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 hover:scale-[1.02] transition-all duration-75`}
+                        >
+                          {trend}
+                        </button>
+                      )}
+                    </Menu.Item>
+                  </div>
+                ))}
                 <div className="absolute bottom-0 pb-3">
                   <Menu.Item>
                     {({ active }: { active: boolean }) => (
                       <button
                         className={`${
                           active ? " bg-colorBeige " : "text-gray-900  "
-                        } group flex text-colorBlack/80 w-full items-center gap-3 rounded-md px-2 py-2 text-sm `}
+                        } group flex text-colorBlack/80 w-full items-center gap-3 rounded-md px-2 py-2 text-sm hover:scale-[1.02] transition-all duration-75`}
                       >
                         Shop All
                         <svg
@@ -287,18 +148,17 @@ export default function Homenavigation() {
                           viewBox="0 0 330 330"
                           className="w-3"
                         >
-                          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                          <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                           <g
                             id="SVGRepo_tracerCarrier"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                           ></g>
                           <g id="SVGRepo_iconCarrier">
-                            {" "}
                             <path
                               id="XMLID_222_"
                               d="M250.606,154.389l-150-149.996c-5.857-5.858-15.355-5.858-21.213,0.001 c-5.857,5.858-5.857,15.355,0.001,21.213l139.393,139.39L79.393,304.394c-5.857,5.858-5.857,15.355,0.001,21.213 C82.322,328.536,86.161,330,90,330s7.678-1.464,10.607-4.394l149.999-150.004c2.814-2.813,4.394-6.628,4.394-10.606 C255,161.018,253.42,157.202,250.606,154.389z"
-                            ></path>{" "}
+                            ></path>
                           </g>
                         </svg>
                       </button>

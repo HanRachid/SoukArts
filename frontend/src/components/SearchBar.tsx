@@ -4,7 +4,7 @@ import {Menu, Transition} from '@headlessui/react';
 import CheckSVG from '../assets/navbar/check.svg?react';
 import React, {Fragment, useState} from 'react';
 
-export default function Searchbar() {
+export default function Searchbar(): React.ReactElement {
   const [selectedCategory, setSelectedCategory] = useState('All Categories');
   const categories = [
     'All categories',
@@ -32,16 +32,13 @@ export default function Searchbar() {
   }
 
   return (
-    <div className='flex items-center justify-between   h-12 rounded-3xl  bg-colorBeigeLight  focus:outline hover:outline outline-stone-400 outline-1  '>
+    <div className='flex items-center justify-between   h-12 rounded-3xl  bg-colorBeigeLight  focus:outline hover:outline outline-stone-400 outline-1'>
       <img src={lens} alt='lens' className='h-4 pl-3 absolute' />
       <input
         type='search'
         className='bg-colorBeigeLight p-5 pl-10 w-3/6 h-10   rounded-2xl focus:outline-none '
       />
-      <Menu
-        as={'div' as React.ElementType}
-        className='absolute inline-block right-0 '
-      >
+      <Menu as={'div' as React.ElementType}>
         <div className=' transform '>
           <Menu.Button className='  inline-flex items-center gap-2 w-full justify-center rounded-md p-2 focus:outline-none   '>
             <label htmlFor='search' className='border-l border-black pl-5 '>
@@ -74,16 +71,16 @@ export default function Searchbar() {
         >
           <Menu.Items
             static
-            className='absolute right-0  w-56 origin-top-right bg-colorBeigeLight  rounded-sm  ring-black/5 focus:outline-none border  border-black text-small font-secondary'
+            className='absolute right-0 p-1.5 w-56 origin-top-right bg-colorBeigeLight  rounded-sm  ring-black/5 focus:outline-none border  border-black text-small font-secondary'
           >
             {categories.map((category, index) => (
-              <div key={index} className=''>
-                <Menu.Item value={category}>
+              <div key={index}>
+                <Menu.Item>
                   <div
                     className={
                       category == selectedCategory
-                        ? 'flex items-center  rounded-md  text-sm  bg-colorBeige'
-                        : 'flex items-center  rounded-md  text-sm  hover:bg-colorBeige'
+                        ? 'flex items-center  rounded-md  text-sm  bg-colorBeige hover:scale-[1.02] transition-all duration-100'
+                        : 'flex items-center  rounded-md  text-sm  hover:bg-colorBeige hover:scale-[1.02] transition-all duration-100'
                     }
                   >
                     <CheckSVG
