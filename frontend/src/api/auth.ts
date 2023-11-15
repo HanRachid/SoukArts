@@ -30,12 +30,12 @@ export async function loginUser(user: User) {
     mode: 'cors',
   };
 
-  const register = await fetch(url, params);
-  console.log(register);
-  
-  const response = await register.json();
-  
-  router.navigate('/');
+
+  const login = await fetch(url, params);
+
+  const response = await login.json();
+
+  console.log(response);
 
   return response;
 }
