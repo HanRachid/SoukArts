@@ -1,9 +1,9 @@
 import {User} from '../../types';
 import {router} from '../App';
-const endpoint = import.meta.env.VITE_API_ENDPOINT+'/auth';
+const endpoint = import.meta.env.VITE_API_ENDPOINT + '/auth';
 
 export async function registerUser(user: User) {
-  const url: string = endpoint + '/auth/register';
+  const url: string = endpoint + '/register';
   const params: RequestInit = {
     method: 'POST',
     headers: {
@@ -29,7 +29,6 @@ export async function loginUser(user: User) {
     body: JSON.stringify(user),
     mode: 'cors',
   };
-
 
   const login = await fetch(url, params);
 

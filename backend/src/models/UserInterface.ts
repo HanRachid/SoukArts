@@ -1,5 +1,3 @@
-import UserModel from './UserModel';
-
 /**
  * An interface describing a UserModel.
  * @public
@@ -23,6 +21,6 @@ export default interface BaseModel {
   updated_at?: Date;
   registerModel(): Promise<Object>;
   getModel(): Promise<BaseModel>;
-  updateModel(object: Partial<UserModel>): Promise<void>;
+  updateModel(object: Partial<BaseModel>): Promise<void>;
   deleteModel(): Promise<void>;
 }
