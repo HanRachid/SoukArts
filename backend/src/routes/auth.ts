@@ -1,7 +1,9 @@
+
 const express = require('express');
 import { Request, Response } from 'express';
 import UserModel from '../models/UserModel';
 import passport from '../middlewares/authpassport';
+
 const authRouter = express.Router();
 const session = require('express-session');
 const bcrypt = require('bcrypt');
@@ -20,11 +22,13 @@ authRouter.post('/register', async (req: Request, res: Response) => {
   if (checkExists) {
     console.log('Cannot register user, already exists');
     res.send({ error: 'nah' });
+
     return;
   }
   const register = await user.registerModel();
   res.send(register);
 });
+
 
 authRouter.use(
   session({ secret: 'cats', resave: false, saveUninitialized: true, cookie: { expires: 300 } })
