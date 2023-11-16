@@ -1,10 +1,10 @@
-import BaseModel from './BaseModel';
+import UserInterface from './UserInterface';
 import mongoose from 'mongoose';
 
 /**
  * UserModel Class that describes the users .
  */
-export default class UserModel implements BaseModel {
+export default class UserModel implements UserInterface {
   private static MongoUserModel = null;
   _id: Object;
   username: string;
@@ -79,7 +79,7 @@ export default class UserModel implements BaseModel {
   static getMongoUserModel() {
     UserModel.MongoUserModel =
       UserModel.MongoUserModel ??
-      mongoose.model<BaseModel>('User', UserModel.getSchema());
+      mongoose.model<UserInterface>('User', UserModel.getSchema());
     return UserModel.MongoUserModel;
   }
 
@@ -151,7 +151,7 @@ export default class UserModel implements BaseModel {
    * Find current model from db
    * @returns current model in db
    */
-  async getModel(): Promise<BaseModel> {
+  async getModel(): Promise<UserInterface> {
     console.log(this._id);
 
     const findModel = await UserModel.getMongoUserModel().findOne({
