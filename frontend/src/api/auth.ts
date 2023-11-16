@@ -1,9 +1,13 @@
-import { User } from "../../types";
-import { router } from "../App";
+
+import {User} from '../../types';
+
 const endpoint = import.meta.env.VITE_API_ENDPOINT;
 
+
 export async function registerUser(user: User) {
-  const url: string = endpoint + "/auth/register";
+
+  const url: string = endpoint + '/register';
+
   const params: RequestInit = {
     method: "POST",
     headers: {
@@ -20,18 +24,22 @@ export async function registerUser(user: User) {
 }
 
 export async function loginUser(user: User) {
-  const url: string = endpoint + "/auth/login";
+  const url: string = endpoint + '/login';
+
   const params: RequestInit = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(user),
-    mode: "cors",
+    mode: 'cors',
+    credentials: 'include',
   };
 
-  const register = await fetch(url, params);
-  const response = await register.json();
+
+  const login = await fetch(url, params);
+
+  const response = await login.json();
   router.navigate("/");
 
   return response;

@@ -1,10 +1,10 @@
-import BaseModel from './BaseModel';
+import UserInterface from './UserInterface';
 import mongoose from 'mongoose';
 
 /**
  * UserModel Class that describes the users .
  */
-export default class UserModel implements BaseModel {
+export default class UserModel implements UserInterface {
   private static MongoUserModel = null;
   _id: Object;
   username: string;
@@ -79,7 +79,7 @@ export default class UserModel implements BaseModel {
   static getMongoUserModel() {
     UserModel.MongoUserModel =
       UserModel.MongoUserModel ??
-      mongoose.model<BaseModel>('User', UserModel.getSchema());
+      mongoose.model<UserInterface>('User', UserModel.getSchema());
     return UserModel.MongoUserModel;
   }
 
@@ -89,29 +89,29 @@ export default class UserModel implements BaseModel {
    */
   static getSchema(): mongoose.Schema {
     return new mongoose.Schema({
-      username: {type: String, required: true},
-      first_name: {type: String, required: false},
-      last_name: {type: String, required: false},
-      gender: {type: String, required: false},
-      profile_image: {type: String, required: false},
-      email: {type: String, required: true},
-      number_phone: {type: String, required: false},
-      password: {type: String, required: true},
-      role_id: {type: Object, required: false},
-      is_active: {type: Boolean, required: false},
-      is_deleted: {type: Boolean, required: false},
+      username: { type: String, required: true },
+      first_name: { type: String, required: false },
+      last_name: { type: String, required: false },
+      gender: { type: String, required: false },
+      profile_image: { type: String, required: false },
+      email: { type: String, required: true },
+      number_phone: { type: String, required: false },
+      password: { type: String, required: true },
+      role_id: { type: Object, required: false },
+      is_active: { type: Boolean, required: false },
+      is_deleted: { type: Boolean, required: false },
       saved_card: {
         type: {
-          card_number: {type: String, required: false},
-          expiry_date: {type: Date, required: false},
-          cvv: {type: Number, required: false},
+          card_number: { type: String, required: false },
+          expiry_date: { type: Date, required: false },
+          cvv: { type: Number, required: false },
         },
         required: false,
       },
-      wishlist: {type: [Object], required: false},
-      order_history: {type: [Object], required: false},
-      created_at: {type: Date, required: false},
-      updated_at: {type: Date, required: false},
+      wishlist: { type: [Object], required: false },
+      order_history: { type: [Object], required: false },
+      created_at: { type: Date, required: false },
+      updated_at: { type: Date, required: false },
     });
   }
 
@@ -151,7 +151,7 @@ export default class UserModel implements BaseModel {
    * Find current model from db
    * @returns current model in db
    */
-  async getModel(): Promise<BaseModel> {
+  async getModel(): Promise<UserInterface> {
     console.log(this._id);
 
     const findModel = await UserModel.getMongoUserModel().findOne({
@@ -167,7 +167,7 @@ export default class UserModel implements BaseModel {
    */
   async updateModel(object: Partial<UserModel>): Promise<void> {
     await UserModel.getMongoUserModel().updateOne(
-      {_id: this._id, updated_at: new Date()},
+      { _id: this._id, updated_at: new Date() },
       object
     );
   }
@@ -176,8 +176,8 @@ export default class UserModel implements BaseModel {
    */
   async deleteModel(): Promise<void> {
     const deleteModel = await UserModel.getMongoUserModel().updateOne(
-      {_id: this._id},
-      {is_deleted: true}
+      { _id: this._id },
+      { is_deleted: true }
     );
     console.log(deleteModel);
   }
@@ -187,8 +187,8 @@ export default class UserModel implements BaseModel {
    */
   async restoreModel(): Promise<void> {
     await UserModel.getMongoUserModel().updateOne(
-      {_id: this._id},
-      {is_deleted: false}
+      { _id: this._id },
+      { is_deleted: false }
     );
   }
   /**
@@ -222,15 +222,38 @@ export default class UserModel implements BaseModel {
    */
   static async findModelpw(
     usermail: string,
-    password: string
   ): Promise<UserModel> {
     const foundModel = await UserModel.getMongoUserModel().findOne({
-      username: usermail,
-      password: password,
+      $or: [
+        { username: usermail },
+        { email: usermail }
+      ],
     });
 
     return foundModel;
   }
+
+
+  /**
+ * find model in db using username/email combination
+ * @param id
+ * @returns found model
+ */
+  static async findModelUserEmail(
+    username: string,
+    email: string
+  ): Promise<UserModel> {
+    const foundModel = await UserModel.getMongoUserModel().findOne({
+      $or: [
+        { username: username },
+        { email: email }
+      ],
+    });
+
+    return foundModel;
+  }
+
+
   /**
    * **DANGEROUS - WIPES ENTIRE DATABASE COLLECTION**
    * for development usage only, wipes entire database

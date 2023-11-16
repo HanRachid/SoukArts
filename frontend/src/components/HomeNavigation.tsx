@@ -23,7 +23,7 @@ export default function Homenavigation(): React.ReactElement {
 
   return (
     <>
-      <Menu as={'div' as React.ElementType} className=' inline-block '>
+      <Menu as={'div' as React.ElementType} className=' inline-block z-50'>
         <div>
           <div className='group flex w-full items-center px-2 py-2 text-medium font-secondary hover:text-colorGold hover:scale-[1.02] transition-all duration-300'>
             <span className=' z-10'>

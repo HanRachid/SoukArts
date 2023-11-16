@@ -32,7 +32,7 @@ export default function Searchbar(): React.ReactElement {
   }
 
   return (
-    <div className='flex items-center justify-between   h-12 rounded-3xl  bg-colorBeigeLight  focus:outline hover:outline outline-stone-400 outline-1'>
+    <div className='flex items-center justify-between   h-12 rounded-3xl  bg-colorBeigeLight  focus:outline hover:outline outline-stone-400 outline-1 '>
       <img src={lens} alt='lens' className='h-4 pl-3 absolute' />
       <input
         type='search'
@@ -71,7 +71,7 @@ export default function Searchbar(): React.ReactElement {
         >
           <Menu.Items
             static
-            className='absolute right-0 p-1.5 w-56 origin-top-right bg-colorBeigeLight  rounded-sm  ring-black/5 focus:outline-none border  border-black text-small font-secondary'
+            className='absolute right-0 p-1.5 w-56 origin-top-right bg-colorBeigeLight  rounded-sm  ring-black/5 focus:outline-none border  border-black text-small font-secondary z-50'
           >
             {categories.map((category, index) => (
               <div key={index}>
