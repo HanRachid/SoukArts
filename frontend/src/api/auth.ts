@@ -1,20 +1,17 @@
-
 import {User} from '../../types';
 
-const endpoint = import.meta.env.VITE_API_ENDPOINT;
-
+const endpoint = import.meta.env.VITE_API_ENDPOINT + '/auth';
 
 export async function registerUser(user: User) {
-
   const url: string = endpoint + '/register';
 
   const params: RequestInit = {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(user),
-    mode: "cors",
+    mode: 'cors',
   };
 
   const register = await fetch(url, params);
@@ -27,20 +24,19 @@ export async function loginUser(user: User) {
   const url: string = endpoint + '/login';
 
   const params: RequestInit = {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(user),
     mode: 'cors',
     credentials: 'include',
   };
 
-
   const login = await fetch(url, params);
 
   const response = await login.json();
-  router.navigate("/");
+  console.log(response);
 
   return response;
 }
