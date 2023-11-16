@@ -1,4 +1,4 @@
-import {connectDb} from './config/connectionDb';
+import { connectDb } from './config/connectionDb';
 import usersRouter from './routes/users';
 import authRouter from './routes/auth';
 const express = require('express');
@@ -10,7 +10,7 @@ const port = process.env.PORT ?? 3000;
 app.use(express.json());
 
 const corsOptions = {
-  origin: 'http://localhost:5174',
+  origin: 'http://localhost:5173',
   credentials: true,
 };
 

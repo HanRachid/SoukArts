@@ -222,15 +222,38 @@ export default class UserModel implements BaseModel {
    */
   static async findModelpw(
     usermail: string,
-    password: string
   ): Promise<UserModel> {
     const foundModel = await UserModel.getMongoUserModel().findOne({
-      username: usermail,
-      password: password,
+      $or: [
+        { username: usermail },
+        { email: usermail }
+      ],
     });
 
     return foundModel;
   }
+
+
+  /**
+ * find model in db using username/email combination
+ * @param id
+ * @returns found model
+ */
+  static async findModelUserEmail(
+    username: string,
+    email: string
+  ): Promise<UserModel> {
+    const foundModel = await UserModel.getMongoUserModel().findOne({
+      $or: [
+        { username: username },
+        { email: email }
+      ],
+    });
+
+    return foundModel;
+  }
+
+
   /**
    * **DANGEROUS - WIPES ENTIRE DATABASE COLLECTION**
    * for development usage only, wipes entire database
