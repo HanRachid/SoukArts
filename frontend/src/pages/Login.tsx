@@ -1,5 +1,7 @@
 import { useFormik } from "formik";
 import { validationSchema } from "./validation/loginValidation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 import logo from "../assets/login/logo1.png";
 import login_side_image from "../assets/login/login_image_side.png";
@@ -32,7 +34,6 @@ export default function Login() {
     },
     validationSchema,
     onSubmit: (values) => {
-      // Handle form submission
       loginUser(values);
     },
     validateOnChange: true,
@@ -41,6 +42,11 @@ export default function Login() {
     event.preventDefault();
     loginUser(login);
   }
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+  const outlineInput = formik.errors.password ? "red-500" : "colorBlack";
   return (
     <section className="w-screen h-screen flex items-center justify-between overflow-hidden">
       <div className="w-1/2 h-full px-32">
@@ -60,11 +66,11 @@ export default function Login() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.username}
-              className="w-full py-2 px-3 focus:outline-colorBlack border-2 border-colorBeige/80 rounded-bl-xl rounded-tr-xl bg-gray-50"
+              className={`w-full py-2 px-3 focus:outline-${outlineInput} border-2 border-colorBeige/80 rounded-bl-xl rounded-tr-xl bg-gray-50`}
             />
 
             <div className="flex flex-col">
-              {formik.touched.username && formik.errors.username ? (
+              {formik.errors.username ? (
                 <div className={shown}>{formik.errors.username}</div>
               ) : (
                 <div className={hidden}>hidden text</div>
@@ -79,18 +85,34 @@ export default function Login() {
                 forgot password
               </button>
             </div>
-            <input
-              type="password"
-              placeholder="Enter your password"
-              name="password"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.password}
-              className="w-full py-2 px-3 focus:outline-colorBlack border-2 border-colorBeige/80 rounded-bl-xl rounded-tr-xl bg-gray-50"
-            />
-            {formik.touched.password && formik.errors.password ? (
-              <div className="text-red-500">{formik.errors.password}</div>
-            ) : null}
+            <div className="relative w-full">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Enter your password"
+                name="password"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.password}
+                className={`w-full py-2 px-3 focus:outline-${outlineInput} border-2 border-colorBeige/80 rounded-bl-xl rounded-tr-xl bg-gray-50`}
+              />
+              <button
+                type="button"
+                className="absolute top-2 right-4 password-toggle"
+                onClick={togglePasswordVisibility}
+              >
+                <FontAwesomeIcon
+                  icon={showPassword ? faEye : faEyeSlash}
+                  className="password-toggle-icon"
+                />
+              </button>
+            </div>
+            <div className="flex flex-col">
+              {formik.errors.password ? (
+                <div className="text-red-500">{formik.errors.password}</div>
+              ) : (
+                <div className={hidden}>hidden text</div>
+              )}
+            </div>
           </div>
           <div className="">
             <input type="checkbox" name="remember" onChange={handleChange} />
