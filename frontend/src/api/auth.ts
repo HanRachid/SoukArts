@@ -1,5 +1,4 @@
 import {User} from '../../types';
-import {router} from '../App';
 const endpoint = import.meta.env.VITE_API_ENDPOINT + '/auth';
 
 export async function registerUser(user: User) {
