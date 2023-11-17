@@ -1,5 +1,4 @@
 import {User} from '../../types';
-
 const endpoint = import.meta.env.VITE_API_ENDPOINT + '/auth';
 
 export async function registerUser(user: User) {
