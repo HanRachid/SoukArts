@@ -1,36 +1,46 @@
 import logo from "../assets/login/logo1.png";
 import login_side_image from "../assets/login/login_image_side.png";
-import logo_gogole from "../assets/login/google-svgrepo-com.svg";
+import logo_google from "../assets/login/google-svgrepo-com.svg";
 import logo_apple from "../assets/login/apple-color-svgrepo-com.svg";
 import { Link } from "react-router-dom";
 import { registerUser } from "../api/auth";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
+import { useState } from "react";
+import { User } from "../../types";
+import { RegisterSchema } from "./validation/RegisterValidation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 export default function Register() {
-  const RegisterSchema = Yup.object({
-    username: Yup.string()
-      .min(5, "Username must be at least 5 characters long")
-      .matches(/^\S*$/, "Username cannot contain spaces")
-      .required("Username is required"),
-    email: Yup.string()
-      .matches(
-        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-        "Invalid email address. Please enter a valid email address."
-      )
-      .email("Invalid email address")
-      .required("This field is required"),
-    password: Yup.string()
-      .min(8, "Password must be at least 8 characters long")
-      .matches(
-        /^(?=.[A-Z])(?=.\d)(?=.[!@#$%^&()])[A-Za-z\d!@#$%^&*()]+$/g,
-        "Password must contain at least one uppercase letter, one numeric character, and one symbol"
-      )
-      .required("Password is required"),
-  });
+
+  {/*onSubmit & sending data to db */}
+  const onSubmit = (
+    values: User,
+    { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }
+  ) => {
+    registerUser(values)
+    .then((response) => {
+      console.log('User registered successfully:', response);
+    })
+    .catch((error) => {
+      console.error('Registration failed:', error);
+    })
+    .finally(() => {
+      setSubmitting(false);
+    });
+};
+  
+  {/*terms checked*/}
+  const [termsChecked, setTermsChecked] = useState(false);
+
+  {/*Show/Hide password*/}
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   return (
-    <section className="w-screen h-screen flex items-center justify-between overflow-hidden">
+    <section className="w-screen flex items-center justify-between overflow-hidden">
       <div className="w-1/2 h-full px-32">
         <div className="h-44 w-full flex-col flex items-center justify-center">
           <Link to="/">
@@ -41,11 +51,7 @@ export default function Register() {
         <Formik
           initialValues={{ username: "", email: "", password: "" }}
           validationSchema={RegisterSchema}
-          onSubmit={(values, { setSubmitting }) => {
-            console.log(values);
-            registerUser(values);
-            setSubmitting(false);
-          }}
+          onSubmit={onSubmit}
         >
           {({ isSubmitting, errors, touched }) => (
             <Form className="space-y-6 w-full">
@@ -84,14 +90,19 @@ export default function Register() {
               </div>
 
               <div className="w-full flex items-start justify-center flex-col">
-                <div className="flex justify-between items-center w-full">
+                <div className="relative flex justify-between items-center w-full">
                   <label className="pb-1.5 font-secondary">Password</label>
+                  <FontAwesomeIcon
+                    icon={showPassword ? faEyeSlash : faEye}
+                    className="cursor-pointer absolute right-5 top-11"
+                    onClick={togglePasswordVisibility}
+                  />
                 </div>
                 <Field
                   className={`w-full py-2 px-3 focus:outline-colorBlack border-2 rounded-bl-xl rounded-tr-xl bg-gray-50 ${
                     errors.password && touched.password ? "border-red-500" : ""
                   }`}
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   placeholder="Enter your password"
                   name="password"
                 />
@@ -102,7 +113,12 @@ export default function Register() {
                 />
               </div>
               <div className="">
-                <input type="checkbox" name="checkbox" />
+                <input
+                  type="checkbox"
+                  name="checkbox"
+                  checked={termsChecked}
+                  onChange={() => setTermsChecked(!termsChecked)}
+                />
                 <label className="ml-2 text-sm font-medium">
                   I agree to the{" "}
                   <span>
@@ -112,6 +128,11 @@ export default function Register() {
                   </span>
                 </label>
               </div>
+              {!termsChecked && (
+                <div className="text-red-500">
+                  Please agree to the terms and policy.
+                </div>
+              )}
 
               <div className="w-full flex items-center justify-center">
                 <button
@@ -132,17 +153,18 @@ export default function Register() {
             </Form>
           )}
         </Formik>
+
         <div className="w-full pt-10">
           <div className="flex items-center gap-10 justify-center">
             <button className="w-full py-2  border-black border-2 rounded-bl-xl rounded-tr-xl font-medium text-lg bg-white/50 hover:scale-[1.02] transition-all duration-100">
               <div className="flex items-center justify-evenly">
-                <img className="w-7" src={logo_gogole} alt="logo_google" />
+                <img className="w-9" src={logo_google} alt="logo_google" />
                 <p className="font-secondary">Sign in with Google</p>
               </div>
             </button>
             <button className="w-full py-2  border-black border-2 rounded-bl-xl rounded-tr-xl font-medium text-lg bg-white/50 hover:scale-[1.02] transition-all duration-100">
               <div className="flex items-center justify-evenly">
-                <img className="w-7" src={logo_apple} alt="logo_google" />
+                <img className="w-9" src={logo_apple} alt="logo_apple" />
                 <p className="font-secondary">Sign in with Apple</p>
               </div>
             </button>
