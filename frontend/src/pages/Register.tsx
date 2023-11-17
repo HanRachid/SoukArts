@@ -7,12 +7,12 @@ import { registerUser } from "../api/auth";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
-
 export default function Register() {
   const RegisterSchema = Yup.object({
     username: Yup.string()
-      .matches(/^[a-zA-Z][a-zA-Z0-9_-]{3,15}$/, "Invalid username. It must start with a letter and only contain letters, numbers, hyphens, or underscores.")
-      .required("This field is required"),
+      .min(5, "Username must be at least 5 characters long")
+      .matches(/^\S*$/, "Username cannot contain spaces")
+      .required("Username is required"),
     email: Yup.string()
       .matches(
         /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
@@ -21,11 +21,12 @@ export default function Register() {
       .email("Invalid email address")
       .required("This field is required"),
     password: Yup.string()
+      .min(8, "Password must be at least 8 characters long")
       .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}$/,
-        "Invalid password. It must contain at least one uppercase letter, one lowercase letter, one digit, and have a minimum length of 8 characters."
+        /^(?=.[A-Z])(?=.\d)(?=.[!@#$%^&()])[A-Za-z\d!@#$%^&*()]+$/g,
+        "Password must contain at least one uppercase letter, one numeric character, and one symbol"
       )
-      .required("This field is required"),
+      .required("Password is required"),
   });
 
   return (
@@ -52,10 +53,7 @@ export default function Register() {
                 <label className="pb-1.5 font-secondary">Username</label>
                 <Field
                   className={`w-full py-2 px-3 focus:outline-colorBlack border-2 rounded-bl-xl rounded-tr-xl bg-gray-50 ${
-                    errors.username &&
-                    touched.username
-                      ? "border-red-500"
-                      : ""
+                    errors.username && touched.username ? "border-red-500" : ""
                   }`}
                   type="text"
                   placeholder="Enter your username"
@@ -72,10 +70,7 @@ export default function Register() {
                 <label className="pb-1.5 font-secondary">Email address</label>
                 <Field
                   className={`w-full py-2 px-3 focus:outline-colorBlack border-2 rounded-bl-xl rounded-tr-xl bg-gray-50 ${
-                    errors.email &&
-                    touched.email
-                      ? "border-red-500"
-                      : ""
+                    errors.email && touched.email ? "border-red-500" : ""
                   }`}
                   type="email"
                   placeholder="Enter your email"
@@ -94,10 +89,7 @@ export default function Register() {
                 </div>
                 <Field
                   className={`w-full py-2 px-3 focus:outline-colorBlack border-2 rounded-bl-xl rounded-tr-xl bg-gray-50 ${
-                    errors.password &&
-                    touched.password
-                      ? "border-red-500"
-                      : ""
+                    errors.password && touched.password ? "border-red-500" : ""
                   }`}
                   type="password"
                   placeholder="Enter your password"
@@ -110,16 +102,10 @@ export default function Register() {
                 />
               </div>
               <div className="">
-                <input
-                  type="checkbox"
-                  name="checkbox"
-
-                
-                />
-                <label className="pl-4 font-secondary">
+                <input type="checkbox" name="checkbox" />
+                <label className="ml-2 text-sm font-medium">
                   I agree to the{" "}
                   <span>
-                    {" "}
                     <Link className="underline" to="/">
                       terms & policy
                     </Link>
