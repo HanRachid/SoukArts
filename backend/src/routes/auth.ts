@@ -33,7 +33,7 @@ authRouter.use(
     secret: 'cats',
     resave: false,
     saveUninitialized: true,
-    cookie: {expires: 300},
+    cookie: {originalMaxAge: 300000},
   })
 );
 

@@ -1,4 +1,4 @@
-import { connectDb } from './config/connectionDb';
+import {connectDb} from './config/connectionDb';
 import usersRouter from './routes/users';
 import authRouter from './routes/auth';
 const express = require('express');
