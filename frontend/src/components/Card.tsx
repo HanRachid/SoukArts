@@ -21,6 +21,7 @@ export function EcommerceCard({
 
   const ProductTitle =
     "Beni ourain Custom Moroccan rug - Berber Beni ourain rug - Wool area rug - Handmade rug - Moroccan area rug - Morocco rug";
+
   return (
     <Card className={`group ${cardWidth} ${cardHeight}`}>
       <CardHeader

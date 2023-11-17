@@ -15,7 +15,7 @@ export default function GlobalLayout({
         {hasLayout && <PromoNav />}
 
         {hasLayout && <NavBar />}
-        <div className="flex-1 flex flex-col">
+        <div className="">
           <Component />
         </div>
         {hasLayout && <Footer />}

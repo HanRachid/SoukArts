@@ -21,7 +21,7 @@ export default function ProductsList() {
   const { category } = useParams();
   return (
     <>
-      <div className="m-[114px] ">
+      <div className="m-[244px] mt-8 ">
         <HeroSlider
           image1={image1}
           image2={image2}
@@ -35,7 +35,7 @@ export default function ProductsList() {
             Most Loved
           </h1>
 
-          <div className="flex justify-center items-center gap-6">
+          <div className="flex justify-center  gap-6">
             <div>
               <EcommerceCard isFirstCard={true} image={rug1} />
             </div>

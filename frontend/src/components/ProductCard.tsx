@@ -1,10 +1,15 @@
 import { Link } from "react-router-dom";
-import image1 from "../assets/rugs/rug 1.jpg";
 
 const ProductTitle =
   "Beni ourain Custom Moroccan rug - Berber Beni ourain rug - Wool area rug - Handmade rug - Moroccan area rug - Morocco rug";
 
-export default function ProductCard({ isFirstCard }: { isFirstCard: boolean }) {
+export default function ProductCard({
+  isFirstCard,
+  image,
+}: {
+  isFirstCard: boolean;
+  image: string;
+}) {
   const cardHeight = isFirstCard ? "h-20" : "h-[500px]";
   const cardWidth = isFirstCard ? "w-[600px]" : "w-[300px]";
   return (
@@ -32,7 +37,7 @@ export default function ProductCard({ isFirstCard }: { isFirstCard: boolean }) {
       </button>
 
       <img
-        src={image1}
+        src={image}
         alt="product-image"
         className="h-64 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72"
       />
