@@ -1,34 +1,39 @@
-import { RouteObj } from "../types";
-import DashBoard from "./pages/Dashboard";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Privacy from "./pages/Privacy";
-import Register from "./pages/Register";
-import Termsofuse from "./pages/TermsOfUse";
-import GlobalLayout from "./layouts/GlobalLayout";
+import {RouteObj} from '../types';
+import DashBoard from './pages/Dashboard';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Privacy from './pages/Privacy';
+import Register from './pages/Register';
+import Termsofuse from './pages/TermsOfUse';
+import GlobalLayout from './layouts/GlobalLayout';
+import RugProducts from './pages/RugProducts';
 export default [
   {
-    path: "/",
+    path: '/',
     element: <GlobalLayout Component={Home} hasLayout={true} />,
   },
   {
-    path: "/login",
+    path: '/login',
     element: <GlobalLayout Component={Login} hasLayout={false} />,
   },
   {
-    path: "/register",
+    path: '/register',
     element: <GlobalLayout Component={Register} hasLayout={false} />,
   },
   {
-    path: "/dashboard",
+    path: '/dashboard',
     element: <GlobalLayout Component={DashBoard} hasLayout={false} />,
   },
   {
-    path: "/termsofuse",
+    path: '/termsofuse',
     element: <GlobalLayout Component={Termsofuse} hasLayout={false} />,
   },
   {
-    path: "/privacy",
+    path: '/privacy',
     element: <GlobalLayout Component={Privacy} hasLayout={false} />,
+  },
+  {
+    path: '/category/rugs',
+    element: <GlobalLayout Component={RugProducts} hasLayout={true} />,
   },
 ] as RouteObj[];

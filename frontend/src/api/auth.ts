@@ -3,6 +3,7 @@ const endpoint = import.meta.env.VITE_API_ENDPOINT + '/auth';
 
 export async function registerUser(user: User) {
   const url: string = endpoint + '/register';
+
   const params: RequestInit = {
     method: 'POST',
     headers: {
@@ -20,6 +21,7 @@ export async function registerUser(user: User) {
 
 export async function loginUser(user: User) {
   const url: string = endpoint + '/login';
+
   const params: RequestInit = {
     method: 'POST',
     headers: {
@@ -27,12 +29,12 @@ export async function loginUser(user: User) {
     },
     body: JSON.stringify(user),
     mode: 'cors',
+    credentials: 'include',
   };
 
   const login = await fetch(url, params);
 
   const response = await login.json();
-
   console.log(response);
 
   return response;

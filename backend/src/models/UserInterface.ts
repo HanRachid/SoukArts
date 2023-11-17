@@ -2,7 +2,7 @@
  * An interface describing a UserModel.
  * @public
  */
-export default interface BaseModel {
+export default interface UserInterface {
   _id: Object;
   username: string;
   first_name: string;
@@ -20,7 +20,7 @@ export default interface BaseModel {
   created_at?: Date;
   updated_at?: Date;
   registerModel(): Promise<Object>;
-  getModel(): Promise<BaseModel>;
-  updateModel(object: Partial<BaseModel>): Promise<void>;
+  getModel(): Promise<UserInterface>;
+  updateModel(object: Partial<UserInterface>): Promise<void>;
   deleteModel(): Promise<void>;
 }
