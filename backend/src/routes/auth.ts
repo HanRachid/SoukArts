@@ -1,7 +1,7 @@
 const express = require('express');
 import {Request, Response} from 'express';
 import UserModel from '../models/UserModel';
-import passport from '../middlewares/authpassport';
+import passport from '../middlewares/passport';
 
 const authRouter = express.Router();
 const session = require('express-session');
@@ -9,22 +9,22 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 authRouter.post('/register', async (req: Request, res: Response) => {
-  const {username, email, password} = req.body;
+  let {username, email, password} = req.body;
 
   const hashedPassword = await bcrypt.hash(password, saltRounds);
-
-  const user = new UserModel(username, email, hashedPassword);
-  const checkExists = await UserModel.findModelUserEmail(username, email);
-
-  console.log(user);
+  const user = new UserModel();
+  const checkExists = await user.findExistingUser(username, email);
 
   if (checkExists) {
-    console.log('Cannot register user, already exists');
-    res.send({error: 'nah'});
+    res.send({error: 'Cannot register user, already exists'});
 
     return;
   }
-  const register = await user.registerModel();
+  const register = await user.create({
+    username: username,
+    email: email,
+    password: hashedPassword,
+  });
   res.send(register);
 });
 

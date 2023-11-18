@@ -8,13 +8,13 @@ passport.use(
   new LocalStrategy(async (username, password, done) => {
     try {
       // Assuming findModelpw returns the user with hashed password
-      const user = await UserModel.findModelpw(username);
-
+      const user = await new UserModel().findExistingLogins(username);
       if (!user) {
         return done(null, false, {message: 'Incorrect username.'});
       }
 
       // Compare hashed password
+
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) {
         return done(null, false, {message: 'Incorrect password!'});
@@ -34,7 +34,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
   try {
-    const user = await UserModel.findModel(id);
+    const user = await new UserModel().findById(id);
     done(null, user);
   } catch (err) {
     done(err);
