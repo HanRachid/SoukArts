@@ -21,6 +21,6 @@ export default class ProducModel extends BaseModel<ProductInterface> {
   });
 
   constructor() {
-    super('Product', ProducModel.schema);
+    super('product', ProducModel.schema);
   }
 }

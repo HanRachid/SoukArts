@@ -1,5 +1,7 @@
 import {Document} from 'mongodb';
-import mongoose, {Model, Query, Schema} from 'mongoose';
+import mongoose, {Model, Query, Schema, Types} from 'mongoose';
+import {ClassElement, Type} from 'typescript';
+import UserModel from './UserModel';
 
 export default class BaseModel<T extends Document> {
   private model: Model<T>;
@@ -50,7 +52,36 @@ export default class BaseModel<T extends Document> {
   async findByQuery(query: Record<string, any>): Promise<T | null> {
     return this.model.findOne(query).exec();
   }
-  async getSchema(SchemaFields: Partial<T>) {
-    new Schema<T>(SchemaFields);
+  async registerModel(modelName: string, schema: Schema<T>) {
+    mongoose.model<T>(modelName, schema);
+  }
+  async findOneToManyPopulate(
+    id: string,
+    modelName: string,
+    schema: Schema<T>
+  ) {
+    try {
+      const objectId = new Types.ObjectId(id);
+      const many = this.registerModel(modelName, schema);
+      const result = await this.model
+        .find({user_id: objectId})
+        .populate(modelName + '_id')
+        .exec();
+      return result;
+    } catch (error) {
+      console.error(`Error finding one-to-many documents: ${error.message}`);
+      throw error;
+    }
+  }
+  async findOneToMany(id: string, modelName: string, schema: Schema<T>) {
+    try {
+      const objectId = new Types.ObjectId(id);
+      const many = this.registerModel(modelName, schema);
+      const result = await this.model.find({user_id: objectId}).exec();
+      return result;
+    } catch (error) {
+      console.error(`Error finding one-to-many documents: ${error.message}`);
+      throw error;
+    }
   }
 }

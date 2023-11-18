@@ -33,7 +33,7 @@ export default class UserModel extends BaseModel<UserInterface> {
   });
 
   constructor() {
-    super('User', UserModel.schema);
+    super('user', UserModel.schema);
   }
 
   async findExistingUser(
