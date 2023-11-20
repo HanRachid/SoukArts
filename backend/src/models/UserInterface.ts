@@ -1,9 +1,11 @@
+import {Document, Schema} from 'mongoose';
+
 /**
  * An interface describing a UserModel.
  * @public
  */
-export default interface UserInterface {
-  _id: Object;
+export default interface UserInterface extends Document {
+  _id: Schema.Types.ObjectId;
   username: string;
   first_name: string;
   last_name: string;
@@ -19,8 +21,4 @@ export default interface UserInterface {
   order_history?: OrderHistoryItem[];
   created_at?: Date;
   updated_at?: Date;
-  registerModel(): Promise<Object>;
-  getModel(): Promise<UserInterface>;
-  updateModel(object: Partial<UserInterface>): Promise<void>;
-  deleteModel(): Promise<void>;
 }
