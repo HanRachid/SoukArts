@@ -52,7 +52,7 @@ export default class BaseModel<T extends Document> {
   async findByQuery(query: Record<string, any>): Promise<T | null> {
     return this.model.findOne(query).exec();
   }
-  async registerModel(modelName: string, schema: Schema<T>) {
+  async registerModel(modelName: string, schema: Schema<T>): Promise<void> {
     mongoose.model<T>(modelName, schema);
   }
   async findOneToManyPopulate(
@@ -62,11 +62,11 @@ export default class BaseModel<T extends Document> {
   ) {
     try {
       const objectId = new Types.ObjectId(id);
-      const many = this.registerModel(modelName, schema);
-      const result = await this.model
-        .find({user_id: objectId})
-        .populate(modelName + '_id')
-        .exec();
+      this.registerModel(modelName, schema);
+
+      const field = modelName + '_id';
+      const query: Record<string, Types.ObjectId> = {[field]: objectId};
+      const result = await this.model.find(query).populate(field).exec();
       return result;
     } catch (error) {
       console.error(`Error finding one-to-many documents: ${error.message}`);
@@ -76,8 +76,12 @@ export default class BaseModel<T extends Document> {
   async findOneToMany(id: string, modelName: string, schema: Schema<T>) {
     try {
       const objectId = new Types.ObjectId(id);
-      const many = this.registerModel(modelName, schema);
-      const result = await this.model.find({user_id: objectId}).exec();
+      console.log({id: id, modelName: modelName});
+
+      this.registerModel(modelName, schema);
+      const field = modelName + '_id';
+      const query: Record<string, Types.ObjectId> = {[field]: objectId};
+      const result = await this.model.find(query).exec();
       return result;
     } catch (error) {
       console.error(`Error finding one-to-many documents: ${error.message}`);

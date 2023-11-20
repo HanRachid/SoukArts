@@ -6,6 +6,8 @@ import OrderModel from './models/OrderModel';
 import {Schema, Types} from 'mongoose';
 import {ObjectId} from 'mongodb';
 import UserModel from './models/UserModel';
+import FavoriteModel from './models/FavoriteModel';
+import ProductModel from './models/ProductModel';
 const express = require('express');
 const cors = require('cors');
 
@@ -24,12 +26,7 @@ app.use(cors(corsOptions));
 app.use('/users', usersRouter);
 app.use('/auth', authRouter);
 app.use('/products', productRouter);
-const order = new OrderModel();
-order
-  .findOneToMany('655753584cddcf7aebee30f8', 'user', UserModel.schema)
-  .then((result) => {
-    console.log(result);
-  });
+
 app.listen(3000, (): void => {
   console.log('server running on port ' + port);
   connectToDB();

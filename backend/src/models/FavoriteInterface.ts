@@ -1,8 +1,7 @@
-import {Schema} from 'mongoose';
+import {Types} from 'mongoose';
 
 export default interface FavoriteInterface extends Document {
-  _id: Schema.Types.ObjectId;
-  product_id: Schema.Types.ObjectId;
-  user_id: Schema.Types.ObjectId;
+  product_id: Types.ObjectId;
+  user_id: Types.ObjectId;
   created_at: Date;
 }

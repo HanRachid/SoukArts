@@ -1,11 +1,12 @@
-import {Schema} from 'mongoose';
+import {Schema, Types} from 'mongoose';
 import BaseModel from './BaseModel';
 import FavoriteInterface from './FavoriteInterface';
 
 export default class FavoriteModel extends BaseModel<FavoriteInterface> {
   static schema = new Schema({
-    name: {type: String, required: true},
-    description: {type: String, required: true},
+    product_id: {type: Types.ObjectId, required: true, ref: 'product'},
+    user_id: {type: Types.ObjectId, required: true, ref: 'user'},
+    created_at: {type: Date, required: false},
   });
 
   constructor() {
