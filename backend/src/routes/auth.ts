@@ -47,7 +47,7 @@ authRouter.post(
   '/login',
   (req: Request, res: Response, next: NextFunction) => {
     if (req.isAuthenticated()) {
-      res.send({isAuth: true, user: req.user});
+      res.send({user: req.user});
     } else {
       next();
     }
@@ -64,7 +64,7 @@ authRouter.post(
     console.log(req.user);
     if (req.isAuthenticated()) {
       req.logout(() => {
-        res.send({logged: false});
+        res.send({user: req.user});
       });
     } else {
       res.send({error: 'no user is connected'});
@@ -73,7 +73,7 @@ authRouter.post(
 );
 
 authRouter.get('/success', (req: Request, res: Response) => {
-  res.send({isAuth: true, user: req.user, cookie: req.session.cookie});
+  res.send({user: req.user, cookie: req.session.cookie});
 });
 
 authRouter.get('/:id/forgot', (req: Request, res: Response) => {

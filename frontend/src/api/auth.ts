@@ -1,6 +1,8 @@
-import { Dispatch, AnyAction } from '@reduxjs/toolkit';
+import {Dispatch, AnyAction} from '@reduxjs/toolkit';
 import {User} from '../../types';
-import { setLoginState, setLogoutState } from '../features/auth/authSlice';
+import {setLoginState, setLogoutState} from '../features/auth/authSlice';
+import {store} from '../app/store';
+import {router} from '../App';
 const endpoint = import.meta.env.VITE_API_ENDPOINT + '/auth';
 
 export async function registerUser(user: User) {
@@ -24,7 +26,7 @@ export async function registerUser(user: User) {
 export async function loginUser(user: User, dispatch: Dispatch<AnyAction>) {
   const url = endpoint + '/login';
 
-  const params : RequestInit= {
+  const params: RequestInit = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -41,7 +43,10 @@ export async function loginUser(user: User, dispatch: Dispatch<AnyAction>) {
 
     if (loginResponse.ok) {
       // Successful login
-      dispatch(setLoginState(response.user)); // Update the state with user info
+      dispatch(setLoginState(response.user));
+      if (store.getState().auth.user) {
+        router.navigate('/');
+      } // Update the state with user info
     } else {
       // Login failed
       dispatch(setLogoutState());
@@ -54,7 +59,7 @@ export async function loginUser(user: User, dispatch: Dispatch<AnyAction>) {
   }
 }
 
-export async function logoutUser() {
+export async function logoutUser(dispatch: Dispatch<AnyAction>) {
   const url: string = endpoint + '/logout';
 
   const params: RequestInit = {
@@ -67,10 +72,16 @@ export async function logoutUser() {
     credentials: 'include',
   };
 
-  const login = await fetch(url, params);
+  const logout = await fetch(url, params);
 
-  const response = await login.json();
+  const response = await logout.json();
   console.log(response);
+
+  if (!response.error) {
+    dispatch(setLogoutState());
+    console.log(store.getState());
+    router.navigate('/logout');
+  }
 
   return response;
 }

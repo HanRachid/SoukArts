@@ -8,24 +8,20 @@ import login_side_image from '../assets/login/login_image_side.png';
 import logo_google from '../assets/login/google-svgrepo-com.svg';
 import logo_apple from '../assets/login/apple-color-svgrepo-com.svg';
 import {Link} from 'react-router-dom';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {loginUser} from '../api/auth';
 
-import {useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {useNavigate} from 'react-router-dom';
-import {RootState} from '../app/store';
+import {useDispatch} from 'react-redux';
+import {store} from '../app/store';
+import {User} from '../../types';
 
 export default function Login() {
-  const navigate = useNavigate();
-  const {isAuthenticated} = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (isAuthenticated) {
-      navigate('/');
-    }
-  }, [isAuthenticated, navigate]);
+    loginUser({} as User, dispatch);
+    console.log(store.getState());
+  }, [store.getState().auth]);
 
   const hidden = 'text-red-500 text-opacity-0';
   const shown = 'text-red-500';
@@ -38,7 +34,7 @@ export default function Login() {
 
     validationSchema,
     onSubmit: (values) => {
-      loginUser(values);
+      loginUser(values, dispatch);
     },
     validateOnChange: true,
   });
