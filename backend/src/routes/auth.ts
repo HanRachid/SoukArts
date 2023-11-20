@@ -61,11 +61,14 @@ authRouter.post(
 authRouter.post(
   '/logout',
   (req: Request, res: Response, next: NextFunction) => {
-    req.logout(() => {
-      if (req.isAuthenticated()) {
-        res.redirect('/');
-      }
-    });
+    console.log(req.user);
+    if (req.isAuthenticated()) {
+      req.logout(() => {
+        res.send({logged: false});
+      });
+    } else {
+      res.send({error: 'no user is connected'});
+    }
   }
 );
 

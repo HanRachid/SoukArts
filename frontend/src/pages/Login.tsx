@@ -23,8 +23,6 @@ export default function Login() {
 
     validationSchema,
     onSubmit: (values) => {
-      console.log(values);
-
       loginUser(values);
     },
     validateOnChange: true,

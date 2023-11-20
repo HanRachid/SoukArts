@@ -39,3 +39,24 @@ export async function loginUser(user: User) {
 
   return response;
 }
+
+export async function logoutUser() {
+  const url: string = endpoint + '/logout';
+
+  const params: RequestInit = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+
+    mode: 'cors',
+    credentials: 'include',
+  };
+
+  const login = await fetch(url, params);
+
+  const response = await login.json();
+  console.log(response);
+
+  return response;
+}

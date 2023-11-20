@@ -17,12 +17,6 @@ const corsOptions = {
   credentials: true,
 };
 
-new OrderModel()
-  .findOneToMany('655753584cddcf7aebee30f8', 'user', UserModel.schema)
-  .then((result) => {
-    console.log(result);
-  });
-
 app.use(cors(corsOptions));
 
 app.use('/users', usersRouter);
