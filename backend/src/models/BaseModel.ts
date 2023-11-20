@@ -1,7 +1,5 @@
 import {Document} from 'mongodb';
 import mongoose, {Model, Query, Schema, Types} from 'mongoose';
-import {ClassElement, Type} from 'typescript';
-import UserModel from './UserModel';
 
 export default class BaseModel<T extends Document> {
   private model: Model<T>;

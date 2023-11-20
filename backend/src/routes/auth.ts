@@ -26,7 +26,9 @@ authRouter.post('/register', async (req: Request, res: Response) => {
 
   const hashedPassword = await bcrypt.hash(password, saltRounds);
   const user = new UserModel();
-  const checkExists = await user.findExistingUser(username, email);
+  const checkExists = await user.findByQuery({
+    $or: [{username: username}, {email: email}],
+  });
 
   if (checkExists) {
     res.send({error: 'Cannot register user, already exists'});
@@ -44,8 +46,6 @@ authRouter.post('/register', async (req: Request, res: Response) => {
 authRouter.post(
   '/login',
   (req: Request, res: Response, next) => {
-    console.log(req.body);
-
     if (req.isAuthenticated()) {
       res.send({isAuth: true, user: req.user});
     } else {

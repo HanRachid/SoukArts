@@ -8,7 +8,9 @@ passport.use(
   new LocalStrategy(async (username, password, done) => {
     try {
       // Assuming findModelpw returns the user with hashed password
-      const user = await new UserModel().findExistingLogins(username);
+      const user = await new UserModel().findByQuery({
+        $or: [{username: username}, {email: username}],
+      });
       if (!user) {
         return done(null, false, {message: 'Incorrect username.'});
       }

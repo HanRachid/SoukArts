@@ -35,19 +35,4 @@ export default class UserModel extends BaseModel<UserInterface> {
   constructor() {
     super('user', UserModel.schema);
   }
-
-  async findExistingUser(
-    username: string,
-    email: string
-  ): Promise<UserInterface | null> {
-    return await this.findByQuery({
-      $or: [{username: username}, {email: email}],
-    });
-  }
-
-  async findExistingLogins(usermail: string): Promise<UserInterface | null> {
-    return await this.findByQuery({
-      $or: [{username: usermail}, {email: usermail}],
-    });
-  }
 }
