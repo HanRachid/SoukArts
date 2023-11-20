@@ -3,11 +3,7 @@ import usersRouter from './routes/users';
 import authRouter from './routes/auth';
 import productRouter from './routes/products';
 import OrderModel from './models/OrderModel';
-import {Schema, Types} from 'mongoose';
-import {ObjectId} from 'mongodb';
 import UserModel from './models/UserModel';
-import FavoriteModel from './models/FavoriteModel';
-import ProductModel from './models/ProductModel';
 const express = require('express');
 const cors = require('cors');
 
@@ -21,7 +17,7 @@ const corsOptions = {
   credentials: true,
 };
 
-const orders = new OrderModel()
+new OrderModel()
   .findOneToMany('655753584cddcf7aebee30f8', 'user', UserModel.schema)
   .then((result) => {
     console.log(result);

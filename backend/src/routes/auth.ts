@@ -1,5 +1,5 @@
 const express = require('express');
-import {Request, Response} from 'express';
+import {NextFunction, Request, Response} from 'express';
 import UserModel from '../models/UserModel';
 import passport from '../middlewares/passport';
 
@@ -45,7 +45,7 @@ authRouter.post('/register', async (req: Request, res: Response) => {
 
 authRouter.post(
   '/login',
-  (req: Request, res: Response, next) => {
+  (req: Request, res: Response, next: NextFunction) => {
     if (req.isAuthenticated()) {
       res.send({isAuth: true, user: req.user});
     } else {
@@ -56,6 +56,17 @@ authRouter.post(
     successRedirect: '/auth/success',
     failureRedirect: '/auth/failure',
   })
+);
+
+authRouter.post(
+  '/logout',
+  (req: Request, res: Response, next: NextFunction) => {
+    req.logout(() => {
+      if (req.isAuthenticated()) {
+        res.redirect('/');
+      }
+    });
+  }
 );
 
 authRouter.get('/success', (req: Request, res: Response) => {
