@@ -8,8 +8,21 @@ const session = require('express-session');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
+authRouter.use(
+  session({
+    secret: 'cats',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {originalMaxAge: 300000},
+  })
+);
+
+authRouter.use(passport.initialize());
+authRouter.use(passport.session());
+authRouter.use(express.urlencoded({extended: false}));
+
 authRouter.post('/register', async (req: Request, res: Response) => {
-  let {username, email, password} = req.body;
+  const {username, email, password} = req.body;
 
   const hashedPassword = await bcrypt.hash(password, saltRounds);
   const user = new UserModel();
@@ -28,22 +41,9 @@ authRouter.post('/register', async (req: Request, res: Response) => {
   res.send(register);
 });
 
-authRouter.use(
-  session({
-    secret: 'cats',
-    resave: false,
-    saveUninitialized: true,
-    cookie: {originalMaxAge: 300000},
-  })
-);
-
-authRouter.use(passport.initialize());
-authRouter.use(passport.session());
-authRouter.use(express.urlencoded({extended: false}));
-
 authRouter.post(
   '/login',
-  (req, res, next) => {
+  (req: Request, res: Response, next) => {
     console.log(req.body);
 
     if (req.isAuthenticated()) {
@@ -58,11 +58,25 @@ authRouter.post(
   })
 );
 
-authRouter.get('/success', (req, res) => {
+authRouter.get('/success', (req: Request, res: Response) => {
   res.send({isAuth: true, user: req.user, cookie: req.session.cookie});
 });
 
-authRouter.get('/failure', (req, res) => {
+authRouter.get('/:id/forgot', (req: Request, res: Response) => {
+  res.send({isAuth: true, user: req.user, cookie: req.session.cookie});
+});
+
+authRouter.get('/:id/profile', (req: Request, res: Response) => {
+  const profile = new UserModel().findById(req.params.id);
+});
+authRouter.post('/:id/profile', (req: Request, res: Response) => {
+  res.send({isAuth: true, user: req.user, cookie: req.session.cookie});
+});
+authRouter.post('/:id/deleteprofile', (req: Request, res: Response) => {
+  res.send({isAuth: true, user: req.user, cookie: req.session.cookie});
+});
+
+authRouter.get('/failure', (req: Request, res: Response) => {
   console.log('failure!');
   res.send({logged: false});
 });
