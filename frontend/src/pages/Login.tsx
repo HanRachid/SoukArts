@@ -11,7 +11,22 @@ import {Link} from 'react-router-dom';
 import {useState} from 'react';
 import {loginUser} from '../api/auth';
 
+import {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {useNavigate} from 'react-router-dom';
+import {RootState} from '../app/store';
+
 export default function Login() {
+  const navigate = useNavigate();
+  const {isAuthenticated} = useSelector((state: RootState) => state.auth);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/');
+    }
+  }, [isAuthenticated, navigate]);
+
   const hidden = 'text-red-500 text-opacity-0';
   const shown = 'text-red-500';
 

@@ -95,4 +95,12 @@ authRouter.get('/failure', (req: Request, res: Response) => {
   res.send({logged: false});
 });
 
+authRouter.get('/check', (req, res) => {
+  if (req.user) {
+    res.json({isAuthenticated: true, user: req.user});
+  } else {
+    res.json({isAuthenticated: false});
+  }
+});
+
 export default authRouter;
