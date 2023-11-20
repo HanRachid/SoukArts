@@ -1,5 +1,5 @@
 const express = require('express');
-import {Request, Response} from 'express';
+import { Request, Response } from 'express';
 import UserModel from '../models/UserModel';
 import passport from '../middlewares/authpassport';
 
@@ -9,7 +9,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 authRouter.post('/register', async (req: Request, res: Response) => {
-  const {username, email, password} = req.body;
+  const { username, email, password } = req.body;
 
   const hashedPassword = await bcrypt.hash(password, saltRounds);
 
@@ -20,7 +20,7 @@ authRouter.post('/register', async (req: Request, res: Response) => {
 
   if (checkExists) {
     console.log('Cannot register user, already exists');
-    res.send({error: 'nah'});
+    res.send({ error: 'nah' });
 
     return;
   }
@@ -33,13 +33,13 @@ authRouter.use(
     secret: 'cats',
     resave: false,
     saveUninitialized: true,
-    cookie: {expires: 300},
+    cookie: { expires: 300 },
   })
 );
 
 authRouter.use(passport.initialize());
 authRouter.use(passport.session());
-authRouter.use(express.urlencoded({extended: false}));
+authRouter.use(express.urlencoded({ extended: false }));
 
 authRouter.post(
   '/login',
@@ -47,7 +47,7 @@ authRouter.post(
     console.log(req.body);
 
     if (req.isAuthenticated()) {
-      res.send({isAuth: true, user: req.user});
+      res.send({ isAuth: true, user: req.user });
     } else {
       next();
     }
@@ -59,12 +59,12 @@ authRouter.post(
 );
 
 authRouter.get('/success', (req, res) => {
-  res.send({isAuth: true, user: req.user, cookie: req.session.cookie});
+  res.send({ isAuth: true, user: req.user, cookie: req.session.cookie });
 });
 
 authRouter.get('/failure', (req, res) => {
   console.log('failure!');
-  res.send({logged: false});
+  res.send({ logged: false });
 });
 
 authRouter.get('/check', (req, res) => {
