@@ -15,7 +15,7 @@ export default class UserModel extends BaseModel<UserInterface> {
     email: {type: String, required: true},
     number_phone: {type: String, required: false},
     password: {type: String, required: true},
-    role_id: {type: Object, required: false},
+    role: {type: String, required: false},
     is_active: {type: Boolean, required: false},
     is_deleted: {type: Boolean, required: false},
     saved_card: {

@@ -19,7 +19,6 @@ export async function registerUser(user: User) {
 
   const register = await fetch(url, params);
   const response = await register.json();
-  console.log(response);
   return response;
 }
 
@@ -39,7 +38,6 @@ export async function loginUser(user: User, dispatch: Dispatch<AnyAction>) {
   try {
     const loginResponse = await fetch(url, params);
     const response = await loginResponse.json();
-    console.log(response);
 
     if (loginResponse.ok) {
       // Successful login
@@ -50,6 +48,37 @@ export async function loginUser(user: User, dispatch: Dispatch<AnyAction>) {
     } else {
       // Login failed
       dispatch(setLogoutState());
+    }
+
+    return response;
+  } catch (error) {
+    console.error('Login error:', error);
+    dispatch(setLogoutState());
+  }
+}
+
+export async function refreshLog(user: User, dispatch: Dispatch<AnyAction>) {
+  const url = endpoint + '/login';
+
+  const params: RequestInit = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(user),
+    mode: 'cors',
+    credentials: 'include',
+  };
+
+  try {
+    const loginResponse = await fetch(url, params);
+    const response = await loginResponse.json();
+
+    if (loginResponse.ok) {
+      dispatch(setLoginState(response.user));
+      if (!store.getState().auth.user) {
+        dispatch(setLogoutState());
+      }
     }
 
     return response;
@@ -75,12 +104,10 @@ export async function logoutUser(dispatch: Dispatch<AnyAction>) {
   const logout = await fetch(url, params);
 
   const response = await logout.json();
-  console.log(response);
 
   if (!response.error) {
     dispatch(setLogoutState());
     console.log(store.getState());
-    router.navigate('/logout');
   }
 
   return response;

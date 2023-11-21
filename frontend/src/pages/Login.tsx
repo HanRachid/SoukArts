@@ -20,8 +20,7 @@ export default function Login() {
 
   useEffect(() => {
     loginUser({} as User, dispatch);
-    console.log(store.getState());
-  }, [store.getState().auth]);
+  }, [store.getState().auth.user]);
 
   const hidden = 'text-red-500 text-opacity-0';
   const shown = 'text-red-500';

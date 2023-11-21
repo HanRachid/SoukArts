@@ -67,7 +67,7 @@ authRouter.post(
         res.send({user: req.user});
       });
     } else {
-      res.send({error: 'no user is connected'});
+      res.send({user: null});
     }
   }
 );
@@ -92,7 +92,7 @@ authRouter.post('/:id/deleteprofile', (req: Request, res: Response) => {
 
 authRouter.get('/failure', (req: Request, res: Response) => {
   console.log('failure!');
-  res.send({logged: false});
+  res.send({user: null});
 });
 
 authRouter.get('/check', (req, res) => {

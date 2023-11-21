@@ -4,11 +4,25 @@ import HeartSVG from '../assets/navbar/heart.svg?react';
 import CartSVG from '../assets/navbar/cart.svg?react';
 import {Link} from 'react-router-dom';
 import Button from './Button';
-import {logoutUser} from '../api/auth';
+import {logoutUser, refreshLog} from '../api/auth';
 import {useDispatch} from 'react-redux';
-import {store} from '../app/store';
+import ProfileDropdown from './ProfileDropdown';
+import {useEffect, useState} from 'react';
+import {User} from '../../types';
 export default function Navigation(): React.ReactElement {
   const dispatch = useDispatch();
+  const [user, setUser] = useState<{id: string; name: string} | null>(null);
+
+  useEffect(() => {
+    refreshLog({} as User, dispatch).then((result) => {
+      if (result.user) {
+        setUser(result.user);
+      } else {
+        setUser(null);
+      }
+    });
+  });
+
   return (
     <>
       <div className='flex items-center justify-between p-4 h-10 '>
@@ -30,15 +44,18 @@ export default function Navigation(): React.ReactElement {
         <Link to='/'>
           <CartSVG className='w-6 font-secondary hover:fill-colorGold' />
         </Link>
-        {store.getState().auth.user ? (
-          <button onClick={() => logoutUser(dispatch)}>
-            <div className='group flex w-full items-center px-2 py-2 text-medium font-secondary hover:text-colorGold hover:scale-[1.02] transition-all duration-300'>
-              <span className=' z-10'>
-                Logout
-                <span className='absolute bottom-0 left-0 w-full h-0.5 bg-colorGold transform scale-x-0 origin-left transition-transform group-hover:scale-x-100 duration-300'></span>
-              </span>
-            </div>
-          </button>
+        {user ? (
+          <>
+            <button onClick={() => logoutUser(dispatch)}>
+              <div className='group flex w-full items-center px-2 py-2 text-medium font-secondary hover:text-colorGold hover:scale-[1.02] transition-all duration-300'>
+                <span className=' z-10'>
+                  Logout
+                  <span className='absolute bottom-0 left-0 w-full h-0.5 bg-colorGold transform scale-x-0 origin-left transition-transform group-hover:scale-x-100 duration-300'></span>
+                </span>
+              </div>
+            </button>
+            <ProfileDropdown />
+          </>
         ) : (
           <>
             <Link to='/login'>

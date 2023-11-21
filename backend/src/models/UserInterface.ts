@@ -14,7 +14,7 @@ export default interface UserInterface extends Document {
   email: string;
   phone: string;
   password: string;
-  role_id?: Object;
+  role?: Object;
   is_active?: boolean;
   is_deleted?: boolean;
   card_info?: CardInfo;

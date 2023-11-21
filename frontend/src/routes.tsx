@@ -23,15 +23,15 @@ export default [
   },
   {
     path: '/dashboard',
-    element: <GlobalLayout Component={DashBoard} hasLayout={false} />,
+    element: <GlobalLayout Component={DashBoard} hasLayout={true} />,
   },
   {
     path: '/termsofuse',
-    element: <GlobalLayout Component={Termsofuse} hasLayout={false} />,
+    element: <GlobalLayout Component={Termsofuse} hasLayout={true} />,
   },
   {
     path: '/privacy',
-    element: <GlobalLayout Component={Privacy} hasLayout={false} />,
+    element: <GlobalLayout Component={Privacy} hasLayout={true} />,
   },
   {
     path: '/category/rugs',
