@@ -6,7 +6,8 @@ import Privacy from "./pages/Privacy";
 import Register from "./pages/Register";
 import Termsofuse from "./pages/TermsOfUse";
 import GlobalLayout from "./layouts/GlobalLayout";
-import RugProducts from "./pages/RugProducts";
+// import RugProducts from "./pages/RugProducts";
+import ProductsList from "./pages/Category-Product";
 export default [
   {
     path: "/",
@@ -34,6 +35,6 @@ export default [
   },
   {
     path: "/categories/:category",
-    element: <GlobalLayout Component={RugProducts} hasLayout={true} />,
+    element: <GlobalLayout Component={ProductsList} hasLayout={true} />,
   },
 ] as RouteObj[];
