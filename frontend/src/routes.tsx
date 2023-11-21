@@ -7,6 +7,8 @@ import Register from './pages/Register';
 import Termsofuse from './pages/TermsOfUse';
 import GlobalLayout from './layouts/GlobalLayout';
 import RugProducts from './pages/RugProducts';
+import Cart from './pages/Cart';
+
 export default [
   {
     path: '/',
@@ -31,6 +33,10 @@ export default [
   {
     path: '/privacy',
     element: <GlobalLayout Component={Privacy} hasLayout={false} />,
+  },
+  {
+    path: '/cart',
+    element: <GlobalLayout Component={Cart} hasLayout={true} />,
   },
   {
     path: '/category/rugs',

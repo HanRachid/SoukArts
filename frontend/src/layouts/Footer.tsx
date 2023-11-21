@@ -16,7 +16,7 @@ export default function Footer(): React.ReactElement {
   const [open, setOpen] = React.useState<boolean>(false);
   return (
     <>
-      <footer className='font-secondary mt-12 border-t-4 border-t-colorGold'>
+      <footer className='font-secondary border-t-4 border-t-colorGold bg-colorBeige'>
         {/* Footer-part-one */}
         <section className='xl:w-5/6 mx-auto'>
           <div className='w-full flex flex-col md:flex-row'>
