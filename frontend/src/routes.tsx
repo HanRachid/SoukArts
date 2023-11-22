@@ -8,6 +8,7 @@ import Termsofuse from './pages/TermsOfUse';
 import GlobalLayout from './layouts/GlobalLayout';
 import RugProducts from './pages/RugProducts';
 import Cart from './pages/Cart';
+import Logout from './pages/Logout';
 
 export default [
   {
@@ -24,15 +25,15 @@ export default [
   },
   {
     path: '/dashboard',
-    element: <GlobalLayout Component={DashBoard} hasLayout={false} />,
+    element: <GlobalLayout Component={DashBoard} hasLayout={true} />,
   },
   {
     path: '/termsofuse',
-    element: <GlobalLayout Component={Termsofuse} hasLayout={false} />,
+    element: <GlobalLayout Component={Termsofuse} hasLayout={true} />,
   },
   {
     path: '/privacy',
-    element: <GlobalLayout Component={Privacy} hasLayout={false} />,
+    element: <GlobalLayout Component={Privacy} hasLayout={true} />,
   },
   {
     path: '/cart',
@@ -41,5 +42,9 @@ export default [
   {
     path: '/category/rugs',
     element: <GlobalLayout Component={RugProducts} hasLayout={true} />,
+  },
+  {
+    path: '/logout',
+    element: <GlobalLayout Component={Logout} hasLayout={true} />,
   },
 ] as RouteObj[];
