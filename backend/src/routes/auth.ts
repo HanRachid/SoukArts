@@ -21,27 +21,29 @@ authRouter.use(passport.initialize());
 authRouter.use(passport.session());
 authRouter.use(express.urlencoded({extended: false}));
 
-authRouter.post('/register', async (req: Request, res: Response) => {
-  const {username, email, password} = req.body;
+authRouter.post(
+  '/register',
+  async (req: Request, res: Response, next: NextFunction) => {
+    const {username, email, password} = req.body;
 
-  const hashedPassword = await bcrypt.hash(password, saltRounds);
-  const user = new UserModel();
-  const checkExists = await user.findByQuery({
-    $or: [{username: username}, {email: email}],
-  });
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    const user = new UserModel();
+    const checkExists = await user.findByQuery({
+      $or: [{username: username}, {email: email}],
+    });
 
-  if (checkExists) {
-    res.send({error: 'Cannot register user, already exists'});
-
-    return;
+    if (checkExists) {
+      res.status(400).send({error: 'exists'});
+      return;
+    }
+    const register = await user.create({
+      username: username,
+      email: email,
+      password: hashedPassword,
+    });
+    res.status(200).send(register);
   }
-  const register = await user.create({
-    username: username,
-    email: email,
-    password: hashedPassword,
-  });
-  res.send(register);
-});
+);
 
 authRouter.post(
   '/login',
