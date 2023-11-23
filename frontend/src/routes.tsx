@@ -5,9 +5,9 @@ import Privacy from "./pages/Privacy";
 import Register from "./pages/Register";
 import Termsofuse from "./pages/TermsOfUse";
 import GlobalLayout from "./layouts/GlobalLayout";
-import Dashboard from "./pages/Dashboard";
-import Categories from "./pages/Categories";
-import DashboardLayout from "./layouts/DashboardLayout";
+// import RugProducts from "./pages/RugProducts";
+import ProductsList from "./pages/Category-Product";
+import Logout from "./pages/Logout";
 export default [
   {
     path: "/",
@@ -36,5 +36,13 @@ export default [
   {
     path: "/privacy",
     element: <GlobalLayout Component={Privacy} hasLayout={false} />,
+  },
+  {
+    path: "/categories/:category",
+    element: <GlobalLayout Component={ProductsList} hasLayout={true} />,
+  },
+  {
+    path: "/logout",
+    element: <GlobalLayout Component={Logout} hasLayout={true} />,
   },
 ] as RouteObj[];

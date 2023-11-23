@@ -12,10 +12,10 @@ export default function GlobalLayout({
   return (
     <>
       <div className="flex flex-col min-h-screen">
-        <PromoNav />
+        {hasLayout && <PromoNav />}
 
         {hasLayout && <NavBar />}
-        <div className="flex-1 flex flex-col">
+        <div className="">
           <Component />
         </div>
         {hasLayout && <Footer />}
