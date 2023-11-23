@@ -1,0 +1,16 @@
+@font-face {
+  font-family: "BrownSugar";
+  src: url("./assets/fonts/Brown-sugar.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "ABeeZee";
+  src: url("./assets/fonts/ABeeZee.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
