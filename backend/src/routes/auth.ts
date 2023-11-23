@@ -13,7 +13,7 @@ authRouter.use(
     secret: 'cats',
     resave: false,
     saveUninitialized: true,
-    cookie: {originalMaxAge: 300000},
+    cookie: {originalMaxAge: 5000},
   })
 );
 
@@ -33,7 +33,7 @@ authRouter.post(
     });
 
     if (checkExists) {
-      res.status(400).send({error: 'exists'});
+      res.status(409).send({error: 'exists'});
       return;
     }
     const register = await user.create({
@@ -75,7 +75,7 @@ authRouter.post(
 );
 
 authRouter.get('/success', (req: Request, res: Response) => {
-  res.send({user: req.user, cookie: req.session.cookie});
+  res.send({user: {...req.user, ...req.session.cookie}});
 });
 
 authRouter.get('/:id/forgot', (req: Request, res: Response) => {

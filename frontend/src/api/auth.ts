@@ -21,9 +21,9 @@ export async function registerUser(user: User) {
 
   const response = await register.json();
   if (response.error) {
-    if (response.error === 'exists') throw new Error('User already exists!');
-  } else {
-    throw new Error(response.error);
+    if (response.error === 'exists') {
+      throw new Error('User already exists!');
+    }
   }
   return response;
 }

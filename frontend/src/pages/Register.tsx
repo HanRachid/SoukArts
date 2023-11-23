@@ -21,10 +21,15 @@ export default function Register() {
     {setSubmitting}: {setSubmitting: (isSubmitting: boolean) => void}
   ) => {
     registerUser(values)
-      .then((response) => {
-        console.log(response);
+      .then(() => {
+        loginUser(
+          {username: values.username, password: values.password},
+          dispatch
+        );
       })
-
+      .catch((error) => {
+        console.error(error);
+      })
       .finally(() => {
         setSubmitting(false);
       });
