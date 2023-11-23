@@ -8,6 +8,7 @@ import Termsofuse from "./pages/TermsOfUse";
 import GlobalLayout from "./layouts/GlobalLayout";
 // import RugProducts from "./pages/RugProducts";
 import ProductsList from "./pages/Category-Product";
+import ProductDetail from "./pages/ProductDetail";
 import Logout from "./pages/Logout";
 export default [
   {
@@ -37,6 +38,10 @@ export default [
   {
     path: "/categories/:category",
     element: <GlobalLayout Component={ProductsList} hasLayout={true} />,
+  },
+  {
+    path: "/categories/:category/:product",
+    element: <GlobalLayout Component={ProductDetail} hasLayout={true} />,
   },
   {
     path: "/logout",
