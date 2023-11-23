@@ -35,8 +35,8 @@ export default withMT({
         headingXl: "4.0625rem",
       },
       fontFamily: {
-        primary: ["BrownSugar", "sans-serif"],
-        secondary: ["ABeeZee", "sans-serif"],
+        primary: ['BrownSugar', 'sans-serif'],
+        secondary: ['ABeeZee', 'sans-serif'],
       },
     },
   },

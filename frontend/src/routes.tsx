@@ -37,4 +37,8 @@ export default [
     path: "/categories/:category",
     element: <GlobalLayout Component={ProductsList} hasLayout={true} />,
   },
+  {
+    path: '/logout',
+    element: <GlobalLayout Component={Logout} hasLayout={true} />,
+  },
 ] as RouteObj[];

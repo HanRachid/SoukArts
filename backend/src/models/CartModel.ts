@@ -1,13 +1,14 @@
 import {Schema} from 'mongoose';
 import BaseModel from './BaseModel';
+import CartInterface from './CartInterface';
 
-export default class CategoryModel extends BaseModel<CategoryInterface> {
+export default class CartModel extends BaseModel<CartInterface> {
   static schema = new Schema({
     name: {type: String, required: true},
     description: {type: String, required: true},
   });
 
   constructor() {
-    super('Category', CategoryModel.schema);
+    super('Cart', CartModel.schema);
   }
 }
