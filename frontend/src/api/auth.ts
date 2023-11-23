@@ -35,6 +35,6 @@ export async function loginUser(user: User) {
   const response = await login.json();
 
   console.log(response);
-
+  router.navigate('/');
   return response;
 }
