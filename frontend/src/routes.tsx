@@ -1,4 +1,4 @@
-import {RouteObj} from '../types';
+import { RouteObj } from '../types';
 import DashBoard from './pages/Dashboard';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -7,6 +7,7 @@ import Register from './pages/Register';
 import Termsofuse from './pages/TermsOfUse';
 import GlobalLayout from './layouts/GlobalLayout';
 import RugProducts from './pages/RugProducts';
+import Favorite from './pages/Favorite';
 export default [
   {
     path: '/',
@@ -35,5 +36,10 @@ export default [
   {
     path: '/category/rugs',
     element: <GlobalLayout Component={RugProducts} hasLayout={true} />,
+  },
+
+  {
+    path: '/favorite',
+    element: <GlobalLayout Component={Favorite} hasLayout={true} />,
   },
 ] as RouteObj[];
