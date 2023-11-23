@@ -1,11 +1,13 @@
 import { RouteObj } from "../types";
-import DashBoard from "./pages/Dashboard";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Privacy from "./pages/Privacy";
 import Register from "./pages/Register";
 import Termsofuse from "./pages/TermsOfUse";
 import GlobalLayout from "./layouts/GlobalLayout";
+import Dashboard from "./pages/Dashboard";
+import Categories from "./pages/Categories";
+import DashboardLayout from "./layouts/DashboardLayout";
 export default [
   {
     path: "/",
@@ -21,7 +23,11 @@ export default [
   },
   {
     path: "/dashboard",
-    element: <GlobalLayout Component={DashBoard} hasLayout={false} />,
+    element: <DashboardLayout Component={Dashboard} />,
+  },
+  {
+    path: "/categories",
+    element: <DashboardLayout Component={Categories} />,
   },
   {
     path: "/termsofuse",
