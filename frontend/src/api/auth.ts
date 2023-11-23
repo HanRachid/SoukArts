@@ -31,11 +31,7 @@ export async function loginUser(user: User) {
   };
 
   const register = await fetch(url, params);
-  console.log(register);
-  
   const response = await register.json();
-  
   router.navigate('/');
-
   return response;
 }
