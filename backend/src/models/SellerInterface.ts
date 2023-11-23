@@ -1,6 +1,7 @@
 import {Types} from 'mongoose';
 
 export default interface SellerInterface extends Document {
+  _id: Types.ObjectId;
   user_id: Types.ObjectId;
   shop_name: string;
   business_email: string;
