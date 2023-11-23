@@ -1,68 +1,80 @@
 import { Link } from "react-router-dom";
-import image1 from "../assets/rugs/rug 1.jpg";
+import { Tooltip } from "react-tooltip";
+
+//import images
+import HeartSVG from "../assets/navbar/heart.svg?react";
+import star from "../assets/icons/icons8-star-50.png";
 
 const ProductTitle =
   "Beni ourain Custom Moroccan rug - Berber Beni ourain rug - Wool area rug - Handmade rug - Moroccan area rug - Morocco rug";
 
-export default function ProductCard({ isFirstCard }: { isFirstCard: boolean }) {
-  const cardHeight = isFirstCard ? "h-20" : "h-[500px]";
-  const cardWidth = isFirstCard ? "w-[600px]" : "w-[300px]";
+export default function ProductCard({
+  image,
+  isNew,
+}: {
+  image: string;
+  isNew: boolean;
+}) {
   return (
-    <Link
-      to="#"
-      className={`group relative overflow-hidden ${cardWidth} ${cardHeight} font-secondary pt-5 flex flex-col`}
-    >
-      <button className="absolute end-4 top-14 z-10 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75">
-        <span className="sr-only">Wishlist</span>
-
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          className="h-4 w-4"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
-          />
-        </svg>
-      </button>
-
-      <img
-        src={image1}
-        alt="product-image"
-        className="h-64 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72"
-      />
-
-      <div className="relative border border-gray-100 bg-white p-2">
-        <span className="whitespace-nowrap bg-colorGold px-3 py-1.5 text-xs font-medium text-white">
-          New
-        </span>
-
-        <h3
-          className="mt-4 text-lg font-[24px] text-gray-900 tooltip"
-          data-tip={ProductTitle}
-        >
-          {ProductTitle.length > 30
-            ? ProductTitle.substring(0, 29) + "..."
-            : ProductTitle}
-        </h3>
-        <div className="flex justify-between">
-          <h4 className="mt-4 text-small font-light text-black-900 opacity-70 font-secondary">
-            By MarrakechGallery
-          </h4>
-
-          <p className="mt-4 text-sm text-colorGold">600 DH</p>
-        </div>
-        <form className="mt-4">
-          <button className="block w-full rounded bg-colorGold text-white p-4 text-sm font-normal medium transition hover:scale-105">
-            Add to Cart
+    <>
+      <div className="group relative overflow-hidden w-[456.55px] h-[691.18] font-secondary flex flex-col rounded-xl shadow-md z-0">
+        <Link to="#">
+          <button className="absolute end-12 top-8 z-10  hover:bg-white/60 hover:scale-[1.06] ">
+            <div className="relative">
+              <div className="w-9 h-9 rounded-full bg-white p-1.5 text-gray-900 transition absolute"></div>
+              <HeartSVG className="absolute w-7 end-[-2rem] top-[-3.8rem] font-secondary hover:fill-colorGold" />
+            </div>
           </button>
-        </form>
+          <img
+            src={image}
+            alt="product-image"
+            className={` ${
+              isNew ? "h-[350px]" : "h-[599.72]"
+            } w-full object-cover transition duration-500 group-hover:scale-105`}
+          />
+
+          <div className="relative border border-gray-100 bg-white pt-2 p-6 rounded-br-xl rounded-bl-xl">
+            <span
+              className={`whitespace-nowrap bg-colorGold px-3 py-1.5 text-xs font-medium text-white ${
+                isNew ? "" : "hidden"
+              }`}
+            >
+              New
+            </span>
+            <h3
+              className="mt-4 font-medium font-secondary text-[1.35rem] text-gray-900 tooltip"
+              data-tooltip-id="my-tooltip"
+              data-tooltip-content={ProductTitle}
+            >
+              {ProductTitle.length > 35
+                ? ProductTitle.substring(0, 35) + "..."
+                : ProductTitle}
+            </h3>
+            <div className="flex justify-between">
+              <h4 className="-mt-1 text-base font-light text-black-900 opacity-70 font-secondary">
+                By MarrakechGallery
+              </h4>
+
+              <p className="mt-4 text-xl text-colorGold">600 DH</p>
+            </div>
+            <div className="flex justify-between">
+              <div className="flex items-center gap-2 font-bold text-black">
+                <img width="20" height="20" src={star} alt="star" />
+                <p className="font-medium text-xl text-black">4.7 (1.5K)</p>
+              </div>
+              <p className="font-thin text-sm font-secondary text-colorGold">
+                <span className="line-through">1700DH</span>(60%)
+              </p>
+            </div>
+            <form className="mt-4">
+              <button className="h-[58px] text-[1.2rem] block w-full rounded-tr-[10px] rounded-bl-[10px]  bg-colorGold text-white font-secondary font-normal medium transition hover:bg-colorGold/90 hover:scale-[1.02]">
+                Add to Cart
+              </button>
+            </form>
+          </div>
+        </Link>
       </div>
-    </Link>
+      <Tooltip id="my-tooltip" />
+    </>
   );
 }
