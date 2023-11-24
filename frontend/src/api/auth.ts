@@ -18,7 +18,13 @@ export async function registerUser(user: User) {
   };
 
   const register = await fetch(url, params);
+
   const response = await register.json();
+  if (response.error) {
+    if (response.error === 'exists') {
+      throw new Error('User already exists!');
+    }
+  }
   return response;
 }
 
