@@ -1,17 +1,17 @@
-import {useFormik} from 'formik';
-import {validationSchema} from './validation/LoginValidation';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
+import { useFormik } from 'formik';
+import { validationSchema } from './validation/LoginValidation';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import logo from '../assets/login/logo1.png';
 import login_side_image from '../assets/login/login_image_side.png';
 import logo_google from '../assets/login/google-svgrepo-com.svg';
 import logo_apple from '../assets/login/apple-color-svgrepo-com.svg';
-import {Link} from 'react-router-dom';
-import {useEffect, useState} from 'react';
-import {loginUser} from '../api/auth';
-import {useDispatch} from 'react-redux';
-import {store} from '../app/store';
-import {User} from '../../types';
+import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { loginUser } from '../api/auth';
+import { useDispatch } from 'react-redux';
+import { store } from '../app/store';
+import { User } from '../../types';
 
 export default function Login() {
   const dispatch = useDispatch();
