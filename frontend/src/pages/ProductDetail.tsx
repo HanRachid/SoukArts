@@ -1,18 +1,24 @@
 // import { useParams } from "react-router-dom";
-
+import { CarouselProduct } from "../components/carouselProduct";
+import DetailsProduct from "../components/DetailsProduct";
+//images
 import carousel1 from "../assets/jewelry/carousel1.jpg";
 import carousel2 from "../assets/jewelry/carousel2.jpg";
-import { CarouselProduct } from "../components/carouselProduct";
-im;
+import carousel3 from "../assets/jewelry/carousel3.jpg";
+import carousel4 from "../assets/jewelry/carousel4.jpg";
+import carousel5 from "../assets/jewelry/carousel5.webp";
 
-images;
+const carousel = [carousel1, carousel2, carousel3, carousel4, carousel5];
 
 export default function ProductDetail() {
   // const { product } = useParams();
   return (
-    <div>
+    <div className="ml-[120px] mr-[120px] mt-24 flex gap-11">
       <div>
-        <CarouselProduct />
+        <CarouselProduct images={carousel} />
+      </div>
+      <div>
+        <DetailsProduct />
       </div>
     </div>
   );
