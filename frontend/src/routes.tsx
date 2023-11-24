@@ -6,7 +6,8 @@ import Privacy from './pages/Privacy';
 import Register from './pages/Register';
 import Termsofuse from './pages/TermsOfUse';
 import GlobalLayout from './layouts/GlobalLayout';
-import RugProducts from './pages/RugProducts';
+import ProductsList from './pages/ProductsList';
+import Logout from './pages/Logout';
 import Favorite from './pages/Favorite';
 export default [
   {
@@ -34,8 +35,12 @@ export default [
     element: <GlobalLayout Component={Privacy} hasLayout={false} />,
   },
   {
-    path: '/category/rugs',
-    element: <GlobalLayout Component={RugProducts} hasLayout={true} />,
+    path: '/categories/:category',
+    element: <GlobalLayout Component={ProductsList} hasLayout={true} />,
+  },
+  {
+    path: '/logout',
+    element: <GlobalLayout Component={Logout} hasLayout={true} />,
   },
 
   {
