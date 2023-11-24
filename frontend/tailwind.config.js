@@ -40,8 +40,8 @@ export default withMT({
       },
     },
   },
-  plugins: ['daisyui'],
+  plugins: [daisyui],
   daisyui: {
-    themes: false,
+    themes: ['light'],
   },
 });

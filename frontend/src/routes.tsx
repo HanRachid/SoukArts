@@ -10,6 +10,7 @@ import GlobalLayout from './layouts/GlobalLayout';
 import ProductsList from './pages/CategoryProduct';
 import ProductDetail from './pages/ProductDetail';
 import Logout from './pages/Logout';
+import SearchResult from './pages/SearchResults';
 export default [
   {
     path: '/',
@@ -46,5 +47,9 @@ export default [
   {
     path: '/logout',
     element: <GlobalLayout Component={Logout} hasLayout={true} />,
+  },
+  {
+    path: '/search/:category/:terms',
+    element: <GlobalLayout Component={SearchResult} hasLayout={true} />,
   },
 ] as RouteObj[];

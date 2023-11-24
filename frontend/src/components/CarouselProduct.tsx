@@ -6,7 +6,7 @@ interface CarouselProductProps {
 
 export function CarouselProduct({images}: CarouselProductProps) {
   let setOutsideActiveIndex: Function;
-  let [imageActiveIndex, setImageActiveIndex] = useState<number>(0);
+  const [imageActiveIndex, setImageActiveIndex] = useState<number>(0);
 
   return (
     <div className='w-[853px]'>
