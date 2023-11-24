@@ -5,8 +5,8 @@ import ProductInterface from './ProductInterface';
 export default class ProductModel extends BaseModel<ProductInterface> {
   static schema = new Schema({
     seller_id: {type: Schema.Types.ObjectId, required: false},
-    category: {type: String, required: true},
-    subcategory: {type: String, required: true},
+    category: {type: Array, required: true},
+    subcategory: {type: Array, required: true},
     free_shipping: {type: Boolean, required: true},
     shipping_time: {type: Boolean, required: true},
     title: {type: String, required: true},
@@ -16,8 +16,8 @@ export default class ProductModel extends BaseModel<ProductInterface> {
     style: {type: String, required: true},
     filter: {
       color: {
-        primary: {type: String, required: true},
-        secondary: {type: String, required: true},
+        primary: {type: Array, required: true},
+        secondary: {type: Array, required: true},
       },
       item_type: {type: Array, required: true},
       ordering_options: {type: Array, required: true},

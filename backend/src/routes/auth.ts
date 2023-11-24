@@ -2,6 +2,7 @@ const express = require('express');
 import {NextFunction, Request, Response} from 'express';
 import UserModel from '../models/UserModel';
 import passport from '../middlewares/passport';
+import {getDays} from '../helpers/authHelpers';
 
 const authRouter = express.Router();
 const session = require('express-session');
@@ -13,7 +14,7 @@ authRouter.use(
     secret: 'cats',
     resave: false,
     saveUninitialized: true,
-    cookie: {originalMaxAge: 5000},
+    cookie: {originalMaxAge: getDays(4)},
   })
 );
 
