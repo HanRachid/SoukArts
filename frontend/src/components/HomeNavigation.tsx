@@ -1,9 +1,10 @@
 import {Menu, Transition} from '@headlessui/react';
 import React, {Fragment} from 'react';
+import {Link} from 'react-router-dom';
 
 export default function Homenavigation(): React.ReactElement {
   const categories = [
-    'rugs',
+    'Rugs',
     'Poufs',
     'Lamps',
     'Pillows',
@@ -62,13 +63,15 @@ export default function Homenavigation(): React.ReactElement {
                   <div key={index}>
                     <Menu.Item>
                       {({active}: {active: boolean}) => (
-                        <button
-                          className={`${
-                            active ? ' bg-colorBeige ' : 'text-gray-900  '
-                          } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 hover:scale-[1.02] transition-all duration-75`}
-                        >
-                          {category}
-                        </button>
+                        <Link to={'/categories/' + category}>
+                          <button
+                            className={`${
+                              active ? ' bg-colorBeige ' : 'text-gray-900  '
+                            } group flex text-colorBlack/80 w-full items-center rounded-md px-2 py-2 hover:scale-[1.02] transition-all duration-75`}
+                          >
+                            {category}
+                          </button>
+                        </Link>
                       )}
                     </Menu.Item>
                   </div>

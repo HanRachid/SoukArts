@@ -5,6 +5,8 @@ import Privacy from './pages/Privacy';
 import Register from './pages/Register';
 import Termsofuse from './pages/TermsOfUse';
 import GlobalLayout from './layouts/GlobalLayout';
+import ProductDetail from './pages/ProductDetail';
+import SearchResult from './pages/SearchResults';
 import ProductsList from './pages/ProductsList';
 import Logout from './pages/Logout';
 import Favorite from './pages/Favorite';
@@ -40,10 +42,17 @@ export default [
     element: <GlobalLayout Component={ProductsList} hasLayout={true} />,
   },
   {
+    path: '/products/:product',
+    element: <GlobalLayout Component={ProductDetail} hasLayout={true} />,
+  },
+  {
     path: '/logout',
     element: <GlobalLayout Component={Logout} hasLayout={true} />,
   },
-
+  {
+    path: '/search/:category/:terms',
+    element: <GlobalLayout Component={SearchResult} hasLayout={true} />,
+  },
   {
     path: '/favorite',
     element: <GlobalLayout Component={Favorite} hasLayout={true} />,
