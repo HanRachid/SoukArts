@@ -3,9 +3,11 @@ import lens from '../assets/navbar/lens.svg';
 import {Menu, Transition} from '@headlessui/react';
 import CheckSVG from '../assets/navbar/check.svg?react';
 import React, {Fragment, useState} from 'react';
+import {router} from '../App';
 
 export default function Searchbar(): React.ReactElement {
   const [selectedCategory, setSelectedCategory] = useState('All Categories');
+  const [searchTerms, setSearchTerms] = useState('');
   const categories = [
     'All categories',
     'Rugs',
@@ -30,18 +32,32 @@ export default function Searchbar(): React.ReactElement {
     event.preventDefault();
     setSelectedCategory(value);
   }
-
+  function handleSearch(event: any) {
+    const value: string = event.target.value;
+    setSearchTerms(value);
+    console.log(value);
+  }
+  function submitSearch(event: any) {
+    event.preventDefault();
+    const routeUrl = '/search/' + selectedCategory + '/' + searchTerms;
+    router.navigate(routeUrl);
+  }
   return (
     <div className='flex items-center justify-between   h-12 rounded-3xl  bg-colorBeigeLight  focus:outline hover:outline outline-stone-400 outline-1 '>
       <img src={lens} alt='lens' className='h-4 pl-3 absolute' />
-      <input
-        type='search'
-        className='bg-colorBeigeLight p-5 pl-10 w-3/6 h-10   rounded-2xl focus:outline-none '
-      />
+      <form id='search' onSubmit={submitSearch}>
+        <input
+          type='search'
+          className=' p-5 pl-10 w-96 h-10 ml-3  rounded-2xl focus:outline-none bg-colorBeigeLight'
+          value={searchTerms}
+          onChange={handleSearch}
+        />
+      </form>
+
       <Menu as={'div' as React.ElementType}>
         <div className=' transform '>
           <Menu.Button className='  inline-flex items-center gap-2 w-full justify-center rounded-md p-2 focus:outline-none   '>
-            <label htmlFor='search' className='border-l border-black pl-5 '>
+            <label htmlFor='search' className='border-l border-black-950 pl-5 '>
               <span className='font-secondary'>{selectedCategory}</span>
             </label>
             <svg

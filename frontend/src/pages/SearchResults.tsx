@@ -1,28 +1,19 @@
 import {useParams} from 'react-router-dom';
 
 // import Components
-import Filter from '../components/Filter';
-import HeroSlider from '../components/HeroSlider';
 import SelectOptions from '../components/Select';
 import ProductCard from '../components/ProductCard';
-import PopularCard from '../components/PopularCard';
 import {Pagination} from '@mui/material';
 import RecentCard from '../components/RecentCard';
 
 // import Images
 import categories from './data/categories';
 
-import rug1 from '../assets/rugs/rug 9.jpg';
-import rug2 from '../assets/rugs/rug 11.jpg';
-import rug3 from '../assets/rugs/rug 13.jpg';
-import rug4 from '../assets/rugs/rug 5.webp';
-import rug5 from '../assets/rugs/rug 7.webp';
 import rug6 from '../assets/rugs/rug 1.jpg';
 import rug7 from '../assets/rugs/rug 12.jpg';
+import Filter from '../components/Filter';
 
-const rugs = [rug2, rug3, rug4, rug5];
-
-export default function ProductsList() {
+export default function SearchResult() {
   const {category} = useParams();
   const selectedCategory = categories.find(
     (c) => c.name === category?.toLowerCase()
@@ -31,27 +22,6 @@ export default function ProductsList() {
   return (
     <>
       <div className='ml-[244px] mr-[244px] mt-8 '>
-        <HeroSlider images={selectedCategory?.images}>
-          {category?.toUpperCase()} CATEGORIES
-        </HeroSlider>
-        <div>
-          <h1 className='font-primary text-heading tracking-wide pt-8'>
-            Most Loved
-          </h1>
-          <div className='flex  gap-6'>
-            <div>
-              <PopularCard isFirstCard={true} isNew={true} image={rug1} />
-            </div>
-            <div className='grid grid-cols-2 grid-rows-2 gap-6'>
-              {rugs.map((rug) => {
-                return (
-                  <PopularCard isFirstCard={false} isNew={false} image={rug} />
-                );
-              })}
-            </div>
-          </div>
-        </div>
-        <div className='mt-8 border-b border-gray-500 my-4'></div>
         <div className='flex justify-around mt-16'>
           {subcategories?.map((subcategory) => (
             <div className='w-32 flex flex-col justify-start items-center'>

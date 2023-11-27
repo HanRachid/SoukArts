@@ -21,6 +21,7 @@ export default function ProfileDropdown(): React.ReactElement {
       name: 'Privacy',
       handler: handlePrivacy,
     },
+    {name: 'Dashboard', handler: () => router.navigate('/dashboard')},
   ];
 
   return (
