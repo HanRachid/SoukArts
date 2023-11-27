@@ -1,4 +1,3 @@
-import Footer from "../layouts/Footer";
 
 import itemImage from "../assets/rugs/rug 10.jpg";
 const ReviewPayment = () => {
@@ -49,7 +48,7 @@ const ReviewPayment = () => {
           </button>
         </div>
       </div>
-      <Footer />
+    
     </div>
   );
 };

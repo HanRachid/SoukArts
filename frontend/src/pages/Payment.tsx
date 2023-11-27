@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import Footer from "../layouts/Footer";
 import "./css/DeliveryPayment.css";
 
 import React from "react";
@@ -166,7 +165,6 @@ const Payment = () => {
           </form>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };
