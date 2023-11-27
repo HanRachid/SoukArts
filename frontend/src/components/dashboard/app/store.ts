@@ -1,7 +1,6 @@
-
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import authReducer from '../features/auth/authSlice';
-import favoritesDisplayReducer from '../features/favoritesDisplaySlice';
+import {combineReducers, configureStore} from '@reduxjs/toolkit';
+import authReducer from '../../../features/auth/authSlice';
+import favoritesDisplayReducer from '../../../features/favoritesDisplaySlice';
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -14,5 +13,3 @@ export type RootState = ReturnType<typeof rootReducer>;
 export const store = configureStore({
   reducer: rootReducer,
 });
-
-
