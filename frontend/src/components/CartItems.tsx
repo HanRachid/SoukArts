@@ -1,4 +1,4 @@
-import ShopAffiliate from "../components/ShopAffiliate";
+import ShopAffiliate from "./ShopAffiliate";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
@@ -29,9 +29,10 @@ const CartItems = () => {
   return (
     <section>
       <div className="mt-14">
-        <h2 className="text-large px-5 lg:px-24 xl:ms-20 text-bold">1 item in your cart</h2>
+        <h2 className="text-large px-5 lg:px-24 xl:ms-20 text-bold">
+          1 item in your cart
+        </h2>
         <div className="flex flex-col px-5 lg:px-24 xl:flex-row justify-center gap-12">
-
           <div className="w-full md:w-5/6 xl:w-3/6 bg-white rounded-tr-lg rounded-bl-lg px-5 py-5 shadow-lg">
             <div className="flex justify-between">
               <div className="flex items-center">
@@ -65,8 +66,8 @@ const CartItems = () => {
                   <p>Size: 2m sur 3m</p>
                   <p className="text-colorGold font-bold text-large">600dh</p>
                   <p>
-                  <span className="line-through">1700dh</span>(60%)
-                </p>
+                    <span className="line-through">1700dh</span>(60%)
+                  </p>
                   <div className="flex justify-around mt-10">
                     <div className="flex items-center">
                       <span>1</span>
@@ -130,8 +131,7 @@ const CartItems = () => {
 
           <div className="xl:w-2/6">
             <h2 className="text-large">Payment</h2>
-            <div className="flex flex-col sm:flex-row xl:flex-col mx-auto gap-7 sm:items-center xl:items-stretch sm:gap-16">
-              
+            <div className="flex flex-col sm:flex-row xl:flex-col mx-auto sm:items-center xl:items-stretch sm:gap-16">
               <div className="sm:order-1">
                 <div className="flex gap-5 items-center mt-2">
                   <input
@@ -316,12 +316,13 @@ const CartItems = () => {
                   <p>652 DH</p>
                 </div>
                 <div className="text-center mt-5">
-                  <button className="bg-colorGold text-colorLight rounded-tr-lg rounded-bl-lg py-2 px-6">
-                    Proceed to Checkout
-                  </button>
+                  <Link to="/deliverypayment">
+                    <button className="bg-colorGold text-colorLight rounded-tr-lg rounded-bl-lg py-2 px-6">
+                      Proceed to Checkout
+                    </button>
+                  </Link>
                 </div>
               </div>
-
             </div>
           </div>
         </div>

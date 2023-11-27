@@ -49,11 +49,11 @@ export default function Register() {
   };
 
   return (
-    <section className='w-screen flex items-center justify-between overflow-hidden'>
+    <section className='w-screen h-screen flex items-center justify-between overflow-hidden'>
       <div className='w-1/2 h-full px-32'>
         <div className='h-44 w-full flex-col flex items-center justify-center'>
           <Link to='/'>
-            <img src={logo} alt='logo' />
+            <img src={logo} className='w-40 object-cover' alt='logo' />
           </Link>
           <h2 className='text-3xl mt-2 font-primary'>Get started now!</h2>
         </div>

@@ -10,10 +10,10 @@ import {router} from '../App';
 
 export default function DashboardLayout({
   Component,
-  title,
+  pageTitle,
 }: {
   Component: React.ComponentType;
-  title: String;
+  pageTitle: String;
 }) {
   const location = useLocation();
   const currentPage = location.pathname.slice(1);
@@ -25,7 +25,13 @@ export default function DashboardLayout({
   };
 
   const activeLinkStyle = (title: string) => {
-    const route = title === 'Dashboard' ? 'dashboard/' : 'dashboard/' + title;
+    const route = title === 'Dashboard' ? 'dashboard' : 'dashboard/' + title;
+
+    if (
+      route === 'dashboard/Products' &&
+      currentPage === 'Dashboard/products/addNewProduct'
+    )
+      return 'bg-gradient-to-r from-colorBrown to-colorGold text-white';
 
     return currentPage.toLowerCase() === route.toLowerCase()
       ? 'bg-gradient-to-r from-colorBrown to-colorGold text-white'
@@ -80,7 +86,7 @@ export default function DashboardLayout({
         <nav className='sticky top-0 h-16 border-b bg-white lg:py-2.5'>
           <div className='flex items-center justify-between space-x-4 px-6 2xl:container'>
             <h5 className='text-2xl font-medium text-colorBlack lg:block hidden capitalize font-primary'>
-              {title}
+              {pageTitle}
             </h5>
             <button
               onClick={toggleSidebar}
