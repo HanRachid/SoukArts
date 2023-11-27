@@ -1,16 +1,19 @@
 import {useState} from 'react';
 import Logo from '../assets/logolight.svg';
-import {Link, useLocation} from 'react-router-dom';
+import {useLocation} from 'react-router-dom';
 import {IoNotifications, IoSearch} from 'react-icons/io5';
 import {RiMenu2Line} from 'react-icons/ri';
 import {BiMessageSquareDetail} from 'react-icons/bi';
 import {FiLogOut} from 'react-icons/fi';
 import links from './Links';
+import {router} from '../App';
 
 export default function DashboardLayout({
   Component,
+  title,
 }: {
   Component: React.ComponentType;
+  title: String;
 }) {
   const location = useLocation();
   const currentPage = location.pathname.slice(1);
@@ -21,11 +24,13 @@ export default function DashboardLayout({
     setShowSidebar(!showSidebar);
   };
 
-  const activeLinkStyle = (linkName: string) =>
-    currentPage === linkName.toLowerCase()
+  const activeLinkStyle = (title: string) => {
+    const route = title === 'Dashboard' ? 'dashboard/' : 'dashboard/' + title;
+
+    return currentPage.toLowerCase() === route.toLowerCase()
       ? 'bg-gradient-to-r from-colorBrown to-colorGold text-white'
       : 'text-black';
-
+  };
   return (
     <>
       {showSidebar && (
@@ -46,17 +51,19 @@ export default function DashboardLayout({
             <img src={Logo} className='w-32' alt='tailus logo' />
           </div>
           <ul className='mt-8 space-y-2 tracking-wide'>
-            {links.map(({icon, linkName}) => (
-              <li key={linkName}>
-                <Link
-                  to={`/${linkName.toLowerCase()}`}
+            {links.map(({icon, title, path}) => (
+              <li key={title}>
+                <div
+                  onClick={() => {
+                    router.navigate(path);
+                  }}
                   className={`${activeLinkStyle(
-                    linkName
+                    title
                   )} relative flex items-center space-x-4 rounded-xl px-4 py-3`}
                 >
                   {icon}
-                  <span className='-mr-1 font-medium'>{linkName}</span>
-                </Link>
+                  <span className='-mr-1 font-medium'>{title}</span>
+                </div>
               </li>
             ))}
           </ul>
@@ -68,12 +75,12 @@ export default function DashboardLayout({
           </button>
         </div>
       </aside>
-      <div className='mb-6 lg:max-w-[75%] xl:max-w-[80%] 2xl:max-w-[85%] ml-auto'>
+      <div className='mb-6 lg:max-w-[75%] xl:max-w-[80%] 2xl:max-w-[85%] ml-auto bg-gray-50'>
         {/* TODO: HADI NAVBAR */}
         <nav className='sticky top-0 h-16 border-b bg-white lg:py-2.5'>
           <div className='flex items-center justify-between space-x-4 px-6 2xl:container'>
             <h5 className='text-2xl font-medium text-colorBlack lg:block hidden capitalize font-primary'>
-              {currentPage}
+              {title}
             </h5>
             <button
               onClick={toggleSidebar}

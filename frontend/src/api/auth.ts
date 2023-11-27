@@ -1,7 +1,7 @@
 import {Dispatch, AnyAction} from '@reduxjs/toolkit';
 import {User} from '../../types';
 import {setLoginState, setLogoutState} from '../features/auth/authSlice';
-import {store} from '../app/store';
+import {store} from '../components/dashboard/app/store';
 import {router} from '../App';
 const endpoint = import.meta.env.VITE_API_ENDPOINT + '/auth';
 
