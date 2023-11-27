@@ -11,6 +11,7 @@ import ProductDetail from './pages/ProductDetail';
 import SearchResult from './pages/SearchResults';
 import ProductsList from './pages/ProductsList';
 import Logout from './pages/Logout';
+import Favorite from './pages/Favorite';
 export default [
   {
     path: '/',
@@ -51,5 +52,9 @@ export default [
   {
     path: '/search/:category/:terms',
     element: <GlobalLayout Component={SearchResult} hasLayout={true} />,
+  },
+  {
+    path: '/favorite',
+    element: <GlobalLayout Component={Favorite} hasLayout={true} />,
   },
 ] as RouteObj[];
