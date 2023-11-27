@@ -123,11 +123,11 @@ export default function Footer(): React.ReactElement {
               <span>©2023 SoukArts,Inc.</span>
 
               <span className='underline text-[12px] md:text-small font-extralight mt-3 md:mt-0'>
-                <Link to='/Termsofuse'>Terms of use</Link>
+                <Link to='/termsofuse'>Terms of use</Link>
               </span>
 
               <span className='underline text-[12px] md:text-small font-extralight'>
-                <Link to='privacy'>Privacy</Link>
+                <Link to='/privacy'>Privacy</Link>
               </span>
 
               <span className='underline '>
@@ -164,7 +164,7 @@ export default function Footer(): React.ReactElement {
                       </Typography>
                       <Typography id='modal-desc' textColor='text.tertiary'>
                         <div className='grid grid-cols-3 gap-6 md:gap-32 text-medium font-secondary md:px-14 pt-7'>
-                          <div>
+                          <div className="flex flex-col">
                             <span className='border-b-[1px] border-b-colorGold pb-4 mb-4 md:pb-7 md:mb-7 '>
                               Morocco
                             </span>
@@ -182,7 +182,7 @@ export default function Footer(): React.ReactElement {
                             </span>
                           </div>
 
-                          <div>
+                          <div className="flex flex-col">
                             <span className='border-b-[1px] border-b-colorGold pb-4 mb-4 md:pb-7 md:mb-7 '>
                               Germany
                             </span>
@@ -200,7 +200,7 @@ export default function Footer(): React.ReactElement {
                             </span>
                           </div>
 
-                          <div>
+                          <div className="flex flex-col">
                             <span className='border-b-[1px] border-b-colorGold pb-4 mb-4 md:pb-7 md:mb-7 '>
                               Japan
                             </span>

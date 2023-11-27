@@ -9,6 +9,10 @@ import GlobalLayout from './layouts/GlobalLayout';
 import RugProducts from './pages/RugProducts';
 import Cart from './pages/Cart';
 import Logout from './pages/Logout';
+import Payment from './pages/Payment';
+import DeliveryPayment from './pages/DeliveryPayment';
+import ReviewPayment from './pages/ReviewPayment';
+import PaymentLayout from './layouts/PaymentLayout';
 
 export default [
   {
@@ -38,6 +42,18 @@ export default [
   {
     path: '/cart',
     element: <GlobalLayout Component={Cart} hasLayout={true} />,
+  },
+  {
+    path: '/deliverypayment',
+    element: <PaymentLayout Component={DeliveryPayment} activeStep={0} />,
+  },
+  {
+    path: '/payment',
+    element: <PaymentLayout Component={Payment} activeStep={1} />,
+  },
+  {
+    path: '/reviewpayment',
+    element: <PaymentLayout Component={ReviewPayment} activeStep={2}  />,
   },
   {
     path: '/category/rugs',
