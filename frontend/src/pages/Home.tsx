@@ -3,7 +3,7 @@ import FeaturesShop from '../components/FeaturesShop';
 import Categories from '../components/Categories';
 import ShopByStyle from '../components/ShopByStyle';
 import PopularProducts from '../components/PopularProducts';
-import EarningWithSukarts from '../components/EarningWithSukarts';
+import EarningWithSukarts from '../components/EarnWithSoukarts';
 import AboutSoukarts from '../components/AboutSoukarts';
 import OurValues from '../components/OurValues';
 
