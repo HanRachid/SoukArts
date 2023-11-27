@@ -59,48 +59,54 @@ export default [
   },
   {
     path: '/dashboard',
-    element: <DashboardLayout title={'Dashboard'} Component={Dashboard} />,
+    element: <DashboardLayout pageTitle={'Dashboard'} Component={Dashboard} />,
   },
   {
     path: '/Dashboard/Products',
     element: (
-      <DashboardLayout title={'Dashboard/Products'} Component={Products} />
+      <DashboardLayout pageTitle={'Dashboard/Products'} Component={Products} />
     ),
   },
   {
     path: '/Dashboard/Orders',
     element: (
-      <DashboardLayout title={'/Dashboard/Orders'} Component={Products} />
+      <DashboardLayout pageTitle={'/Dashboard/Orders'} Component={Products} />
     ),
   },
   {
     path: '/Dashboard/Stats',
     element: (
-      <DashboardLayout title={'/Dashboard/Stats'} Component={Products} />
+      <DashboardLayout pageTitle={'/Dashboard/Stats'} Component={Products} />
     ),
   },
   {
     path: '/Dashboard/Finance',
     element: (
-      <DashboardLayout title={'/Dashboard/Finance'} Component={Products} />
+      <DashboardLayout pageTitle={'/Dashboard/Finance'} Component={Products} />
     ),
   },
   {
     path: '/Dashboard/Settings',
     element: (
-      <DashboardLayout title={'/Dashboard/Settings'} Component={Products} />
+      <DashboardLayout pageTitle={'/Dashboard/Settings'} Component={Products} />
     ),
   },
   {
     path: '/Dashboard/Marketing',
     element: (
-      <DashboardLayout title={'/Dashboard/Marketing'} Component={Products} />
+      <DashboardLayout
+        pageTitle={'/Dashboard/Marketing'}
+        Component={Products}
+      />
     ),
   },
   {
     path: 'Dashboard/products/addNewProduct',
     element: (
-      <DashboardLayout title={'Dashboard/Products'} Component={AddNewProduct} />
+      <DashboardLayout
+        pageTitle={'Dashboard/Products'}
+        Component={AddNewProduct}
+      />
     ),
   },
 ] as RouteObj[];
