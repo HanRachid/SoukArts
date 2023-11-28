@@ -13,9 +13,10 @@ export default interface ProductInterface {
   shipping_time: boolean;
   title: string;
   description: string;
-  quantity?: number;
-  price?: number;
+  quantity: number;
+  price: number;
   style: string;
+  photos: string[];
   filter: {
     color: {
       primary: string;

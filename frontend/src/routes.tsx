@@ -18,7 +18,7 @@ import DashboardLayout from './layouts/DashboardLayout';
 import Dashboard from './views/Dashboard';
 import Products from './views/Products';
 import AddNewProduct from './components/products/AddNewProduct';
-
+import SellerLinks from './DashboardLinks/SellerLinks';
 export default [
   {
     path: '/',
@@ -75,36 +75,62 @@ export default [
   },
   {
     path: '/dashboard',
-    element: <DashboardLayout pageTitle={'Dashboard'} Component={Dashboard} />,
+    element: (
+      <DashboardLayout
+        pageTitle={'Dashboard'}
+        Component={Dashboard}
+        links={SellerLinks}
+      />
+    ),
   },
   {
     path: '/Dashboard/Products',
     element: (
-      <DashboardLayout pageTitle={'Dashboard/Products'} Component={Products} />
+      <DashboardLayout
+        pageTitle={'Dashboard/Products'}
+        Component={Products}
+        links={SellerLinks}
+      />
     ),
   },
   {
     path: '/Dashboard/Orders',
     element: (
-      <DashboardLayout pageTitle={'/Dashboard/Orders'} Component={Products} />
+      <DashboardLayout
+        pageTitle={'/Dashboard/Orders'}
+        Component={Products}
+        links={SellerLinks}
+      />
     ),
   },
   {
     path: '/Dashboard/Stats',
     element: (
-      <DashboardLayout pageTitle={'/Dashboard/Stats'} Component={Products} />
+      <DashboardLayout
+        pageTitle={'/Dashboard/Stats'}
+        Component={Products}
+        links={SellerLinks}
+      />
     ),
   },
   {
     path: '/Dashboard/Finance',
     element: (
-      <DashboardLayout pageTitle={'/Dashboard/Finance'} Component={Products} />
+      <DashboardLayout
+        pageTitle={'/Dashboard/Finance'}
+        Component={Products}
+        links={SellerLinks}
+      />
     ),
   },
   {
     path: '/Dashboard/Settings',
     element: (
-      <DashboardLayout pageTitle={'/Dashboard/Settings'} Component={Products} />
+      <DashboardLayout
+        pageTitle={'/Dashboard/Settings'}
+        Component={Products}
+        links={SellerLinks}
+      />
     ),
   },
   {
@@ -113,6 +139,7 @@ export default [
       <DashboardLayout
         pageTitle={'/Dashboard/Marketing'}
         Component={Products}
+        links={SellerLinks}
       />
     ),
   },
@@ -122,6 +149,7 @@ export default [
       <DashboardLayout
         pageTitle={'Dashboard/Products'}
         Component={AddNewProduct}
+        links={SellerLinks}
       />
     ),
   },

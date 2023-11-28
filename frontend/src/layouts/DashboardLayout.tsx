@@ -5,15 +5,17 @@ import {IoNotifications, IoSearch} from 'react-icons/io5';
 import {RiMenu2Line} from 'react-icons/ri';
 import {BiMessageSquareDetail} from 'react-icons/bi';
 import {FiLogOut} from 'react-icons/fi';
-import links from './Links';
 import {router} from '../App';
+import {DashboardLink} from '../../types';
 
 export default function DashboardLayout({
   Component,
   pageTitle,
+  links,
 }: {
   Component: React.ComponentType;
   pageTitle: String;
+  links: DashboardLink[];
 }) {
   const location = useLocation();
   const currentPage = location.pathname.slice(1);
@@ -57,7 +59,7 @@ export default function DashboardLayout({
             <img src={Logo} className='w-32' alt='tailus logo' />
           </div>
           <ul className='mt-8 space-y-2 tracking-wide'>
-            {links.map(({icon, title, path}) => (
+            {links.map(({icon, title, path}: DashboardLink) => (
               <li key={title}>
                 <div
                   onClick={() => {
