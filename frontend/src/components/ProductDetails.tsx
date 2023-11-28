@@ -1,15 +1,19 @@
 import profilShop from "../assets/jewelry/shop image.webp";
+import { Button, ConfigProvider } from "antd";
 import star from "../assets/icons/icons8-star-50.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import BasicAccordion from "./Accordion";
 
 export default function DetailsProduct() {
   const numberOfStars = 5;
   const starsArray = Array(numberOfStars).fill(null);
   return (
     <div className="flex flex-col gap-11 justify-start ">
-      <h1 className="font-secondary text-3xl tracking-widest">
-        Silver EARRINGS - BERBER CRAFTSMANSHIP- BOHO ETHNIC BOHO JEWELRY
+      <h1 className="font-secondary text-3xl tracking-widest w-[502px] line leading-relaxed">
+        Silver EARRINGS - BERBER <br />
+        CRAFTSMANSHIP-
+        <br /> BOHO ETHNIC BOHO JEWELRY
       </h1>
       <div className=" flex justify-start items-center gap-4">
         <div className="h-14 w-14 rounded-full border-2 overflow-hidden hover:scale-[1.06] hover:-outline-offset-2 outline-1 outline outline-colorBlack ">
@@ -51,16 +55,33 @@ export default function DetailsProduct() {
           </p>
         </div>
       </div>
-      <div className="flex gap-4">
-        <button className="relative group h-11 w-32 bg-transparent text-colorBlack outline-1 border-colorBlack border font-secondary tracking-wide rounded-none rounded-tr-[7px] rounded-bl-[7px] hover:scale-[1.02] overflow-hidden">
-          <span className="absolute block bg-colorBlack left-0 top-0 w-full h-[1px] origin-left"></span>
-          <span className="absolute block bg-colorBlack left-0 top-0 w-[1px] h-full origin-top"></span>
-          Buy Now
-        </button>
-        <button className="h-11 w-32 bg-colorGold text-white font-secondary tracking-widest rounded-none rounded-tr-[7px] rounded-bl-[7px] hover:bg-colorGold/90 hover:scale-[1.02]">
-          Add to cart
-        </button>
+      <div className="flex gap-4 items-center">
+        <ConfigProvider
+          theme={{
+            components: {
+              Button: {
+                colorPrimaryHover: "#B48F58",
+                colorPrimary: "#000",
+                colorPrimaryActive: "#B48F58",
+                primaryColor: "#fff",
+                colorBgContainer: "#B48F58",
+              },
+            },
+          }}
+        >
+          <Button
+            type="default"
+            className="relative group h-11 w-[243px] text-sm bg-transparent text-colorBlack outline-1 border-colorBlack border font-secondary tracking-wide rounded-none rounded-tr-[7px] rounded-bl-[7px] hover:scale-[1.02] hover:tracking-widest hover:border-[1.5px] hover:font-medium"
+          >
+            Buy Now
+          </Button>
+          <button className="h-11 w-[243px] bg-colorGold text-white font-secondary tracking-widest rounded-none rounded-tr-[7px] rounded-bl-[7px] hover:bg-colorGold/90 hover:scale-[1.02]">
+            Add to cart
+          </button>
+        </ConfigProvider>
       </div>
+      <div className="w-full h-[1px] bg-colorBlack/20 "></div>
+      <BasicAccordion />
     </div>
   );
 }
