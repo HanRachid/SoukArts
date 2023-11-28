@@ -1,11 +1,6 @@
 import {ChangeEvent, useState} from 'react';
-import {Product} from '../../../types';
+import {Photo, Product} from '../../../types';
 import {addProduct} from '../../api/products';
-
-type Photo = {
-  file: File;
-  url: string;
-};
 
 export default function AddNewProduct() {
   const [productValues, setProductValues] = useState<Product>({
@@ -18,7 +13,7 @@ export default function AddNewProduct() {
   });
   const handleFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
-    const uploadedPhotos: Photo[] = [];
+    const uploadedPhotos: Photo[] = [...productValues.photos];
 
     if (files) {
       for (let i = 0; i < files.length; i++) {
@@ -26,11 +21,11 @@ export default function AddNewProduct() {
         const url = URL.createObjectURL(file);
         uploadedPhotos.push({file, url});
       }
+      setProductValues({
+        ...productValues,
+        photos: uploadedPhotos,
+      });
     }
-    setProductValues({
-      ...productValues,
-      photos: uploadedPhotos,
-    });
   };
   function handleChange(event: any) {
     setProductValues({
@@ -155,9 +150,21 @@ export default function AddNewProduct() {
                 </div>
 
                 <div className='mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8'>
-                  {productValues.photos.map((photo) => (
-                    <div key={photo.url} className='group relative'>
+                  {productValues.photos.map((photo, index) => (
+                    <div key={index} className='group relative'>
                       <div className='min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-32'>
+                        <button
+                          onClick={() => {
+                            setProductValues({
+                              ...productValues,
+                              photos: productValues.photos.filter(
+                                (photo, indexPhoto) => indexPhoto !== index
+                              ),
+                            });
+                          }}
+                        >
+                          X
+                        </button>
                         <img
                           src={photo.url}
                           alt=''

@@ -19,3 +19,10 @@ type Product = {
   quantity: number;
   photos: Photo[];
 };
+
+type Photo = {
+  file: File;
+  url: string;
+};
+
+type DashboardLink = {icon: ReactNode; path: string; title: string};
