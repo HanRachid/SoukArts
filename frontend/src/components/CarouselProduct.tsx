@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { Carousel } from "@material-tailwind/react";
 import HeartSVG from "../assets/navbar/heart.svg?react";
+import AddCollection from "../assets/icons/AddCollectin.svg?react";
+import { Image } from "antd";
 
 interface CarouselProductProps {
   images: string[];
 }
 
 export function CarouselProduct({ images }: CarouselProductProps) {
-  let setOutsideActiveIndex: object;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let setOutsideActiveIndex: any;
   const [imageActiveIndex, setImageActiveIndex] = useState<number>(0);
 
   return (
@@ -37,16 +40,22 @@ export function CarouselProduct({ images }: CarouselProductProps) {
       >
         {images.map((image, index) => (
           <>
-            <img
+            <Image
               src={image}
               alt={`image ${index + 1}`}
               className="h-full w-full object-cover"
               key={index}
             />
-            <button className="absolute end-12 top-8 z-10  hover:bg-white/60 hover:scale-[1.06] ">
-              <div className="relative">
-                <div className="w-11 h-11 rounded-full bg-white p-1.5 text-gray-900 transition absolute"></div>
-                <HeartSVG className="absolute w-8 end-[-2.4rem] top-[-3.7rem] font-secondary hover:fill-colorGold" />
+            <button className="absolute end-11 top-12 z-10  hover:bg-white/60 hover:scale-[1.06] ">
+              <div className="relative group">
+                <div className="w-11 h-11 rounded-full bg-white p-1.5 text-gray-900 transition absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                <HeartSVG className="absolute w-6 inset-1/2 transform -translate-x-1/2 -translate-y-1/2 font-secondary group-hover:fill-colorGold group-hover:scale-110" />
+              </div>
+            </button>
+            <button className="absolute end-11 top-28 z-10  hover:bg-white/60 hover:scale-[1.06] ">
+              <div className="relative group">
+                <div className="w-11 h-11 rounded-full bg-white p-1.5 text-gray-900 transition absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                <AddCollection className="absolute w-6 inset-1/2 transform -translate-x-1/2 -translate-y-1/2 font-secondary group-hover:fill-colorGold group-hover:scale-110" />
               </div>
             </button>
           </>
