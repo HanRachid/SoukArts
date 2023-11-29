@@ -17,12 +17,7 @@ type Product = {
   category: 'Vintage' | 'Handmade';
   price: number;
   quantity: number;
-  photos: Photo[];
-};
-
-type Photo = {
-  file: File;
-  url: string;
+  images: FormData[];
 };
 
 type DashboardLink = {icon: ReactNode; path: string; title: string};
