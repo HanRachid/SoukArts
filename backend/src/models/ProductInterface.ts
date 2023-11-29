@@ -1,23 +1,36 @@
+import {Types} from 'mongoose';
+
 /**
  * An interface describing a UserModel.
  * @public
  */
-interface ProductInterface {
-  _id: Object; // Primary Key
-  category_id: Object; // Foreign Key to Categories Collection
-  shipping_id: Object; // Foreign Key to Shipping Collection
-  seller_id: Object; // Foreign Key to Sellers Collection
-  title: string; // Product Title
-  description: string; // Product Description
-  stock: number; // Stock Quantity
-  is_new: boolean; // Is the Product New?
-  price: number; // Product Price
-  product_ratings: number; // Average Product Rating
-  discount: {
-    // Nested JSON for Discounts
-    amount: number; // Discount Amount
-    valid_until: Date; // Discount Validity
+export default interface ProductInterface {
+  _id: Types.ObjectId;
+  seller_id: Types.ObjectId;
+  category: string;
+  subcategory: string;
+  free_shipping: boolean;
+  shipping_time: boolean;
+  title: string;
+  description: string;
+  quantity: number;
+  price: number;
+  style: string;
+  photos: string[];
+  filter: {
+    color: {
+      primary: string;
+      secondary: string;
+    };
+    item_type: string[];
+    ordering_options: string[];
   };
-  created_at: Date; // Product Creation Timestamp
-  updated_at: Date; // Last Update Timestamp
+  product_ratings?: number;
+  discount: {
+    on_sale: boolean;
+    amount?: number;
+    valid_until?: Date;
+  };
+  created_at?: Date;
+  updated_at?: Date;
 }

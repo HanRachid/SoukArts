@@ -1,7 +1,6 @@
 import {useParams} from 'react-router-dom';
 
 // import Components
-import {Filter} from '../components/Filter';
 import HeroSlider from '../components/HeroSlider';
 import SelectOptions from '../components/Select';
 import ProductCard from '../components/ProductCard';
@@ -19,6 +18,7 @@ import rug4 from '../assets/rugs/rug 5.webp';
 import rug5 from '../assets/rugs/rug 7.webp';
 import rug6 from '../assets/rugs/rug 1.jpg';
 import rug7 from '../assets/rugs/rug 12.jpg';
+import Filter from '../components/Filter';
 
 const rugs = [rug2, rug3, rug4, rug5];
 

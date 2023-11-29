@@ -1,11 +1,7 @@
-
-import CartItems from "../layouts/CartItems";
+import CartItems from "../components/CartItems";
 
 const Cart = () => {
-    
-  return (
-  <CartItems/>
-  )
-}
+  return <CartItems />;
+};
 
-export default Cart
+export default Cart;

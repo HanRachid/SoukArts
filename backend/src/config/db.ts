@@ -6,7 +6,7 @@ import mongoose from 'mongoose';
 export const connectToDB = async (): Promise<void> => {
   try {
     await mongoose.connect(process.env.DriveMongoDB, {
-      dbName: process.env.MondoDataBase,
+      dbName: process.env.MongoDataBase,
     });
     console.log('connected to database');
   } catch (error) {

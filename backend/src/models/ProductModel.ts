@@ -1,18 +1,31 @@
 import {Schema} from 'mongoose';
 import BaseModel from './BaseModel';
+import ProductInterface from './ProductInterface';
 
 export default class ProductModel extends BaseModel<ProductInterface> {
   static schema = new Schema({
-    category_id: {type: Schema.Types.ObjectId, required: false},
-    shipping_id: {type: Schema.Types.ObjectId, required: false},
     seller_id: {type: Schema.Types.ObjectId, required: false},
+    category: {type: Array, required: true},
+    subcategory: {type: Array, required: false},
+    free_shipping: {type: Boolean, required: false},
+    shipping_time: {type: Boolean, required: false},
     title: {type: String, required: true},
-    description: {type: String, required: false},
-    stock: {type: Number, required: false},
-    is_new: {type: Boolean, required: false},
+    description: {type: String, required: true},
+    quantity: {type: Number, required: false},
     price: {type: Number, required: false},
+    images: {type: Array, required: true},
+    style: {type: String, required: false},
+    filter: {
+      color: {
+        primary: {type: Array, required: false},
+        secondary: {type: Array, required: false},
+      },
+      item_type: {type: Array, required: false},
+      ordering_options: {type: Array, required: false},
+    },
     product_ratings: {type: Number, required: false},
     discount: {
+      on_sale: {type: Boolean, required: false},
       amount: {type: Number, required: false},
       valid_until: {type: Date, required: false},
     },

@@ -2,6 +2,7 @@ const express = require('express');
 import {NextFunction, Request, Response} from 'express';
 import UserModel from '../models/UserModel';
 import passport from '../middlewares/passport';
+import {getDays} from '../helpers/authHelpers';
 
 const authRouter = express.Router();
 const session = require('express-session');
@@ -13,7 +14,7 @@ authRouter.use(
     secret: 'cats',
     resave: false,
     saveUninitialized: true,
-    cookie: {originalMaxAge: 300000},
+    cookie: {originalMaxAge: getDays(4)},
   })
 );
 
@@ -21,27 +22,29 @@ authRouter.use(passport.initialize());
 authRouter.use(passport.session());
 authRouter.use(express.urlencoded({extended: false}));
 
-authRouter.post('/register', async (req: Request, res: Response) => {
-  const {username, email, password} = req.body;
+authRouter.post(
+  '/register',
+  async (req: Request, res: Response, next: NextFunction) => {
+    const {username, email, password} = req.body;
 
-  const hashedPassword = await bcrypt.hash(password, saltRounds);
-  const user = new UserModel();
-  const checkExists = await user.findByQuery({
-    $or: [{username: username}, {email: email}],
-  });
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    const user = new UserModel();
+    const checkExists = await user.findByQuery({
+      $or: [{username: username}, {email: email}],
+    });
 
-  if (checkExists) {
-    res.send({error: 'Cannot register user, already exists'});
-
-    return;
+    if (checkExists) {
+      res.status(409).send({error: 'exists'});
+      return;
+    }
+    const register = await user.create({
+      username: username,
+      email: email,
+      password: hashedPassword,
+    });
+    res.status(200).send(register);
   }
-  const register = await user.create({
-    username: username,
-    email: email,
-    password: hashedPassword,
-  });
-  res.send(register);
-});
+);
 
 authRouter.post(
   '/login',
@@ -73,7 +76,7 @@ authRouter.post(
 );
 
 authRouter.get('/success', (req: Request, res: Response) => {
-  res.send({user: req.user, cookie: req.session.cookie});
+  res.send({user: {...req.user, ...req.session.cookie}});
 });
 
 authRouter.get('/:id/forgot', (req: Request, res: Response) => {
