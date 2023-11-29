@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import Logo from '../assets/logolight.svg';
 import {useLocation} from 'react-router-dom';
 import {IoNotifications, IoSearch} from 'react-icons/io5';
@@ -6,7 +6,10 @@ import {RiMenu2Line} from 'react-icons/ri';
 import {BiMessageSquareDetail} from 'react-icons/bi';
 import {FiLogOut} from 'react-icons/fi';
 import {router} from '../App';
-import {DashboardLink} from '../../types';
+import {DashboardLink, User} from '../../types';
+import {store} from '../app/store';
+import {refreshLog} from '../api/auth';
+import {useDispatch} from 'react-redux';
 
 export default function DashboardLayout({
   Component,
@@ -21,10 +24,17 @@ export default function DashboardLayout({
   const currentPage = location.pathname.slice(1);
 
   const [showSidebar, setShowSidebar] = useState(false);
-
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
   };
+  const dispatch = useDispatch();
+  useEffect(() => {
+    refreshLog({} as User, dispatch).then(() => {
+      if (!store.getState().auth.user) {
+        router.navigate('/login');
+      }
+    });
+  }, [store.getState().auth.user]);
 
   const activeLinkStyle = (title: string) => {
     const route = title === 'Dashboard' ? 'dashboard' : 'dashboard/' + title;
@@ -56,7 +66,12 @@ export default function DashboardLayout({
       >
         <div>
           <div className='-mx-6 px-6 py-4 w-full flex justify-center'>
-            <img src={Logo} className='w-32' alt='tailus logo' />
+            <img
+              src={Logo}
+              onClick={() => router.navigate('/')}
+              className='w-32'
+              alt='tailus logo'
+            />
           </div>
           <ul className='mt-8 space-y-2 tracking-wide'>
             {links.map(({icon, title, path}: DashboardLink) => (

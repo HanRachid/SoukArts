@@ -12,6 +12,7 @@ export type User = {
 };
 
 type Product = {
+  user_id: string | undefined;
   title: string;
   description: string;
   category: 'Vintage' | 'Handmade';
@@ -20,4 +21,13 @@ type Product = {
   images: FormData[];
 };
 
+type ProductUrl = {
+  user_id: string | undefined;
+  title: string;
+  description: string;
+  category: 'Vintage' | 'Handmade';
+  price: number;
+  quantity: number;
+  images: string[];
+};
 type DashboardLink = {icon: ReactNode; path: string; title: string};

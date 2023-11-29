@@ -1,10 +1,12 @@
-import {ChangeEvent, useState} from 'react';
+import {ChangeEvent, useEffect, useState} from 'react';
 import {Product} from '../../../types';
 import {addProduct} from '../../api/products';
 import {router} from '../../App';
+import {store} from '../../app/store';
 
 export default function AddNewProduct() {
   const [productValues, setProductValues] = useState<Product>({
+    user_id: '',
     title: '',
     description: '',
     category: 'Vintage',
@@ -14,6 +16,13 @@ export default function AddNewProduct() {
   });
 
   const [browsedImages, setBrowsedImages] = useState<string[]>([]);
+
+  useEffect(() => {
+    setProductValues({
+      ...productValues,
+      user_id: store.getState().auth.user?._id,
+    });
+  }, [store.getState().auth.user]);
 
   const handleFileUpload = async (event: ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
@@ -41,11 +50,12 @@ export default function AddNewProduct() {
     });
   }
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    addProduct(productValues);
+    await addProduct(productValues);
     setProductValues({
+      user_id: store.getState().auth.user?._id,
       title: '',
       description: '',
       category: 'Vintage',
@@ -54,6 +64,7 @@ export default function AddNewProduct() {
       images: [],
     });
     setBrowsedImages([]);
+
     router.navigate('/Dashboard/Products');
   };
   return (
