@@ -30,8 +30,12 @@ productRouter.get('/:id', (req: Request, res: Response) => {
 
 productRouter.post('/deleteproduct', async (req: Request, res: Response) => {
   try {
-    const product = await new ProductModel().deleteDefinitive(req.body.id);
-    res.send(product);
+    const images = await new ProductModel().findById(req.body.id);
+    const deleteProduct = await new ProductModel().deleteDefinitive(
+      req.body.id
+    );
+
+    res.send(deleteProduct);
   } catch (error) {
     res.status(400).send(error);
   }

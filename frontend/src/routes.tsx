@@ -19,6 +19,7 @@ import Dashboard from './views/Dashboard';
 import Products from './views/Products';
 import AddNewProduct from './components/products/AddNewProduct';
 import SellerLinks from './DashboardLinks/SellerLinks';
+import Cart from './pages/Cart';
 export default [
   {
     path: '/',
@@ -72,6 +73,10 @@ export default [
   {
     path: '/favorite',
     element: <GlobalLayout Component={Favorite} hasLayout={true} />,
+  },
+  {
+    path: '/Cart',
+    element: <GlobalLayout Component={Cart} hasLayout={true} />,
   },
   {
     path: '/dashboard',
