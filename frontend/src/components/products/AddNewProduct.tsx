@@ -1,6 +1,7 @@
 import {ChangeEvent, useState} from 'react';
-import {Photo, Product} from '../../../types';
+import {Product} from '../../../types';
 import {addProduct} from '../../api/products';
+import {router} from '../../App';
 
 export default function AddNewProduct() {
   const [productValues, setProductValues] = useState<Product>({
@@ -9,22 +10,28 @@ export default function AddNewProduct() {
     category: 'Vintage',
     price: 0,
     quantity: 0,
-    photos: [],
+    images: [],
   });
-  const handleFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
-    const uploadedPhotos: Photo[] = [...productValues.photos];
 
+  const [browsedImages, setBrowsedImages] = useState<string[]>([]);
+
+  const handleFileUpload = async (event: ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
     if (files) {
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
-        const url = URL.createObjectURL(file);
-        uploadedPhotos.push({file, url});
+        const image = new FormData();
+        const localUrl = URL.createObjectURL(file);
+        image.append('file', file);
+        image.append('cloud_name', 'dmgfba0uv');
+        image.append('upload_preset', 'olz6hm0s');
+
+        setProductValues({
+          ...productValues,
+          images: [...productValues.images, image],
+        });
+        setBrowsedImages([...browsedImages, localUrl]);
       }
-      setProductValues({
-        ...productValues,
-        photos: uploadedPhotos,
-      });
     }
   };
   function handleChange(event: any) {
@@ -36,8 +43,18 @@ export default function AddNewProduct() {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log(productValues);
+
     addProduct(productValues);
+    setProductValues({
+      title: '',
+      description: '',
+      category: 'Vintage',
+      price: 0,
+      quantity: 0,
+      images: [],
+    });
+    setBrowsedImages([]);
+    router.navigate('/Dashboard/Products');
   };
   return (
     <section className='flex flex-col'>
@@ -150,23 +167,28 @@ export default function AddNewProduct() {
                 </div>
 
                 <div className='mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8'>
-                  {productValues.photos.map((photo, index) => (
+                  {browsedImages.map((photo, index) => (
                     <div key={index} className='group relative'>
                       <div className='min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-32'>
                         <button
                           onClick={() => {
                             setProductValues({
                               ...productValues,
-                              photos: productValues.photos.filter(
-                                (photo, indexPhoto) => indexPhoto !== index
+                              images: productValues.images.filter(
+                                (_photo, indexPhoto) => indexPhoto !== index
                               ),
                             });
+                            setBrowsedImages(
+                              browsedImages.filter(
+                                (_photo, indexPhoto) => indexPhoto !== index
+                              )
+                            );
                           }}
                         >
                           X
                         </button>
                         <img
-                          src={photo.url}
+                          src={photo}
                           alt=''
                           className='h-full w-full object-cover object-center lg:h-full lg:w-full'
                         />

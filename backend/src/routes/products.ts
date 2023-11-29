@@ -28,4 +28,17 @@ productRouter.get('/:id', (req: Request, res: Response) => {
   console.log(req.params.id);
 });
 
+productRouter.post('/deleteproduct', async (req: Request, res: Response) => {
+  try {
+    const product = await new ProductModel().deleteDefinitive(req.body.id);
+    res.send(product);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
+productRouter.post('/editproduct', (req: Request, res: Response) => {
+  console.log(req.params.id);
+});
+
 export default productRouter;
