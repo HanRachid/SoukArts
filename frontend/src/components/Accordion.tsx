@@ -3,7 +3,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { Button, ConfigProvider } from "antd";
+import ButtonOutlined from "./ButtonOutlined";
 
 import Vintage from "../assets/icons/vintage icon.svg?react";
 import Style from "../assets/icons/Style icon.svg?react";
@@ -164,26 +164,7 @@ export default function BasicAccordion() {
               </div>
             </div>
             <div className="flex flex-col gap-3 justify-center">
-              <ConfigProvider
-                theme={{
-                  components: {
-                    Button: {
-                      colorPrimaryHover: "#B48F58",
-                      colorPrimary: "#000",
-                      colorPrimaryActive: "#B48F58",
-                      primaryColor: "#fff",
-                      colorBgContainer: "#B48F58",
-                    },
-                  },
-                }}
-              >
-                <Button
-                  type="default"
-                  className="relative group h-11 w-full text-sm bg-transparent text-colorBlack outline-1 border-colorBlack border font-secondary tracking-wide rounded-none rounded-tr-[7px] rounded-bl-[7px] hover:scale-[1.02] hover:tracking-widest hover:border-[1.5px] hover:font-medium mt-3"
-                >
-                  Message Meryam
-                </Button>
-              </ConfigProvider>
+              <ButtonOutlined>Message Meryam</ButtonOutlined>
               <p className="font-secondary tracking-wide text-xs text-colorBlack text-center">
                 This seller usually responds within 24 hours.
               </p>
