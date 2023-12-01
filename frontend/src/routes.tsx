@@ -19,6 +19,7 @@ import Dashboard from './views/Dashboard';
 import Products from './views/Products';
 import AddNewProduct from './components/products/AddNewProduct';
 import SellerLinks from './DashboardLinks/SellerLinks';
+import Orders from './views/Orders'
 export default [
   {
     path: '/',
@@ -98,7 +99,7 @@ export default [
     element: (
       <DashboardLayout
         pageTitle={'/Dashboard/Orders'}
-        Component={Products}
+        Component={Orders}
         links={SellerLinks}
       />
     ),
