@@ -22,7 +22,7 @@ export default function AddNewProduct() {
   const [productValues, setProductValues] = useState<ProductUrl>({
     title: '',
     description: '',
-    category: 'Handmade',
+    category: '',
     price: 0,
     quantity: 0,
     images: [],
@@ -32,7 +32,9 @@ export default function AddNewProduct() {
   });
 
   const [browsedImages, setBrowsedImages] = useState<string[]>([]);
-
+  const [selectedSubCategory, setSelectedSubCategory] = useState<
+    string[] | undefined
+  >(undefined);
   useEffect(() => {
     setProductValues({
       ...productValues,
@@ -61,7 +63,9 @@ export default function AddNewProduct() {
     }
   };
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const {name, value} = event.target;
     setProductValues((prevState: any) => ({
       ...prevState,
@@ -69,11 +73,15 @@ export default function AddNewProduct() {
     }));
   };
 
-  const handleSelectCategory = (value: string) => {
+  const handleSelectCategory = (value: string | undefined) => {
     setProductValues((prevState: any) => ({
       ...prevState,
       category: value,
     }));
+    const findSubcategory = subcategoriesData.find(
+      ({name}) => name === value
+    )?.Subcategories;
+    setSelectedSubCategory(findSubcategory);
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -170,10 +178,6 @@ export default function AddNewProduct() {
     },
   ];
 
-  const findSubcategory = subcategoriesData.find(
-    ({name}) => name == productValues.category
-  );
-
   return (
     <section className='flex flex-col z-0 relative'>
       <div>
@@ -199,6 +203,7 @@ export default function AddNewProduct() {
                     value={productValues.title}
                     color='brown'
                     name='title'
+                    crossOrigin={true}
                   />
 
                   <div>
@@ -229,8 +234,7 @@ export default function AddNewProduct() {
                     <Option value='Bags'>Bags</Option>
                     <Option value='Jewelry'>Jewelry</Option>
                   </Select>
-
-                  {productValues.category && (
+                  {selectedSubCategory && (
                     <Select
                       label='Subcategory'
                       name='subcategory'
@@ -238,7 +242,7 @@ export default function AddNewProduct() {
                       onChange={() => {}}
                       color='brown'
                     >
-                      {findSubcategory?.Subcategories.map((subcategory) => (
+                      {selectedSubCategory.map((subcategory) => (
                         <Option key={subcategory} value={subcategory}>
                           {subcategory}
                         </Option>
@@ -351,6 +355,7 @@ export default function AddNewProduct() {
                       type='number'
                       onChange={handleChange}
                       value={productValues.price}
+                      crossOrigin
                     />
 
                     <Input
@@ -358,6 +363,7 @@ export default function AddNewProduct() {
                       name='quantity'
                       onChange={handleChange}
                       value={productValues.quantity}
+                      crossOrigin
                     />
                   </div>
                 </div>
