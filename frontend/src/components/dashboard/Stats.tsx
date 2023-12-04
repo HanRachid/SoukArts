@@ -6,7 +6,7 @@ const stats = [
 
 export default function Stats() {
   return (
-    <div className="w-full lg:px-20 pt-10">
+    <div className="w-full pt-10">
       <div className="flex lg:flex-row flex-col lg:justify-between justify-start mb-10">
       <h3 className="text-3xl font-semibold leading-6 text-black font-primary">
         Stats overview

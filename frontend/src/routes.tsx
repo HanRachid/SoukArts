@@ -20,6 +20,8 @@ import Products from './views/Products';
 import AddNewProduct from './components/products/AddNewProduct';
 import SellerLinks from './DashboardLinks/SellerLinks';
 import Orders from './views/Orders'
+import OrdersDetails from './components/orders/OrdersDetails'
+import Settings from './views/Settings';
 export default [
   {
     path: '/',
@@ -129,7 +131,7 @@ export default [
     element: (
       <DashboardLayout
         pageTitle={'/Dashboard/Settings'}
-        Component={Products}
+        Component={Settings}
         links={SellerLinks}
       />
     ),
@@ -150,6 +152,16 @@ export default [
       <DashboardLayout
         pageTitle={'Dashboard/Products'}
         Component={AddNewProduct}
+        links={SellerLinks}
+      />
+    ),
+  },
+  {
+    path: 'Dashboard/orders/ordersDetails',
+    element: (
+      <DashboardLayout
+        pageTitle={'Dashboard/Orders'}
+        Component={OrdersDetails}
         links={SellerLinks}
       />
     ),
