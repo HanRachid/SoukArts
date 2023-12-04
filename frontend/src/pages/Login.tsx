@@ -10,7 +10,7 @@ import {Link} from 'react-router-dom';
 import {useEffect, useState} from 'react';
 import {loginUser} from '../api/auth';
 import {useDispatch} from 'react-redux';
-import {store} from '../components/dashboard/app/store';
+import {store} from '../app/store';
 import {User} from '../../types';
 
 export default function Login() {
