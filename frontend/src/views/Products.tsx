@@ -68,14 +68,14 @@ export default function Products() {
           </h2>
         </div>
         <div className='mt-4 flex md:mt-0 md:ml-4'>
-          <div
-            className='ml-3 inline-flex items-center rounded-md border border-transparent bg-colorGold px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gold-700 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:ring-offset-2'
+          <Button
+            color='brown'
             onClick={() => {
               router.navigate('/Dashboard/products/addNewProduct');
             }}
           >
             Add New Product
-          </div>
+          </Button>
         </div>
       </header>
       <div

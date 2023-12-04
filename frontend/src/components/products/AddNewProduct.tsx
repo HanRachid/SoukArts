@@ -2,12 +2,24 @@ import {ChangeEvent, useEffect, useState} from 'react';
 import {ProductUrl} from '../../../types';
 import {addProduct} from '../../api/products';
 import {router} from '../../App';
+import {
+  Button,
+  Input,
+  Option,
+  Select,
+  Textarea,
+  Typography,
+} from '@material-tailwind/react';
+import {IoClose} from 'react-icons/io5';
 import {store} from '../../app/store';
+
+type Category = {
+  name: string;
+  Subcategories: string[];
+};
 
 export default function AddNewProduct() {
   const [productValues, setProductValues] = useState<ProductUrl>({
-    _id: '',
-    user_id: '',
     title: '',
     description: '',
     category: 'Handmade',
@@ -15,6 +27,8 @@ export default function AddNewProduct() {
     quantity: 0,
     images: [],
     formData: [],
+    user_id: '',
+    _id: '',
   });
 
   const [browsedImages, setBrowsedImages] = useState<string[]>([]);
@@ -27,7 +41,7 @@ export default function AddNewProduct() {
   }, [store.getState().auth.user]);
 
   const handleFileUpload = async (event: ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
+    const files = event.target?.files;
     if (files) {
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
@@ -46,14 +60,23 @@ export default function AddNewProduct() {
       }
     }
   };
-  function handleChange(event: any) {
-    setProductValues({
-      ...productValues,
-      [event.target.name]: event.target.value,
-    });
-  }
 
-  const handleSubmit = async (e: any) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const {name, value} = event.target;
+    setProductValues((prevState: any) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSelectCategory = (value: string) => {
+    setProductValues((prevState: any) => ({
+      ...prevState,
+      category: value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     await addProduct(productValues);
@@ -72,8 +95,87 @@ export default function AddNewProduct() {
 
     router.navigate('/Dashboard/Products');
   };
+
+  const subcategoriesData: Category[] = [
+    {
+      name: 'Rugs',
+      Subcategories: [
+        'Azilal Rug',
+        'Boucherouite Rugs',
+        'Kilim Rugs',
+        'Taznakht Rugs',
+        'Boujad Rugs',
+        'Zanafi Rugs',
+        'Beni Ourain Rugs',
+      ],
+    },
+    {
+      name: 'Poufs',
+      Subcategories: [
+        'Round Leather Poufs',
+        'Boucherouite Poufs',
+        'Square Leather Poufs',
+        'Kilim Berber Poufs',
+      ],
+    },
+    {
+      name: 'Lamps',
+      Subcategories: [
+        'Pendant Lights',
+        'Table Lamps',
+        'Lampshades',
+        'Floor Lamps',
+        'Brass Lamps',
+        'Rattan Lamps',
+      ],
+    },
+    {
+      name: 'Pillows',
+      Subcategories: [
+        'Berber Pillows',
+        'Beni Ourain Pillows',
+        'Kilim Pillows',
+        'Sahara Pillows',
+        'Handira Pillows',
+      ],
+    },
+    {
+      name: 'Shoes',
+      Subcategories: [
+        'Women Shoes',
+        'Man Shoes',
+        'Babouche',
+        'Leather Sandals',
+        'Rattan Shoes',
+      ],
+    },
+    {
+      name: 'Bags',
+      Subcategories: [
+        'Leather Bags',
+        'Kilim Bags',
+        'Rattan Bags',
+        'Straw Market Bag',
+      ],
+    },
+    {
+      name: 'Jewelry',
+      Subcategories: [
+        'Earrings',
+        'Necklaces',
+        'Rings',
+        'Bracelets',
+        'Ankle Bracelet',
+      ],
+    },
+  ];
+
+  const findSubcategory = subcategoriesData.find(
+    ({name}) => name == productValues.category
+  );
+
   return (
-    <section className='flex flex-col'>
+    <section className='flex flex-col z-0 relative'>
       <div>
         <div className='md:grid md:grid-cols-3 md:gap-6'>
           <div className='md:col-span-1'>
@@ -90,59 +192,60 @@ export default function AddNewProduct() {
           <div className='mt-5 md:col-span-2 md:mt-0'>
             <div className='shadow sm:overflow-hidden sm:rounded-md'>
               <div className='space-y-6 bg-white px-4 py-5 sm:p-6'>
-                <div className='grid grid-cols-3 gap-6'>
-                  <div className='col-span-3 sm:col-span-2'>
-                    <label className='block text-sm font-medium text-gray-700'>
-                      Title
-                    </label>
-                    <div className='mt-1 flex rounded-md shadow-sm'>
-                      <input
-                        type='text'
-                        name='title'
-                        className='block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-gold-500 focus:ring-gold-500 sm:text-sm'
-                        placeholder='Title of your product'
-                        onChange={handleChange}
-                        value={productValues.title}
-                      />
-                    </div>
-                  </div>
-                </div>
+                <div className='flex flex-col gap-6'>
+                  <Input
+                    label='Title'
+                    onChange={handleChange}
+                    value={productValues.title}
+                    color='brown'
+                    name='title'
+                  />
 
-                <div>
-                  <label className='block text-sm font-medium text-gray-700'>
-                    Description
-                  </label>
-                  <div className='mt-1'>
-                    <textarea
+                  <div>
+                    <Textarea
+                      label='Description'
                       name='description'
-                      rows={3}
-                      className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gold-500 focus:ring-gold-500 sm:text-sm'
-                      placeholder='Enter a description...'
                       onChange={handleChange}
                       value={productValues.description}
+                      color='brown'
                     />
+                    <Typography variant='small' color='blue-gray'>
+                      Brief description for your Product.
+                    </Typography>
                   </div>
-                  <p className='mt-2 text-sm text-gray-500'>
-                    Brief description for your Product.
-                  </p>
-                </div>
 
-                <div className='col-span-6 sm:col-span-3'>
-                  <label className='block text-sm font-medium text-gray-700'>
-                    Category
-                  </label>
-                  <select
-                    onChange={handleChange}
+                  <Select
+                    label='Category'
                     name='category'
-                    className='mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-gold-500 focus:outline-none focus:ring-gold-500 sm:text-sm'
                     value={productValues.category}
+                    onChange={handleSelectCategory}
+                    color='brown'
                   >
-                    <option>Vintage</option>
-                    <option>Handmade</option>
-                  </select>
-                </div>
+                    <Option value='Rugs'>Rugs</Option>
+                    <Option value='Poufs'>Poufs</Option>
+                    <Option value='Lamps'>Lamps</Option>
+                    <Option value='Pillows'>Pillows</Option>
+                    <Option value='Shoes'>Shoes</Option>
+                    <Option value='Bags'>Bags</Option>
+                    <Option value='Jewelry'>Jewelry</Option>
+                  </Select>
 
-                <div>
+                  {productValues.category && (
+                    <Select
+                      label='Subcategory'
+                      name='subcategory'
+                      value=''
+                      onChange={() => {}}
+                      color='brown'
+                    >
+                      {findSubcategory?.Subcategories.map((subcategory) => (
+                        <Option key={subcategory} value={subcategory}>
+                          {subcategory}
+                        </Option>
+                      ))}
+                    </Select>
+                  )}
+
                   <label className='block text-sm font-medium text-gray-700'>
                     Photos
                   </label>
@@ -184,9 +287,10 @@ export default function AddNewProduct() {
 
                 <div className='mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8'>
                   {browsedImages.map((photo, index) => (
-                    <div key={index} className='group relative'>
-                      <div className='min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-32'>
+                    <div key={index} className='relative'>
+                      <div className='w-full overflow-hidden rounded-md'>
                         <button
+                          className='absolute -right-2 -top-2 rounded-full bg-gray-200 shadow-md h-8 w-8 flex items-center justify-center'
                           onClick={() => {
                             setProductValues({
                               ...productValues,
@@ -201,7 +305,7 @@ export default function AddNewProduct() {
                             );
                           }}
                         >
-                          X
+                          <IoClose />
                         </button>
                         <img
                           src={photo}
@@ -240,41 +344,27 @@ export default function AddNewProduct() {
             <form onSubmit={handleSubmit}>
               <div className='overflow-hidden shadow sm:rounded-md'>
                 <div className='bg-white px-4 py-5 sm:p-6'>
-                  <div className='grid grid-cols-6 gap-6'>
-                    <div className='col-span-6'>
-                      <label className='block text-sm font-medium text-gray-700'>
-                        Price
-                      </label>
-                      <input
-                        name='price'
-                        type='number'
-                        className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gold-500 focus:ring-gold-500 sm:text-sm'
-                        onChange={handleChange}
-                        value={productValues.price}
-                      />
-                    </div>
+                  <div className='flex flex-col gap-6'>
+                    <Input
+                      label='Price'
+                      name='price'
+                      type='number'
+                      onChange={handleChange}
+                      value={productValues.price}
+                    />
 
-                    <div className='col-span-6'>
-                      <label className='block text-sm font-medium text-gray-700'>
-                        Quantity
-                      </label>
-                      <input
-                        type='number'
-                        name='quantity'
-                        className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gold-500 focus:ring-gold-500 sm:text-sm'
-                        onChange={handleChange}
-                        value={productValues.quantity}
-                      />
-                    </div>
+                    <Input
+                      label='Quantity'
+                      name='quantity'
+                      onChange={handleChange}
+                      value={productValues.quantity}
+                    />
                   </div>
                 </div>
                 <div className='bg-gray-50 px-4 py-3 text-right sm:px-6'>
-                  <button
-                    type='submit'
-                    className='inline-flex justify-center rounded-md border border-transparent bg-gold-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gold-700 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:ring-offset-2'
-                  >
+                  <Button type='submit' color='brown'>
                     Save
-                  </button>
+                  </Button>
                 </div>
               </div>
             </form>

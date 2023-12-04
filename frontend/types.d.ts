@@ -38,7 +38,7 @@ type Product = {
   user_id: string | undefined;
   title: string;
   description: string;
-  category: 'Vintage' | 'Handmade';
+  category: string;
   price: number;
   quantity: number;
   images: FormData[];
