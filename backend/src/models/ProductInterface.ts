@@ -16,7 +16,7 @@ export default interface ProductInterface {
   quantity: number;
   price: number;
   style: string;
-  images: Object[];
+  images: CloudinaryImage[];
   filter: {
     color: {
       primary: string;

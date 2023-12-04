@@ -20,8 +20,9 @@ export default class BaseModel<T extends Document> {
     return this.model.findByIdAndUpdate(id, data, {new: true}).exec();
   }
 
-  async deleteDefinitive(id: string): Promise<void> {
-    await this.model.findByIdAndDelete(id).exec();
+  async deleteDefinitive(id: string): Promise<Object> {
+    const deletable = await this.model.findByIdAndDelete(id).exec();
+    return deletable;
   }
   /**
    * Set current model's is_deleted to true

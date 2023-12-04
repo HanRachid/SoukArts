@@ -1,10 +1,17 @@
 import {ChangeEvent, useEffect, useState} from 'react';
 import {ProductUrl} from '../../../types';
-import {addProduct} from '../../api/products';
-import {router} from '../../App';
+import {editProduct, getProducts} from '../../api/products';
 import {store} from '../../app/store';
 
-export default function AddNewProduct() {
+export default function EditProduct({
+  setIsEdit,
+  product,
+  setProducts,
+}: {
+  setIsEdit: Function;
+  product: ProductUrl;
+  setProducts: Function;
+}) {
   const [productValues, setProductValues] = useState<ProductUrl>({
     _id: '',
     user_id: '',
@@ -18,14 +25,18 @@ export default function AddNewProduct() {
   });
 
   const [browsedImages, setBrowsedImages] = useState<string[]>([]);
+  const [localBrowsedImages, setLocalBrowsedImages] = useState<string[]>([]);
 
   useEffect(() => {
-    setProductValues({
-      ...productValues,
-      user_id: store.getState().auth.user?._id,
-    });
-  }, [store.getState().auth.user]);
+    setProductValues({...product, formData: []});
 
+    for (let image of product.images) {
+      const newImages = browsedImages;
+
+      newImages.push(image.url);
+      setBrowsedImages(newImages);
+    }
+  }, []);
   const handleFileUpload = async (event: ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files) {
@@ -42,7 +53,7 @@ export default function AddNewProduct() {
           ...productValues,
           formData: [...productValues.formData, formData],
         });
-        setBrowsedImages([...browsedImages, localUrl]);
+        setLocalBrowsedImages([...localBrowsedImages, localUrl]);
       }
     }
   };
@@ -55,8 +66,10 @@ export default function AddNewProduct() {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-
-    await addProduct(productValues);
+    await editProduct(productValues);
+    getProducts(product.user_id!).then((res) => {
+      setProducts(res);
+    });
     setProductValues({
       _id: '',
       user_id: '',
@@ -69,23 +82,16 @@ export default function AddNewProduct() {
       formData: [],
     });
     setBrowsedImages([]);
+    setLocalBrowsedImages([]);
 
-    router.navigate('/Dashboard/Products');
+    setIsEdit(false);
   };
   return (
-    <section className='flex flex-col'>
+    <section className='flex '>
       <div>
         <div className='md:grid md:grid-cols-3 md:gap-6'>
-          <div className='md:col-span-1'>
-            <div className='px-4 sm:px-0'>
-              <h3 className='text-lg font-medium leading-6 text-gray-900'>
-                Product details
-              </h3>
-              <p className='mt-1 text-sm text-gray-600'>
-                This information will be displayed publicly so be careful what
-                you share.
-              </p>
-            </div>
+          <div className=''>
+            <div className='px-0 sm:px-0'></div>
           </div>
           <div className='mt-5 md:col-span-2 md:mt-0'>
             <div className='shadow sm:overflow-hidden sm:rounded-md'>
@@ -211,6 +217,28 @@ export default function AddNewProduct() {
                       </div>
                     </div>
                   ))}
+                  {localBrowsedImages.map((photo, index) => (
+                    <div key={index} className='group relative'>
+                      <div className='min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-32'>
+                        <button
+                          onClick={() => {
+                            setLocalBrowsedImages(
+                              localBrowsedImages.filter(
+                                (_photo, indexPhoto) => indexPhoto !== index
+                              )
+                            );
+                          }}
+                        >
+                          X
+                        </button>
+                        <img
+                          src={photo}
+                          alt=''
+                          className='h-full w-full object-cover object-center lg:h-full lg:w-full'
+                        />
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -226,16 +254,7 @@ export default function AddNewProduct() {
 
       <div className='mt-10 sm:mt-0'>
         <div className='md:grid md:grid-cols-3 md:gap-6'>
-          <div className='md:col-span-1'>
-            <div className='px-4 sm:px-0'>
-              <h3 className='text-lg font-medium leading-6 text-gray-900'>
-                Inventory and pricing
-              </h3>
-              <p className='mt-1 text-sm text-gray-600'>
-                Please enter the inventory and pricing details.
-              </p>
-            </div>
-          </div>
+          <div className='md:col-span-1'></div>
           <div className='mt-5 md:col-span-2 md:mt-0'>
             <form onSubmit={handleSubmit}>
               <div className='overflow-hidden shadow sm:rounded-md'>

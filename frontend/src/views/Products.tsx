@@ -8,27 +8,60 @@ import {HiDotsVertical} from 'react-icons/hi';
 import {router} from '../App';
 import {useEffect, useState} from 'react';
 import {store} from '../app/store';
-import {getProducts} from '../api/products';
+import {deleteProduct, getProducts} from '../api/products';
 import {ProductUrl} from '../../types';
+import EditProduct from '../components/products/EditProduct';
 
 export default function Products() {
-  const [products, setProducts] = useState([]);
+  const [isEdit, setIsEdit] = useState(false);
+  const [products, setProducts] = useState<ProductUrl[]>([]);
+  const [toEdit, setToEdit] = useState<ProductUrl>({
+    _id: '',
+    user_id: '',
+    title: '',
+    description: '',
+    category: 'Handmade',
+    price: 0,
+    quantity: 0,
+    images: [],
+    formData: [],
+  });
   useEffect(() => {
     const user = store.getState().auth.user;
-    console.log(user);
 
     if (user) {
       getProducts(user._id).then((res) => {
-        console.log(res);
-
         setProducts(res);
       });
     }
-  }, []);
+  }, [store.getState().auth.user]);
+  async function handleDelete(id: string) {
+    deleteProduct(id).then(() => {
+      const user = store.getState().auth.user;
 
+      getProducts(user!._id).then((res) => {
+        setProducts(res);
+      });
+    });
+  }
   return (
     <div>
-      <header className='md:flex md:items-center md:justify-between'>
+      <div className='absolute flex justify-center self-center z-30 bg-gray-500/10'>
+        {isEdit && (
+          <EditProduct
+            setIsEdit={setIsEdit}
+            product={toEdit}
+            setProducts={setProducts}
+          />
+        )}
+      </div>
+      <header
+        className={
+          isEdit
+            ? 'md:flex md:items-center md:justify-between opacity-10 pointer-events-none'
+            : 'md:flex md:items-center md:justify-between '
+        }
+      >
         <div className='min-w-0 flex-1'>
           <h2 className='text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight'>
             Products List
@@ -45,7 +78,13 @@ export default function Products() {
           </div>
         </div>
       </header>
-      <div className='mt-6 grid grid-cols-2 gap-4 gap-y-10 sm:gap-6 md:grid-cols-4 lg:gap-8 '>
+      <div
+        className={
+          isEdit
+            ? 'mt-6 grid grid-cols-2 gap-4 gap-y-10 sm:gap-6 md:grid-cols-4 lg:gap-8 opacity-10 pointer-events-none'
+            : 'mt-6 grid grid-cols-2 gap-4 gap-y-10 sm:gap-6 md:grid-cols-4 lg:gap-8 '
+        }
+      >
         {products.map((product: ProductUrl, index: number) => (
           <div
             key={index}
@@ -53,7 +92,11 @@ export default function Products() {
           >
             <div className='h-56 w-full overflow-hidden rounded-md bg-white-200 group-hover:opacity-75 lg:h-72 xl:h-80 '>
               <img
-                src={product.images[0]}
+                src={
+                  product.images[0]
+                    ? product.images[0].url
+                    : 'https://placehold.co/600x400.png'
+                }
                 alt={product.description}
                 className='h-full w-full object-cover object-center'
               />
@@ -64,6 +107,7 @@ export default function Products() {
                 {product.title}
               </a>
             </h3>
+
             <p className='mt-1 text-sm text-gray-500'>
               {product.quantity} In Stock
             </p>
@@ -71,6 +115,7 @@ export default function Products() {
               <p className='mt-1 text-sm font-medium text-gray-900'>
                 {product.price} DH
               </p>
+
               <Popover>
                 <PopoverHandler>
                   <Button variant='text'>
@@ -79,10 +124,23 @@ export default function Products() {
                 </PopoverHandler>
                 <PopoverContent>
                   <div className='flex flex-col'>
-                    <Button variant='text' className='text-start'>
+                    <Button
+                      variant='text'
+                      className='text-start'
+                      onClick={() => {
+                        setIsEdit(true);
+                        setToEdit(product);
+                      }}
+                    >
                       Edit
                     </Button>
-                    <Button variant='text' className='text-start'>
+                    <Button
+                      variant='text'
+                      className='text-start'
+                      onClick={() => {
+                        handleDelete(product._id);
+                      }}
+                    >
                       Delete
                     </Button>
                   </div>
