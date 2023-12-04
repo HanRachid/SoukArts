@@ -14,7 +14,7 @@ export type User = {
 type Product = {
   title: string;
   description: string;
-  category: 'Vintage' | 'Handmade';
+  category: string;
   price: number;
   quantity: number;
   images: FormData[];

@@ -22,7 +22,7 @@ const products = [
 
 export default function Products() {
   return (
-    <div>
+    <div className='h-screen'>
       <header className='md:flex md:items-center md:justify-between'>
         <div className='min-w-0 flex-1'>
           <h2 className='text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight'>
@@ -30,14 +30,14 @@ export default function Products() {
           </h2>
         </div>
         <div className='mt-4 flex md:mt-0 md:ml-4'>
-          <div
-            className='ml-3 inline-flex items-center rounded-md border border-transparent bg-colorGold px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gold-700 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:ring-offset-2'
+          <Button
+            color='brown'
             onClick={() => {
               router.navigate('/Dashboard/products/addNewProduct');
             }}
           >
             Add New Product
-          </div>
+          </Button>
         </div>
       </header>
       <div className='mt-6 grid grid-cols-2 gap-4 gap-y-10 sm:gap-6 md:grid-cols-4 lg:gap-8 '>

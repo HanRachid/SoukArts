@@ -60,7 +60,7 @@ export default function DashboardLayout({
           </div>
           <ul className='mt-8 space-y-2 tracking-wide'>
             {links.map(({icon, title, path}: DashboardLink) => (
-              <li key={title}>
+              <li key={title} className='cursor-pointer'>
                 <div
                   onClick={() => {
                     router.navigate(path);
@@ -85,7 +85,7 @@ export default function DashboardLayout({
       </aside>
       <div className='mb-6 lg:max-w-[75%] xl:max-w-[80%] 2xl:max-w-[85%] ml-auto bg-gray-50'>
         {/* TODO: HADI NAVBAR */}
-        <nav className='sticky top-0 h-16 border-b bg-white lg:py-2.5'>
+        <nav className='relative top-0 h-16 border-b bg-white lg:py-2.5 z-999'>
           <div className='flex items-center justify-between space-x-4 px-6 2xl:container'>
             <h5 className='text-2xl font-medium text-colorBlack lg:block hidden capitalize font-primary'>
               {pageTitle}
