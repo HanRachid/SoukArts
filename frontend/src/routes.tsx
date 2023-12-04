@@ -17,137 +17,149 @@ import Favorite from './pages/Favorite';
 import DashboardLayout from './layouts/DashboardLayout';
 import Dashboard from './views/Dashboard';
 import Products from './views/Products';
+import ProfileSettings from "./views/ProfileSettings";
+
 import AddNewProduct from './components/products/AddNewProduct';
 import SellerLinks from './DashboardLinks/SellerLinks';
 export default [
   {
-    path: '/',
+    path: "/",
     element: <GlobalLayout Component={Home} hasLayout={true} />,
   },
   {
-    path: '/login',
+    path: "/login",
     element: <GlobalLayout Component={Login} hasLayout={false} />,
   },
   {
-    path: '/register',
+    path: "/register",
     element: <GlobalLayout Component={Register} hasLayout={false} />,
   },
 
   {
-    path: '/termsofuse',
+    path: "/termsofuse",
     element: <GlobalLayout Component={Termsofuse} hasLayout={false} />,
   },
   {
-    path: '/privacy',
+    path: "/privacy",
     element: <GlobalLayout Component={Privacy} hasLayout={false} />,
   },
   {
-    path: '/categories/:category',
+    path: "/categories/:category",
     element: <GlobalLayout Component={ProductsList} hasLayout={true} />,
   },
   {
-    path: '/deliverypayment',
+    path: "/deliverypayment",
     element: <PaymentLayout Component={DeliveryPayment} activeStep={0} />,
   },
   {
-    path: '/payment',
+    path: "/payment",
     element: <PaymentLayout Component={Payment} activeStep={1} />,
   },
   {
-    path: '/reviewpayment',
+    path: "/reviewpayment",
     element: <PaymentLayout Component={ReviewPayment} activeStep={2} />,
   },
   {
-    path: '/products/:product',
+    path: "/products/:product",
     element: <GlobalLayout Component={ProductDetail} hasLayout={true} />,
   },
   {
-    path: '/logout',
+    path: "/logout",
     element: <GlobalLayout Component={Logout} hasLayout={true} />,
   },
   {
-    path: '/search/:category/:terms',
+    path: "/search/:category/:terms",
     element: <GlobalLayout Component={SearchResult} hasLayout={true} />,
   },
   {
-    path: '/favorite',
+    path: "/favorite",
     element: <GlobalLayout Component={Favorite} hasLayout={true} />,
   },
   {
-    path: '/dashboard',
+    path: "/dashboard",
     element: (
       <DashboardLayout
-        pageTitle={'Dashboard'}
+        pageTitle={"Dashboard"}
         Component={Dashboard}
         links={SellerLinks}
       />
     ),
   },
   {
-    path: '/Dashboard/Products',
+    path: "/Dashboard/Products",
     element: (
       <DashboardLayout
-        pageTitle={'Dashboard/Products'}
+        pageTitle={"Dashboard/Products"}
         Component={Products}
         links={SellerLinks}
       />
     ),
   },
   {
-    path: '/Dashboard/Orders',
+    path: "/Profile",
     element: (
       <DashboardLayout
-        pageTitle={'/Dashboard/Orders'}
+        pageTitle={"Profile"}
+        Component={ProfileSettings}
+        links={SellerLinks}
+      />
+    ),
+  },
+  {
+    path: "/Dashboard/Orders",
+    element: (
+      <DashboardLayout
+        pageTitle={"/Dashboard/Orders"}
         Component={Products}
         links={SellerLinks}
       />
     ),
   },
   {
-    path: '/Dashboard/Stats',
+    path: "/Dashboard/Stats",
     element: (
       <DashboardLayout
-        pageTitle={'/Dashboard/Stats'}
+        pageTitle={"/Dashboard/Stats"}
         Component={Products}
         links={SellerLinks}
       />
     ),
   },
   {
-    path: '/Dashboard/Finance',
+    path: "/Dashboard/Finance",
     element: (
       <DashboardLayout
-        pageTitle={'/Dashboard/Finance'}
+        pageTitle={"/Dashboard/Finance"}
         Component={Products}
         links={SellerLinks}
       />
     ),
   },
   {
-    path: '/Dashboard/Settings',
+    path: "/Dashboard/Settings",
     element: (
       <DashboardLayout
-        pageTitle={'/Dashboard/Settings'}
+        pageTitle={"/Dashboard/Settings"}
         Component={Products}
         links={SellerLinks}
       />
     ),
   },
   {
-    path: '/Dashboard/Marketing',
+    path: "/Dashboard/Marketing",
     element: (
       <DashboardLayout
-        pageTitle={'/Dashboard/Marketing'}
+        pageTitle={"/Dashboard/Marketing"}
         Component={Products}
         links={SellerLinks}
       />
     ),
   },
   {
-    path: 'Dashboard/products/addNewProduct',
+    path: "Dashboard/products/addNewProduct",
     element: (
       <DashboardLayout
-        pageTitle={'Dashboard/Products'}
+        pageTitle={"Dashboard/Products"}
         Component={AddNewProduct}
         links={SellerLinks}
       />

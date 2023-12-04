@@ -5,47 +5,54 @@ import {
   IoHome,
   IoSettingsSharp,
 } from 'react-icons/io5';
+import { CgProfile } from "react-icons/cg";
+
 import {ImStatsDots} from 'react-icons/im';
 import {DashboardLink} from '../../types';
 export default [
   {
     icon: <IoHome />,
-    path: '/Dashboard',
-    title: 'Dashboard',
+    path: "/Dashboard",
+    title: "Dashboard",
   },
   {
     icon: <FaBagShopping />,
-    path: '/Dashboard/Products',
-    title: 'Products',
+    path: "/Dashboard/Products",
+    title: "Products",
   },
   {
     icon: <FaCartShopping />,
-    path: '/Dashboard/Orders',
-    title: 'Orders',
+    path: "/Dashboard/Orders",
+    title: "Orders",
   },
   {
     icon: <ImStatsDots />,
-    path: '/Dashboard/Stats',
-    title: 'Stats',
+    path: "/Dashboard/Stats",
+    title: "Stats",
   },
   {
     icon: <IoCash />,
-    path: '/Dashboard/Finance',
-    title: 'Finance',
+    path: "/Dashboard/Finance",
+    title: "Finance",
   },
   {
     icon: <IoSettingsSharp />,
-    path: '/Dashboard/Settings',
-    title: 'Settings',
+    path: "/Dashboard/Settings",
+    title: "Settings",
   },
   {
     icon: <FaShop />,
-    path: '/Dashboard/Marketing',
-    title: 'Marketing',
+    path: "/Dashboard/Marketing",
+    title: "Marketing",
   },
   {
     icon: <IoHelpCircleOutline />,
-    path: '/Dashboard/Help',
-    title: 'Help',
+    path: "/Dashboard/Help",
+    title: "Help",
   },
+  // {
+  //   icon: <CgProfile />,
+  //   path: "/Profile",
+  //   title: "Profile",
+  // },
 ] as DashboardLink[];

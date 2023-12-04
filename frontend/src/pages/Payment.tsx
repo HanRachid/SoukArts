@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import "./css/DeliveryPayment.css";
-
 import React from "react";
 import { useState } from "react";
 import { UserCircleIcon, CreditCardIcon } from "@heroicons/react/24/outline";
