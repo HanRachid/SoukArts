@@ -64,7 +64,6 @@ authRouter.post(
 authRouter.post(
   '/logout',
   (req: Request, res: Response, next: NextFunction) => {
-    console.log(req.user);
     if (req.isAuthenticated()) {
       req.logout(() => {
         res.send({user: req.user});

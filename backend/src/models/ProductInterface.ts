@@ -6,7 +6,7 @@ import {Types} from 'mongoose';
  */
 export default interface ProductInterface {
   _id: Types.ObjectId;
-  seller_id: Types.ObjectId;
+  user_id: Types.ObjectId;
   category: string;
   subcategory: string;
   free_shipping: boolean;
@@ -16,7 +16,7 @@ export default interface ProductInterface {
   quantity: number;
   price: number;
   style: string;
-  photos: string[];
+  images: CloudinaryImage[];
   filter: {
     color: {
       primary: string;

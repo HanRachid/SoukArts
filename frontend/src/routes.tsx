@@ -19,6 +19,32 @@ import Dashboard from "./views/Dashboard";
 import Products from "./views/Products";
 import AddNewProduct from "./components/products/AddNewProduct";
 import SellerLinks from "./DashboardLinks/SellerLinks";
+import Orders from "./views/Orders";
+import OrdersDetails from "./components/orders/OrdersDetails";
+import Settings from "./views/Settings";
+import Cart from "./pages/Cart";
+
+import { RouteObj } from "../types";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Privacy from "./pages/Privacy";
+import Register from "./pages/Register";
+import Termsofuse from "./pages/TermsOfUse";
+import GlobalLayout from "./layouts/GlobalLayout";
+import ProductDetail from "./pages/ProductDetail";
+import SearchResult from "./pages/SearchResults";
+import ProductsList from "./pages/ProductsList";
+import Logout from "./pages/Logout";
+import Payment from "./pages/Payment";
+import DeliveryPayment from "./pages/DeliveryPayment";
+import ReviewPayment from "./pages/ReviewPayment";
+import PaymentLayout from "./layouts/PaymentLayout";
+import Favorite from "./pages/Favorite";
+import DashboardLayout from "./layouts/DashboardLayout";
+import Dashboard from "./views/Dashboard";
+import Products from "./views/Products";
+import AddNewProduct from "./components/products/AddNewProduct";
+import SellerLinks from "./DashboardLinks/SellerLinks";
 import Cart from "./pages/Cart";
 import StoreSeller from "./pages/StoreSeller";
 export default [
@@ -105,6 +131,8 @@ export default [
       <DashboardLayout
         pageTitle={"/Dashboard/Orders"}
         Component={Products}
+        pageTitle={"/Dashboard/Orders"}
+        Component={Orders}
         links={SellerLinks}
       />
     ),
@@ -135,6 +163,8 @@ export default [
       <DashboardLayout
         pageTitle={"/Dashboard/Settings"}
         Component={Products}
+        pageTitle={"/Dashboard/Settings"}
+        Component={Settings}
         links={SellerLinks}
       />
     ),
@@ -155,6 +185,16 @@ export default [
       <DashboardLayout
         pageTitle={"Dashboard/Products"}
         Component={AddNewProduct}
+        links={SellerLinks}
+      />
+    ),
+  },
+  {
+    path: "Dashboard/orders/ordersDetails",
+    element: (
+      <DashboardLayout
+        pageTitle={"Dashboard/Orders"}
+        Component={OrdersDetails}
         links={SellerLinks}
       />
     ),

@@ -1,10 +1,11 @@
 import {Schema} from 'mongoose';
 import BaseModel from './BaseModel';
 import ProductInterface from './ProductInterface';
+import {Types} from 'mongoose';
 
 export default class ProductModel extends BaseModel<ProductInterface> {
   static schema = new Schema({
-    seller_id: {type: Schema.Types.ObjectId, required: false},
+    user_id: {type: Types.ObjectId, required: true, ref: 'user'},
     category: {type: Array, required: true},
     subcategory: {type: Array, required: false},
     free_shipping: {type: Boolean, required: false},

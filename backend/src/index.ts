@@ -4,6 +4,7 @@ import authRouter from './routes/auth';
 import productRouter from './routes/products';
 import OrderModel from './models/OrderModel';
 import UserModel from './models/UserModel';
+import ProductModel from './models/ProductModel';
 const express = require('express');
 const cors = require('cors');
 
@@ -18,7 +19,6 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
 app.use('/users', usersRouter);
 app.use('/auth', authRouter);
 app.use('/products', productRouter);
