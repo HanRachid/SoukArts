@@ -28,7 +28,7 @@ export default function Navigation(): React.ReactElement {
       <div className='flex items-center justify-between p-4 h-10 '>
         <Homenavigation />
 
-        <Link to='/'>
+        <Link to='/becomeaseller'>
           <button>
             <div className='group flex w-full items-center px-2 py-2  text-medium font-secondary hover:text-colorGold hover:scale-[1.02] transition-all duration-300'>
               <span className=' z-10'>

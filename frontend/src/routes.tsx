@@ -86,7 +86,7 @@ export default [
     element: <Becomeaseller Component={Sellerpayment} activeStep={3} />,
   },
   {
-    path: '/panding',
+    path: '/pending',
     element: <Becomeaseller Component={Panding} activeStep={4} />,
   },
   {
