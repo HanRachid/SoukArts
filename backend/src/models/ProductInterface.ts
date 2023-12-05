@@ -17,14 +17,10 @@ export default interface ProductInterface {
   price: number;
   style: string;
   images: CloudinaryImage[];
-  filter: {
-    color: {
-      primary: string;
-      secondary: string;
-    };
-    item_type: string[];
-    ordering_options: string[];
-  };
+  primary_color: string;
+  secondary_color: string;
+  item_type: string[];
+  ordering_options: string[];
   product_ratings?: number;
   discount: {
     on_sale: boolean;

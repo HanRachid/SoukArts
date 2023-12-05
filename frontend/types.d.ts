@@ -50,9 +50,20 @@ type ProductUrl = {
   title: string;
   description: string;
   category: string;
+  subcategory: string | undefined;
+  item_type: string | undefined;
+  shipping_time: string | undefined;
+  free_shipping: boolean;
   price: number;
   quantity: number;
+  style: string | undefined;
+  primary_color: string | undefined;
+  secondary_color: string | undefined;
   images: CloudinaryImage[];
   formData: FormData[];
 };
 type DashboardLink = {icon: ReactNode; path: string; title: string};
+type Category = {
+  name: string;
+  Subcategories: string[];
+};
