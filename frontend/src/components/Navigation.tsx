@@ -4,7 +4,7 @@ import HeartSVG from '../assets/navbar/heart.svg?react';
 import CartSVG from '../assets/navbar/cart.svg?react';
 import {Link} from 'react-router-dom';
 import Button from './Button';
-import {logoutUser, refreshLog} from '../api/auth';
+import {loginUser, logoutUser, refreshLog} from '../api/auth';
 import {useDispatch} from 'react-redux';
 import ProfileDropdown from './ProfileDropdown';
 import {useEffect, useState} from 'react';

@@ -20,8 +20,9 @@ export default class BaseModel<T extends Document> {
     return this.model.findByIdAndUpdate(id, data, {new: true}).exec();
   }
 
-  async deleteDefinitive(id: string): Promise<void> {
-    await this.model.findByIdAndDelete(id).exec();
+  async deleteDefinitive(id: string): Promise<Object> {
+    const deletable = await this.model.findByIdAndDelete(id).exec();
+    return deletable;
   }
   /**
    * Set current model's is_deleted to true
@@ -74,12 +75,12 @@ export default class BaseModel<T extends Document> {
   async findOneToMany(id: string, modelName: string, schema: Schema<T>) {
     try {
       const objectId = new Types.ObjectId(id);
-      console.log({id: id, modelName: modelName});
 
       this.registerModel(modelName, schema);
       const field = modelName + '_id';
       const query: Record<string, Types.ObjectId> = {[field]: objectId};
       const result = await this.model.find(query).exec();
+
       return result;
     } catch (error) {
       console.error(`Error finding one-to-many documents: ${error.message}`);
