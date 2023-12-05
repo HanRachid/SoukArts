@@ -1,4 +1,4 @@
-import {RouteObj} from '../types';
+import { RouteObj } from '../types';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Privacy from './pages/Privacy';
@@ -20,6 +20,12 @@ import Products from './views/Products';
 import AddNewProduct from './components/products/AddNewProduct';
 import SellerLinks from './DashboardLinks/SellerLinks';
 import Cart from './pages/Cart';
+import Becomeaseller from './layouts/Becomeaseller';
+import Welcomepage from './pages/Welcomepage';
+import Shop from './pages/Shop';
+import BecomeSellerListing from './pages/BecomeSellerListing';
+import Sellerpayment from './pages/Sellerpayment';
+import Panding from './pages/Panding';
 export default [
   {
     path: '/',
@@ -57,6 +63,26 @@ export default [
   {
     path: '/reviewpayment',
     element: <PaymentLayout Component={ReviewPayment} activeStep={2} />,
+  },
+  {
+    path: '/becomeaseller',
+    element: <Becomeaseller Component={Welcomepage} activeStep={0} />,
+  },
+  {
+    path: '/shop',
+    element: <Becomeaseller Component={Shop} activeStep={1} />,
+  },
+  {
+    path: '/listing',
+    element: <Becomeaseller Component={BecomeSellerListing} activeStep={2} />,
+  },
+  {
+    path: '/sellerpayment',
+    element: <Becomeaseller Component={Sellerpayment} activeStep={3} />,
+  },
+  {
+    path: '/panding',
+    element: <Becomeaseller Component={Panding} activeStep={4} />,
   },
   {
     path: '/products/:product',

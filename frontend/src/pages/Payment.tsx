@@ -7,7 +7,7 @@ import { UserCircleIcon, CreditCardIcon } from "@heroicons/react/24/outline";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faApple } from "@fortawesome/free-brands-svg-icons";
 
-const Payment = () => {
+const Payment = ({ isSeller = false }: { isSeller?: any }) => {
   const [formData, setFormData] = useState({
     cardHolder: "",
     cardNumber: "",
@@ -141,17 +141,20 @@ const Payment = () => {
               </div>
             </div>
 
-            <div className="mt-10 mb-10">
-              <div className="flex justify-between border-t border-colorGold">
-                <p className="font-bold">Subtotal</p>
-                <p>600 DH</p>
-              </div>
+            {!isSeller && (
+              < div className="mt-10 mb-10">
+                <div className="flex justify-between border-t border-colorGold">
+                  <p className="font-bold">Subtotal</p>
+                  <p>600 DH</p>
 
-              <div className="mb-4 flex justify-between border-b border-colorGold">
-                <p className="font-bold">Shipping</p>
-                <p>52 DH</p>
+                </div>
+
+                <div className="mb-4 flex justify-between border-b border-colorGold">
+                  <p className="font-bold">Shipping</p>
+                  <p>52 DH</p>
+                </div>
               </div>
-            </div>
+            )}
 
             <div className="mt-4">
               <button
@@ -164,8 +167,8 @@ const Payment = () => {
             </div>
           </form>
         </div>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 };
 
