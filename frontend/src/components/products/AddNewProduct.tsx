@@ -1,5 +1,5 @@
 import {ChangeEvent, useEffect, useState} from 'react';
-import {ProductUrl} from '../../../types';
+import {Category, ProductUrl} from '../../../types';
 import {addProduct} from '../../api/products';
 import {router} from '../../App';
 import {
@@ -9,26 +9,125 @@ import {
   Select,
   Textarea,
   Typography,
+  Checkbox,
 } from '@material-tailwind/react';
 import {IoClose} from 'react-icons/io5';
 import {store} from '../../app/store';
 
-type Category = {
-  name: string;
-  Subcategories: string[];
-};
+const styles = ['Modern', 'Classic', 'Fusion', 'Boho'];
+const subcategoriesData: Category[] = [
+  {
+    name: 'Rugs',
+    Subcategories: [
+      'Azilal Rug',
+      'Boucherouite Rugs',
+      'Kilim Rugs',
+      'Taznakht Rugs',
+      'Boujad Rugs',
+      'Zanafi Rugs',
+      'Beni Ourain Rugs',
+    ],
+  },
+  {
+    name: 'Poufs',
+    Subcategories: [
+      'Round Leather Poufs',
+      'Boucherouite Poufs',
+      'Square Leather Poufs',
+      'Kilim Berber Poufs',
+    ],
+  },
+  {
+    name: 'Lamps',
+    Subcategories: [
+      'Pendant Lights',
+      'Table Lamps',
+      'Lampshades',
+      'Floor Lamps',
+      'Brass Lamps',
+      'Rattan Lamps',
+    ],
+  },
+  {
+    name: 'Pillows',
+    Subcategories: [
+      'Berber Pillows',
+      'Beni Ourain Pillows',
+      'Kilim Pillows',
+      'Sahara Pillows',
+      'Handira Pillows',
+    ],
+  },
+  {
+    name: 'Shoes',
+    Subcategories: [
+      'Women Shoes',
+      'Man Shoes',
+      'Babouche',
+      'Leather Sandals',
+      'Rattan Shoes',
+    ],
+  },
+  {
+    name: 'Bags',
+    Subcategories: [
+      'Leather Bags',
+      'Kilim Bags',
+      'Rattan Bags',
+      'Straw Market Bag',
+    ],
+  },
+  {
+    name: 'Jewelry',
+    Subcategories: [
+      'Earrings',
+      'Necklaces',
+      'Rings',
+      'Bracelets',
+      'Ankle Bracelet',
+    ],
+  },
+];
+
+const Colors: string[] = [
+  'Gray',
+  'White',
+  'Black',
+  'Blue',
+  'Gold',
+  'Silver',
+  'Copper',
+  'Beige',
+  'Black',
+  'Bronze',
+  'Brown',
+  'Green',
+  'Orange',
+  'Pink',
+  'Purple',
+  'Red',
+  'Rose gold',
+  'Yellow',
+];
 
 export default function AddNewProduct() {
   const [productValues, setProductValues] = useState<ProductUrl>({
+    _id: '',
+    user_id: '',
     title: '',
     description: '',
     category: '',
+    subcategory: '',
+    item_type: 'Handmade',
+    shipping_time: '',
+    free_shipping: false,
     price: 0,
     quantity: 0,
     images: [],
+    style: '',
+    primary_color: '',
+    secondary_color: '',
     formData: [],
-    user_id: '',
-    _id: '',
   });
 
   const [browsedImages, setBrowsedImages] = useState<string[]>([]);
@@ -64,13 +163,17 @@ export default function AddNewProduct() {
   };
 
   const handleChange = (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     const {name, value} = event.target;
     setProductValues((prevState: any) => ({
       ...prevState,
       [name]: value,
     }));
+    console.log(event.target.value);
+    console.log(event.target.name);
   };
 
   const handleSelectCategory = (value: string | undefined) => {
@@ -93,90 +196,23 @@ export default function AddNewProduct() {
       user_id: '',
       title: '',
       description: '',
-      category: 'Handmade',
+      category: '',
+      subcategory: '',
+      item_type: '',
+      shipping_time: '',
+      free_shipping: false,
       price: 0,
       quantity: 0,
       images: [],
+      style: '',
+      primary_color: '',
+      secondary_color: '',
       formData: [],
     });
     setBrowsedImages([]);
 
     router.navigate('/Dashboard/Products');
   };
-
-  const subcategoriesData: Category[] = [
-    {
-      name: 'Rugs',
-      Subcategories: [
-        'Azilal Rug',
-        'Boucherouite Rugs',
-        'Kilim Rugs',
-        'Taznakht Rugs',
-        'Boujad Rugs',
-        'Zanafi Rugs',
-        'Beni Ourain Rugs',
-      ],
-    },
-    {
-      name: 'Poufs',
-      Subcategories: [
-        'Round Leather Poufs',
-        'Boucherouite Poufs',
-        'Square Leather Poufs',
-        'Kilim Berber Poufs',
-      ],
-    },
-    {
-      name: 'Lamps',
-      Subcategories: [
-        'Pendant Lights',
-        'Table Lamps',
-        'Lampshades',
-        'Floor Lamps',
-        'Brass Lamps',
-        'Rattan Lamps',
-      ],
-    },
-    {
-      name: 'Pillows',
-      Subcategories: [
-        'Berber Pillows',
-        'Beni Ourain Pillows',
-        'Kilim Pillows',
-        'Sahara Pillows',
-        'Handira Pillows',
-      ],
-    },
-    {
-      name: 'Shoes',
-      Subcategories: [
-        'Women Shoes',
-        'Man Shoes',
-        'Babouche',
-        'Leather Sandals',
-        'Rattan Shoes',
-      ],
-    },
-    {
-      name: 'Bags',
-      Subcategories: [
-        'Leather Bags',
-        'Kilim Bags',
-        'Rattan Bags',
-        'Straw Market Bag',
-      ],
-    },
-    {
-      name: 'Jewelry',
-      Subcategories: [
-        'Earrings',
-        'Necklaces',
-        'Rings',
-        'Bracelets',
-        'Ankle Bracelet',
-      ],
-    },
-  ];
 
   return (
     <section className='flex flex-col z-0 relative'>
@@ -218,6 +254,16 @@ export default function AddNewProduct() {
                       Brief description for your Product.
                     </Typography>
                   </div>
+                  <Select
+                    label='Type'
+                    name='Type'
+                    value={productValues.item_type}
+                    onChange={() => {}}
+                    color='brown'
+                  >
+                    <Option value='Handmade'>Handmade</Option>
+                    <Option value='Vintage'>Vintage</Option>
+                  </Select>
 
                   <Select
                     label='Category'
@@ -226,20 +272,23 @@ export default function AddNewProduct() {
                     onChange={handleSelectCategory}
                     color='brown'
                   >
-                    <Option value='Rugs'>Rugs</Option>
-                    <Option value='Poufs'>Poufs</Option>
-                    <Option value='Lamps'>Lamps</Option>
-                    <Option value='Pillows'>Pillows</Option>
-                    <Option value='Shoes'>Shoes</Option>
-                    <Option value='Bags'>Bags</Option>
-                    <Option value='Jewelry'>Jewelry</Option>
+                    {subcategoriesData.map(({name}) => (
+                      <Option key={name} value={name}>
+                        {name}
+                      </Option>
+                    ))}
                   </Select>
+
                   {selectedSubCategory && (
                     <Select
                       label='Subcategory'
                       name='subcategory'
-                      value=''
-                      onChange={() => {}}
+                      onChange={(event) => {
+                        setProductValues({
+                          ...productValues,
+                          subcategory: event,
+                        });
+                      }}
                       color='brown'
                     >
                       {selectedSubCategory.map((subcategory) => (
@@ -249,7 +298,81 @@ export default function AddNewProduct() {
                       ))}
                     </Select>
                   )}
+                  <Select
+                    label='Style'
+                    name='Style'
+                    onChange={(event) => {
+                      setProductValues({
+                        ...productValues,
+                        style: event,
+                      });
+                    }}
+                    color='brown'
+                  >
+                    {styles.map((style) => (
+                      <Option key={style} value={style}>
+                        {style}
+                      </Option>
+                    ))}
+                  </Select>
+                  <Select
+                    label='Primary Color'
+                    name='Primary Color'
+                    onChange={(event) => {
+                      setProductValues({
+                        ...productValues,
+                        primary_color: event,
+                      });
+                    }}
+                    color='brown'
+                  >
+                    {Colors.map((color) => (
+                      <Option value={color}>{color}</Option>
+                    ))}
+                  </Select>
+                  <Select
+                    label='Secondary Color'
+                    name='Secondary Color'
+                    onChange={(event) => {
+                      setProductValues({
+                        ...productValues,
+                        secondary_color: event,
+                      });
+                    }}
+                    color='brown'
+                  >
+                    {Colors.map((color) => (
+                      <Option value={color}>{color}</Option>
+                    ))}
+                  </Select>
+                  <Select
+                    label='Shipping Time'
+                    name='Shipping Time'
+                    onChange={(event) => {
+                      console.log(productValues);
 
+                      setProductValues({
+                        ...productValues,
+                        shipping_time: event,
+                      });
+                    }}
+                    color='brown'
+                  >
+                    <Option value='Three Days'>Three Days</Option>
+                    <Option value='One Day'>One Day</Option>
+                  </Select>
+
+                  <Checkbox
+                    label='Free Shipping'
+                    onChange={() => {
+                      setProductValues({
+                        ...productValues,
+                        free_shipping: !productValues.free_shipping,
+                      });
+                    }}
+                    crossOrigin
+                    color='brown'
+                  />
                   <label className='block text-sm font-medium text-gray-700'>
                     Photos
                   </label>

@@ -11,8 +11,22 @@ cloudinary.config({
   api_secret: '9NNuLMHEpzj_K-yZRbZ8opmat0E',
 });
 productRouter.post('/addproduct', async (req: Request, res: Response) => {
-  const {category, title, description, images, price, quantity, user_id} =
-    req.body;
+  const {
+    category,
+    title,
+    description,
+    images,
+    price,
+    quantity,
+    user_id,
+    primary_color,
+    secondary_color,
+    shipping_time,
+    subcategory,
+    style,
+    item_type,
+    free_shipping,
+  } = req.body;
 
   const editProduct = await new ProductModel().findByQuery({title: title});
   if (editProduct) {
@@ -27,6 +41,13 @@ productRouter.post('/addproduct', async (req: Request, res: Response) => {
     images: images,
     price: price,
     quantity: quantity,
+    primary_color: primary_color,
+    secondary_color: secondary_color,
+    shipping_time: shipping_time,
+    subcategory: subcategory,
+    style: style,
+    item_type: item_type,
+    free_shipping: free_shipping,
   });
 
   res.send(product._id);

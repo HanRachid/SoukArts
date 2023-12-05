@@ -26,6 +26,7 @@ export default function Register() {
           {username: values.username, password: values.password},
           dispatch
         );
+        router.navigate('/');
       })
       .catch((error) => {
         console.error(error);
