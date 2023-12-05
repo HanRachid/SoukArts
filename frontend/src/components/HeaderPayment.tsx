@@ -10,7 +10,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { router } from "../App";
 
-const HeaderPayment = ({ isActive }: { isActive: number }) => {
+const HeaderBecomeaseller = ({ isActive }: { isActive: number }) => {
   const [activeStep, setActiveStep] = React.useState(isActive);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -33,9 +33,8 @@ const HeaderPayment = ({ isActive }: { isActive: number }) => {
 
   return (
     <div
-      className={`h-48 lg:h-28 flex flex-col lg:flex-row gap-3 lg:gap-0 justify-center lg:justify-between items-center border-b border-colorGold sticky top-0 z-50 ${
-        isScrolled ? "bg-white bg-opacity-70" : "bg-white"
-      }`}
+      className={`h-48 lg:h-28 flex flex-col lg:flex-row gap-3 lg:gap-0 justify-center lg:justify-between items-center border-b border-colorGold sticky top-0 z-50 ${isScrolled ? "bg-white bg-opacity-70" : "bg-white"
+        }`}
     >
       <div className="flex justify-center items-center">
         <img src={logolight} className="w-48" alt="logolight" />
@@ -47,9 +46,10 @@ const HeaderPayment = ({ isActive }: { isActive: number }) => {
 
       <div className="w-5/6 lg:w-3/6 px-3 lg:px-24 py-1 lg:py-4">
         <Stepper activeStep={activeStep}>
-          <Step onClick={() => {setActiveStep(0)
-            router.navigate('/deliverypayment')        
-            }}>
+          <Step onClick={() => {
+            setActiveStep(0)
+            router.navigate('/deliverypayment')
+          }}>
             <TruckIcon className="h-5 w-5" />
             <div className="absolute -bottom-[2rem] w-max text-center">
               <Typography
@@ -60,9 +60,10 @@ const HeaderPayment = ({ isActive }: { isActive: number }) => {
               </Typography>
             </div>
           </Step>
-          <Step onClick={() => {setActiveStep(1)
-            router.navigate('/payment')        
-            }}>
+          <Step onClick={() => {
+            setActiveStep(1)
+            router.navigate('/payment')
+          }}>
             <CreditCardIcon className="h-5 w-5" />
             <div className="absolute -bottom-[2rem] w-max text-center">
               <Typography
@@ -73,9 +74,10 @@ const HeaderPayment = ({ isActive }: { isActive: number }) => {
               </Typography>
             </div>
           </Step>
-          <Step onClick={() => {setActiveStep(2)
-            router.navigate('/reviewpayment')        
-            }}>
+          <Step onClick={() => {
+            setActiveStep(2)
+            router.navigate('/reviewpayment')
+          }}>
             <ClipboardDocumentCheckIcon className="h-5 w-5" />
             <div className="absolute -bottom-[2rem] w-max text-center">
               <Typography
@@ -92,4 +94,4 @@ const HeaderPayment = ({ isActive }: { isActive: number }) => {
   );
 };
 
-export default HeaderPayment;
+export default HeaderBecomeaseller;

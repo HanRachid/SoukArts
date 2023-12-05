@@ -23,6 +23,12 @@ import Orders from './views/Orders';
 import OrdersDetails from './components/orders/OrdersDetails';
 import Settings from './views/Settings';
 import Cart from './pages/Cart';
+import Becomeaseller from './layouts/Becomeaseller';
+import Welcomepage from './pages/Welcomepage';
+import Shop from './pages/Shop';
+import BecomeSellerListing from './pages/BecomeSellerListing';
+import Sellerpayment from './pages/Sellerpayment';
+import Panding from './pages/Panding';
 
 import StoreSeller from './pages/StoreSeller';
 export default [
@@ -62,6 +68,26 @@ export default [
   {
     path: '/reviewpayment',
     element: <PaymentLayout Component={ReviewPayment} activeStep={2} />,
+  },
+  {
+    path: '/becomeaseller',
+    element: <Becomeaseller Component={Welcomepage} activeStep={0} />,
+  },
+  {
+    path: '/shop',
+    element: <Becomeaseller Component={Shop} activeStep={1} />,
+  },
+  {
+    path: '/listing',
+    element: <Becomeaseller Component={BecomeSellerListing} activeStep={2} />,
+  },
+  {
+    path: '/sellerpayment',
+    element: <Becomeaseller Component={Sellerpayment} activeStep={3} />,
+  },
+  {
+    path: '/pending',
+    element: <Becomeaseller Component={Panding} activeStep={4} />,
   },
   {
     path: '/products/:product',
