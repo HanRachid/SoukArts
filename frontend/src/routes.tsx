@@ -1,4 +1,4 @@
-import { RouteObj } from '../types';
+import {RouteObj} from '../types';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Privacy from './pages/Privacy';
@@ -19,8 +19,8 @@ import Dashboard from './views/Dashboard';
 import Products from './views/Products';
 import AddNewProduct from './components/products/AddNewProduct';
 import SellerLinks from './DashboardLinks/SellerLinks';
-import Orders from './views/Orders'
-import OrdersDetails from './components/orders/OrdersDetails'
+import Orders from './views/Orders';
+import OrdersDetails from './components/orders/OrdersDetails';
 import Settings from './views/Settings';
 import Cart from './pages/Cart';
 import Becomeaseller from './layouts/Becomeaseller';
@@ -29,6 +29,8 @@ import Shop from './pages/Shop';
 import BecomeSellerListing from './pages/BecomeSellerListing';
 import Sellerpayment from './pages/Sellerpayment';
 import Panding from './pages/Panding';
+
+import StoreSeller from './pages/StoreSeller';
 export default [
   {
     path: '/',
@@ -132,7 +134,7 @@ export default [
     element: (
       <DashboardLayout
         pageTitle={'/Dashboard/Orders'}
-        Component={Orders}
+        Component={Products}
         links={SellerLinks}
       />
     ),
@@ -162,7 +164,7 @@ export default [
     element: (
       <DashboardLayout
         pageTitle={'/Dashboard/Settings'}
-        Component={Settings}
+        Component={Products}
         links={SellerLinks}
       />
     ),
@@ -196,5 +198,9 @@ export default [
         links={SellerLinks}
       />
     ),
+  },
+  {
+    path: '/Store',
+    element: <GlobalLayout Component={StoreSeller} hasLayout={true} />,
   },
 ] as RouteObj[];
