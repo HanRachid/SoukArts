@@ -118,7 +118,7 @@ export default function AddNewProduct() {
     description: '',
     category: '',
     subcategory: '',
-    item_type: 'Handmade',
+    item_type: '',
     shipping_time: '',
     free_shipping: false,
     price: 0,

@@ -2,13 +2,13 @@ import {Link} from 'react-router-dom';
 import {Tooltip} from 'react-tooltip';
 
 //import images
-import HeartSVG from '../assets/navbar/heart.svg?react';
-import star from '../assets/icons/icons8-star-50.png';
+import HeartSVG from '../../assets/navbar/heart.svg?react';
+import star from '../../assets/icons/icons8-star-50.png';
 
 const ProductTitle =
   'Beni ourain Custom Moroccan rug - Berber Beni ourain rug - Wool area rug - Handmade rug - Moroccan area rug - Morocco rug';
 
-export default function SuggestionCard({
+export default function ProductCard({
   image,
   isNew,
 }: {
@@ -28,9 +28,9 @@ export default function SuggestionCard({
           <img
             src={image}
             alt='product-image'
-            className={
-              'h-72 w-full object-cover transition duration-500 group-hover:scale-105'
-            }
+            className={` ${
+              isNew ? 'h-[220px]' : 'h-[251.86]'
+            } w-full object-cover transition duration-500 group-hover:scale-105`}
           />
 
           <div className='relative border border-gray-100 bg-white pt-2 p-6 rounded-br-xl rounded-bl-xl'>
@@ -66,6 +66,11 @@ export default function SuggestionCard({
                 <span className='line-through'>1700DH</span>(60%)
               </p>
             </div>
+            <form className='mt-2'>
+              <button className='h-[34.22px] text-[1.2rem] block w-full rounded-tr-[10px] rounded-bl-[10px]  bg-colorGold text-white font-secondary font-normal medium transition hover:bg-colorGold/90 hover:scale-[1.02]'>
+                Add to Cart
+              </button>
+            </form>
           </div>
         </Link>
       </div>

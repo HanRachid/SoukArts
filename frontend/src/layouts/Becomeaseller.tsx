@@ -1,6 +1,5 @@
-
 import Footer from './Footer';
-import HeaderBecomeaseller from '../components/HeaderBecomeaseller';
+import HeaderBecomeaseller from '../components/becomeaseller/HeaderBecomeaseller';
 
 export default function GlobalLayout({
   Component,

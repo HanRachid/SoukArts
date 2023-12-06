@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom';
 import logolight from '../assets/logolight.svg';
-import SearchBar from '../components/SearchBar';
-import Navigation from '../components/Navigation';
+import SearchBar from '../components/navbar/SearchBar';
+import Navigation from '../components/navbar/Navigation';
 import React from 'react';
 
 export default function NavBar(): React.ReactElement {

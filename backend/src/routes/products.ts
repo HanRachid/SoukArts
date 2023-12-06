@@ -4,6 +4,7 @@ import ProductModel from '../models/ProductModel';
 const productRouter = express.Router();
 import {v2 as cloudinary} from 'cloudinary';
 import UserModel from '../models/UserModel';
+import {log} from 'console';
 
 cloudinary.config({
   cloud_name: 'dmgfba0uv',
@@ -54,13 +55,30 @@ productRouter.post('/addproduct', async (req: Request, res: Response) => {
 });
 
 // get specific product
-productRouter.get('/:id', async (req: Request, res: Response) => {
+productRouter.get('/product/:id', async (req: Request, res: Response) => {
   const products = await new ProductModel().findOneToMany(
     req.params.id,
     'user',
     UserModel.schema
   );
 
+  res.send(products);
+});
+
+productRouter.get('/allproducts', async (req: Request, res: Response) => {
+  const users = await new UserModel().getAllModels();
+  const products = [];
+  for (const user of users) {
+    const userproducts = await new ProductModel().findOneToMany(
+      user.id,
+      'user',
+      UserModel.schema
+    );
+    const product = {user: user.username, userProducts: userproducts};
+
+    products.push(product);
+    console.log(product);
+  }
   res.send(products);
 });
 

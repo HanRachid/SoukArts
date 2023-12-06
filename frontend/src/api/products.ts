@@ -94,7 +94,7 @@ export async function deleteProduct(id: string) {
 }
 
 export async function getProducts(id: string) {
-  const url: string = endpoint + '/' + id;
+  const url: string = endpoint + '/product/' + id;
   const products = await fetch(url);
   const result = await products.json();
 
