@@ -15,17 +15,6 @@ export default class SellerModel extends BaseModel<SellerInterface> {
     status: {type: String, required: true},
     created_at: {type: Date, required: true},
     updated_at: {type: Date, required: true},
-    shop_policies: {
-      returns_exchanges: {
-        is_returnable: {type: Boolean, required: true},
-        return_period: {type: Number, required: true},
-      },
-      cancellations: {
-        is_cancellable: {type: Boolean, required: true},
-        cancellation_period: {type: Number, required: true},
-      },
-      payment_methods: {type: Array, required: true},
-    },
   });
   constructor() {
     super('Seller', SellerModel.schema);

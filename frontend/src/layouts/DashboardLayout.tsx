@@ -50,7 +50,7 @@ export default function DashboardLayout({
       : 'text-black';
   };
   return (
-    <>
+    <div className='bg-gray-50'>
       {showSidebar && (
         <div
           onClick={toggleSidebar}
@@ -142,13 +142,12 @@ export default function DashboardLayout({
             </div>
           </div>
         </nav>
-        {/* TODO: HADI BLAST CONTENT */}
-        <div className='px-6 pt-6 2xl:container bg-gray-50'>
+        <div className='px-6 pt-6 2xl:container bg-gray-50 h-full -mb-16'>
           <div className='flex flex-col items-center justify-center max-w-7xl mx-auto'>
             <Component />
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

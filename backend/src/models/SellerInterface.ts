@@ -13,15 +13,4 @@ export default interface SellerInterface extends Document {
   status: string;
   created_at: Date;
   updated_at: Date;
-  shop_policies: {
-    returns_exchanges: {
-      is_returnable: boolean;
-      return_period: number;
-    };
-    cancellations: {
-      is_cancellable: boolean;
-      cancellation_period: number;
-    };
-    payment_methods: string[];
-  };
 }

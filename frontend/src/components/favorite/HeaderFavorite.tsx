@@ -1,6 +1,6 @@
 import search_icon from '../../assets/favorite/search_icon.svg';
 import {useDispatch} from 'react-redux';
-import {setShowFavorites} from '../../features/favoritesDisplaySlice';
+import {setShowFavorites} from '../../features/display/favoritesDisplaySlice';
 
 const HeaderFavorite = () => {
   const dispatch = useDispatch();

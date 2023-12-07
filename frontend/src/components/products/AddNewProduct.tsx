@@ -151,7 +151,6 @@ export default function AddNewProduct() {
         formData.append('file', file);
         formData.append('cloud_name', 'dmgfba0uv');
         formData.append('upload_preset', 'olz6hm0s');
-        console.log(formData.get('file'));
 
         setProductValues({
           ...productValues,
@@ -172,8 +171,6 @@ export default function AddNewProduct() {
       ...prevState,
       [name]: value,
     }));
-    console.log(event.target.value);
-    console.log(event.target.name);
   };
 
   const handleSelectCategory = (value: string | undefined) => {
@@ -189,7 +186,17 @@ export default function AddNewProduct() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    for (const key of Object.keys(productValues)) {
+      const missingFields = [];
+      if (
+        !productValues[key as keyof ProductUrl] &&
+        key !== 'free_shipping' &&
+        key !== '_id'
+      ) {
+        alert('Please fill all the fields');
+        return;
+      }
+    }
     await addProduct(productValues);
     setProductValues({
       _id: '',
@@ -258,7 +265,12 @@ export default function AddNewProduct() {
                     label='Type'
                     name='Type'
                     value={productValues.item_type}
-                    onChange={() => {}}
+                    onChange={(event) => {
+                      setProductValues({
+                        ...productValues,
+                        item_type: event,
+                      });
+                    }}
                     color='brown'
                   >
                     <Option value='Handmade'>Handmade</Option>

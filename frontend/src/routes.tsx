@@ -19,18 +19,14 @@ import Dashboard from './views/sellerdashboard/Dashboard';
 import Products from './views/sellerdashboard/Products';
 import AddNewProduct from './components/products/AddNewProduct';
 import SellerLinks from './dashboardlinks/SellerLinks';
-import Orders from './views/sellerdashboard/Orders';
 import OrdersDetails from './components/orders/OrdersDetails';
-import Settings from './views/sellerdashboard/Settings';
 import Cart from './pages/Cart';
-import Becomeaseller from './layouts/Becomeaseller';
-import Welcomepage from './pages/Welcomepage';
+import Becomeaseller from './layouts/BecomeASeller';
+import Welcomepage from './views/becomeaseller/Welcomepage';
 import Shop from './pages/Shop';
-import BecomeSellerListing from './pages/BecomeSellerListing';
-import Sellerpayment from './pages/Sellerpayment';
-import Panding from './pages/Panding';
-
-import StoreSeller from './pages/StoreSeller';
+import Sellerpayment from './views/becomeaseller/Sellerpayment';
+import StoreSeller from './views/becomeaseller/StoreSeller';
+import Pending from './views/becomeaseller/Pending';
 export default [
   {
     path: '/',
@@ -77,17 +73,14 @@ export default [
     path: '/shop',
     element: <Becomeaseller Component={Shop} activeStep={1} />,
   },
-  {
-    path: '/listing',
-    element: <Becomeaseller Component={BecomeSellerListing} activeStep={2} />,
-  },
+
   {
     path: '/sellerpayment',
-    element: <Becomeaseller Component={Sellerpayment} activeStep={3} />,
+    element: <Becomeaseller Component={Sellerpayment} activeStep={2} />,
   },
   {
     path: '/pending',
-    element: <Becomeaseller Component={Panding} activeStep={4} />,
+    element: <Becomeaseller Component={Pending} activeStep={3} />,
   },
   {
     path: '/products/:product',

@@ -20,10 +20,17 @@ export default function Products() {
     user_id: '',
     title: '',
     description: '',
-    category: 'Handmade',
+    category: '',
+    subcategory: '',
+    item_type: '',
+    shipping_time: '',
+    free_shipping: false,
     price: 0,
     quantity: 0,
     images: [],
+    style: '',
+    primary_color: '',
+    secondary_color: '',
     formData: [],
   });
   useEffect(() => {
@@ -45,8 +52,8 @@ export default function Products() {
     });
   }
   return (
-    <div>
-      <div className='absolute flex justify-center self-center z-30 bg-gray-500/10'>
+    <div className='flex flex-col'>
+      <div className='absolute flex justify-center items-center self-center z-30 bg-gray-500/10'>
         {isEdit && (
           <EditProduct
             setIsEdit={setIsEdit}
@@ -123,7 +130,7 @@ export default function Products() {
                   </Button>
                 </PopoverHandler>
                 <PopoverContent>
-                  <div className='flex flex-col'>
+                  <div className='flex flex-col items-center'>
                     <Button
                       variant='text'
                       className='text-start'

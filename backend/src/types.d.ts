@@ -1,4 +1,4 @@
-type Role = 'Client' | 'Seller' | 'Admin';
+type Role = 'Client' | 'Seller' | 'Awaiting' | 'Admin';
 type Gender = 'Male' | 'Female' | 'Other';
 type CardInfo = {
   card_number: String;

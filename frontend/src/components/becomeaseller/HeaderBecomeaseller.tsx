@@ -80,26 +80,10 @@ const HeaderBecomeaseller = ({isActive}: {isActive: number}) => {
               </Typography>
             </div>
           </Step>
-          <Step
-            onClick={() => {
-              setActiveStep(2);
-              router.navigate('/listing');
-            }}
-          >
-            <ShoppingBagIcon className='h-5 w-5' />
-            <div className='absolute -bottom-[2rem] w-max text-center'>
-              <Typography
-                variant='h6'
-                color={activeStep === 2 ? 'blue-gray' : 'gray'}
-              >
-                Listing
-              </Typography>
-            </div>
-          </Step>
 
           <Step
             onClick={() => {
-              setActiveStep(3);
+              setActiveStep(2);
               router.navigate('/sellerpayment');
             }}
           >
@@ -107,7 +91,7 @@ const HeaderBecomeaseller = ({isActive}: {isActive: number}) => {
             <div className='absolute -bottom-[2rem] w-max text-center'>
               <Typography
                 variant='h6'
-                color={activeStep === 3 ? 'blue-gray' : 'gray'}
+                color={activeStep === 2 ? 'blue-gray' : 'gray'}
               >
                 Payment
               </Typography>
@@ -116,7 +100,7 @@ const HeaderBecomeaseller = ({isActive}: {isActive: number}) => {
 
           <Step
             onClick={() => {
-              setActiveStep(4);
+              setActiveStep(3);
               router.navigate('/pending');
             }}
           >
@@ -124,7 +108,7 @@ const HeaderBecomeaseller = ({isActive}: {isActive: number}) => {
             <div className='absolute -bottom-[2rem] w-max text-center'>
               <Typography
                 variant='h6'
-                color={activeStep === 4 ? 'blue-gray' : 'gray'}
+                color={activeStep === 3 ? 'blue-gray' : 'gray'}
               >
                 Pending
               </Typography>
