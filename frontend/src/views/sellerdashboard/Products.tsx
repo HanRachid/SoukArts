@@ -33,6 +33,7 @@ export default function Products() {
     secondary_color: '',
     formData: [],
   });
+  const [popBool, setPopBool] = useState(false);
   useEffect(() => {
     const user = store.getState().auth.user;
 
@@ -123,8 +124,13 @@ export default function Products() {
                 {product.price} DH
               </p>
 
-              <Popover>
-                <PopoverHandler>
+              <Popover open={popBool}>
+                <PopoverHandler
+                  onClick={() => {
+                    setPopBool(!popBool);
+                    console.log(popBool);
+                  }}
+                >
                   <Button variant='text'>
                     <HiDotsVertical />
                   </Button>
@@ -137,6 +143,7 @@ export default function Products() {
                       onClick={() => {
                         setIsEdit(true);
                         setToEdit(product);
+                        setPopBool(false);
                       }}
                     >
                       Edit
@@ -146,6 +153,7 @@ export default function Products() {
                       className='text-start'
                       onClick={() => {
                         handleDelete(product._id);
+                        setPopBool(false);
                       }}
                     >
                       Delete
