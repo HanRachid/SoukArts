@@ -10,8 +10,7 @@ import {useEffect, useState} from 'react';
 import {store} from '../../app/store';
 import {deleteProduct, getProducts} from '../../api/products';
 import {ProductUrl} from '../../../types';
-import EditProduct from '../../components/products/EditProduct';
-
+import NewEditProduct from '../../components/products/newEditProduct';
 export default function Products() {
   const [isEdit, setIsEdit] = useState(false);
   const [products, setProducts] = useState<ProductUrl[]>([]);
@@ -33,12 +32,13 @@ export default function Products() {
     secondary_color: '',
     formData: [],
   });
-  const [popBool, setPopBool] = useState(false);
   useEffect(() => {
     const user = store.getState().auth.user;
 
     if (user) {
       getProducts(user._id).then((res) => {
+        console.log(res);
+
         setProducts(res);
       });
     }
@@ -54,12 +54,13 @@ export default function Products() {
   }
   return (
     <div className='flex flex-col'>
-      <div className='absolute flex justify-center items-center self-center z-30 bg-gray-500/10'>
+      <div className='absolute  z-30 bg-gray-500/10 '>
         {isEdit && (
-          <EditProduct
+          <NewEditProduct
             setIsEdit={setIsEdit}
             product={toEdit}
             setProducts={setProducts}
+            setToEdit={setToEdit}
           />
         )}
       </div>
@@ -124,11 +125,12 @@ export default function Products() {
                 {product.price} DH
               </p>
 
-              <Popover open={popBool}>
+              <Popover open={toEdit._id === product._id}>
                 <PopoverHandler
                   onClick={() => {
-                    setPopBool(!popBool);
-                    console.log(popBool);
+                    toEdit._id === product._id
+                      ? setToEdit({} as ProductUrl)
+                      : setToEdit(product);
                   }}
                 >
                   <Button variant='text'>
@@ -140,10 +142,9 @@ export default function Products() {
                     <Button
                       variant='text'
                       className='text-start'
-                      onClick={() => {
+                      onClick={(e) => {
                         setIsEdit(true);
                         setToEdit(product);
-                        setPopBool(false);
                       }}
                     >
                       Edit
@@ -151,9 +152,8 @@ export default function Products() {
                     <Button
                       variant='text'
                       className='text-start'
-                      onClick={() => {
+                      onClick={(e) => {
                         handleDelete(product._id);
-                        setPopBool(false);
                       }}
                     >
                       Delete

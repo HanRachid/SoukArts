@@ -11,6 +11,7 @@ import {
   Typography,
   Checkbox,
 } from '@material-tailwind/react';
+import {IoClose} from 'react-icons/io5';
 
 const styles = ['Modern', 'Classic', 'Fusion', 'Boho'];
 const subcategoriesData: Category[] = [
@@ -410,7 +411,67 @@ export default function EditProduct({
                       </p>
                     </div>
                   </div>
+                  <div className='mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8 w-5/6'>
+                    {browsedImages.map((photo, index) => (
+                      <div key={index} className='relative'>
+                        <div className='w-full overflow-hidden rounded-md'>
+                          <button
+                            className='absolute -right-2 -top-2 rounded-full bg-gray-200 shadow-md h-8 w-8 flex items-center justify-center'
+                            onClick={() => {
+                              setProductValues({
+                                ...productValues,
+                                images: productValues.images.filter(
+                                  (_photo, indexPhoto) => indexPhoto !== index
+                                ),
+                              });
+                              setBrowsedImages(
+                                browsedImages.filter(
+                                  (_photo, indexPhoto) => indexPhoto !== index
+                                )
+                              );
+                            }}
+                          >
+                            <IoClose />
+                          </button>
+                          <img
+                            src={photo}
+                            alt=''
+                            className='h-full w-full object-cover object-center lg:h-full lg:w-full'
+                          />
+                        </div>
+                      </div>
+                    ))}
 
+                    {localBrowsedImages.map((photo, index) => (
+                      <div key={index} className='relative'>
+                        <div className='w-full overflow-hidden rounded-md'>
+                          <button
+                            className='absolute -right-2 -top-2 rounded-full bg-gray-200 shadow-md h-8 w-8 flex items-center justify-center'
+                            onClick={() => {
+                              setProductValues({
+                                ...productValues,
+                                images: productValues.images.filter(
+                                  (_photo, indexPhoto) => indexPhoto !== index
+                                ),
+                              });
+                              setLocalBrowsedImages(
+                                localBrowsedImages.filter(
+                                  (_photo, indexPhoto) => indexPhoto !== index
+                                )
+                              );
+                            }}
+                          >
+                            <IoClose />
+                          </button>
+                          <img
+                            src={photo}
+                            alt=''
+                            className='h-full w-full object-cover object-center lg:h-full lg:w-full'
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                   <div className='mt-10 sm:mt-0'>
                     <div className=''>
                       <div className='md:col-span-1'></div>
@@ -468,59 +529,6 @@ export default function EditProduct({
                       </div>
                     </div>
                   </div>
-                </div>
-
-                <div className='mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8'>
-                  {browsedImages.map((photo, index) => (
-                    <div key={index} className='group relative'>
-                      <div className='min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-32'>
-                        <button
-                          onClick={() => {
-                            setProductValues({
-                              ...productValues,
-                              images: productValues.images.filter(
-                                (_photo, indexPhoto) => indexPhoto !== index
-                              ),
-                            });
-                            setBrowsedImages(
-                              browsedImages.filter(
-                                (_photo, indexPhoto) => indexPhoto !== index
-                              )
-                            );
-                          }}
-                        >
-                          X
-                        </button>
-                        <img
-                          src={photo}
-                          alt=''
-                          className='h-full w-full object-cover object-center lg:h-full lg:w-full'
-                        />
-                      </div>
-                    </div>
-                  ))}
-                  {localBrowsedImages.map((photo, index) => (
-                    <div key={index} className='group relative'>
-                      <div className='min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-32'>
-                        <button
-                          onClick={() => {
-                            setLocalBrowsedImages(
-                              localBrowsedImages.filter(
-                                (_photo, indexPhoto) => indexPhoto !== index
-                              )
-                            );
-                          }}
-                        >
-                          X
-                        </button>
-                        <img
-                          src={photo}
-                          alt=''
-                          className='h-full w-full object-cover object-center lg:h-full lg:w-full'
-                        />
-                      </div>
-                    </div>
-                  ))}
                 </div>
               </div>
             </div>

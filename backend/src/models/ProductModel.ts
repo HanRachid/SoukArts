@@ -6,8 +6,8 @@ import {Types} from 'mongoose';
 export default class ProductModel extends BaseModel<ProductInterface> {
   static schema = new Schema({
     user_id: {type: Types.ObjectId, required: true, ref: 'user'},
-    category: {type: Array, required: true},
-    subcategory: {type: Array, required: true},
+    category: {type: String, required: true},
+    subcategory: {type: String, required: true},
     free_shipping: {type: Boolean, required: true},
     shipping_time: {type: String, required: true},
     title: {type: String, required: true},
@@ -16,10 +16,9 @@ export default class ProductModel extends BaseModel<ProductInterface> {
     price: {type: Number, required: true},
     images: {type: Array, required: true},
     style: {type: String, required: true},
-    primary_color: {type: Array, required: true},
-    secondary_color: {type: Array, required: true},
-    item_type: {type: Array, required: true},
-    ordering_options: {type: Array, required: false},
+    primary_color: {type: String, required: true},
+    secondary_color: {type: String, required: true},
+    item_type: {type: String, required: true},
 
     product_ratings: {type: Number, required: false},
     discount: {
