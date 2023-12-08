@@ -1,15 +1,25 @@
 import {useState} from 'react';
 import {router} from '../../App';
+import {Seller} from '../../../types';
+import {store} from '../../app/store';
 
-function Welcomepage() {
+function Welcomepage({
+  setSeller,
+  seller,
+}: {
+  setSeller: Function;
+  seller: Seller;
+}) {
   const handlesubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    console.log('Form Data:', formData);
+    setSeller({...formData, ...seller});
+    console.log({...formData, ...seller});
     router.navigate('/shop');
   };
 
   const [formData, setFormData] = useState({
-    email: '',
+    business_email: '',
+    user_id: store.getState().auth.user?._id,
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,10 +51,10 @@ function Welcomepage() {
           >
             <div className='mb-4'>
               <input
-                type='email'
-                id='email'
-                name='email'
-                value={formData.email}
+                type='business_email'
+                id='business_email'
+                name='business_email'
+                value={formData.business_email}
                 onChange={handleChange}
                 placeholder='Confirmer Your Email'
                 className='w-full py-2 px-3 border-2 border-colorBeige/80 rounded-bl-xl rounded-tr-xl bg-gray-50'

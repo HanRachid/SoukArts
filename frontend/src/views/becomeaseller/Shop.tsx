@@ -1,23 +1,29 @@
 import {useState} from 'react';
 import {Select, Option} from '@material-tailwind/react';
-import france from '../assets/icons/france.png';
-import anglais from '../assets/icons/usa.png';
-import {router} from '../App';
+import france from '../../assets/icons/france.png';
+import anglais from '../../assets/icons/usa.png';
+import {router} from '../../App';
+import {Seller} from '../../../types';
 
-function Shop() {
+function Shop({setSeller, seller}: {setSeller: Function; seller: Seller}) {
   const handlesubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    console.log('Form Data:', formData);
+    console.log(seller);
+
+    setSeller({...formData, ...seller});
+    console.log({...formData, ...seller});
+
     router.navigate('/sellerpayment');
   };
-  const [laungue, setSelectedLangue] = useState('');
 
-  const handleCountryChange = (laungue: string) => {
-    setSelectedLangue(laungue);
+  const handleCountryChange = (language: string) => {
+    setFormData({...formData, language: language});
+    console.log(formData);
   };
 
   const [formData, setFormData] = useState({
-    namestore: '',
+    shop_name: '',
+    language: '',
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,9 +49,9 @@ function Shop() {
               <label htmlFor='Name Store'>Name Store</label>
               <input
                 type='text'
-                id='namestore'
-                name='namestore'
-                value={formData.namestore}
+                id='shop_name'
+                name='shop_name'
+                value={formData.shop_name}
                 onChange={handleChange}
                 placeholder='Enter your name'
                 className='w-full py-2 px-3 border-2 border-colorBeige/80 rounded-bl-xl rounded-tr-xl bg-gray-50'
@@ -56,7 +62,7 @@ function Shop() {
             <div className='max-w-md mx-auto mt-4'>
               <label htmlFor='Name Store'>Langue Store</label>
               <Select
-                label={laungue || 'Select Country'}
+                label={formData.language || 'Select Country'}
                 onChange={(value: string | undefined) =>
                   handleCountryChange(value as string)
                 }

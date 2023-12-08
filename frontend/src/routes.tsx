@@ -2,7 +2,7 @@ import {RouteObj} from '../types';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Privacy from './pages/Privacy';
-import Register from './components/categoryproducts/Register';
+import Register from './pages/Register';
 import Termsofuse from './pages/TermsOfUse';
 import GlobalLayout from './layouts/GlobalLayout';
 import ProductDetail from './pages/ProductDetail';
@@ -23,9 +23,9 @@ import OrdersDetails from './components/orders/OrdersDetails';
 import Cart from './pages/Cart';
 import Becomeaseller from './layouts/BecomeASeller';
 import Welcomepage from './views/becomeaseller/Welcomepage';
-import Shop from './pages/Shop';
+import Shop from './views/becomeaseller/Shop';
 import Sellerpayment from './views/becomeaseller/Sellerpayment';
-import StoreSeller from './views/becomeaseller/StoreSeller';
+import StoreSeller from './pages/StoreSeller';
 import Pending from './views/becomeaseller/Pending';
 export default [
   {
