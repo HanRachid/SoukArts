@@ -27,7 +27,7 @@ export default function Homenavigation(): React.ReactElement {
         <div>
           <div className='group flex w-full items-center px-2 py-2 text-medium font-secondary hover:text-colorGold hover:scale-[1.02] transition-all duration-300'>
             <span className='z-10 xl:text-[12px] 2xl:text-[16px]'>
-              <Menu.Button> Shop </Menu.Button>
+              <Menu.Button className="text-[18px]"> Shop </Menu.Button>
 
               <span className='absolute bottom-0 left-0 w-full h-0.5 bg-colorGold transform scale-x-0 origin-left transition-transform group-hover:scale-x-100 duration-300'></span>
             </span>
