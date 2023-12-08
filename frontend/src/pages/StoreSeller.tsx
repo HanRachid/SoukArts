@@ -1,6 +1,6 @@
-import banner from '../../assets/store/Banner.webp';
-import Content from '../../components/store/Content';
-import InfoStore from '../../components/store/InfoStore';
+import banner from '../assets/store/Banner.webp';
+import Content from '../components/store/Content';
+import InfoStore from '../components/store/InfoStore';
 
 export default function StoreSeller() {
   return (

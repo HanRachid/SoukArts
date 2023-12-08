@@ -1,11 +1,11 @@
-import { Dispatch, AnyAction } from '@reduxjs/toolkit';
-import { User } from '../../types';
-import { setLoginState, setLogoutState } from '../features/auth/authSlice';
-import { store } from '../app/store';
-import { router } from '../App';
+import {Dispatch, AnyAction} from '@reduxjs/toolkit';
+import {User} from '../../types';
+import {setLoginState, setLogoutState} from '../features/auth/authSlice';
+import {store} from '../app/store';
+import {router} from '../App';
 const endpoint = import.meta.env.VITE_API_ENDPOINT + '/auth';
 
-export async function registerUser(user: User) {
+export async function registerUser(user: Partial<User>) {
   const url: string = endpoint + '/register';
 
   const params: RequestInit = {
@@ -28,7 +28,10 @@ export async function registerUser(user: User) {
   return response;
 }
 
-export async function loginUser(user: User, dispatch: Dispatch<AnyAction>) {
+export async function loginUser(
+  user: Partial<User>,
+  dispatch: Dispatch<AnyAction>
+) {
   const url = endpoint + '/login';
 
   const params: RequestInit = {

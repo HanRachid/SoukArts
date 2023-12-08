@@ -1,23 +1,23 @@
-import logo from '../../assets/login/logo1.png';
-import login_side_image from '../../assets/login/login_image_side.png';
-import logo_google from '../../assets/login/google-svgrepo-com.svg';
-import logo_apple from '../../assets/login/apple-color-svgrepo-com.svg';
+import logo from '../assets/login/logo1.png';
+import login_side_image from '../assets/login/login_image_side.png';
+import logo_google from '../assets/login/google-svgrepo-com.svg';
+import logo_apple from '../assets/login/apple-color-svgrepo-com.svg';
 import {Link} from 'react-router-dom';
-import {loginUser, registerUser} from '../../api/auth';
+import {loginUser, registerUser} from '../api/auth';
 import {Formik, Field, Form, ErrorMessage} from 'formik';
 import {useState} from 'react';
-import {User} from '../../../types';
+import {User} from '../../types';
 import {useDispatch} from 'react-redux';
 
-import {RegisterSchema} from '../../pages/validation/RegisterValidation';
+import {RegisterSchema} from './validation/RegisterValidation';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
-import {router} from '../../App';
+import {router} from '../App';
 
 export default function Register() {
   const dispatch = useDispatch();
   const onSubmit = (
-    values: User,
+    values: Partial<User>,
     {setSubmitting}: {setSubmitting: (isSubmitting: boolean) => void}
   ) => {
     registerUser(values)
@@ -25,8 +25,9 @@ export default function Register() {
         loginUser(
           {username: values.username, password: values.password},
           dispatch
-        );
-        router.navigate('/');
+        ).then(() => {
+          router.navigate('/');
+        });
       })
       .catch((error) => {
         console.error(error);

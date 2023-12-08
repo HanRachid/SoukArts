@@ -5,11 +5,11 @@ import logolight from '../../assets/logolight.svg';
 import {
   BriefcaseIcon,
   BuildingStorefrontIcon,
-  ShoppingBagIcon,
   CreditCardIcon,
   ClipboardDocumentCheckIcon,
 } from '@heroicons/react/24/outline';
 import {router} from '../../App';
+import {Link} from 'react-router-dom';
 
 const HeaderBecomeaseller = ({isActive}: {isActive: number}) => {
   const [activeStep, setActiveStep] = React.useState(isActive);
@@ -39,7 +39,10 @@ const HeaderBecomeaseller = ({isActive}: {isActive: number}) => {
       }`}
     >
       <div className='flex justify-center items-center'>
-        <img src={logolight} className='w-48' alt='logolight' />
+        <Link to='/'>
+          <img src={logolight} className='w-48' alt='logolight' />
+        </Link>
+
         <div className='flex justify-center items-center'>
           <BuildingStorefrontIcon className='h-6 w-6 mr-2' />
           <p className='text-small'>Become a Seller</p>

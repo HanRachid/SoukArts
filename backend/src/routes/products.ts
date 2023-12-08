@@ -4,7 +4,6 @@ import ProductModel from '../models/ProductModel';
 const productRouter = express.Router();
 import {v2 as cloudinary} from 'cloudinary';
 import UserModel from '../models/UserModel';
-import {log} from 'console';
 
 cloudinary.config({
   cloud_name: 'dmgfba0uv',

@@ -41,6 +41,7 @@ authRouter.post(
       username: username,
       email: email,
       password: hashedPassword,
+      role: 'user',
     });
     res.status(200).send(register);
   }

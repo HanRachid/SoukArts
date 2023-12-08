@@ -503,7 +503,11 @@ export default function AddNewProduct() {
                   </div>
                 </div>
                 <div className='bg-gray-50 px-4 py-3 text-right sm:px-6'>
-                  <Button type='submit' color='brown'>
+                  <Button
+                    type='submit'
+                    color='brown'
+                    className='mr-4 hover:bg-colorGold'
+                  >
                     Save
                   </Button>
                 </div>

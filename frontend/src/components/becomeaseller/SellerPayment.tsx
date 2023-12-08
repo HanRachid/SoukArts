@@ -6,15 +6,23 @@ import {UserCircleIcon, CreditCardIcon} from '@heroicons/react/24/outline';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faApple} from '@fortawesome/free-brands-svg-icons';
 import {router} from '../../App';
+import {Seller} from '../../../types';
+import {addSeller} from '../../api/seller';
 
-const SellerPayment = ({isSeller = false}: {isSeller?: any}) => {
+const SellerPayment = ({
+  isSeller = false,
+  setSeller,
+  seller,
+}: {
+  isSeller?: any;
+  setSeller: Function;
+  seller: Seller;
+}) => {
   const [formData, setFormData] = useState({
     cardHolder: '',
     cardNumber: '',
     expirationDate: '',
     cvc: '',
-    subtotal: 0,
-    shipping: 0,
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,8 +33,14 @@ const SellerPayment = ({isSeller = false}: {isSeller?: any}) => {
     }));
   };
 
-  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
+    setSeller({...formData, ...seller});
+    const newSeller = await addSeller({...formData, ...seller});
+    console.log({...formData, ...seller});
+
+    console.log(newSeller);
+
     router.navigate('/pending');
   };
   return (
