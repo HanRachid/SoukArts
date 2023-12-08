@@ -222,23 +222,19 @@ export default function AddNewProduct() {
         formData: [],
       });
       setBrowsedImages([]);
-
+      setLoading(false);
       router.navigate("/Dashboard/Products");
     } catch (error) {
       // Handle error (display error message, log, etc.)
       console.error("Error submitting product:", error);
-    } finally {
-      setLoading(false);
     }
   };
 
   return (
     <>
       {loading ? (
-        <div className="flex items-center justify-center">
-          <div className="w-80">
-            <Lottie animationData={loader} />
-          </div>
+        <div className="flex items-center justify-center relative">
+          <Lottie animationData={loader} className="absolute top-48 w-64" />
         </div>
       ) : (
         <section className="flex flex-col z-0 relative">
