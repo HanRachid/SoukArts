@@ -18,6 +18,7 @@ import DashboardLayout from './layouts/DashboardLayout';
 import Dashboard from './views/Dashboard';
 import Products from './views/Products';
 import AddNewProduct from './components/products/AddNewProduct';
+import Cart from './pages/Cart';
 
 export default [
   {
@@ -44,6 +45,10 @@ export default [
   {
     path: '/categories/:category',
     element: <GlobalLayout Component={ProductsList} hasLayout={true} />,
+  },
+  {
+    path: '/cart',
+    element: <GlobalLayout Component={Cart} hasLayout={true} />,
   },
   {
     path: '/deliverypayment',
