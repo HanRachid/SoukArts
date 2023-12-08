@@ -25,7 +25,7 @@ export default function ProfileDropdown(): React.ReactElement {
   ];
 
   return (
-    <div className='flex  items-center justify-between   rounded-3xl outline outline-3 hover:outline-2 outline-colorBeige hover:outline-colorGold '>
+    <div className='flex  items-center justify-between rounded-3xl outline outline-3 hover:outline-2 outline-colorBeige hover:outline-colorGold '>
       <Menu as={'div' as React.ElementType}>
         <div className=' flex  p-1'>
           <Menu.Button>
