@@ -14,7 +14,7 @@ export default function Navigation(): React.ReactElement {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    refreshLog({} as User, dispatch).then((result) => {
+    refreshLog({} as User).then((result) => {
       if (result.user) {
         setUser(result.user);
       } else {
@@ -47,7 +47,7 @@ export default function Navigation(): React.ReactElement {
         </Link>
         {user ? (
           <>
-            <button onClick={() => logoutUser(dispatch)}>
+            <button onClick={() => logoutUser()}>
               <div className='group flex w-full items-center px-2 py-2 text-medium font-secondary hover:text-colorGold hover:scale-[1.02] transition-all duration-300'>
                 <span className=' z-10'>
                   Logout

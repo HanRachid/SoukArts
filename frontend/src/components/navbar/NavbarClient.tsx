@@ -2,7 +2,7 @@ import logolight from '../../assets/logolight.svg';
 import {Link} from 'react-router-dom';
 import lens from '../../assets/navbar/lens.svg';
 import {logoutUser, refreshLog} from '../../api/auth';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {useEffect, useState} from 'react';
 import {User} from '../../../types';
 import HeartSVG from '../../assets/navbar/heart.svg?react';
@@ -12,21 +12,13 @@ import Searchbar from './SearchBar';
 import Navigation from './Navigation';
 import ProfileDropdown from './ProfileDropdown';
 import HomeNavigationMobile from './HomeNavigationMobile';
+import {setLogoutState} from '../../features/auth/authSlice';
 
 const NavbarClient = () => {
   const dispatch = useDispatch();
-  const [user, setUser] = useState<{id: string; name: string} | null>(null);
   const [showShop, setShowShop] = useState(false);
 
-  useEffect(() => {
-    refreshLog({} as User, dispatch).then((result) => {
-      if (result.user) {
-        setUser(result.user);
-      } else {
-        setUser(null);
-      }
-    });
-  });
+  const user = useSelector((state: any) => state.auth.user);
 
   const [isSearchbarVisible, setIsSearchbarVisible] = useState(false);
   const toggleSearchbar = () => {
@@ -74,12 +66,10 @@ const NavbarClient = () => {
           <img src={logolight} alt='Logo' className='w-48 xl:w-52 xl:h-16' />
         </div>
 
-        {/* RACHID ici liens de navigation ecran pc*/}
         <div className='navbar-end w-1/3 xl:block hidden mt-10 pb-10'>
           <Navigation />
         </div>
 
-        {/* RACHID ici liens de navigation ecran smartphone*/}
         <div className='navbar-end xl:hidden flex justify-end relative'>
           <div className='dropdown'>
             <div
@@ -117,7 +107,11 @@ const NavbarClient = () => {
               <li>
                 {user ? (
                   <div>
-                    <button onClick={() => logoutUser(dispatch)}>
+                    <button
+                      onClick={() =>
+                        logoutUser().then(() => dispatch(setLogoutState))
+                      }
+                    >
                       <div className='group flex w-full items-center px-2 py-2 font-secondary hover:text-colorGold hover:scale-[1.02] transition-all duration-300'>
                         <span className='z-10'>
                           Logout

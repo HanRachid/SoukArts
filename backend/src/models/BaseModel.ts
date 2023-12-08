@@ -48,6 +48,12 @@ export default class BaseModel<T extends Document> {
   async getAllModels(): Promise<T[]> {
     return this.model.find({}).exec();
   }
+  async getAllModelsPopulate(modelName: string): Promise<T[]> {
+    return this.model
+      .find({})
+      .populate(modelName + '_id')
+      .exec();
+  }
   async findByQuery(query: Record<string, any>): Promise<T | null> {
     return this.model.findOne(query).exec();
   }

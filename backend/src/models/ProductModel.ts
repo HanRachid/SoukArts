@@ -6,6 +6,7 @@ import {Types} from 'mongoose';
 export default class ProductModel extends BaseModel<ProductInterface> {
   static schema = new Schema({
     user_id: {type: Types.ObjectId, required: true, ref: 'user'},
+    seller_id: {type: Schema.Types.ObjectId, ref: 'seller', required: true},
     category: {type: String, required: true},
     subcategory: {type: String, required: true},
     free_shipping: {type: Boolean, required: true},

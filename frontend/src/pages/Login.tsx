@@ -8,18 +8,23 @@ import logo_google from '../assets/login/google-svgrepo-com.svg';
 import logo_apple from '../assets/login/apple-color-svgrepo-com.svg';
 import {Link} from 'react-router-dom';
 import {useEffect, useState} from 'react';
-import {loginUser} from '../api/auth';
+import {loginUser, refreshLog} from '../api/auth';
 import {useDispatch} from 'react-redux';
 import {store} from '../app/store';
 import {User} from '../../types';
 import {router} from '../App';
+import {setLoginState} from '../features/auth/authSlice';
 
 export default function Login() {
   const dispatch = useDispatch();
-
   useEffect(() => {
-    loginUser({} as User, dispatch);
-  }, [store.getState().auth.user]);
+    refreshLog({} as User).then((result) => {
+      if (result.user) {
+        dispatch(setLoginState(result));
+        router.navigate('/');
+      }
+    });
+  }, []);
 
   const hidden = 'text-red-500 text-opacity-0';
   const shown = 'text-red-500';
@@ -32,7 +37,8 @@ export default function Login() {
 
     validationSchema,
     onSubmit: (values) => {
-      loginUser(values, dispatch).then(() => {
+      loginUser(values).then((result) => {
+        dispatch(setLoginState(result));
         router.navigate('/');
       });
     },

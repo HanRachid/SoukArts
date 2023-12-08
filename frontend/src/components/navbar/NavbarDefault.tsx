@@ -1,10 +1,9 @@
 import logolight from '../../assets/logolight.svg';
 import {Link} from 'react-router-dom';
 import lens from '../../assets/navbar/lens.svg';
-import {logoutUser, refreshLog} from '../../api/auth';
-import {useDispatch} from 'react-redux';
-import {useEffect, useState} from 'react';
-import {User} from '../../../types';
+import {logoutUser} from '../../api/auth';
+import {useDispatch, useSelector} from 'react-redux';
+import {useState} from 'react';
 import HeartSVG from '../../assets/navbar/heart.svg?react';
 import CartSVG from '../../assets/navbar/cart.svg?react';
 import Button from '../Button';
@@ -12,21 +11,14 @@ import Searchbar from './SearchBar';
 import Navigation from './Navigation';
 import ProfileDropdown from './ProfileDropdown';
 import HomeNavigationMobile from './HomeNavigationMobile';
+import {setLogoutState} from '../../features/auth/authSlice';
+import {router} from '../../App';
 
 const NavbarDefault = () => {
   const dispatch = useDispatch();
-  const [user, setUser] = useState<{id: string; name: string} | null>(null);
-  const [showShop, setShowShop] = useState(false);
+  const user = useSelector((state: any) => state.auth.user);
 
-  useEffect(() => {
-    refreshLog({} as User, dispatch).then((result) => {
-      if (result.user) {
-        setUser(result.user);
-      } else {
-        setUser(null);
-      }
-    });
-  });
+  const [showShop, setShowShop] = useState(false);
 
   const [isSearchbarVisible, setIsSearchbarVisible] = useState(false);
   const toggleSearchbar = () => {
@@ -117,7 +109,14 @@ const NavbarDefault = () => {
               <li>
                 {user ? (
                   <div>
-                    <button onClick={() => logoutUser(dispatch)}>
+                    <button
+                      onClick={() =>
+                        logoutUser().then(() => {
+                          dispatch(setLogoutState);
+                          router.navigate('/');
+                        })
+                      }
+                    >
                       <div className='group flex w-full items-center px-2 py-2 font-secondary hover:text-colorGold hover:scale-[1.02] transition-all duration-300'>
                         <span className='z-10'>
                           Logout

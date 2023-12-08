@@ -1,8 +1,7 @@
 import {Dispatch, AnyAction} from '@reduxjs/toolkit';
 import {User} from '../../types';
-import {setLoginState, setLogoutState} from '../features/auth/authSlice';
+
 import {store} from '../app/store';
-import {router} from '../App';
 const endpoint = import.meta.env.VITE_API_ENDPOINT + '/auth';
 
 export async function registerUser(user: Partial<User>) {
@@ -28,10 +27,7 @@ export async function registerUser(user: Partial<User>) {
   return response;
 }
 
-export async function loginUser(
-  user: Partial<User>,
-  dispatch: Dispatch<AnyAction>
-) {
+export async function loginUser(user: Partial<User>) {
   const url = endpoint + '/login';
 
   const params: RequestInit = {
@@ -44,29 +40,13 @@ export async function loginUser(
     credentials: 'include',
   };
 
-  try {
-    const loginResponse = await fetch(url, params);
-    const response = await loginResponse.json();
+  const loginResponse = await fetch(url, params);
+  const response = await loginResponse.json();
 
-    if (loginResponse.ok) {
-      // Successful login
-      dispatch(setLoginState(response.user));
-      if (store.getState().auth.user) {
-        router.navigate('/');
-      } // Update the state with user info
-    } else {
-      // Login failed
-      dispatch(setLogoutState());
-    }
-
-    return response;
-  } catch (error) {
-    console.error('Login error:', error);
-    dispatch(setLogoutState());
-  }
+  return response;
 }
 
-export async function refreshLog(user: User, dispatch: Dispatch<AnyAction>) {
+export async function refreshLog(user: User) {
   const url = endpoint + '/login';
 
   const params: RequestInit = {
@@ -79,25 +59,13 @@ export async function refreshLog(user: User, dispatch: Dispatch<AnyAction>) {
     credentials: 'include',
   };
 
-  try {
-    const loginResponse = await fetch(url, params);
-    const response = await loginResponse.json();
+  const loginResponse = await fetch(url, params);
+  const response = await loginResponse.json();
 
-    if (loginResponse.ok) {
-      dispatch(setLoginState(response.user));
-      if (!store.getState().auth.user) {
-        dispatch(setLogoutState());
-      }
-    }
-
-    return response;
-  } catch (error) {
-    console.error('Login error:', error);
-    dispatch(setLogoutState());
-  }
+  return response;
 }
 
-export async function logoutUser(dispatch: Dispatch<AnyAction>) {
+export async function logoutUser() {
   const url: string = endpoint + '/logout';
 
   const params: RequestInit = {
@@ -113,11 +81,6 @@ export async function logoutUser(dispatch: Dispatch<AnyAction>) {
   const logout = await fetch(url, params);
 
   const response = await logout.json();
-
-  if (!response.error) {
-    dispatch(setLogoutState());
-    console.log(store.getState());
-  }
 
   return response;
 }
