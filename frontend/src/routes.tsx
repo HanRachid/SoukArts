@@ -85,7 +85,7 @@ export default [
   },
   {
     path: '/pending',
-    element: <Becomeaseller Component={Pending} activeStep={3} />,
+    element: <GlobalLayout Component={Pending} hasLayout={true} />,
   },
   {
     path: '/products/:product',

@@ -28,41 +28,17 @@ export default function Navigation(): React.ReactElement {
       <div className='flex items-center justify-between p-4 h-10 '>
         <Homenavigation />
 
-        {user?.role === 'user' && (
-          <Link to='/becomeaseller'>
-            <button>
-              <div className='group flex w-full items-center px-2 py-2  text-medium font-secondary hover:text-colorGold hover:scale-[1.02] transition-all duration-300'>
-                <span className=' z-10'>
-                  Become a seller
-                  <span className='absolute bottom-0 left-0 w-full h-0.5 bg-colorGold transform scale-x-0 origin-left transition-transform group-hover:scale-x-100 duration-300'></span>
-                </span>
-              </div>
-            </button>
-          </Link>
-        )}
-
-        {user?.role === 'seller' && (
-          <Link to='/dashboard'>
-            <button>
-              <div className='group flex w-full items-center px-2 py-2  text-medium font-secondary hover:text-colorGold hover:scale-[1.02] transition-all duration-300'>
-                <span className=' z-10'>
-                  Dashboard
-                  <span className='absolute bottom-0 left-0 w-full h-0.5 bg-colorGold transform scale-x-0 origin-left transition-transform group-hover:scale-x-100 duration-300'></span>
-                </span>
-              </div>
-            </button>
-          </Link>
-        )}
-        {user?.role === 'Pending' && (
+        <Link to='/becomeaseller'>
           <button>
             <div className='group flex w-full items-center px-2 py-2  text-medium font-secondary hover:text-colorGold hover:scale-[1.02] transition-all duration-300'>
               <span className=' z-10'>
-                Shop awaiting approval
+                Become a seller
                 <span className='absolute bottom-0 left-0 w-full h-0.5 bg-colorGold transform scale-x-0 origin-left transition-transform group-hover:scale-x-100 duration-300'></span>
               </span>
             </div>
           </button>
-        )}
+        </Link>
+
         <Link to='/'>
           <HeartSVG className='w-6 font-secondary hover:fill-colorGold' />
         </Link>

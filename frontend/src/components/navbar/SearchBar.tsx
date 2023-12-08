@@ -1,7 +1,7 @@
 /// <reference types="vite-plugin-svgr/client" />
-import lens from '../assets/navbar/lens.svg';
+import lens from '../../assets/navbar/lens.svg';
 import {Menu, Transition} from '@headlessui/react';
-import CheckSVG from '../assets/navbar/check.svg?react';
+import CheckSVG from '../../assets/navbar/check.svg?react';
 import React, {
   Fragment,
   useState,

@@ -1,30 +1,34 @@
-import NavbarClient from '../components/NavbarClient';
-import NavbarDefault from '../components/NavbarDefault';
-import React from 'react';
-import NavbarSeller from '../components/NavbarSeller';
+import NavbarClient from '../components/navbar/NavbarClient';
+import NavbarDefault from '../components/navbar/NavbarDefault';
+import React, {useEffect} from 'react';
+import NavbarSeller from '../components/navbar/NavbarSeller';
 import {useState} from 'react';
+import {store} from '../app/store';
+import {User} from '../../types';
+import NavbarPending from '../components/navbar/NavbarPending';
+import {refreshLog} from '../api/auth';
+import {useDispatch} from 'react-redux';
 
 export default function NavBar(): React.ReactElement {
-  const [userType, setUserType] = useState<string | null>('client');
-
-  const handleUserTypeChange = (type: string) => {
-    setUserType(type);
-  };
+  const [user, setUser] = useState<Partial<User> | null>({} as User);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    refreshLog({} as User, dispatch).then(() => {
+      setUser(store.getState().auth.user);
+      console.log(store.getState().auth.user);
+    });
+  }, [store.getState().auth.user]);
 
   return (
     <div>
       <div>
-        {userType === 'client' && <NavbarClient />}
-        {userType === 'seller' && <NavbarSeller />}
-        {(!userType || userType === 'default') && <NavbarDefault />}
+        {user?.role === 'seller' && <NavbarSeller />}
+        {user?.role === 'user' && <NavbarClient />}
+        {user?.role === 'Pending' && <NavbarPending />}
+        {!user?.role && <NavbarDefault />}
       </div>
 
       {/* Bouton pour tester le changement de navbar RACHID */}
-      <button onClick={() => handleUserTypeChange('client')}>Set Client</button>
-      <button onClick={() => handleUserTypeChange('seller')}>Set Seller</button>
-      <button onClick={() => handleUserTypeChange('default')}>
-        Set Default
-      </button>
     </div>
   );
 }
