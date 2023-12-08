@@ -21,6 +21,7 @@ import ProfileSettings from "./views/ProfileSettings";
 
 import AddNewProduct from './components/products/AddNewProduct';
 import SellerLinks from './DashboardLinks/SellerLinks';
+import Cart from './pages/Cart';
 export default [
   {
     path: "/",
@@ -76,7 +77,15 @@ export default [
     element: <GlobalLayout Component={Favorite} hasLayout={true} />,
   },
   {
+<<<<<<< HEAD
     path: "/dashboard",
+=======
+    path: '/Cart',
+    element: <GlobalLayout Component={Cart} hasLayout={true} />,
+  },
+  {
+    path: '/dashboard',
+>>>>>>> ebbaa5928d8680b0bac3c709ed8384efb0bffcfc
     element: (
       <DashboardLayout
         pageTitle={"Dashboard"}
