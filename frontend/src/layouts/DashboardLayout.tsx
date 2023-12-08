@@ -28,13 +28,13 @@ export default function DashboardLayout({
     setShowSidebar(!showSidebar);
   };
   const dispatch = useDispatch();
-  useEffect(() => {
-    refreshLog({} as User, dispatch).then(() => {
-      if (!store.getState().auth.user) {
-        router.navigate('/login');
-      }
-    });
-  }, [store.getState().auth.user]);
+  // useEffect(() => {
+  //   refreshLog({} as User, dispatch).then(() => {
+  //     if (!store.getState().auth.user) {
+  //       router.navigate('/login');
+  //     }
+  //   });
+  // }, [store.getState().auth.user]);
 
   const activeLinkStyle = (title: string) => {
     const route = title === 'Dashboard' ? 'dashboard' : 'dashboard/' + title;
@@ -50,7 +50,7 @@ export default function DashboardLayout({
       : 'text-black';
   };
   return (
-    <div className='bg-gray-50'>
+    <div className='bg-gray-50 font-secondary'>
       {showSidebar && (
         <div
           onClick={toggleSidebar}

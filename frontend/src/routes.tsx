@@ -27,6 +27,11 @@ import Shop from './pages/Shop';
 import Sellerpayment from './views/becomeaseller/Sellerpayment';
 import StoreSeller from './views/becomeaseller/StoreSeller';
 import Pending from './views/becomeaseller/Pending';
+import Orders from './views/sellerdashboard/Orders'
+import Settings from './views/sellerdashboard/Settings';
+import Stats from './views/sellerdashboard/Stats';
+import Helps from './views/sellerdashboard/Helps';
+import Finance from './views/sellerdashboard/Finance';
 export default [
   {
     path: '/',
@@ -127,7 +132,7 @@ export default [
     element: (
       <DashboardLayout
         pageTitle={'/Dashboard/Orders'}
-        Component={Products}
+        Component={Orders}
         links={SellerLinks}
       />
     ),
@@ -137,7 +142,7 @@ export default [
     element: (
       <DashboardLayout
         pageTitle={'/Dashboard/Stats'}
-        Component={Products}
+        Component={Stats}
         links={SellerLinks}
       />
     ),
@@ -147,7 +152,7 @@ export default [
     element: (
       <DashboardLayout
         pageTitle={'/Dashboard/Finance'}
-        Component={Products}
+        Component={Finance}
         links={SellerLinks}
       />
     ),
@@ -157,17 +162,27 @@ export default [
     element: (
       <DashboardLayout
         pageTitle={'/Dashboard/Settings'}
-        Component={Products}
+        Component={Settings}
         links={SellerLinks}
       />
     ),
   },
+  // {
+  //   path: '/Dashboard/Marketing',
+  //   element: (
+  //     <DashboardLayout
+  //       pageTitle={'/Dashboard/Marketing'}
+  //       Component={Products}
+  //       links={SellerLinks}
+  //     />
+  //   ),
+  // },
   {
-    path: '/Dashboard/Marketing',
+    path: '/Dashboard/Help',
     element: (
       <DashboardLayout
-        pageTitle={'/Dashboard/Marketing'}
-        Component={Products}
+        pageTitle={'/Dashboard/Help'}
+        Component={Helps}
         links={SellerLinks}
       />
     ),

@@ -38,11 +38,11 @@ export default [
     path: '/Dashboard/Settings',
     title: 'Settings',
   },
-  {
-    icon: <FaShop />,
-    path: '/Dashboard/Marketing',
-    title: 'Marketing',
-  },
+  // {
+  //   icon: <FaShop />,
+  //   path: '/Dashboard/Marketing',
+  //   title: 'Marketing',
+  // },
   {
     icon: <IoHelpCircleOutline />,
     path: '/Dashboard/Help',
