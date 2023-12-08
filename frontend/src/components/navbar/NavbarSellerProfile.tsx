@@ -5,7 +5,7 @@ import {MdOutlineLogout} from 'react-icons/md';
 import {RiSettings3Line} from 'react-icons/ri';
 import {LuCreditCard} from 'react-icons/lu';
 import {GrNotes} from 'react-icons/gr';
-import {logoutUser, refreshLog} from '../../api/auth';
+import {logoutUser} from '../../api/auth';
 import {useDispatch} from 'react-redux';
 import {router} from '../../App';
 import {store} from '../../app/store';
@@ -17,10 +17,7 @@ const NavbarSellerProfile = () => {
   const dispatch = useDispatch();
   const [user, setUser] = useState<Partial<User> | null>({} as User);
   useEffect(() => {
-    refreshLog({} as User, dispatch).then(() => {
-      setUser(store.getState().auth.user);
-      console.log(store.getState().auth.user);
-    });
+    setUser(store.getState().auth.user);
   }, [store.getState().auth.user]);
   return (
     <div className='absolute top-[135px] right-56 font-secondary w-64 h-auto bg-colorBeigeLight border-t-4 border-b-4 border-colorGold px-4 py-4 z-[999]'>

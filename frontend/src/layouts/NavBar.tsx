@@ -15,7 +15,6 @@ export default function NavBar(): React.ReactElement {
   useEffect(() => {
     refreshLog({} as User, dispatch).then(() => {
       setUser(store.getState().auth.user);
-      console.log(store.getState().auth.user);
     });
   }, [store.getState().auth.user]);
 
