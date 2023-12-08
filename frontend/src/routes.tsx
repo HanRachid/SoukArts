@@ -15,11 +15,19 @@ import ReviewPayment from './pages/ReviewPayment';
 import PaymentLayout from './layouts/PaymentLayout';
 import Favorite from './pages/Favorite';
 import DashboardLayout from './layouts/DashboardLayout';
-import Dashboard from './views/Dashboard';
-import Products from './views/Products';
+import Dashboard from './views/sellerdashboard/Dashboard';
+import Products from './views/sellerdashboard/Products';
 import AddNewProduct from './components/products/AddNewProduct';
-import Cart from './pages/Cart';
 
+import SellerLinks from './dashboardlinks/SellerLinks';
+import OrdersDetails from './components/orders/OrdersDetails';
+import Cart from './pages/Cart';
+import Becomeaseller from './layouts/BecomeASeller';
+import Welcomepage from './views/becomeaseller/Welcomepage';
+import Shop from './views/becomeaseller/Shop';
+import Sellerpayment from './views/becomeaseller/Sellerpayment';
+import StoreSeller from './pages/StoreSeller';
+import Pending from './views/becomeaseller/Pending';
 export default [
   {
     path: '/',
@@ -63,6 +71,23 @@ export default [
     element: <PaymentLayout Component={ReviewPayment} activeStep={2} />,
   },
   {
+    path: '/becomeaseller',
+    element: <Becomeaseller Component={Welcomepage} activeStep={0} />,
+  },
+  {
+    path: '/shop',
+    element: <Becomeaseller Component={Shop} activeStep={1} />,
+  },
+
+  {
+    path: '/sellerpayment',
+    element: <Becomeaseller Component={Sellerpayment} activeStep={2} />,
+  },
+  {
+    path: '/pending',
+    element: <Becomeaseller Component={Pending} activeStep={3} />,
+  },
+  {
     path: '/products/:product',
     element: <GlobalLayout Component={ProductDetail} hasLayout={true} />,
   },
@@ -79,37 +104,67 @@ export default [
     element: <GlobalLayout Component={Favorite} hasLayout={true} />,
   },
   {
+    path: '/Cart',
+    element: <GlobalLayout Component={Cart} hasLayout={true} />,
+  },
+  {
     path: '/dashboard',
-    element: <DashboardLayout pageTitle={'Dashboard'} Component={Dashboard} />,
+    element: (
+      <DashboardLayout
+        pageTitle={'Dashboard'}
+        Component={Dashboard}
+        links={SellerLinks}
+      />
+    ),
   },
   {
     path: '/Dashboard/Products',
     element: (
-      <DashboardLayout pageTitle={'Dashboard/Products'} Component={Products} />
+      <DashboardLayout
+        pageTitle={'Dashboard/Products'}
+        Component={Products}
+        links={SellerLinks}
+      />
     ),
   },
   {
     path: '/Dashboard/Orders',
     element: (
-      <DashboardLayout pageTitle={'/Dashboard/Orders'} Component={Products} />
+      <DashboardLayout
+        pageTitle={'/Dashboard/Orders'}
+        Component={Products}
+        links={SellerLinks}
+      />
     ),
   },
   {
     path: '/Dashboard/Stats',
     element: (
-      <DashboardLayout pageTitle={'/Dashboard/Stats'} Component={Products} />
+      <DashboardLayout
+        pageTitle={'/Dashboard/Stats'}
+        Component={Products}
+        links={SellerLinks}
+      />
     ),
   },
   {
     path: '/Dashboard/Finance',
     element: (
-      <DashboardLayout pageTitle={'/Dashboard/Finance'} Component={Products} />
+      <DashboardLayout
+        pageTitle={'/Dashboard/Finance'}
+        Component={Products}
+        links={SellerLinks}
+      />
     ),
   },
   {
     path: '/Dashboard/Settings',
     element: (
-      <DashboardLayout pageTitle={'/Dashboard/Settings'} Component={Products} />
+      <DashboardLayout
+        pageTitle={'/Dashboard/Settings'}
+        Component={Products}
+        links={SellerLinks}
+      />
     ),
   },
   {
@@ -118,6 +173,7 @@ export default [
       <DashboardLayout
         pageTitle={'/Dashboard/Marketing'}
         Component={Products}
+        links={SellerLinks}
       />
     ),
   },
@@ -127,7 +183,22 @@ export default [
       <DashboardLayout
         pageTitle={'Dashboard/Products'}
         Component={AddNewProduct}
+        links={SellerLinks}
       />
     ),
+  },
+  {
+    path: 'Dashboard/orders/ordersDetails',
+    element: (
+      <DashboardLayout
+        pageTitle={'Dashboard/Orders'}
+        Component={OrdersDetails}
+        links={SellerLinks}
+      />
+    ),
+  },
+  {
+    path: '/Store',
+    element: <GlobalLayout Component={StoreSeller} hasLayout={true} />,
   },
 ] as RouteObj[];

@@ -4,7 +4,8 @@ import {useEffect} from 'react';
 import {refreshLog} from './api/auth.ts';
 import {useDispatch} from 'react-redux';
 import {User} from '../types';
-import {store} from './components/dashboard/app/store.ts';
+import {store} from './app/store.ts';
+import {getAllProducts} from './api/products.ts';
 export const router = createBrowserRouter(routes);
 
 export default function App(): React.ReactElement {
@@ -12,6 +13,9 @@ export default function App(): React.ReactElement {
 
   useEffect(() => {
     refreshLog({} as User, dispatch).then((result) => {
+      console.log(result);
+    });
+    getAllProducts(dispatch).then((result) => {
       console.log(result);
     });
   }, [store.getState().auth.user]);

@@ -10,8 +10,9 @@ import {Link} from 'react-router-dom';
 import {useEffect, useState} from 'react';
 import {loginUser} from '../api/auth';
 import {useDispatch} from 'react-redux';
-import {store} from '../components/dashboard/app/store';
+import {store} from '../app/store';
 import {User} from '../../types';
+import {router} from '../App';
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -31,7 +32,9 @@ export default function Login() {
 
     validationSchema,
     onSubmit: (values) => {
-      loginUser(values, dispatch);
+      loginUser(values, dispatch).then(() => {
+        router.navigate('/');
+      });
     },
     validateOnChange: true,
   });

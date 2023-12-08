@@ -41,6 +41,7 @@ authRouter.post(
       username: username,
       email: email,
       password: hashedPassword,
+      role: 'user',
     });
     res.status(200).send(register);
   }
@@ -64,7 +65,6 @@ authRouter.post(
 authRouter.post(
   '/logout',
   (req: Request, res: Response, next: NextFunction) => {
-    console.log(req.user);
     if (req.isAuthenticated()) {
       req.logout(() => {
         res.send({user: req.user});

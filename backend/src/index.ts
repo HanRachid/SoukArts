@@ -2,8 +2,7 @@ import {connectToDB} from './config/db';
 import usersRouter from './routes/users';
 import authRouter from './routes/auth';
 import productRouter from './routes/products';
-import OrderModel from './models/OrderModel';
-import UserModel from './models/UserModel';
+import sellerRouter from './routes/seller';
 const express = require('express');
 const cors = require('cors');
 
@@ -18,10 +17,10 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
 app.use('/users', usersRouter);
 app.use('/auth', authRouter);
 app.use('/products', productRouter);
+app.use('/seller', sellerRouter);
 
 app.listen(3000, (): void => {
   console.log('server running on port ' + port);

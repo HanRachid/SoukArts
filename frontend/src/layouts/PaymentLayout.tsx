@@ -1,6 +1,5 @@
-
 import Footer from './Footer';
-import HeaderPayment from '../components/HeaderPayment';
+import HeaderPayment from '../components/payment/HeaderPayment';
 
 export default function GlobalLayout({
   Component,
@@ -12,12 +11,12 @@ export default function GlobalLayout({
   return (
     <>
       <div className='flex flex-col min-h-screen'>
-         <HeaderPayment isActive={activeStep} />
+        <HeaderPayment isActive={activeStep} />
 
         <div className='flex-1 flex flex-col'>
           <Component />
         </div>
-      <Footer />
+        <Footer />
       </div>
     </>
   );

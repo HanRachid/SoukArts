@@ -17,7 +17,7 @@ import {router} from '../App';
 export default function Register() {
   const dispatch = useDispatch();
   const onSubmit = (
-    values: User,
+    values: Partial<User>,
     {setSubmitting}: {setSubmitting: (isSubmitting: boolean) => void}
   ) => {
     registerUser(values)
@@ -25,7 +25,9 @@ export default function Register() {
         loginUser(
           {username: values.username, password: values.password},
           dispatch
-        );
+        ).then(() => {
+          router.navigate('/');
+        });
       })
       .catch((error) => {
         console.error(error);

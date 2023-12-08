@@ -1,28 +1,40 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import Logo from '../assets/logolight.svg';
 import {useLocation} from 'react-router-dom';
 import {IoNotifications, IoSearch} from 'react-icons/io5';
 import {RiMenu2Line} from 'react-icons/ri';
 import {BiMessageSquareDetail} from 'react-icons/bi';
 import {FiLogOut} from 'react-icons/fi';
-import links from './Links';
 import {router} from '../App';
+import {DashboardLink, User} from '../../types';
+import {store} from '../app/store';
+import {refreshLog} from '../api/auth';
+import {useDispatch} from 'react-redux';
 
 export default function DashboardLayout({
   Component,
   pageTitle,
+  links,
 }: {
   Component: React.ComponentType;
   pageTitle: String;
+  links: DashboardLink[];
 }) {
   const location = useLocation();
   const currentPage = location.pathname.slice(1);
 
   const [showSidebar, setShowSidebar] = useState(false);
-
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
   };
+  const dispatch = useDispatch();
+  useEffect(() => {
+    refreshLog({} as User, dispatch).then(() => {
+      if (!store.getState().auth.user) {
+        router.navigate('/login');
+      }
+    });
+  }, [store.getState().auth.user]);
 
   const activeLinkStyle = (title: string) => {
     const route = title === 'Dashboard' ? 'dashboard' : 'dashboard/' + title;
@@ -38,7 +50,7 @@ export default function DashboardLayout({
       : 'text-black';
   };
   return (
-    <>
+    <div className='bg-gray-50'>
       {showSidebar && (
         <div
           onClick={toggleSidebar}
@@ -54,11 +66,16 @@ export default function DashboardLayout({
       >
         <div>
           <div className='-mx-6 px-6 py-4 w-full flex justify-center'>
-            <img src={Logo} className='w-32' alt='tailus logo' />
+            <img
+              src={Logo}
+              onClick={() => router.navigate('/')}
+              className='w-32'
+              alt='tailus logo'
+            />
           </div>
           <ul className='mt-8 space-y-2 tracking-wide'>
-            {links.map(({icon, title, path}) => (
-              <li key={title}>
+            {links.map(({icon, title, path}: DashboardLink) => (
+              <li key={title} className='cursor-pointer'>
                 <div
                   onClick={() => {
                     router.navigate(path);
@@ -83,7 +100,7 @@ export default function DashboardLayout({
       </aside>
       <div className='mb-6 lg:max-w-[75%] xl:max-w-[80%] 2xl:max-w-[85%] ml-auto bg-gray-50'>
         {/* TODO: HADI NAVBAR */}
-        <nav className='sticky top-0 h-16 border-b bg-white lg:py-2.5'>
+        <nav className='relative top-0 h-16 border-b bg-white lg:py-2.5 z-999'>
           <div className='flex items-center justify-between space-x-4 px-6 2xl:container'>
             <h5 className='text-2xl font-medium text-colorBlack lg:block hidden capitalize font-primary'>
               {pageTitle}
@@ -125,13 +142,12 @@ export default function DashboardLayout({
             </div>
           </div>
         </nav>
-        {/* TODO: HADI BLAST CONTENT */}
-        <div className='px-6 pt-6 2xl:container bg-gray-50'>
+        <div className='px-6 pt-6 2xl:container bg-gray-50 h-full -mb-16'>
           <div className='flex flex-col items-center justify-center max-w-7xl mx-auto'>
             <Component />
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

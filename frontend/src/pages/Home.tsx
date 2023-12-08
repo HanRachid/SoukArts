@@ -1,11 +1,11 @@
-import Header from '../components/Header';
-import FeaturesShop from '../components/FeaturesShop';
-import Categories from '../components/Categories';
-import ShopByStyle from '../components/ShopByStyle';
-import PopularProducts from '../components/PopularProducts';
-import EarningWithSukarts from '../components/EarnWithSoukarts';
-import AboutSoukarts from '../components/AboutSoukarts';
-import OurValues from '../components/OurValues';
+import Header from '../components/home/Header';
+import FeaturesShop from '../components/home/FeaturesShop';
+import Categories from '../components/home/Categories';
+import ShopByStyle from '../components/home/ShopByStyle';
+import PopularProducts from '../components/home/PopularProducts';
+import EarningWithSukarts from '../components/home/EarnWithSoukarts';
+import AboutSoukarts from '../components/home/AboutSoukarts';
+import OurValues from '../components/home/OurValues';
 
 export default function Home() {
   return (

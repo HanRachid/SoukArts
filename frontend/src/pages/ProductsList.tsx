@@ -1,13 +1,13 @@
 import {useParams} from 'react-router-dom';
 
 // import Components
-import Filter from '../components/Filter';
-import HeroSlider from '../components/HeroSlider';
-import SelectOptions from '../components/Select';
-import ProductCard from '../components/ProductCard';
-import PopularCard from '../components/PopularCard';
+import Filter from '../components/categoryproducts/Filter';
+import HeroSlider from '../components/categoryproducts/HeroSlider';
+import SelectOptions from '../components/categoryproducts/Select';
+import ProductCard from '../components/categoryproducts/ProductCard';
+import PopularCard from '../components/categoryproducts/PopularCard';
 import {Pagination} from '@mui/material';
-import RecentCard from '../components/RecentCard';
+import RecentCard from '../components/categoryproducts/RecentCard';
 
 // import Images
 import categories from './data/categories';
