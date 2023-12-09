@@ -27,6 +27,9 @@ import Shop from './views/becomeaseller/Shop';
 import Sellerpayment from './views/becomeaseller/Sellerpayment';
 import StoreSeller from './pages/StoreSeller';
 import Pending from './views/becomeaseller/Pending';
+import LoginAdmin from './components/admin/SellerStatus';
+import AdminLayout from './layouts/AdmindLayout';
+import AdminLinks from './dashboardlinks/AdminLinks';
 export default [
   {
     path: '/',
@@ -102,6 +105,19 @@ export default [
     path: '/Cart',
     element: <GlobalLayout Component={Cart} hasLayout={true} />,
   },
+
+  /************Start admin */
+  {
+    path: '/Admin',
+    element: (
+      <AdminLayout
+        pageTitle={'Home Admin'}
+        Component={LoginAdmin}
+        links={AdminLinks}
+      />
+    ),
+  },
+  /************End admin */
   {
     path: '/dashboard',
     element: (

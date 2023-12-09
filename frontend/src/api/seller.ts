@@ -24,3 +24,23 @@ export async function addSeller(seller: Seller) {
 
   return response;
 }
+
+export async function getPendingSeller() {
+  const url: string = endpoint + '/getPendingSeller';
+
+  const params: RequestInit = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    mode: 'cors',
+  };
+
+  const Sellers = await fetch(url, params);
+  const response = await Sellers.json();
+  if (response.error) {
+    
+  }
+console.log(response);
+  return response;
+}

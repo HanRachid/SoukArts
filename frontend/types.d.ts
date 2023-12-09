@@ -75,7 +75,11 @@ type ProductUrl = {
   images: CloudinaryImage[];
   formData: FormData[];
 };
+
 type DashboardLink = {icon: ReactNode; path: string; title: string};
+
+type AdminLink = {icon: ReactNode; path: string; title: string};
+
 type Category = {
   name: string;
   Subcategories: string[];
@@ -95,3 +99,4 @@ type Seller = {
   created_at: Date;
   updated_at: Date;
 };
+

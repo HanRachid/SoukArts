@@ -40,4 +40,10 @@ sellerRouter.post('/addseller', async (req: Request, res: Response) => {
   res.send(newSeller);
 });
 
+sellerRouter.get('/getPendingSeller', async (req: Request, res: Response) => {
+  const sellers = await new SellerModel().getAllModels();
+  console.log(sellers);
+  res.send(sellers);
+});
+
 export default sellerRouter;
