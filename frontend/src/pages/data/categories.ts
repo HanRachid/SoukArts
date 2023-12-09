@@ -1,12 +1,14 @@
-// images for the heroSlider
+// images for the heroSlider category rugs
 import rug1 from "../../assets/rugs/image 1.webp";
 import rug2 from "../../assets/rugs/image 5.webp";
 import rug3 from "../../assets/rugs/image 3.jfif";
 import rug4 from "../../assets/rugs/image 4.jpg";
+// images for the heroSlider category Poufs
 import pouf1 from "../../assets/Poufs/pouf 1.webp";
 import pouf2 from "../../assets/Poufs/Pouf 2.jpg";
 import pouf3 from "../../assets/Poufs/pouf 3.webp";
 import pouf4 from "../../assets/Poufs/pouf 4.jpg";
+// images for the heroSlider category Lamps
 
 // images for the subcategories rugs
 import azilal from "../../assets/rugs/TYPES DE TAPIS/AZILAL.webp";
