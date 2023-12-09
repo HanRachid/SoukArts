@@ -4,27 +4,53 @@ import {
   CheckCircleIcon, 
   XCircleIcon,
 } from '@heroicons/react/24/outline';
+import ModalComponent from '../../views/alert/ModalComponent';
+import { Seller } from '../../../types';
+
 
 const LoginAdmin: React.FC = () => {
+  const [sellers, setSellers] = useState([]);
+  const [hoveredSeller, setHoveredSeller] = useState<Seller | null>(null);
+  const [isHovering, setIsHovering] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-    const [sellers, setSellers] = useState([]);
+  useEffect(() => {
+    const fetchSellers = async () => {
+      try {
+        const response = await getPendingSeller();
+        setSellers(response);
+      } catch (error) {
+        console.error('Error fetching sellers: ', error);
+      }
+    };
 
-    useEffect(() => {
-        const fetchSellers = async () => {
-            try {
-                const response = await getPendingSeller();
-                setSellers(response);
-            } catch (error) {
-                console.error('Error fetching sellers: ', error);
-            }
-        };
+    fetchSellers();
+  }, []);
 
-        fetchSellers();
-    }, []);
-    
+  const handleMouseEnter = (e: React.MouseEvent, sellerName: Seller) => {
+    const viewportWidth = window.innerWidth;
+    const cursorX = e.clientX;
+    const spaceLeft = cursorX;
+    const spaceRight = viewportWidth - cursorX;
+    const isSpaceOnRight = spaceRight >= spaceLeft;
+
+    setIsHovering(true);
+    setMousePosition({
+      x: isSpaceOnRight ? cursorX : cursorX - 500, // Adjust width as needed
+      y: e.clientY,
+    });
+    setHoveredSeller(sellerName);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovering(false);
+    setHoveredSeller(null);
+  };
 
     return (
+      
         <div className="flex flex-col h-screen">
+
         <div className="flex-grow overflow-auto">
             <div className="min-w-full border border-gray-200 rounded-lg">
                 <table className="min-w-full divide-y divide-gray-200 bg-white text-sm">
@@ -40,31 +66,43 @@ const LoginAdmin: React.FC = () => {
 
       <tbody className="divide-y divide-gray-200">
       {sellers.map(seller => (
-                   
-                   <tr>
-                   <td className="whitespace-nowrap px-28 py-2 font-medium text-gray-900 text-center">{seller.shop_name}</td>
-                   <td className=" sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-14 py-2 text-gray-700 overflow-hidden text-ellipsis align-middle max-w-[90%] text-center">{seller.cardHolder}</td>
-                   <td className=" sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-14 py-2 text-gray-700 overflow-hidden text-ellipsis align-middle max-w-[90%] text-center">{seller.status}</td>
-                   <td className=" sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-14 py-2 text-gray-700 overflow-hidden text-ellipsis align-middle max-w-[90%] text-center">{seller.business_email}</td>
-                   <td className=" sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-14 py-2 text-gray-700 overflow-hidden text-ellipsis align-middle max-w-[90%] text-center"><span className="inline-flex overflow-hidden rounded-md border bg-white shadow-sm">
-                        <button
-                          className="inline-block border-e p-3 text-gray-700 hover:bg-green-300 hover:text-white focus:relative"
-                          title="accept seller"
-                          onClick={() => {}}
-                        >
-                          <CheckCircleIcon className='h-6 w-6'/>
-                        </button>
+                
+    <tr
+    onMouseEnter={(e) => handleMouseEnter(e, seller)}
+    onMouseLeave={handleMouseLeave}
+    key={seller.user_id}
+    >
+      <td className="whitespace-nowrap px-28 py-2 font-medium text-gray-900 text-center">{seller.shop_name}</td>
+      <td className="sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-14 py-2 text-gray-700 overflow-hidden text-ellipsis align-middle max-w-[90%] text-center">{seller.cardHolder}</td>
+      <td className="sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-14 py-2 text-gray-700 overflow-hidden text-ellipsis align-middle max-w-[90%] text-center">{seller.status}</td>
+      <td className="sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-14 py-2 text-gray-700 overflow-hidden text-ellipsis align-middle max-w-[90%] text-center">{seller.business_email}</td>
+      <td className="sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-14 py-2 text-gray-700 overflow-hidden text-ellipsis align-middle max-w-[90%] text-center">
+        <span className="inline-flex overflow-hidden rounded-md border bg-white shadow-sm">
+          <button
+            className="inline-block border-e p-3 text-gray-700 hover:bg-green-300 hover:text-white focus:relative"
+            title="accept seller"
+            onClick={()=>{}}
+          >
+            <CheckCircleIcon className='h-6 w-6'/>
+          </button>
 
-                        <button
-                          className="inline-block border-e p-3 text-gray-700 hover:bg-red-500 hover:text-white focus:relative"
-                          title="reject seller"
-                          onClick={() => {}}
-                        >
-                          <XCircleIcon className='h-6 w-6'/>
-                        </button>
-                      </span>
-                  </td>
-                 </tr>
+          <button
+            className="inline-block border-e p-3 text-gray-700 hover:bg-red-500 hover:text-white focus:relative"
+            title="reject seller"
+            onClick={()=>{}}
+          >
+            <XCircleIcon className='h-6 w-6'/>
+          </button>
+        </span>
+      </td>
+
+      {isHovering && (
+        <ModalComponent 
+          content={hoveredSeller}
+          position={mousePosition}
+        />
+      )}
+    </tr>
                
            ))}
         
