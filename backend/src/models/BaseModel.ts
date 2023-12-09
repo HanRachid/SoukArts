@@ -1,5 +1,7 @@
 import {Document} from 'mongodb';
 import mongoose, {Model, Schema, Types} from 'mongoose';
+import UserModel from './UserModel';
+import SellerModel from './SellerModel';
 
 export default class BaseModel<T extends Document> {
   private model: Model<T>;
@@ -48,11 +50,29 @@ export default class BaseModel<T extends Document> {
   async getAllModels(): Promise<T[]> {
     return this.model.find({}).exec();
   }
-  async getAllModelsPopulate(modelName: string): Promise<T[]> {
+  async getAllModelsPopulate(modelName: string, schema: Schema): Promise<T[]> {
+    this.registerModel(modelName, schema);
     return this.model
       .find({})
       .populate(modelName + '_id')
       .exec();
+  }
+  async getAllModelsPopulateTwice(
+    modelNameOne: string,
+    schemaOne: Schema,
+    modelNameTwo: string,
+    schemaTwo: Schema
+  ): Promise<T[]> {
+    this.registerModel(modelNameOne, schemaOne);
+    this.registerModel(modelNameTwo, schemaTwo);
+    return this.model
+      .find({})
+      .populate(modelNameOne + '_id')
+      .populate(modelNameTwo + '_id')
+      .exec();
+  }
+  async getAllProducts(): Promise<T[]> {
+    return this.model.find({}).populate('user_id').populate('seller_id').exec();
   }
   async findByQuery(query: Record<string, any>): Promise<T | null> {
     return this.model.findOne(query).exec();

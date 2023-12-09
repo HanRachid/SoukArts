@@ -65,8 +65,16 @@ productRouter.get('/product/:id', async (req: Request, res: Response) => {
 });
 
 productRouter.get('/allproducts', async (req: Request, res: Response) => {
-  const allProducts = await new ProductModel().getAllModels();
-
+  /*  const allProducts = await new ProductModel().getAllModelsPopulateTwice(
+    'user',
+    'seller'
+  );*/
+  const allProducts = await new ProductModel().getAllModelsPopulateTwice(
+    'user',
+    UserModel.schema,
+    'seller',
+    UserModel.schema
+  );
   res.send(allProducts);
 });
 

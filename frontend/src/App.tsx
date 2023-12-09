@@ -4,7 +4,7 @@ import {refreshLog} from './api/auth.ts';
 import {useDispatch} from 'react-redux';
 import {setLoginState} from './features/auth/authSlice.ts';
 import {User} from '../types';
-import {getAllProducts, getProducts} from './api/products.ts';
+import {getAllProducts} from './api/products.ts';
 import {setProductsState} from './features/products/productsSlice.ts';
 export const router = createBrowserRouter(routes);
 
@@ -12,9 +12,10 @@ export default function App(): React.ReactElement {
   const dispatch = useDispatch();
   refreshLog({} as User).then((result) => {
     dispatch(setLoginState(result));
-    console.log(result);
   });
   getAllProducts().then((result) => {
+    console.log(result);
+
     dispatch(setProductsState(result));
   });
 

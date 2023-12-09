@@ -1,11 +1,9 @@
 import Footer from './Footer';
 import HeaderBecomeaseller from '../components/becomeaseller/HeaderBecomeaseller';
-import {useEffect, useState} from 'react';
-import {store} from '../app/store';
+import {useState} from 'react';
 import {router} from '../App';
-import {refreshLog} from '../api/auth';
-import {Seller, User} from '../../types';
-import {useDispatch} from 'react-redux';
+import {Seller} from '../../types';
+import {useSelector} from 'react-redux';
 interface SellerProps {
   seller: Seller;
   setSeller: React.Dispatch<React.SetStateAction<Seller>>;
@@ -17,17 +15,14 @@ export default function BecomeASeller({
   Component: React.ComponentType<SellerProps>;
   activeStep: number;
 }): React.ReactElement {
-  const dispatch = useDispatch();
   const [seller, setSeller] = useState<Seller>({} as Seller);
-  useEffect(() => {
-    refreshLog({} as User, dispatch).then((res) => {
-      if (res.user && res.user.role === 'user') {
-        store.dispatch({type: 'user/setUser', payload: res});
-      } else {
-        router.navigate('/');
-      }
-    });
-  });
+  const user = useSelector((state: any) => state.auth.user.user);
+  console.log(user);
+  if (!user) {
+    router.navigate('/login');
+  } else if (user!.role! !== 'Client') {
+    router.navigate('/');
+  }
   return (
     <>
       <div className='flex flex-col min-h-screen'>

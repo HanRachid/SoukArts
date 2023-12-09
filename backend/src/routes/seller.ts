@@ -22,8 +22,11 @@ sellerRouter.post('/addseller', async (req: Request, res: Response) => {
     language,
     expirationDate,
   } = req.body;
-  console.log(req.body);
-
+  const checkExists = await new SellerModel().findByQuery({user_id: user_id});
+  if (checkExists) {
+    res.send('Seller already exists');
+    return;
+  }
   const newSeller = await new SellerModel().create({
     business_email: business_email,
     user_id: user_id,
@@ -35,7 +38,11 @@ sellerRouter.post('/addseller', async (req: Request, res: Response) => {
     language: language,
     status: 'pending',
   });
-  await new UserModel().update(user_id, {role: 'Pending'});
+  const updatedUser = await new UserModel().update(user_id, {
+    role: 'Pending',
+    seller_id: newSeller._id,
+  });
+  console.log(updatedUser);
 
   res.send(newSeller);
 });

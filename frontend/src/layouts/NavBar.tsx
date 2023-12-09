@@ -67,14 +67,14 @@ const Navbar = () => {
           </div>
         </div>
 
-        <div className='navbar-center flex items-center xl:h-16'>
+        <Link to='/' className='navbar-center flex items-center xl:h-16'>
           <img src={logolight} alt='Logo' className='w-48 xl:w-52 xl:h-16' />
-        </div>
+        </Link>
 
         {/* RACHID ici liens de navigation ecran pc*/}
         <div className='navbar-end w-1/3 xl:block hidden mt-10 pb-10'>
           {user! && user!.role! === 'Seller' && <NavigationSeller />}
-          {user! && user!.role! === 'user' && <Navigation />}
+          {user! && user!.role! === 'Client' && <Navigation />}
           {user! && user!.role! === 'Pending' && <NavigationPending />}
           {(!user! || !user!.role) && <Navigation />}
         </div>

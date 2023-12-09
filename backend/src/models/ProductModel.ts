@@ -2,6 +2,8 @@ import {Schema} from 'mongoose';
 import BaseModel from './BaseModel';
 import ProductInterface from './ProductInterface';
 import {Types} from 'mongoose';
+import UserModel from './UserModel';
+import SellerModel from './SellerModel';
 
 export default class ProductModel extends BaseModel<ProductInterface> {
   static schema = new Schema({

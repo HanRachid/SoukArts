@@ -41,7 +41,7 @@ authRouter.post(
       username: username,
       email: email,
       password: hashedPassword,
-      role: 'user',
+      role: 'Client',
     });
     res.status(200).send(register);
   }
@@ -60,6 +60,17 @@ authRouter.post(
     successRedirect: '/auth/success',
     failureRedirect: '/auth/failure',
   })
+);
+
+authRouter.post(
+  '/refreshlogin',
+  (req: Request, res: Response, next: NextFunction) => {
+    if (req.isAuthenticated()) {
+      res.send({user: req.user});
+    } else {
+      next();
+    }
+  }
 );
 
 authRouter.post(

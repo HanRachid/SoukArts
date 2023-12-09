@@ -47,7 +47,8 @@ export async function loginUser(user: Partial<User>) {
 }
 
 export async function refreshLog(user: User) {
-  const url = endpoint + '/login';
+  const url = endpoint + '/refreshlogin';
+  console.log(url);
 
   const params: RequestInit = {
     method: 'POST',

@@ -12,6 +12,7 @@ export default interface SellerInterface extends Document {
   cvc: number;
   language: string;
   status: string;
+  description: string;
   created_at: Date;
   updated_at: Date;
 }

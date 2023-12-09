@@ -6,10 +6,8 @@ import {RiMenu2Line} from 'react-icons/ri';
 import {BiMessageSquareDetail} from 'react-icons/bi';
 import {FiLogOut} from 'react-icons/fi';
 import {router} from '../App';
-import {DashboardLink, User} from '../../types';
-import {store} from '../app/store';
-import {refreshLog} from '../api/auth';
-import {useDispatch, useSelector} from 'react-redux';
+import {DashboardLink} from '../../types';
+import {useSelector} from 'react-redux';
 
 export default function DashboardLayout({
   Component,
@@ -30,7 +28,8 @@ export default function DashboardLayout({
   const user = useSelector((state: any) =>
     state.auth.user ? state.auth.user.user : null
   );
-  if (user.role !== 'Seller') {
+
+  if (!user || user!.role! !== 'Seller') {
     router.navigate('/');
   }
 
