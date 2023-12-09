@@ -76,7 +76,7 @@ authRouter.post(
 );
 
 authRouter.get('/success', (req: Request, res: Response) => {
-  res.send({user: {...req.user, ...req.session.cookie}});
+  res.send({user: req.user});
 });
 
 authRouter.get('/:id/forgot', (req: Request, res: Response) => {

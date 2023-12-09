@@ -42,7 +42,7 @@ export async function loginUser(user: Partial<User>) {
 
   const loginResponse = await fetch(url, params);
   const response = await loginResponse.json();
-
+  console.log(response);
   return response;
 }
 

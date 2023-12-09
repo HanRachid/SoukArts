@@ -11,6 +11,7 @@ import {store} from '../../app/store';
 import {deleteProduct, getProducts} from '../../api/products';
 import {ProductUrl} from '../../../types';
 import EditProduct from '../../components/products/EditProduct';
+import {useSelector} from 'react-redux';
 export default function Products() {
   const [isEdit, setIsEdit] = useState(false);
   const [products, setProducts] = useState<ProductUrl[]>([]);
@@ -32,20 +33,14 @@ export default function Products() {
     secondary_color: '',
     formData: [],
   });
-  useEffect(() => {
-    const user = store.getState().auth.user;
-
-    if (user) {
-      getProducts(user._id).then((res) => {
-        console.log(res);
-
-        setProducts(res);
-      });
-    }
-  }, [store.getState().auth.user]);
+  const productses = useSelector((state: any) =>
+    state.auth.user ? state.auth.user.user : null
+  );
   async function handleDelete(id: string) {
     deleteProduct(id).then(() => {
-      const user = store.getState().auth.user;
+      const user = useSelector((state: any) =>
+        state.auth.user ? state.auth.user.user : null
+      );
 
       getProducts(user!._id).then((res) => {
         setProducts(res);

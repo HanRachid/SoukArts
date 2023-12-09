@@ -11,9 +11,8 @@ export const router = createBrowserRouter(routes);
 export default function App(): React.ReactElement {
   const dispatch = useDispatch();
   refreshLog({} as User).then((result) => {
-    console.log(result);
-
     dispatch(setLoginState(result));
+    console.log(result);
   });
   getAllProducts().then((result) => {
     dispatch(setProductsState(result));
