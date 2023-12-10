@@ -11,7 +11,7 @@ export default function GlobalLayout({
 }): React.ReactElement {
   return (
     <>
-      <div className='flex flex-col min-h-screen'>
+      <div className='flex flex-col min-h-screen justify-between'>
         {hasLayout && <PromoNav />}
 
         {hasLayout && <NavBar />}

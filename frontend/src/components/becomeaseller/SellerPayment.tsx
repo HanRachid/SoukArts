@@ -6,8 +6,11 @@ import {UserCircleIcon, CreditCardIcon} from '@heroicons/react/24/outline';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faApple} from '@fortawesome/free-brands-svg-icons';
 import {router} from '../../App';
-import {Seller} from '../../../types';
+import {Seller, User} from '../../../types';
 import {addSeller} from '../../api/seller';
+import {useDispatch, useSelector} from 'react-redux';
+import {refreshLog} from '../../api/auth';
+import {setLoginState} from '../../features/auth/authSlice';
 
 const SellerPayment = ({
   isSeller = false,
@@ -31,16 +34,20 @@ const SellerPayment = ({
       ...prevData,
       [name]: value,
     }));
+    console.log({...formData, ...seller});
   };
-
+  const user = useSelector((state: any) => state.auth.user.user);
+  const dispatch = useDispatch();
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     setSeller({...formData, ...seller});
     const newSeller = await addSeller({...formData, ...seller});
-    console.log({...formData, ...seller});
+    console.log({...formData, ...seller, user_id: user!._id});
 
     console.log(newSeller);
-
+    refreshLog({} as User).then((result) => {
+      dispatch(setLoginState(result));
+    });
     router.navigate('/pending');
   };
   return (

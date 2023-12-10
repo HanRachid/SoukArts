@@ -5,11 +5,14 @@ import React, {Fragment} from 'react';
 import {logoutUser} from '../../api/auth';
 import {useDispatch} from 'react-redux';
 import {router} from '../../App';
+import {setLogoutState} from '../../features/auth/authSlice';
 export default function ProfileDropdown(): React.ReactElement {
   const dispatch = useDispatch();
-
   function handleLogout() {
-    logoutUser(dispatch);
+    logoutUser().then(() => {
+      dispatch(setLogoutState());
+      router.navigate('/');
+    });
   }
 
   function handlePrivacy() {
@@ -25,7 +28,7 @@ export default function ProfileDropdown(): React.ReactElement {
   ];
 
   return (
-    <div className='flex  items-center justify-between   rounded-3xl outline outline-3 hover:outline-2 outline-colorBeige hover:outline-colorGold '>
+    <div className='flex  items-center justify-between rounded-3xl outline outline-3 hover:outline-2 outline-colorBeige hover:outline-colorGold '>
       <Menu as={'div' as React.ElementType}>
         <div className=' flex  p-1'>
           <Menu.Button>

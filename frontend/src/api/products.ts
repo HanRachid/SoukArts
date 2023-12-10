@@ -1,8 +1,4 @@
-import {Dispatch} from 'react';
 import {ProductUrl} from '../../types';
-import {store} from '../app/store';
-import {AnyAction} from '@reduxjs/toolkit';
-import {setProductsState} from '../features/products/productsSlice';
 const endpoint = import.meta.env.VITE_API_ENDPOINT + '/products';
 
 export async function addProduct(product: ProductUrl) {
@@ -105,10 +101,10 @@ export async function getProducts(id: string) {
   return result;
 }
 
-export async function getAllProducts(dispatch: Dispatch<AnyAction>) {
+export async function getAllProducts() {
   const url: string = endpoint + '/allproducts/';
   const product = await fetch(url);
   const result = await product.json();
-  store.dispatch(setProductsState(result));
+
   return result;
 }

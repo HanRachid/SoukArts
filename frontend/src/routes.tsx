@@ -18,6 +18,7 @@ import DashboardLayout from './layouts/DashboardLayout';
 import Dashboard from './views/sellerdashboard/Dashboard';
 import Products from './views/sellerdashboard/Products';
 import AddNewProduct from './components/products/AddNewProduct';
+
 import SellerLinks from './dashboardlinks/SellerLinks';
 import OrdersDetails from './components/orders/OrdersDetails';
 import Cart from './pages/Cart';
@@ -57,6 +58,10 @@ export default [
     element: <GlobalLayout Component={ProductsList} hasLayout={true} />,
   },
   {
+    path: '/cart',
+    element: <GlobalLayout Component={Cart} hasLayout={true} />,
+  },
+  {
     path: '/deliverypayment',
     element: <PaymentLayout Component={DeliveryPayment} activeStep={0} />,
   },
@@ -83,7 +88,7 @@ export default [
   },
   {
     path: '/pending',
-    element: <Becomeaseller Component={Pending} activeStep={3} />,
+    element: <GlobalLayout Component={Pending} hasLayout={true} />,
   },
   {
     path: '/products/:product',

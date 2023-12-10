@@ -11,7 +11,6 @@ export default function Homenavigation(): React.ReactElement {
     'Shoes',
     'Bags',
     'Jewelery',
-    'Accessories',
   ];
   const styles = ['Modern', 'Classic', 'Fusion', 'Boho'];
   const trending = [
@@ -24,10 +23,10 @@ export default function Homenavigation(): React.ReactElement {
 
   return (
     <>
-      <Menu as={'div' as React.ElementType} className=' inline-block z-50'>
+      <Menu as={'div' as React.ElementType} className='z-50'>
         <div>
           <div className='group flex w-full items-center px-2 py-2 text-medium font-secondary hover:text-colorGold hover:scale-[1.02] transition-all duration-300'>
-            <span className=' z-10'>
+            <span className='z-10 xl:text-[12px] 2xl:text-[16px]'>
               <Menu.Button> Shop </Menu.Button>
 
               <span className='absolute bottom-0 left-0 w-full h-0.5 bg-colorGold transform scale-x-0 origin-left transition-transform group-hover:scale-x-100 duration-300'></span>
@@ -44,8 +43,8 @@ export default function Homenavigation(): React.ReactElement {
           leaveFrom='transform opacity-100 scale-100'
           leaveTo='transform opacity-0 scale-95'
         >
-          <div className='flex absolute'>
-            <Menu.Items className='relative right-16 flex gap-24 justify-between  mt-2 w-max p-8  origin-top-right rounded-sm  ring-black/5 focus:outline-none  border-t-4 border-b-4 border-colorGold bg-colorBeigeLight  font-secondary text-colorBlack '>
+          <div className='absolute right-0 mt-5 z-40'>
+            <Menu.Items className='relative lg:top-0 top-60 z-50 right-16 flex flex-col lg:flex-row h-auto gap-24 justify-between  mt-2 w-max p-8  origin-top-right rounded-sm  ring-black/5 focus:outline-none  border-t-4 border-b-4 border-colorGold bg-colorBeigeLight  font-secondary text-colorBlack '>
               <div>
                 <div className=''>
                   <Menu.Item>
@@ -139,7 +138,7 @@ export default function Homenavigation(): React.ReactElement {
                     {({active}: {active: boolean}) => (
                       <button
                         className={`${
-                          active ? ' bg-colorBeige ' : 'text-gray-900  '
+                          active ? ' bg-colorBeige ' : 'text-gray-900'
                         } group flex text-colorBlack/80 w-full items-center gap-3 rounded-md px-2 py-2 text-sm hover:scale-[1.02] transition-all duration-75`}
                       >
                         Shop All

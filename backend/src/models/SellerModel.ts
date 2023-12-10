@@ -12,6 +12,7 @@ export default class SellerModel extends BaseModel<SellerInterface> {
     expirationDate: {type: String, required: true},
     cvc: {type: Number, required: true},
     language: {type: String, required: true},
+    description: {type: String, required: false},
     status: {type: String, required: false},
     created_at: {type: Date, required: false},
     updated_at: {type: Date, required: false},

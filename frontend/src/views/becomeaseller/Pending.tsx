@@ -1,14 +1,6 @@
-import {useNavigate} from 'react-router-dom';
+import {router} from '../../App';
 
 export default function Pending() {
-  const navigate = useNavigate();
-
-  // Replace this function with actual confirmation logic
-  const checkConfirmation = () => {
-    // Simulate confirmation logic
-    navigate('/dashboard');
-  };
-
   return (
     <div className='flex flex-col items-center justify-center mt-20 mb-20'>
       <div className='bg-white p-8 rounded-lg shadow-lg max-w-sm w-full text-center'>
@@ -26,9 +18,11 @@ export default function Pending() {
         <button
           type='submit'
           className='w-full bg-colorGold py-2.5 rounded-bl-xl rounded-tr-xl text-gray-50 font-semibold font-secondary hover:scale-[1.02] transition-all duration-100 hover:bg-opacity-90'
-          onClick={checkConfirmation}
+          onClick={() => {
+            router.navigate('/');
+          }}
         >
-          Check Confirmation
+          Go Back Home
         </button>
       </div>
     </div>
