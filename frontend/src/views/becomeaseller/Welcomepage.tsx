@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {router} from '../../App';
 import {Seller} from '../../../types';
-import {store} from '../../app/store';
+import {useSelector} from 'react-redux';
 
 function Welcomepage({
   setSeller,
@@ -16,11 +16,15 @@ function Welcomepage({
     console.log({...formData, ...seller});
     router.navigate('/shop');
   };
+  const user = useSelector((state: any) => state.auth.user.user);
 
   const [formData, setFormData] = useState({
     business_email: '',
-    user_id: store.getState().auth.user?._id,
+    user_id: user._id,
   });
+  if (!user || user!.role! !== 'Seller' || user!.role! !== 'Admin') {
+    router.navigate('/');
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {name, value} = e.target;

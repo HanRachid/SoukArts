@@ -6,34 +6,36 @@ import {RiMenu2Line} from 'react-icons/ri';
 import {BiMessageSquareDetail} from 'react-icons/bi';
 import {FiLogOut} from 'react-icons/fi';
 import {router} from '../App';
-import {DashboardLink} from '../../types';
+import {AdminLink} from '../../types';
 import {useSelector} from 'react-redux';
 
-export default function DashboardLayout({
+export default function AdminLayout({
   Component,
   pageTitle,
   links,
 }: {
   Component: React.ComponentType;
   pageTitle: String;
-  links: DashboardLink[];
+  links: AdminLink[];
 }) {
-  const location = useLocation();
-  const currentPage = location.pathname.slice(1);
   const user = useSelector((state: any) => state.auth.user);
   console.log(user);
 
+  const location = useLocation();
+  const currentPage = location.pathname.slice(1);
   if (!user) {
-  } else if (user.user.role !== 'Seller' && user.user.role !== 'Admin') {
+  } else if (user!.user.role! !== 'Admin') {
+    console.log(user.user);
     router.navigate('/');
   }
   const [showSidebar, setShowSidebar] = useState(false);
+
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
   };
 
   const activeLinkStyle = (title: string) => {
-    const route = title === 'Dashboard' ? 'dashboard' : 'dashboard/' + title;
+    const route = title === 'Admin' ? 'admin' : 'admin/' + title;
 
     if (
       route === 'dashboard/Products' &&
@@ -46,7 +48,7 @@ export default function DashboardLayout({
       : 'text-black';
   };
   return (
-    <div className='bg-gray-50 font-secondary'>
+    <div className='bg-gray-50'>
       {showSidebar && (
         <div
           onClick={toggleSidebar}
@@ -70,7 +72,7 @@ export default function DashboardLayout({
             />
           </div>
           <ul className='mt-8 space-y-2 tracking-wide'>
-            {links.map(({icon, title, path}: DashboardLink) => (
+            {links.map(({icon, title, path}: AdminLink) => (
               <li key={title} className='cursor-pointer'>
                 <div
                   onClick={() => {
@@ -138,8 +140,8 @@ export default function DashboardLayout({
             </div>
           </div>
         </nav>
-        <div className='px-6 pt-6 2xl:container bg-gray-50 h-full -mb-16'>
-          <div className='flex flex-col items-center justify-center max-w-7xl mx-auto'>
+        <div className='px-6 pt-6 2xl:container bg-gray-50 h-full -mb- min-w-full'>
+          <div className=''>
             <Component />
           </div>
         </div>

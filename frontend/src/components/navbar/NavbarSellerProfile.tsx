@@ -6,19 +6,13 @@ import {RiSettings3Line} from 'react-icons/ri';
 import {LuCreditCard} from 'react-icons/lu';
 import {GrNotes} from 'react-icons/gr';
 import {logoutUser} from '../../api/auth';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {router} from '../../App';
-import {store} from '../../app/store';
 import {setLogoutState} from '../../features/auth/authSlice';
-import {useEffect, useState} from 'react';
-import {User} from '../../../types';
 
 const NavbarSellerProfile = () => {
   const dispatch = useDispatch();
-  const [user, setUser] = useState<Partial<User> | null>({} as User);
-  useEffect(() => {
-    setUser(store.getState().auth.user);
-  }, [store.getState().auth.user]);
+  const user = useSelector((state: any) => state.auth.user);
   return (
     <div className='absolute top-[135px] right-56 font-secondary w-64 h-auto bg-colorBeigeLight border-t-4 border-b-4 border-colorGold px-4 py-4 z-[999]'>
       {/* RACHID si besoin change ci dessus le top et le right pour le positionnementdu dropdown */}
@@ -65,8 +59,8 @@ const NavbarSellerProfile = () => {
           <MdOutlineLogout />
           <button
             onClick={() =>
-              logoutUser(dispatch).then(() => {
-                store.dispatch(setLogoutState());
+              logoutUser().then(() => {
+                dispatch(setLogoutState());
                 router.navigate('/');
               })
             }

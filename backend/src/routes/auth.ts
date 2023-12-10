@@ -41,7 +41,7 @@ authRouter.post(
       username: username,
       email: email,
       password: hashedPassword,
-      role: 'user',
+      role: 'Client',
     });
     res.status(200).send(register);
   }
@@ -63,6 +63,17 @@ authRouter.post(
 );
 
 authRouter.post(
+  '/refreshlogin',
+  (req: Request, res: Response, next: NextFunction) => {
+    if (req.isAuthenticated()) {
+      res.send({user: req.user});
+    } else {
+      res.send({user: {role: 'disconnected'}});
+    }
+  }
+);
+
+authRouter.post(
   '/logout',
   (req: Request, res: Response, next: NextFunction) => {
     if (req.isAuthenticated()) {
@@ -76,7 +87,7 @@ authRouter.post(
 );
 
 authRouter.get('/success', (req: Request, res: Response) => {
-  res.send({user: {...req.user, ...req.session.cookie}});
+  res.send({user: req.user});
 });
 
 authRouter.get('/:id/forgot', (req: Request, res: Response) => {

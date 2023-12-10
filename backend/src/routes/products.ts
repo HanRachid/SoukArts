@@ -65,20 +65,17 @@ productRouter.get('/product/:id', async (req: Request, res: Response) => {
 });
 
 productRouter.get('/allproducts', async (req: Request, res: Response) => {
-  const users = await new UserModel().getAllModels();
-  const products = [];
-  for (const user of users) {
-    const userproducts = await new ProductModel().findOneToMany(
-      user.id,
-      'user',
-      UserModel.schema
-    );
-    const product = {user: user.username, userProducts: userproducts};
-
-    products.push(product);
-    console.log(product);
-  }
-  res.send(products);
+  /*  const allProducts = await new ProductModel().getAllModelsPopulateTwice(
+    'user',
+    'seller'
+  );*/
+  const allProducts = await new ProductModel().getAllModelsPopulateTwice(
+    'user',
+    UserModel.schema,
+    'seller',
+    UserModel.schema
+  );
+  res.send(allProducts);
 });
 
 productRouter.post(

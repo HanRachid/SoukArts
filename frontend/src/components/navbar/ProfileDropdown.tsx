@@ -5,11 +5,14 @@ import React, {Fragment} from 'react';
 import {logoutUser} from '../../api/auth';
 import {useDispatch} from 'react-redux';
 import {router} from '../../App';
+import {setLogoutState} from '../../features/auth/authSlice';
 export default function ProfileDropdown(): React.ReactElement {
   const dispatch = useDispatch();
-
   function handleLogout() {
-    logoutUser(dispatch);
+    logoutUser().then(() => {
+      dispatch(setLogoutState());
+      router.navigate('/');
+    });
   }
 
   function handlePrivacy() {

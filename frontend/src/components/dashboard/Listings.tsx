@@ -1,18 +1,22 @@
+import { Button } from "@material-tailwind/react";
+import { router } from "../../App";
+import Stats from "../../views/sellerdashboard/Stats";
+
 const listingsData = [
   {
     id: 1,
     title: "Active Listings",
-    count: 0,
+    count: "75.5%",
   },
   {
     id: 2,
     title: "Expired",
-    count: 0,
+    count: "55.2%",
   },
   {
     id: 3,
     title: "Sold out",
-    count: 0,
+    count: "10%",
   },
 ];
 
@@ -36,9 +40,19 @@ export default function Listings() {
                     </div>
                   </div>
                   <div className="mt-4 flex-shrink-0 sm:mt-0 sm:ml-5">
-                    <div className="text-colorBlack underline">
+                    <Button
+                      variant="gradient"
+                      color="brown"
+                      onClick={() => {
+                        router.navigate("/Dashboard/Stats");
+                      }}
+                    >
+                      view all listings
+                    </Button>
+
+                    {/* <div className="text-colorBlack underline">
                       View all listings
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
