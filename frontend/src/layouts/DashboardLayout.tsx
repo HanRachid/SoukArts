@@ -47,7 +47,7 @@ export default function DashboardLayout({
       : 'text-black';
   };
   return (
-    <div className='bg-gray-50'>
+    <div className='bg-gray-50 font-secondary'>
       {showSidebar && (
         <div
           onClick={toggleSidebar}

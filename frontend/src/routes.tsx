@@ -28,6 +28,12 @@ import Shop from './views/becomeaseller/Shop';
 import Sellerpayment from './views/becomeaseller/Sellerpayment';
 import StoreSeller from './pages/StoreSeller';
 import Pending from './views/becomeaseller/Pending';
+import Orders from './views/sellerdashboard/Orders';
+import Settings from './views/sellerdashboard/Settings';
+import Stats from './views/sellerdashboard/Stats';
+import Helps from './views/sellerdashboard/Helps';
+import Finance from './views/sellerdashboard/Finance';
+import Listings from './components/dashboard/Listings';
 import LoginAdmin from './components/admin/SellerStatus';
 import AdminLayout from './layouts/AdminLayout';
 import AdminLinks from './dashboardlinks/AdminLinks';
@@ -146,7 +152,7 @@ export default [
     element: (
       <DashboardLayout
         pageTitle={'/Dashboard/Orders'}
-        Component={Products}
+        Component={Orders}
         links={SellerLinks}
       />
     ),
@@ -156,7 +162,7 @@ export default [
     element: (
       <DashboardLayout
         pageTitle={'/Dashboard/Stats'}
-        Component={Products}
+        Component={Stats}
         links={SellerLinks}
       />
     ),
@@ -166,7 +172,7 @@ export default [
     element: (
       <DashboardLayout
         pageTitle={'/Dashboard/Finance'}
-        Component={Products}
+        Component={Finance}
         links={SellerLinks}
       />
     ),
@@ -176,17 +182,27 @@ export default [
     element: (
       <DashboardLayout
         pageTitle={'/Dashboard/Settings'}
-        Component={Products}
+        Component={Settings}
         links={SellerLinks}
       />
     ),
   },
+  // {
+  //   path: '/Dashboard/Marketing',
+  //   element: (
+  //     <DashboardLayout
+  //       pageTitle={'/Dashboard/Marketing'}
+  //       Component={Products}
+  //       links={SellerLinks}
+  //     />
+  //   ),
+  // },
   {
-    path: '/Dashboard/Marketing',
+    path: '/Dashboard/Help',
     element: (
       <DashboardLayout
-        pageTitle={'/Dashboard/Marketing'}
-        Component={Products}
+        pageTitle={'/Dashboard/Help'}
+        Component={Helps}
         links={SellerLinks}
       />
     ),
@@ -197,6 +213,16 @@ export default [
       <DashboardLayout
         pageTitle={'Dashboard/Products'}
         Component={AddNewProduct}
+        links={SellerLinks}
+      />
+    ),
+  },
+  {
+    path: 'Dashboard/Stats',
+    element: (
+      <DashboardLayout
+        pageTitle={'Dashboard'}
+        Component={Stats}
         links={SellerLinks}
       />
     ),
