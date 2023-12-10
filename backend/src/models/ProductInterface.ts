@@ -7,6 +7,7 @@ import {Types} from 'mongoose';
 export default interface ProductInterface {
   _id: Types.ObjectId;
   user_id: Types.ObjectId;
+  seller_id: Types.ObjectId;
   category: string;
   subcategory: string;
   free_shipping: boolean;

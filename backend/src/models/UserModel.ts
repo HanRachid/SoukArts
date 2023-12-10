@@ -1,6 +1,7 @@
 import BaseModel from './BaseModel';
+import SellerModel from './SellerModel';
 import UserInterface from './UserInterface';
-import {Schema} from 'mongoose';
+import {Schema, Types} from 'mongoose';
 
 /**
  * UserModel Class that describes the users .
@@ -15,7 +16,8 @@ export default class UserModel extends BaseModel<UserInterface> {
     email: {type: String, required: true},
     number_phone: {type: String, required: false},
     password: {type: String, required: true},
-    role: {type: String, required: false},
+    role: {type: String, required: true},
+    seller_id: {type: Types.ObjectId, required: false, ref: 'seller'},
     is_active: {type: Boolean, required: false},
     is_deleted: {type: Boolean, required: false},
     saved_card: {

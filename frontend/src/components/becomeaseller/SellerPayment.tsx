@@ -6,15 +6,26 @@ import {UserCircleIcon, CreditCardIcon} from '@heroicons/react/24/outline';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faApple} from '@fortawesome/free-brands-svg-icons';
 import {router} from '../../App';
+import {Seller, User} from '../../../types';
+import {addSeller} from '../../api/seller';
+import {useDispatch, useSelector} from 'react-redux';
+import {refreshLog} from '../../api/auth';
+import {setLoginState} from '../../features/auth/authSlice';
 
-const SellerPayment = ({isSeller = false}: {isSeller?: any}) => {
+const SellerPayment = ({
+  isSeller = false,
+  setSeller,
+  seller,
+}: {
+  isSeller?: any;
+  setSeller: Function;
+  seller: Seller;
+}) => {
   const [formData, setFormData] = useState({
     cardHolder: '',
     cardNumber: '',
     expirationDate: '',
     cvc: '',
-    subtotal: 0,
-    shipping: 0,
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,10 +34,20 @@ const SellerPayment = ({isSeller = false}: {isSeller?: any}) => {
       ...prevData,
       [name]: value,
     }));
+    console.log({...formData, ...seller});
   };
-
-  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+  const user = useSelector((state: any) => state.auth.user.user);
+  const dispatch = useDispatch();
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
+    setSeller({...formData, ...seller});
+    const newSeller = await addSeller({...formData, ...seller});
+    console.log({...formData, ...seller, user_id: user!._id});
+
+    console.log(newSeller);
+    refreshLog({} as User).then((result) => {
+      dispatch(setLoginState(result));
+    });
     router.navigate('/pending');
   };
   return (

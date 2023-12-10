@@ -2,7 +2,7 @@ import {RouteObj} from '../types';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Privacy from './pages/Privacy';
-import Register from './components/categoryproducts/Register';
+import Register from './pages/Register';
 import Termsofuse from './pages/TermsOfUse';
 import GlobalLayout from './layouts/GlobalLayout';
 import ProductDetail from './pages/ProductDetail';
@@ -18,14 +18,15 @@ import DashboardLayout from './layouts/DashboardLayout';
 import Dashboard from './views/sellerdashboard/Dashboard';
 import Products from './views/sellerdashboard/Products';
 import AddNewProduct from './components/products/AddNewProduct';
+
 import SellerLinks from './dashboardlinks/SellerLinks';
 import OrdersDetails from './components/orders/OrdersDetails';
 import Cart from './pages/Cart';
 import Becomeaseller from './layouts/BecomeASeller';
 import Welcomepage from './views/becomeaseller/Welcomepage';
-import Shop from './pages/Shop';
+import Shop from './views/becomeaseller/Shop';
 import Sellerpayment from './views/becomeaseller/Sellerpayment';
-import StoreSeller from './views/becomeaseller/StoreSeller';
+import StoreSeller from './pages/StoreSeller';
 import Pending from './views/becomeaseller/Pending';
 import Orders from './views/sellerdashboard/Orders'
 import Settings from './views/sellerdashboard/Settings';
@@ -60,6 +61,10 @@ export default [
     element: <GlobalLayout Component={ProductsList} hasLayout={true} />,
   },
   {
+    path: '/cart',
+    element: <GlobalLayout Component={Cart} hasLayout={true} />,
+  },
+  {
     path: '/deliverypayment',
     element: <PaymentLayout Component={DeliveryPayment} activeStep={0} />,
   },
@@ -86,7 +91,7 @@ export default [
   },
   {
     path: '/pending',
-    element: <Becomeaseller Component={Pending} activeStep={3} />,
+    element: <GlobalLayout Component={Pending} hasLayout={true} />,
   },
   {
     path: '/products/:product',

@@ -1,23 +1,23 @@
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import routes from './routes.tsx';
-import {useEffect} from 'react';
 import {refreshLog} from './api/auth.ts';
 import {useDispatch} from 'react-redux';
+import {setLoginState} from './features/auth/authSlice.ts';
 import {User} from '../types';
-import {store} from './app/store.ts';
 import {getAllProducts} from './api/products.ts';
+import {setProductsState} from './features/products/productsSlice.ts';
 export const router = createBrowserRouter(routes);
 
 export default function App(): React.ReactElement {
   const dispatch = useDispatch();
+  refreshLog({} as User).then((result) => {
+    dispatch(setLoginState(result));
+  });
+  getAllProducts().then((result) => {
+    console.log(result);
 
-  useEffect(() => {
-    refreshLog({} as User, dispatch).then((result) => {
-      console.log(result);
-    });
-    getAllProducts(dispatch).then((result) => {
-      console.log(result);
-    });
-  }, [store.getState().auth.user]);
+    dispatch(setProductsState(result));
+  });
+
   return <RouterProvider router={router} />;
 }

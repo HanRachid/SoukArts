@@ -4,25 +4,16 @@ import HeartSVG from '../../assets/navbar/heart.svg?react';
 import CartSVG from '../../assets/navbar/cart.svg?react';
 import {Link} from 'react-router-dom';
 import Button from '../Button';
-import {loginUser, logoutUser, refreshLog} from '../../api/auth';
-import {useDispatch} from 'react-redux';
+import {logoutUser, refreshLog} from '../../api/auth';
+import {useDispatch, useSelector} from 'react-redux';
 import ProfileDropdown from './ProfileDropdown';
 import {useEffect, useState} from 'react';
 import {User} from '../../../types';
+import {setLogoutState} from '../../features/auth/authSlice';
+import {router} from '../../App';
 export default function Navigation(): React.ReactElement {
   const dispatch = useDispatch();
-  const [user, setUser] = useState<{id: string; name: string} | null>(null);
-
-  useEffect(() => {
-    refreshLog({} as User, dispatch).then((result) => {
-      if (result.user) {
-        setUser(result.user);
-      } else {
-        setUser(null);
-      }
-    });
-  });
-
+  const user = useSelector((state: any) => state.auth.user);
   return (
     <>
       <div className='flex items-center justify-between p-4 h-10 '>
@@ -38,6 +29,7 @@ export default function Navigation(): React.ReactElement {
             </div>
           </button>
         </Link>
+
         <Link to='/'>
           <HeartSVG className='w-6 font-secondary hover:fill-colorGold' />
         </Link>
@@ -46,7 +38,14 @@ export default function Navigation(): React.ReactElement {
         </Link>
         {user ? (
           <>
-            <button onClick={() => logoutUser(dispatch)}>
+            <button
+              onClick={() =>
+                logoutUser().then(() => {
+                  dispatch(setLogoutState());
+                  router.navigate('/');
+                })
+              }
+            >
               <div className='group flex w-full items-center px-2 py-2 text-medium font-secondary hover:text-colorGold hover:scale-[1.02] transition-all duration-300'>
                 <span className=' z-10'>
                   Logout

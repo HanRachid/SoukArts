@@ -1,4 +1,4 @@
-import {Document, Schema} from 'mongoose';
+import {Document, Schema, Types} from 'mongoose';
 
 /**
  * An interface describing a UserModel.
@@ -14,10 +14,11 @@ export default interface UserInterface extends Document {
   email: string;
   phone: string;
   password: string;
-  role?: Object;
+  role: Object;
   is_active?: boolean;
   is_deleted?: boolean;
   card_info?: CardInfo;
+  seller_id?: Types.ObjectId;
   order_history?: OrderHistoryItem[];
   created_at?: Date;
   updated_at?: Date;

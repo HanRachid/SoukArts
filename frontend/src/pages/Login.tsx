@@ -1,27 +1,28 @@
-import { useFormik } from 'formik';
-import { validationSchema } from './validation/LoginValidation';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import {useFormik} from 'formik';
+import {validationSchema} from './validation/LoginValidation';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
 import logo from '../assets/login/logo1.png';
 import login_side_image from '../assets/login/login_image_side.png';
 import logo_google from '../assets/login/google-svgrepo-com.svg';
 import logo_apple from '../assets/login/apple-color-svgrepo-com.svg';
-import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { loginUser } from '../api/auth';
-import { useDispatch } from 'react-redux';
-import { store } from '../app/store';
-import { User } from '../../types';
+import {Link} from 'react-router-dom';
+import {useState} from 'react';
+import {loginUser} from '../api/auth';
+import {useDispatch, useSelector} from 'react-redux';
+import {router} from '../App';
+import {setLoginState} from '../features/auth/authSlice';
 
 export default function Login() {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    loginUser({} as User, dispatch);
-  }, [store.getState().auth.user]);
-
   const hidden = 'text-red-500 text-opacity-0';
   const shown = 'text-red-500';
+  const user = useSelector((state: any) => state.auth.user);
+
+  if (user) {
+    router.navigate('/');
+  }
 
   const formik = useFormik({
     initialValues: {
@@ -31,7 +32,10 @@ export default function Login() {
 
     validationSchema,
     onSubmit: (values) => {
-      loginUser(values, dispatch);
+      loginUser(values).then((result) => {
+        dispatch(setLoginState(result));
+        router.navigate('/');
+      });
     },
     validateOnChange: true,
   });
