@@ -32,6 +32,7 @@ import Settings from './views/sellerdashboard/Settings';
 import Stats from './views/sellerdashboard/Stats';
 import Helps from './views/sellerdashboard/Helps';
 import Finance from './views/sellerdashboard/Finance';
+import Listings from './components/dashboard/Listings';
 export default [
   {
     path: '/',
@@ -193,6 +194,16 @@ export default [
       <DashboardLayout
         pageTitle={'Dashboard/Products'}
         Component={AddNewProduct}
+        links={SellerLinks}
+      />
+    ),
+  },
+  {
+    path: 'Dashboard/Stats',
+    element: (
+      <DashboardLayout
+        pageTitle={'Dashboard'}
+        Component={Stats}
         links={SellerLinks}
       />
     ),

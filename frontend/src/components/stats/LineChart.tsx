@@ -110,15 +110,15 @@ export default function LineChart() {
         </div>
         <div>
           <Typography variant="h6" color="blue-gray">
-            Line Chart
+            Active Listings
           </Typography>
           <Typography
             variant="small"
             color="gray"
             className="max-w-sm font-normal"
           >
-            Visualize your data in a simple way using the
-            @material-tailwind/react chart plugin.
+            {/* Visualize your data in a simple way using the
+            @material-tailwind/react chart plugin. */}
           </Typography>
         </div>
       </CardHeader>

@@ -101,10 +101,24 @@ const chartConfig = {
 
 export default function BarChart() {
   return (
-    <Card className="w-full h-full shadow-none">
-      <CardBody className="px-2 pb-0">
-        <Chart {...chartConfig} />
-      </CardBody>
-    </Card>
+    <Card className="w-full h-full shadow-none flex flex-col gap-4">
+    <div className="flex items-center w-max rounded-lg p-5 gap-4">
+    <div className="w-max rounded-lg bg-gray-900 p-5 text-white">
+          <Square3Stack3DIcon className="h-6 w-6" />
+        </div>
+      <div>
+        <Typography variant="h6" color="blue-gray">
+          Expired
+        </Typography>
+        <Typography variant="small" color="gray" className="max-w-sm font-normal">
+          {/* Visualize your data in a simple way using the
+          @material-tailwind/react chart plugin. */}
+        </Typography>
+      </div>
+    </div>
+    <CardBody className="px-2 pb-0">
+      <Chart {...chartConfig} />
+    </CardBody>
+  </Card>
   );
 }
