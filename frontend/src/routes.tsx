@@ -106,7 +106,6 @@ export default [
     element: <GlobalLayout Component={Cart} hasLayout={true} />,
   },
 
-  /************Start admin */
   {
     path: '/Admin',
     element: (
@@ -117,7 +116,6 @@ export default [
       />
     ),
   },
-  /************End admin */
   {
     path: '/dashboard',
     element: (
