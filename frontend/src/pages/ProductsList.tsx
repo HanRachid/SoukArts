@@ -11,6 +11,9 @@ import RecentCard from "../components/categoryproducts/RecentCard";
 
 // import Images
 import categories from "./data/categories";
+import Pouf1 from "../assets/Poufs/Pouf 2.jpg";
+import jewelry3 from "../assets/jewelry/popular 2.jpg";
+import lamp1 from "../assets/Lamps/lamp 2.jpg";
 
 import rug6 from "../assets/rugs/rug 1.jpg";
 import rug7 from "../assets/rugs/rug 12.jpg";
@@ -106,9 +109,9 @@ export default function ProductsList() {
           <h2 className="font-secondary text-[1.5rem]">RECENTLY VIEWED</h2>
           <div className="mt-3 grid grid-cols-4 gap-[3.3rem]">
             <RecentCard isNew={true} image={rug7} />
-            <RecentCard isNew={true} image={rug7} />
-            <RecentCard isNew={true} image={rug7} />
-            <RecentCard isNew={true} image={rug7} />
+            <RecentCard isNew={true} image={Pouf1} />
+            <RecentCard isNew={true} image={jewelry3} />
+            <RecentCard isNew={true} image={lamp1} />
           </div>
         </div>
       </div>
