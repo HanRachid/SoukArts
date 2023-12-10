@@ -24,7 +24,6 @@ const LoginAdmin: React.FC = () => {
   const user = useSelector((state: any) =>
     state.auth.user ? state.auth.user.user : null
   );
-  console.log(user);
 
   if (!user || user!.role! !== 'Admin') {
     router.navigate('/login');
@@ -32,9 +31,6 @@ const LoginAdmin: React.FC = () => {
   useEffect(() => {
     fetchSellers();
   }, []);
-  useEffect(() => {
-    console.log(sellers);
-  }, [sellers]);
 
   const handleMouseEnter = (e: React.MouseEvent, sellerName: Seller) => {
     const viewportWidth = window.innerWidth;

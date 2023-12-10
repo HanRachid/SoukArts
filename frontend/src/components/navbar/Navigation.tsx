@@ -4,11 +4,9 @@ import HeartSVG from '../../assets/navbar/heart.svg?react';
 import CartSVG from '../../assets/navbar/cart.svg?react';
 import {Link} from 'react-router-dom';
 import Button from '../Button';
-import {logoutUser, refreshLog} from '../../api/auth';
+import {logoutUser} from '../../api/auth';
 import {useDispatch, useSelector} from 'react-redux';
 import ProfileDropdown from './ProfileDropdown';
-import {useEffect, useState} from 'react';
-import {User} from '../../../types';
 import {setLogoutState} from '../../features/auth/authSlice';
 import {router} from '../../App';
 export default function Navigation(): React.ReactElement {
@@ -36,7 +34,7 @@ export default function Navigation(): React.ReactElement {
         <Link to='/'>
           <CartSVG className='w-6 font-secondary hover:fill-colorGold' />
         </Link>
-        {user ? (
+        {user.role === 'Client' ? (
           <>
             <button
               onClick={() =>

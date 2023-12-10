@@ -17,10 +17,14 @@ function Welcomepage({
     router.navigate('/shop');
   };
   const user = useSelector((state: any) => state.auth.user.user);
+
   const [formData, setFormData] = useState({
     business_email: '',
     user_id: user._id,
   });
+  if (!user || user!.role! !== 'Seller' || user!.role! !== 'Admin') {
+    router.navigate('/');
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {name, value} = e.target;

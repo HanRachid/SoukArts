@@ -5,6 +5,7 @@ export default interface SellerInterface extends Document {
   user_id: Types.ObjectId;
   seller_id: Types.ObjectId;
   shop_name: string;
+  banner: string;
   business_email: string;
   cardNumber: string;
   cardHolder: string;

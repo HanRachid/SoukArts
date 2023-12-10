@@ -18,9 +18,16 @@ export default function AdminLayout({
   pageTitle: String;
   links: AdminLink[];
 }) {
+  const user = useSelector((state: any) => state.auth.user);
+  console.log(user);
+
   const location = useLocation();
   const currentPage = location.pathname.slice(1);
-
+  if (!user) {
+  } else if (user!.user.role! !== 'Admin') {
+    console.log(user.user);
+    router.navigate('/');
+  }
   const [showSidebar, setShowSidebar] = useState(false);
 
   const toggleSidebar = () => {

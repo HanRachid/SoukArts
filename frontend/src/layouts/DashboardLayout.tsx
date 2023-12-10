@@ -20,18 +20,17 @@ export default function DashboardLayout({
 }) {
   const location = useLocation();
   const currentPage = location.pathname.slice(1);
+  const user = useSelector((state: any) => state.auth.user);
+  console.log(user);
 
+  if (!user) {
+  } else if (user.user.role !== 'Seller' && user.user.role !== 'Admin') {
+    router.navigate('/');
+  }
   const [showSidebar, setShowSidebar] = useState(false);
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
   };
-  const user = useSelector((state: any) => state.auth.user);
-
-  console.log(user);
-
-  if (!user || user!.role! !== 'Seller' || user!.role! !== 'Admin') {
-    router.navigate('/');
-  }
 
   const activeLinkStyle = (title: string) => {
     const route = title === 'Dashboard' ? 'dashboard' : 'dashboard/' + title;

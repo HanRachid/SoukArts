@@ -68,7 +68,7 @@ authRouter.post(
     if (req.isAuthenticated()) {
       res.send({user: req.user});
     } else {
-      next();
+      res.send({user: {role: 'disconnected'}});
     }
   }
 );

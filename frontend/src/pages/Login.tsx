@@ -20,7 +20,8 @@ export default function Login() {
   const shown = 'text-red-500';
   const user = useSelector((state: any) => state.auth.user);
 
-  if (user) {
+  if (!user) {
+  } else if (user.user.role !== 'disconnected') {
     router.navigate('/');
   }
 

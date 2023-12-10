@@ -76,6 +76,8 @@ const Navbar = () => {
         <div className='navbar-end w-1/3 xl:block hidden mt-10 pb-10'>
           {user! && user!.role! === 'Seller' && <NavigationSeller />}
           {user! && user!.role! === 'Client' && <Navigation />}
+          {user! && user!.role! === 'disconnected' && <Navigation />}
+
           {user! && user!.role! === 'Admin' && <NavigationAdmin />}
 
           {user! && user!.role! === 'Pending' && <NavigationPending />}
