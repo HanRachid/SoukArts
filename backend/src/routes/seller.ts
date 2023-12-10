@@ -53,4 +53,29 @@ sellerRouter.get('/getPendingSeller', async (req: Request, res: Response) => {
   res.send(sellers);
 });
 
+sellerRouter.post('/approve/:id', async (req: Request, res: Response) => {
+  const seller = await new SellerModel().update(req.params.id, {
+    status: 'approved',
+  });
+  const user = await new UserModel().update(seller.user_id.toString(), {
+    role: 'Seller',
+  });
+  console.log(user);
+  console.log(seller);
+
+  res.send(seller);
+});
+
+sellerRouter.post('/deny/:id', async (req: Request, res: Response) => {
+  const seller = await new SellerModel().update(req.params.id, {
+    status: 'denied',
+  });
+  const user = await new UserModel().update(seller.user_id.toString(), {
+    role: 'User',
+  });
+  console.log(user);
+  console.log(seller);
+  res.send(seller);
+});
+
 export default sellerRouter;

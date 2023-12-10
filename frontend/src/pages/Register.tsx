@@ -13,6 +13,7 @@ import {RegisterSchema} from './validation/RegisterValidation';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
 import {router} from '../App';
+import {setLoginState} from '../features/auth/authSlice';
 
 export default function Register() {
   const dispatch = useDispatch();
@@ -22,12 +23,12 @@ export default function Register() {
   ) => {
     registerUser(values)
       .then(() => {
-        loginUser(
-          {username: values.username, password: values.password},
-          dispatch
-        ).then(() => {
-          router.navigate('/');
-        });
+        loginUser({username: values.username, password: values.password}).then(
+          (response) => {
+            dispatch(setLoginState(response));
+            router.navigate('/');
+          }
+        );
       })
       .catch((error) => {
         console.error(error);
@@ -37,14 +38,8 @@ export default function Register() {
       });
   };
 
-  {
-    /*terms checked*/
-  }
   const [termsChecked, setTermsChecked] = useState(false);
 
-  {
-    /*Show/Hide password*/
-  }
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);

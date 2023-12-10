@@ -18,7 +18,7 @@ const NavigationSeller = () => {
 
   return (
     <>
-      <div className='flex items-center justify-around  w-full'>
+      <div className='flex items-center justify-around w-full'>
         <div className=''>
           <Homenavigation />
         </div>
@@ -31,7 +31,7 @@ const NavigationSeller = () => {
             <CartSVG className='xl:w-4 2xl:w-6 font-secondary hover:fill-colorGold' />
           </Link>
         </div>
-        <Link to='/dashboard'>
+        <Link to='/Admin'>
           <BsShop className='w-6 h-6' />
         </Link>
 

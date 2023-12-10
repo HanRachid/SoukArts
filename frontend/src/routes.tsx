@@ -29,7 +29,7 @@ import Sellerpayment from './views/becomeaseller/Sellerpayment';
 import StoreSeller from './pages/StoreSeller';
 import Pending from './views/becomeaseller/Pending';
 import LoginAdmin from './components/admin/SellerStatus';
-import AdminLayout from './layouts/AdmindLayout';
+import AdminLayout from './layouts/AdminLayout';
 import AdminLinks from './dashboardlinks/AdminLinks';
 export default [
   {

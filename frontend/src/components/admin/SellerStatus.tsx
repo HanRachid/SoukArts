@@ -1,27 +1,40 @@
 import {useState, useEffect} from 'react';
-import {getPendingSeller} from '../../api/seller';
+import {approveSeller, denySeller, getPendingSeller} from '../../api/seller';
 import {CheckCircleIcon, XCircleIcon} from '@heroicons/react/24/outline';
 import ModalComponent from '../../views/alert/ModalComponent';
 import {Seller} from '../../../types';
-
+import {router} from '../../App';
+import {useSelector} from 'react-redux';
 const LoginAdmin: React.FC = () => {
   const [sellers, setSellers] = useState<Seller[]>([]);
   const [hoveredSeller, setHoveredSeller] = useState<Seller | null>(null);
   const [isHovering, setIsHovering] = useState(false);
   const [mousePosition, setMousePosition] = useState({x: 0, y: 0});
 
-  useEffect(() => {
-    const fetchSellers = async () => {
-      try {
-        const response = await getPendingSeller();
-        setSellers(response);
-      } catch (error) {
-        console.error('Error fetching sellers: ', error);
-      }
-    };
+  const fetchSellers = async () => {
+    try {
+      const response = await getPendingSeller();
+      setSellers(
+        response.filter((seller: Seller) => seller.status === 'pending')
+      );
+    } catch (error) {
+      console.error('Error fetching sellers: ', error);
+    }
+  };
+  const user = useSelector((state: any) =>
+    state.auth.user ? state.auth.user.user : null
+  );
+  console.log(user);
 
+  if (!user || user!.role! !== 'Admin') {
+    router.navigate('/login');
+  }
+  useEffect(() => {
     fetchSellers();
   }, []);
+  useEffect(() => {
+    console.log(sellers);
+  }, [sellers]);
 
   const handleMouseEnter = (e: React.MouseEvent, sellerName: Seller) => {
     const viewportWidth = window.innerWidth;
@@ -63,7 +76,7 @@ const LoginAdmin: React.FC = () => {
                   Status
                 </th>
                 <th className='px-6 py-3 text-center font-secondary text-gray-500 uppercase tracking-wider'>
-                  Status
+                  Action
                 </th>
               </tr>
             </thead>
@@ -82,25 +95,33 @@ const LoginAdmin: React.FC = () => {
                     {seller.cardHolder}
                   </td>
                   <td className='sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-14 py-2 text-gray-700 overflow-hidden text-ellipsis align-middle max-w-[90%] text-center'>
-                    {seller.status}
+                    {seller.business_email}
                   </td>
                   <td className='sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-14 py-2 text-gray-700 overflow-hidden text-ellipsis align-middle max-w-[90%] text-center'>
-                    {seller.business_email}
+                    {seller.status}
                   </td>
                   <td className='sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-14 py-2 text-gray-700 overflow-hidden text-ellipsis align-middle max-w-[90%] text-center'>
                     <span className='inline-flex overflow-hidden rounded-md border bg-white shadow-sm'>
                       <button
                         className='inline-block border-e p-3 text-gray-700 hover:bg-green-300 hover:text-white focus:relative'
-                        title='accept seller'
-                        onClick={() => {}}
+                        title='approve'
+                        onClick={() => {
+                          approveSeller(seller._id).then(() => {
+                            fetchSellers();
+                          });
+                        }}
                       >
                         <CheckCircleIcon className='h-6 w-6' />
                       </button>
 
                       <button
                         className='inline-block border-e p-3 text-gray-700 hover:bg-red-500 hover:text-white focus:relative'
-                        title='reject seller'
-                        onClick={() => {}}
+                        title='deny'
+                        onClick={() => {
+                          denySeller(seller._id).then(() => {
+                            fetchSellers();
+                          });
+                        }}
                       >
                         <XCircleIcon className='h-6 w-6' />
                       </button>

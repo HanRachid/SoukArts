@@ -25,11 +25,11 @@ export default function DashboardLayout({
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
   };
-  const user = useSelector((state: any) =>
-    state.auth.user ? state.auth.user.user : null
-  );
+  const user = useSelector((state: any) => state.auth.user);
 
-  if (!user || user!.role! !== 'Seller') {
+  console.log(user);
+
+  if (!user || user!.role! !== 'Seller' || user!.role! !== 'Admin') {
     router.navigate('/');
   }
 

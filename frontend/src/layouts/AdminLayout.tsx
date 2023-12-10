@@ -6,10 +6,8 @@ import {RiMenu2Line} from 'react-icons/ri';
 import {BiMessageSquareDetail} from 'react-icons/bi';
 import {FiLogOut} from 'react-icons/fi';
 import {router} from '../App';
-import {AdminLink, User} from '../../types';
-import {store} from '../app/store';
-import {refreshLog} from '../api/auth';
-import {useDispatch} from 'react-redux';
+import {AdminLink} from '../../types';
+import {useSelector} from 'react-redux';
 
 export default function AdminLayout({
   Component,
@@ -24,17 +22,10 @@ export default function AdminLayout({
   const currentPage = location.pathname.slice(1);
 
   const [showSidebar, setShowSidebar] = useState(false);
+
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
   };
-  const dispatch = useDispatch();
-  useEffect(() => {
-    refreshLog({} as User, dispatch).then(() => {
-      if (!store.getState().auth.user) {
-        router.navigate('/login');
-      }
-    });
-  }, [store.getState().auth.user]);
 
   const activeLinkStyle = (title: string) => {
     const route = title === 'Admin' ? 'admin' : 'admin/' + title;
