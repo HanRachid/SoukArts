@@ -75,23 +75,29 @@ type ProductUrl = {
   images: CloudinaryImage[];
   formData: FormData[];
 };
+
 type DashboardLink = {icon: ReactNode; path: string; title: string};
+
+type AdminLink = {icon: ReactNode; path: string; title: string};
+
 type Category = {
   name: string;
   Subcategories: string[];
 };
 
 type Seller = {
-  _id: Types.ObjectId;
+  _id: Schema.Types.ObjectId;
   user_id: Types.ObjectId;
+  seller_id: Types.ObjectId;
   shop_name: string;
   business_email: string;
-  bank_account: {
-    account_number: string;
-    routing_number: string;
-  };
+  cardNumber: string;
+  cardHolder: string;
+  expirationDate: string;
+  cvc: number;
   language: string;
   status: string;
+  description: string;
   created_at: Date;
   updated_at: Date;
 };
