@@ -34,7 +34,7 @@ export default function Navigation(): React.ReactElement {
         <Link to='/'>
           <CartSVG className='w-6 font-secondary hover:fill-colorGold' />
         </Link>
-        {user.role === 'Client' ? (
+        {user && user.role === 'Client' ? (
           <>
             <button
               onClick={() =>
