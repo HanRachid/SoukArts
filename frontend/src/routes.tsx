@@ -28,12 +28,15 @@ import Shop from './views/becomeaseller/Shop';
 import Sellerpayment from './views/becomeaseller/Sellerpayment';
 import StoreSeller from './pages/StoreSeller';
 import Pending from './views/becomeaseller/Pending';
-import Orders from './views/sellerdashboard/Orders'
+import Orders from './views/sellerdashboard/Orders';
 import Settings from './views/sellerdashboard/Settings';
 import Stats from './views/sellerdashboard/Stats';
 import Helps from './views/sellerdashboard/Helps';
 import Finance from './views/sellerdashboard/Finance';
 import Listings from './components/dashboard/Listings';
+import LoginAdmin from './components/admin/SellerStatus';
+import AdminLayout from './layouts/AdminLayout';
+import AdminLinks from './dashboardlinks/AdminLinks';
 export default [
   {
     path: '/',
@@ -112,6 +115,17 @@ export default [
   {
     path: '/Cart',
     element: <GlobalLayout Component={Cart} hasLayout={true} />,
+  },
+
+  {
+    path: '/Admin',
+    element: (
+      <AdminLayout
+        pageTitle={'Home Admin'}
+        Component={LoginAdmin}
+        links={AdminLinks}
+      />
+    ),
   },
   {
     path: '/dashboard',
