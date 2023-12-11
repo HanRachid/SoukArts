@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 // import Components
 import Filter from "../components/categoryproducts/Filter";
@@ -14,8 +15,6 @@ import categories from "./data/categories";
 import Pouf1 from "../assets/Poufs/Pouf 2.jpg";
 import jewelry3 from "../assets/jewelry/popular 2.jpg";
 import lamp1 from "../assets/Lamps/lamp 2.jpg";
-
-import rug6 from "../assets/rugs/rug 1.jpg";
 import rug7 from "../assets/rugs/rug 12.jpg";
 
 export default function ProductsList() {
@@ -25,6 +24,13 @@ export default function ProductsList() {
   );
   const popularProducts = selectedCategory?.popularProducts;
   const subcategories = selectedCategory?.subcategory;
+
+  const products = useSelector((state) => state.products.products);
+  console.log(products);
+  const productsByCategory = products.filter(
+    (product) => product.category === category
+  );
+  console.log(productsByCategory);
   return (
     <>
       <div className="ml-[244px] mr-[244px] mt-8 ">
@@ -59,8 +65,11 @@ export default function ProductsList() {
         </div>
         <div className="mt-8 border-b border-gray-500 my-4"></div>
         <div className="flex justify-around mt-16">
-          {subcategories?.map((subcategory) => (
-            <div className="w-32 flex flex-col justify-start items-center">
+          {subcategories?.map((subcategory, id) => (
+            <div
+              className="w-32 flex flex-col justify-start items-center"
+              key={id}
+            >
               <div className="h-32 w-32 rounded-full border-2 overflow-hidden hover:scale-[1.06] hover:-outline-offset-2 outline-2 outline outline-colorBlack ">
                 <img
                   src={subcategory?.image}
@@ -92,15 +101,9 @@ export default function ProductsList() {
           />
         </div>
         <div className="mt-11 grid grid-cols-3 gap-6">
-          <ProductCard isNew={true} image={rug6} />
-          <ProductCard isNew={true} image={rug6} />
-          <ProductCard isNew={true} image={rug6} />
-          <ProductCard isNew={true} image={rug6} />
-          <ProductCard isNew={true} image={rug6} />
-          <ProductCard isNew={true} image={rug6} />
-          <ProductCard isNew={true} image={rug6} />
-          <ProductCard isNew={true} image={rug6} />
-          <ProductCard isNew={true} image={rug6} />
+          {productsByCategory.map((productCategory, index) => (
+            <ProductCard key={index} isNew={true} product={productCategory} />
+          ))}
         </div>
         <div className="mt-9 flex justify-center">
           <Pagination count={10} variant="outlined" shape="rounded" />

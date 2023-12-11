@@ -1,3 +1,6 @@
+// framer motion
+import { motion } from "framer-motion";
+
 //Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 //styles
@@ -19,9 +22,22 @@ export default function HeroSlider({
 }): React.ReactElement {
   return (
     <div className="flex flex-col items-center h-screen relative mt-[160px]">
-      <h1 className="font-primary  text-[100px] absolute top-[-80px] z-10 tracking-wide">
+      <motion.h1
+        initial={{
+          y: 50,
+          opacity: 0,
+        }}
+        animate={{
+          y: 0,
+          opacity: 1,
+        }}
+        transition={{
+          duration: 0.5,
+        }}
+        className="font-primary  text-[100px] absolute top-[-80px] z-10 tracking-wide"
+      >
         {children}
-      </h1>
+      </motion.h1>
 
       <Swiper
         spaceBetween={30}

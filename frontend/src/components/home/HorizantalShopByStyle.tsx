@@ -1,7 +1,7 @@
 import { motion, useTransform, useScroll } from "framer-motion";
 import { useRef } from "react";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-
+import { Link } from "react-router-dom";
 import ButtonOutlined from "../productdetails/ButtonOutlined";
 
 //import images
@@ -67,7 +67,9 @@ const Card = ({ card }: { card: CardType }) => {
           <p className="font-secondary text-lg tracking-wider text-colorBlack">
             {card.description}
           </p>
-          <ButtonOutlined>Shop Products</ButtonOutlined>
+          <Link to={card.path}>
+            <ButtonOutlined>Shop Products</ButtonOutlined>
+          </Link>
           <span className="border-none hover:text-colorGold font-secondary tracking-widest text-base hover:cursor-pointer">
             Scroll <ArrowForwardIcon />
           </span>
@@ -84,6 +86,7 @@ type CardType = {
   title: string;
   description: string;
   id: number;
+  path: string;
 };
 const cards: CardType[] = [
   {
@@ -92,6 +95,7 @@ const cards: CardType[] = [
     description:
       "Classic Moroccan style is deeply rooted in the rich cultural heritage of Morocco. It embraces traditional elements and craftsmanship,creating a warm and inviting atmosphere.",
     id: 1,
+    path: "/classic",
   },
   {
     image: modernPic,
@@ -99,6 +103,7 @@ const cards: CardType[] = [
     description:
       "Modern style, also known as contemporary style, emphasizes simplicity, clean lines, and minimalism. It embraces functionality while focusing on open spaces and natural light.",
     id: 2,
+    path: "/modern",
   },
   {
     image: bohoPic,
@@ -106,6 +111,7 @@ const cards: CardType[] = [
     description:
       "Boho, short for bohemian, is a style that celebrates a free-spirited and unconventional approach to design. It draws inspiration from various cultures and eras, resulting in a vibrant and eclectic aesthetic. Boho interiors are characterized by a mix of patterns, textures, and colors. You might find vintage furniture, macramé wall hangings, layered textiles, and plenty of plants. The color palette often includes rich jewel tones, earthy hues, and pops of vibrant shades. The boho style exudes a relaxed and whimsical vibe, encouraging self-expression and a laid-back lifestyle.",
     id: 3,
+    path: "/boho",
   },
   {
     image: fusionPic,
@@ -113,5 +119,6 @@ const cards: CardType[] = [
     description:
       "Fusion style combines the traditional elements of Moroccan design with the sleekness and simplicity of modern aesthetics. It blends the characteristic features of both styles to create a unique and harmonious look. In a fusion interior, you might find traditional Moroccan patterns and colors combined with modern furniture, clean lines, and contemporary materials. This style allows for a creative mix of old and new, resulting in a balanced and eclectic space that showcases cultural influences while embracing modern sensibilities.",
     id: 4,
+    path: "/fusion",
   },
 ];

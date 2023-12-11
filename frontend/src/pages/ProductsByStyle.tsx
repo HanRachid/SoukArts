@@ -1,41 +1,53 @@
 import { useParams } from "react-router-dom";
 
+//import images
+import classicPic from "../assets/home/ShopByStyle/classic.webp";
+import modernPic from "../assets/home/ShopByStyle/Modern.jpg";
+import bohoPic from "../assets/home/ShopByStyle/Boho.jpg";
+import fusionPic from "../assets/home/ShopByStyle/Fusion.jpg";
+
+const styles: {
+  name: string;
+  image: string;
+}[] = [
+  {
+    name: "classic",
+    image: classicPic,
+  },
+  {
+    name: "modern",
+    image: modernPic,
+  },
+  {
+    name: "boho",
+    image: bohoPic,
+  },
+  {
+    name: "fusion",
+    image: fusionPic,
+  },
+];
+
 export default function ProductsByyStyle() {
   const { style } = useParams();
+  const selectedStyle = styles.find((s) => s.name === style);
 
   return (
     <>
       <div className="ml-[244px] mr-[244px] mt-8 ">
-        <HeroSlider images={selectedCategory?.images}>
-          {style?.toUpperCase()} STYLE
-        </HeroSlider>
         <div>
-          <h1 className="font-primary text-heading tracking-wide pt-8">
-            Most Loved
-          </h1>
-          <div className="flex  gap-6">
-            <div>
-              <PopularCard
-                isFirstCard={true}
-                isNew={true}
-                product={popularProducts[0]}
-              />
-            </div>
-            <div className="grid grid-cols-2 grid-rows-2 gap-6">
-              {popularProducts?.map((popularProduct, id) =>
-                popularProduct.isFirstCard ? null : (
-                  <PopularCard
-                    isFirstCard={false}
-                    isNew={false}
-                    product={popularProduct}
-                    key={id}
-                  />
-                )
-              )}
-            </div>
+          <div className="w-[1450px] h-[900px] rounded-tl-full rounded-tr-full overflow-hidden">
+            <img
+              src={selectedStyle.image}
+              alt="image style"
+              className="w-full h-full object-cover"
+            />
           </div>
+          <h1 className="text-center text-6xl font-primary text-colorBlack">
+            {selectedStyle.name?.toUpperCase()} STYLE
+          </h1>
         </div>
-        <div className="mt-8 border-b border-gray-500 my-4"></div>
+        {/* <div className="mt-8 border-b border-gray-500 my-4"></div>
         <div className="flex justify-around mt-16">
           {subcategories?.map((subcategory) => (
             <div className="w-32 flex flex-col justify-start items-center">
@@ -70,16 +82,8 @@ export default function ProductsByyStyle() {
           />
         </div>
         <div className="mt-11 grid grid-cols-3 gap-6">
-          <ProductCard isNew={true} image={rug6} />
-          <ProductCard isNew={true} image={rug6} />
-          <ProductCard isNew={true} image={rug6} />
-          <ProductCard isNew={true} image={rug6} />
-          <ProductCard isNew={true} image={rug6} />
-          <ProductCard isNew={true} image={rug6} />
-          <ProductCard isNew={true} image={rug6} />
-          <ProductCard isNew={true} image={rug6} />
-          <ProductCard isNew={true} image={rug6} />
-        </div>
+          {/* <ProductCard isNew={true} image={rug6} /> */}
+        {/* </div>
         <div className="mt-9 flex justify-center">
           <Pagination count={10} variant="outlined" shape="rounded" />
         </div>
@@ -91,7 +95,7 @@ export default function ProductsByyStyle() {
             <RecentCard isNew={true} image={jewelry3} />
             <RecentCard isNew={true} image={lamp1} />
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );
