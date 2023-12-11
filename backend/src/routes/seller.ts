@@ -108,7 +108,9 @@ sellerRouter.post('/edit/:id', async (req: Request, res: Response) => {
     language,
     destroy_id,
   } = req.body;
-  await cloudinary.uploader.destroy(destroy_id);
+  if (destroy_id) {
+    await cloudinary.uploader.destroy(destroy_id);
+  }
 
   const user = await new SellerModel().update(id, {
     shop_name,

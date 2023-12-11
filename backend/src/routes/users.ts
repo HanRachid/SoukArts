@@ -27,7 +27,9 @@ userRouter.post('/edit/:id', async (req: Request, res: Response) => {
     country,
     destroy_id,
   } = req.body;
-  await cloudinary.uploader.destroy(destroy_id);
+  if (destroy_id) {
+    await cloudinary.uploader.destroy(destroy_id);
+  }
   const user = await new UserModel().update(id, {
     first_name,
     last_name,

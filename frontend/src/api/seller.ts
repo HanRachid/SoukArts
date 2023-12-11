@@ -1,4 +1,4 @@
-import {Seller} from '../../types';
+import {CloudinaryImage, Seller} from '../../types';
 
 const endpoint = import.meta.env.VITE_API_ENDPOINT + '/seller';
 
@@ -97,12 +97,19 @@ export async function editSeller(
   const url: string = endpoint + '/edit/' + seller._id;
 
   const sellerToEdit = seller;
-  if (
-    sellerToEdit.localUrl !== null &&
-    sellerToEdit.localUrl.split(':')[0] !== 'http'
+  sellerToEdit.destroy_id = null;
+
+  if (sellerToEdit.banner) {
+    sellerToEdit.destroy_id = sellerToEdit.banner.public_id;
+  }
+  if (sellerToEdit.localUrl === null) {
+    sellerToEdit.banner = {} as CloudinaryImage;
+  } else if (
+    sellerToEdit!.localUrl! &&
+    sellerToEdit.localUrl!.split(':')[0] === 'blob'
   ) {
     const uploadedImage = await uploadImage(image);
-    sellerToEdit.destroy_id = sellerToEdit.banner.public_id;
+
     sellerToEdit.banner = uploadedImage;
   }
 

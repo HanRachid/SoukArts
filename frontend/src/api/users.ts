@@ -1,4 +1,4 @@
-import {User} from '../../types';
+import {CloudinaryImage, User} from '../../types';
 
 const endpoint = import.meta.env.VITE_API_ENDPOINT + '/users';
 
@@ -22,12 +22,18 @@ export async function editUser(
   const url: string = endpoint + '/edit/' + user._id;
 
   const userToEdit = user;
-  if (
-    userToEdit.localUrl !== null &&
-    userToEdit.localUrl.split(':')[0] !== 'http'
+  userToEdit.destroy_id = null;
+  if (userToEdit.profile_image) {
+    userToEdit.destroy_id = userToEdit.profile_image.public_id;
+  }
+  if (userToEdit.localUrl === null) {
+    userToEdit.profile_image = {} as CloudinaryImage;
+  } else if (
+    userToEdit!.localUrl! &&
+    userToEdit.localUrl!.split(':')[0] === 'blob'
   ) {
     const uploadedImage = await uploadImage(image);
-    userToEdit.destroy_id = userToEdit.profile_image.public_id;
+
     userToEdit.profile_image = uploadedImage;
   }
 

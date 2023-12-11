@@ -40,6 +40,7 @@ import AdminLayout from './layouts/AdminLayout';
 import AdminLinks from './dashboardlinks/AdminLinks';
 import Profile from './views/profile/Profile';
 import ProfileLinks from './dashboardlinks/ProfileLinks';
+import AllUsers from './views/admin/AllUsers';
 export default [
   {
     path: '/',
@@ -126,6 +127,16 @@ export default [
       <AdminLayout
         pageTitle={'Home Admin'}
         Component={LoginAdmin}
+        links={AdminLinks}
+      />
+    ),
+  },
+  {
+    path: '/Admin/Users',
+    element: (
+      <AdminLayout
+        pageTitle={'Home Admin'}
+        Component={AllUsers}
         links={AdminLinks}
       />
     ),
