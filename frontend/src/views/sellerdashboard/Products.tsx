@@ -18,6 +18,7 @@ export default function Products() {
   const [toEdit, setToEdit] = useState<ProductUrl>({
     _id: '',
     user_id: '',
+    seller_id: '',
     title: '',
     description: '',
     category: '',
@@ -33,16 +34,20 @@ export default function Products() {
     secondary_color: '',
     formData: [],
   });
-  const productses = useSelector((state: any) =>
-    state.auth.user ? state.auth.user.user : null
-  );
+  const user = useSelector((state: any) => state.auth.user);
+
+  useEffect(() => {
+    if (user) {
+      getProducts(user.user._id).then((res) => {
+        console.log(res);
+
+        setProducts(res);
+      });
+    }
+  }, [user]);
   async function handleDelete(id: string) {
     deleteProduct(id).then(() => {
-      const user = useSelector((state: any) =>
-        state.auth.user ? state.auth.user.user : null
-      );
-
-      getProducts(user!._id).then((res) => {
+      getProducts(user!.user._id).then((res) => {
         setProducts(res);
       });
     });

@@ -1,11 +1,9 @@
-import StoreSettings from "../../components/settings/StoreSettings";
-import AccountSettings from "../../components/settings/AccountSettings";
+import StoreSettings from '../../components/settings/StoreSettings';
 
 export default function Settings() {
   return (
-    <div className="w-full bg-white px-20 py-20 rounded-lg font-secondary">
-      <AccountSettings/>
-      <StoreSettings/>
+    <div className='w-full bg-white px-20 py-20 rounded-lg font-secondary'>
+      <StoreSettings />
     </div>
   );
 }

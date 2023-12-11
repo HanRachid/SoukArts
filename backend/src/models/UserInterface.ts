@@ -10,9 +10,10 @@ export default interface UserInterface extends Document {
   first_name: string;
   last_name: string;
   gender: Gender;
-  profile_image: string;
+  profile_image: Object;
   email: string;
   phone: string;
+  country: string;
   password: string;
   role: Object;
   is_active?: boolean;

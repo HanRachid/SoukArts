@@ -3,6 +3,9 @@ import {NextFunction, Request, Response} from 'express';
 import UserModel from '../models/UserModel';
 import passport from '../middlewares/passport';
 import {getDays} from '../helpers/authHelpers';
+import SellerModel from '../models/SellerModel';
+import UserInterface from '../models/UserInterface';
+import SellerInterface from '../models/SellerInterface';
 
 const authRouter = express.Router();
 const session = require('express-session');
@@ -49,9 +52,14 @@ authRouter.post(
 
 authRouter.post(
   '/login',
-  (req: Request, res: Response, next: NextFunction) => {
+  async (req: Request, res: Response, next: NextFunction) => {
     if (req.isAuthenticated()) {
-      res.send({user: req.user});
+      const User = req.user as UserInterface & {seller: SellerInterface};
+      const getSeller = await new SellerModel().findById(
+        User.seller_id.toString()
+      );
+      const response = {...User.toObject(), seller: getSeller};
+      res.send({user: response});
     } else {
       next();
     }
@@ -64,9 +72,15 @@ authRouter.post(
 
 authRouter.post(
   '/refreshlogin',
-  (req: Request, res: Response, next: NextFunction) => {
+  async (req: Request, res: Response, next: NextFunction) => {
     if (req.isAuthenticated()) {
-      res.send({user: req.user});
+      const User = req.user as UserInterface & {seller: SellerInterface};
+      const getSeller = await new SellerModel().findById(
+        User.seller_id.toString()
+      );
+      const response = {...User.toObject(), seller: getSeller};
+
+      res.send({user: response});
     } else {
       res.send({user: {role: 'disconnected'}});
     }
@@ -86,8 +100,12 @@ authRouter.post(
   }
 );
 
-authRouter.get('/success', (req: Request, res: Response) => {
-  res.send({user: req.user});
+authRouter.get('/success', async (req: Request, res: Response) => {
+  const User = req.user as UserInterface & {seller: SellerInterface};
+  const getSeller = await new SellerModel().findById(User.seller_id.toString());
+  const response = {...User.toObject(), seller: getSeller};
+
+  res.send({user: response});
 });
 
 authRouter.get('/:id/forgot', (req: Request, res: Response) => {

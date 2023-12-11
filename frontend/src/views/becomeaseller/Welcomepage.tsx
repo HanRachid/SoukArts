@@ -22,7 +22,7 @@ function Welcomepage({
     business_email: '',
     user_id: user._id,
   });
-  if (!user || user!.role! !== 'Seller' || user!.role! !== 'Admin') {
+  if (!user || user!.role! !== 'Client') {
     router.navigate('/');
   }
 

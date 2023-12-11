@@ -26,6 +26,7 @@ productRouter.post('/addproduct', async (req: Request, res: Response) => {
     style,
     item_type,
     free_shipping,
+    seller_id,
   } = req.body;
 
   const editProduct = await new ProductModel().findByQuery({title: title});
@@ -48,7 +49,9 @@ productRouter.post('/addproduct', async (req: Request, res: Response) => {
     style: style,
     item_type: item_type,
     free_shipping: free_shipping,
+    seller_id: seller_id,
   });
+  console.log(product);
 
   res.send(product._id);
 });
@@ -65,16 +68,14 @@ productRouter.get('/product/:id', async (req: Request, res: Response) => {
 });
 
 productRouter.get('/allproducts', async (req: Request, res: Response) => {
-  /*  const allProducts = await new ProductModel().getAllModelsPopulateTwice(
-    'user',
-    'seller'
-  );*/
   const allProducts = await new ProductModel().getAllModelsPopulateTwice(
     'user',
     UserModel.schema,
     'seller',
     UserModel.schema
   );
+  console.log(allProducts);
+
   res.send(allProducts);
 });
 

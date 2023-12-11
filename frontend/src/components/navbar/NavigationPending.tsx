@@ -3,7 +3,7 @@ import HeartSVG from '../../assets/navbar/heart.svg?react';
 import CartSVG from '../../assets/navbar/cart.svg?react';
 import BottomIcon from '../../assets/icons/bottomIcon.png';
 import avatarNavbar from '../../assets/navbar/avatarNavbar.svg';
-import NavbarSellerProfile from './NavbarSellerProfile';
+import NavbarProfile from './NavbarProfile';
 import {useState} from 'react';
 import {BsShop} from 'react-icons/bs';
 import {Link} from 'react-router-dom';
@@ -54,7 +54,7 @@ const NavigationSeller = () => {
         </Link>
       </div>
 
-      {showProfile && <NavbarSellerProfile />}
+      {showProfile && <NavbarProfile />}
     </>
   );
 };

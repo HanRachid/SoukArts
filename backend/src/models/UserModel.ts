@@ -1,3 +1,4 @@
+import {count} from 'console';
 import BaseModel from './BaseModel';
 import SellerModel from './SellerModel';
 import UserInterface from './UserInterface';
@@ -12,9 +13,10 @@ export default class UserModel extends BaseModel<UserInterface> {
     first_name: {type: String, required: false},
     last_name: {type: String, required: false},
     gender: {type: String, required: false},
-    profile_image: {type: String, required: false},
+    profile_image: {type: Object, required: false},
+    country: {type: String, required: false},
     email: {type: String, required: true},
-    number_phone: {type: String, required: false},
+    phone: {type: String, required: false},
     password: {type: String, required: true},
     role: {type: String, required: true},
     seller_id: {type: Types.ObjectId, required: false, ref: 'seller'},
