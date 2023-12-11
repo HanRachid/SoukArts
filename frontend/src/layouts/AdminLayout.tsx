@@ -37,10 +37,9 @@ export default function AdminLayout({
   const activeLinkStyle = (title: string) => {
     const route = title === 'Admin' ? 'admin' : 'admin/' + title;
 
-    if (
-      route === 'dashboard/Products' &&
-      currentPage === 'Dashboard/products/addNewProduct'
-    )
+    if (route === 'admin/Pending Sellers' && currentPage === 'Admin')
+      return 'bg-gradient-to-r from-colorBrown to-colorGold text-white';
+    else if (route === 'admin/All users' && currentPage === 'Admin/Users')
       return 'bg-gradient-to-r from-colorBrown to-colorGold text-white';
 
     return currentPage.toLowerCase() === route.toLowerCase()

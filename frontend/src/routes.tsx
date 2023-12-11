@@ -19,6 +19,49 @@ import DashboardLayout from "./layouts/DashboardLayout";
 import Dashboard from "./views/sellerdashboard/Dashboard";
 import Products from "./views/sellerdashboard/Products";
 import AddNewProduct from "./components/products/AddNewProduct";
+
+import SellerLinks from "./dashboardlinks/SellerLinks";
+import OrdersDetails from "./components/orders/OrdersDetails";
+import Cart from "./pages/Cart";
+import Becomeaseller from "./layouts/BecomeASeller";
+import Welcomepage from "./views/becomeaseller/Welcomepage";
+import Shop from "./views/becomeaseller/Shop";
+import Sellerpayment from "./views/becomeaseller/Sellerpayment";
+import StoreSeller from "./pages/StoreSeller";
+import Pending from "./views/becomeaseller/Pending";
+import Orders from "./views/sellerdashboard/Orders";
+import Settings from "./views/sellerdashboard/Settings";
+import Stats from "./views/sellerdashboard/Stats";
+import Helps from "./views/sellerdashboard/Helps";
+import Finance from "./views/sellerdashboard/Finance";
+import Listings from "./components/dashboard/Listings";
+import LoginAdmin from "./views/admin/SellerStatus";
+import AdminLayout from "./layouts/AdminLayout";
+import AdminLinks from "./dashboardlinks/AdminLinks";
+import Profile from "./views/profile/Profile";
+import ProfileLinks from "./dashboardlinks/ProfileLinks";
+import AllUsers from "./views/admin/AllUsers";
+import { RouteObj } from "../types";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Privacy from "./pages/Privacy";
+import Register from "./pages/Register";
+import Termsofuse from "./pages/TermsOfUse";
+import GlobalLayout from "./layouts/GlobalLayout";
+import ProfileLayout from "./layouts/ProfileLayout";
+import ProductDetail from "./pages/ProductDetail";
+import SearchResult from "./pages/SearchResults";
+import ProductsList from "./pages/ProductsList";
+import Logout from "./pages/Logout";
+import Payment from "./pages/Payment";
+import DeliveryPayment from "./pages/DeliveryPayment";
+import ReviewPayment from "./pages/ReviewPayment";
+import PaymentLayout from "./layouts/PaymentLayout";
+import Favorite from "./pages/Favorite";
+import DashboardLayout from "./layouts/DashboardLayout";
+import Dashboard from "./views/sellerdashboard/Dashboard";
+import Products from "./views/sellerdashboard/Products";
+import AddNewProduct from "./components/products/AddNewProduct";
 import SellerLinks from "./dashboardlinks/SellerLinks";
 import OrdersDetails from "./components/orders/OrdersDetails";
 import Cart from "./pages/Cart";
@@ -130,6 +173,16 @@ export default [
       <AdminLayout
         pageTitle={"Home Admin"}
         Component={LoginAdmin}
+        links={AdminLinks}
+      />
+    ),
+  },
+  {
+    path: "/Admin/Users",
+    element: (
+      <AdminLayout
+        pageTitle={"Home Admin"}
+        Component={AllUsers}
         links={AdminLinks}
       />
     ),

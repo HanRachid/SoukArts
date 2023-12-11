@@ -7,7 +7,7 @@ import {setLoginState} from '../../features/auth/authSlice';
 export default function AccountSettings() {
   const user = useSelector((state: any) => state.auth.user);
   const [userInfo, setUserInfo] = useState(
-    {} as User & {localUrl: string | null}
+    {} as User & {localUrl: string | null} & {destroy_id: string | null}
   );
   const dispatch = useDispatch();
   const [formData, setFormData] = useState<FormData>(new FormData());

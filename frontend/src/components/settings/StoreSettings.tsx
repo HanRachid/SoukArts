@@ -15,7 +15,7 @@ import {editSeller} from '../../api/seller';
 export default function StoreSettings() {
   const user = useSelector((state: any) => state.auth.user);
   const [userInfo, setUserInfo] = useState(
-    {} as Seller & {localUrl: string | null}
+    {} as Seller & {localUrl: string | null} & {destroy_id: string | null}
   );
   const dispatch = useDispatch();
   const [formData, setFormData] = useState<FormData>(new FormData());
@@ -143,6 +143,31 @@ export default function StoreSettings() {
               </Select>
             </div>
           </div>
+          <div className='sm:col-span-3'>
+            <Input
+              value={userInfo.slogan}
+              onChange={handleChange}
+              label='Slogan'
+              name='slogan'
+              crossOrigin='false'
+            />
+          </div>
+
+          <div className='sm:col-span-3'>
+            <Input
+              value={userInfo.address}
+              onChange={handleChange}
+              label='Address'
+              name='address'
+              crossOrigin='false'
+            />
+          </div>
+          <Textarea
+            value={userInfo.annoucements}
+            onChange={handleChange}
+            label='Announcements'
+            name='annoucements'
+          />
           <label className='text-xl font-medium mt-5 text-gray-900'>
             Banner
           </label>
@@ -186,7 +211,14 @@ export default function StoreSettings() {
             />
           </div>
 
-          <div className='flex justify-end pt-8'>
+          <div className='flex justify-between pt-8'>
+            <button
+              type='button'
+              className='ml-3 rounded-md border border-transparent bg-transparent py-2 px-3 text-sm font-medium border border-black-500 text-gray-900 hover:text-gray-700 focus:border-gray-300 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:ring-offset-2 focus:ring-offset-gray-50'
+              onClick={handleRemove}
+            >
+              Remove Banner
+            </button>
             <Button type='submit' color='brown'>
               Save
             </Button>
