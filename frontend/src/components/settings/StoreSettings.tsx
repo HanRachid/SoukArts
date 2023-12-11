@@ -6,9 +6,11 @@ import {
   Textarea,
 } from '@material-tailwind/react';
 import {ChangeEvent, useEffect, useState} from 'react';
-import {Seller} from '../../../types';
+import {Seller, User} from '../../../types';
 import {useDispatch, useSelector} from 'react-redux';
 import {setLoginState} from '../../features/auth/authSlice';
+import {refreshLog} from '../../api/auth';
+import {editSeller} from '../../api/seller';
 
 export default function StoreSettings() {
   const user = useSelector((state: any) => state.auth.user);
@@ -20,7 +22,12 @@ export default function StoreSettings() {
   useEffect(() => {
     if (user) {
       setUserInfo({...user.user.seller, localUrl: user.user.seller.banner});
-      console.log(userInfo);
+      if (user.user.seller.banner) {
+        setUserInfo({
+          ...user.user.seller,
+          localUrl: user.user.seller.banner.url,
+        });
+      }
     }
   }, [user]);
 
@@ -53,8 +60,12 @@ export default function StoreSettings() {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const newUser = await editUser(userInfo, formData);
-    dispatch(setLoginState({user: newUser} as any));
+    console.log(e);
+
+    await editSeller(userInfo, formData);
+    refreshLog({} as User).then((result) => {
+      dispatch(setLoginState(result));
+    });
   }
   return (
     <div>
@@ -63,7 +74,10 @@ export default function StoreSettings() {
           Store
         </h1>
 
-        <form className='divide-y-gray-200 mt-6 space-y-8 divide-y'>
+        <form
+          onSubmit={handleSubmit}
+          className='divide-y-gray-200 mt-6 space-y-8 divide-y'
+        >
           <div className='grid grid-cols-1 gap-y-6 sm:grid-cols-6 sm:gap-x-6 mb-5'>
             <div className='sm:col-span-6'>
               <h2 className='text-xl font-medium text-gray-900'>
@@ -76,11 +90,23 @@ export default function StoreSettings() {
             </div>
 
             <div className='sm:col-span-3'>
-              <Input label='Store name' crossOrigin='false' />
+              <Input
+                label='Store name'
+                name='shop_name'
+                crossOrigin='false'
+                value={userInfo.shop_name}
+                onChange={handleChange}
+              />
             </div>
 
             <div className='sm:col-span-3'>
-              <Input label='Store Contact Email' crossOrigin='false' />
+              <Input
+                label='Store Contact Email'
+                name='business_email'
+                crossOrigin='false'
+                value={userInfo.business_email}
+                onChange={handleChange}
+              />
             </div>
             <div className='sm:col-span-6'>
               <label
@@ -92,10 +118,29 @@ export default function StoreSettings() {
               <div className='mt-1 flex items-center'></div>
             </div>
             <div className='sm:col-span-6'>
-              <Textarea label='Description' />
-              <p className='mt-3 text-sm text-gray-500'>
-                Brief description for your store. URLs are hyperlinked.
-              </p>
+              <Textarea
+                label='Description'
+                name='description'
+                value={userInfo.description}
+                onChange={handleChange}
+              />
+            </div>
+            <div className='sm:col-span-3'>
+              <Select
+                label='language'
+                name='language'
+                value={userInfo.language}
+                onChange={(event) => {
+                  setUserInfo({
+                    ...userInfo,
+                    language: event! as string,
+                  });
+                }}
+              >
+                <Option value='Arabic'>Arabic</Option>
+                <Option value='French'>French</Option>
+                <Option value='English'>English</Option>
+              </Select>
             </div>
           </div>
           <label className='text-xl font-medium mt-5 text-gray-900'>
@@ -140,20 +185,11 @@ export default function StoreSettings() {
               alt=''
             />
           </div>
-          <h2 className='text-xl font-medium text-gray-900 pt-10'>
-            Optional Settings
-          </h2>
 
-          <div className='sm:col-span-3'>
-            <Input label='Slogan' crossOrigin='false' />
-          </div>
-
-          <div className='sm:col-span-3'>
-            <Input label='About' crossOrigin='false' />
-          </div>
-          <Textarea label='Announcements' />
           <div className='flex justify-end pt-8'>
-            <Button color='brown'>Save</Button>
+            <Button type='submit' color='brown'>
+              Save
+            </Button>
           </div>
         </form>
       </div>
