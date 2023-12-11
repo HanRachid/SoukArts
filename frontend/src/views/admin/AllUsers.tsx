@@ -65,7 +65,7 @@ const AllUsers: React.FC = () => {
                   Card Holder
                 </th>
                 <th className='px-6 py-3 text-center font-secondary text-gray-500 uppercase tracking-wider'>
-                  Business Email
+                  Language
                 </th>
                 <th className='px-6 py-3 text-center font-secondary text-gray-500 uppercase tracking-wider'>
                   Status
@@ -87,7 +87,7 @@ const AllUsers: React.FC = () => {
                     {seller.shop_name}
                   </td>
                   <td className='sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-14 py-2 text-gray-700 overflow-hidden text-ellipsis align-middle max-w-[90%] text-center'>
-                    {seller.cardHolder}
+                    {seller.language}
                   </td>
                   <td className='sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-14 py-2 text-gray-700 overflow-hidden text-ellipsis align-middle max-w-[90%] text-center'>
                     {seller.business_email}

@@ -94,8 +94,22 @@ productRouter.post(
 );
 
 productRouter.post('/editproduct/:id', async (req: Request, res: Response) => {
-  const {category, title, description, images, price, quantity, user_id} =
-    req.body;
+  const {
+    category,
+    title,
+    description,
+    images,
+    price,
+    quantity,
+    user_id,
+    primary_color,
+    secondary_color,
+    shipping_time,
+    subcategory,
+    style,
+    item_type,
+    free_shipping,
+  } = req.body;
 
   const id = req.params.id;
   const product = await new ProductModel().findById(id);
@@ -108,6 +122,13 @@ productRouter.post('/editproduct/:id', async (req: Request, res: Response) => {
       images: images,
       price: price,
       quantity: quantity,
+      primary_color,
+      secondary_color,
+      shipping_time,
+      subcategory,
+      style,
+      item_type,
+      free_shipping,
     });
 
     const removedImages = product.images.filter((image) => {
