@@ -4,11 +4,17 @@ import star from "../../assets/icons/icons8-star-50.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import BasicAccordion from "./Accordion";
-
+interface Product {
+  title: string;
+  seller_id: {
+    shop_name: string;
+  };
+  price: number;
+}
 export default function ProductDetailsComponent({
   product,
 }: {
-  product: object;
+  product: Product;
 }) {
   const numberOfStars = 5;
   const starsArray = Array(numberOfStars).fill(null);
@@ -85,7 +91,7 @@ export default function ProductDetailsComponent({
         </ConfigProvider>
       </div>
       <div className="w-full h-[1px] bg-colorBlack/20 "></div>
-      <BasicAccordion />
+      <BasicAccordion  product={product}/>
     </div>
   );
 }

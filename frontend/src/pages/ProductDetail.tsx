@@ -20,8 +20,8 @@ export default function ProductDetail() {
   const imageURLs = images.map((image) => image.url);
   return (
     <>
-      <div className="mt-24 flex gap-16 justify-center">
-        <div className="flex flex-col gap-7 ">
+      <section className="mt-24 flex gap-16 justify-center">
+        <div className="flex flex-col gap-7 w-[853px]">
           <CarouselProduct images={imageURLs} />
           <div>
             <ReviewsSection />
@@ -31,7 +31,7 @@ export default function ProductDetail() {
         <div>
           <ProductDetailsComponent product={currentProduct} />
         </div>
-      </div>
+      </section>
       <div className="flex mt-20 justify-center">
         <MoreFromShop />
       </div>

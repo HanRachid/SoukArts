@@ -39,14 +39,13 @@ export default function CarouselProduct({ images }: CarouselProductProps) {
         }}
       >
         {images.map((image, index) => (
-          <>
+          <div key={index}>
             <Image
               src={image}
               alt={`image ${index + 1}`}
               width={853}
               height={669}
               className="h-full w-full object-cover"
-              key={index}
             />
             <button className="absolute end-11 top-12 z-10  hover:bg-white/60 hover:scale-[1.06] ">
               <div className="relative group">
@@ -60,7 +59,7 @@ export default function CarouselProduct({ images }: CarouselProductProps) {
                 <AddCollection className="absolute w-6 inset-1/2 transform -translate-x-1/2 -translate-y-1/2 font-secondary group-hover:fill-colorGold group-hover:scale-110" />
               </div>
             </button>
-          </>
+          </div>
         ))}
       </Carousel>
       <div className="flex gap-6 mt-7">
