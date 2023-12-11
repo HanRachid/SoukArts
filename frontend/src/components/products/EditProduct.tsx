@@ -173,7 +173,7 @@ export default function EditProduct({
         const localUrl = URL.createObjectURL(file);
         formData.append('file', file);
         formData.append('cloud_name', 'dmgfba0uv');
-        formData.append('upload_preset', 'olz6hm0s');
+        formData.append('upload_preset', '8eab76b3fc');
 
         setProductValues({
           ...productValues,
@@ -332,7 +332,7 @@ export default function EditProduct({
                   )}
                   <Select
                     label='Style'
-                    name='Style'
+                    name='style'
                     value={productValues.style}
                     onChange={(event) => {
                       setProductValues({

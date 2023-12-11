@@ -47,7 +47,6 @@ async function uploadImage(image: FormData) {
 export async function editProduct(data: ProductUrl) {
   const url: string = endpoint + '/editproduct/' + data._id;
   const uploadedImages: Object[] = [];
-  console.log('data:');
 
   console.log(data);
   for (let image of data.formData) {
