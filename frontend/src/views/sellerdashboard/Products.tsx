@@ -34,14 +34,20 @@ export default function Products() {
     secondary_color: '',
     formData: [],
   });
-  const allProducts = useSelector((state: any) => state.products.products);
+  const user = useSelector((state: any) => state.auth.user);
+
+  useEffect(() => {
+    if (user) {
+      getProducts(user.user._id).then((res) => {
+        console.log(res);
+
+        setProducts(res);
+      });
+    }
+  }, [user]);
   async function handleDelete(id: string) {
     deleteProduct(id).then(() => {
-      const user = useSelector((state: any) =>
-        state.auth.user ? state.auth.user.user : null
-      );
-
-      getProducts(user!._id).then((res) => {
+      getProducts(user!.user._id).then((res) => {
         setProducts(res);
       });
     });
