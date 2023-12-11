@@ -60,8 +60,6 @@ sellerRouter.post('/approve/:id', async (req: Request, res: Response) => {
   const user = await new UserModel().update(seller.user_id.toString(), {
     role: 'Seller',
   });
-  console.log(user);
-  console.log(seller);
 
   res.send(seller);
 });
@@ -73,9 +71,24 @@ sellerRouter.post('/deny/:id', async (req: Request, res: Response) => {
   const user = await new UserModel().update(seller.user_id.toString(), {
     role: 'User',
   });
-  console.log(user);
-  console.log(seller);
+
   res.send(seller);
+});
+
+sellerRouter.post('/edit/:id', async (req: Request, res: Response) => {
+  const {id} = req.params;
+  const {shop_name, business_email, banner, description, language} = req.body;
+  console.log(req.body);
+  console.log(id);
+
+  const user = await new SellerModel().update(id, {
+    shop_name,
+    business_email,
+    banner,
+    description,
+    language,
+  });
+  res.send(user);
 });
 
 export default sellerRouter;

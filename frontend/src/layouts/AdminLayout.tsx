@@ -6,7 +6,7 @@ import {RiMenu2Line} from 'react-icons/ri';
 import {BiMessageSquareDetail} from 'react-icons/bi';
 import {FiLogOut} from 'react-icons/fi';
 import {router} from '../App';
-import {AdminLink} from '../../types';
+import {Link} from '../../types';
 import {useSelector} from 'react-redux';
 
 export default function AdminLayout({
@@ -16,7 +16,7 @@ export default function AdminLayout({
 }: {
   Component: React.ComponentType;
   pageTitle: String;
-  links: AdminLink[];
+  links: Link[];
 }) {
   const user = useSelector((state: any) => state.auth.user);
   console.log(user);
@@ -72,7 +72,7 @@ export default function AdminLayout({
             />
           </div>
           <ul className='mt-8 space-y-2 tracking-wide'>
-            {links.map(({icon, title, path}: AdminLink) => (
+            {links.map(({icon, title, path}: Link) => (
               <li key={title} className='cursor-pointer'>
                 <div
                   onClick={() => {
@@ -110,7 +110,6 @@ export default function AdminLayout({
               <RiMenu2Line className='text-2xl' />
             </button>
             <div className='flex space-x-4'>
-              {/*search bar */}
               <div className='md:block'>
                 <div className='relative flex items-center text-gray-400 focus-within:text-colorBrown'>
                   <span className='absolute left-4 flex h-6 items-center border-r border-gray-300 pr-3 '>
@@ -123,7 +122,6 @@ export default function AdminLayout({
                   />
                 </div>
               </div>
-              {/*/search bar */}
 
               <button
                 aria-label='chat'

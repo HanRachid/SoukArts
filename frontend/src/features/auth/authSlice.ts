@@ -13,10 +13,7 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setLoginState: (
-      state,
-      action: PayloadAction<{_id: string; name: string}>
-    ) => {
+    setLoginState: (state, action: PayloadAction<Partial<User>>) => {
       state.user = action.payload;
     },
     setLogoutState: (state) => {

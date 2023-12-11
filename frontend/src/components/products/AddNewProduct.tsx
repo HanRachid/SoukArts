@@ -1,8 +1,8 @@
-import { ChangeEvent, useEffect, useState } from "react";
-import { Category, ProductUrl } from "../../../types";
-import { addProduct } from "../../api/products";
-import { router } from "../../App";
-import Lottie from "lottie-react";
+import {ChangeEvent, useEffect, useState} from 'react';
+import {Category, ProductUrl} from '../../../types';
+import {addProduct} from '../../api/products';
+import {router} from '../../App';
+import Lottie from 'lottie-react';
 import {
   Button,
   Input,
@@ -11,125 +11,127 @@ import {
   Textarea,
   Typography,
   Checkbox,
-} from "@material-tailwind/react";
-import { IoClose } from "react-icons/io5";
-import { store } from "../../app/store";
-import loader from "../../assets/loader.json";
+} from '@material-tailwind/react';
+import {IoClose} from 'react-icons/io5';
+import {store} from '../../app/store';
+import loader from '../../assets/loader.json';
+import {useSelector} from 'react-redux';
 
-const styles = ["Modern", "Classic", "Fusion", "Boho"];
+const styles = ['Modern', 'Classic', 'Fusion', 'Boho'];
 const subcategoriesData: Category[] = [
   {
-    name: "Rugs",
+    name: 'Rugs',
     Subcategories: [
-      "Azilal Rug",
-      "Boucherouite Rugs",
-      "Kilim Rugs",
-      "Taznakht Rugs",
-      "Boujad Rugs",
-      "Zanafi Rugs",
-      "Beni Ourain Rugs",
+      'Azilal Rug',
+      'Boucherouite Rugs',
+      'Kilim Rugs',
+      'Taznakht Rugs',
+      'Boujad Rugs',
+      'Zanafi Rugs',
+      'Beni Ourain Rugs',
     ],
   },
   {
-    name: "Poufs",
+    name: 'Poufs',
     Subcategories: [
-      "Round Leather Poufs",
-      "Boucherouite Poufs",
-      "Square Leather Poufs",
-      "Kilim Berber Poufs",
+      'Round Leather Poufs',
+      'Boucherouite Poufs',
+      'Square Leather Poufs',
+      'Kilim Berber Poufs',
     ],
   },
   {
-    name: "Lamps",
+    name: 'Lamps',
     Subcategories: [
-      "Pendant Lights",
-      "Table Lamps",
-      "Lampshades",
-      "Floor Lamps",
-      "Brass Lamps",
-      "Rattan Lamps",
+      'Pendant Lights',
+      'Table Lamps',
+      'Lampshades',
+      'Floor Lamps',
+      'Brass Lamps',
+      'Rattan Lamps',
     ],
   },
   {
-    name: "Pillows",
+    name: 'Pillows',
     Subcategories: [
-      "Berber Pillows",
-      "Beni Ourain Pillows",
-      "Kilim Pillows",
-      "Sahara Pillows",
-      "Handira Pillows",
+      'Berber Pillows',
+      'Beni Ourain Pillows',
+      'Kilim Pillows',
+      'Sahara Pillows',
+      'Handira Pillows',
     ],
   },
   {
-    name: "Shoes",
+    name: 'Shoes',
     Subcategories: [
-      "Women Shoes",
-      "Man Shoes",
-      "Babouche",
-      "Leather Sandals",
-      "Rattan Shoes",
+      'Women Shoes',
+      'Man Shoes',
+      'Babouche',
+      'Leather Sandals',
+      'Rattan Shoes',
     ],
   },
   {
-    name: "Bags",
+    name: 'Bags',
     Subcategories: [
-      "Leather Bags",
-      "Kilim Bags",
-      "Rattan Bags",
-      "Straw Market Bag",
+      'Leather Bags',
+      'Kilim Bags',
+      'Rattan Bags',
+      'Straw Market Bag',
     ],
   },
   {
-    name: "Jewelry",
+    name: 'Jewelry',
     Subcategories: [
-      "Earrings",
-      "Necklaces",
-      "Rings",
-      "Bracelets",
-      "Ankle Bracelet",
+      'Earrings',
+      'Necklaces',
+      'Rings',
+      'Bracelets',
+      'Ankle Bracelet',
     ],
   },
 ];
 
 const Colors: string[] = [
-  "Gray",
-  "White",
-  "Black",
-  "Blue",
-  "Gold",
-  "Silver",
-  "Copper",
-  "Beige",
-  "Black",
-  "Bronze",
-  "Brown",
-  "Green",
-  "Orange",
-  "Pink",
-  "Purple",
-  "Red",
-  "Rose gold",
-  "Yellow",
+  'Gray',
+  'White',
+  'Black',
+  'Blue',
+  'Gold',
+  'Silver',
+  'Copper',
+  'Beige',
+  'Black',
+  'Bronze',
+  'Brown',
+  'Green',
+  'Orange',
+  'Pink',
+  'Purple',
+  'Red',
+  'Rose gold',
+  'Yellow',
 ];
 
 export default function AddNewProduct() {
   const [loading, setLoading] = useState(false);
   const [productValues, setProductValues] = useState<ProductUrl>({
-    _id: "",
-    user_id: "",
-    title: "",
-    description: "",
-    category: "",
-    subcategory: "",
-    item_type: "",
-    shipping_time: "",
+    _id: '',
+    user_id: '',
+    seller_id: '',
+    title: '',
+    description: '',
+    category: '',
+    subcategory: '',
+    item_type: '',
+    shipping_time: '',
     free_shipping: false,
     price: 0,
     quantity: 0,
     images: [],
-    style: "",
-    primary_color: "",
-    secondary_color: "",
+    style: '',
+    primary_color: '',
+    secondary_color: '',
     formData: [],
   });
 
@@ -137,23 +139,28 @@ export default function AddNewProduct() {
   const [selectedSubCategory, setSelectedSubCategory] = useState<
     string[] | undefined
   >(undefined);
+  const user = useSelector((state: any) => state.auth.user);
+
   useEffect(() => {
+    console.log(user.user);
+
     setProductValues({
       ...productValues,
-      user_id: store.getState().auth.user?._id,
+      user_id: user.user._id,
+      seller_id: user.user.seller_id,
     });
-  }, [store.getState().auth.user]);
+  }, [user]);
 
-  const handleFileUpload = async (event: ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
     const files = event.target?.files;
     if (files) {
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
         const formData = new FormData();
         const localUrl = URL.createObjectURL(file);
-        formData.append("file", file);
-        formData.append("cloud_name", "dmgfba0uv");
-        formData.append("upload_preset", "olz6hm0s");
+        formData.append('file', file);
+        formData.append('cloud_name', 'dmgfba0uv');
+        formData.append('upload_preset', '8eab76b3fc');
 
         setProductValues({
           ...productValues,
@@ -169,7 +176,7 @@ export default function AddNewProduct() {
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >
   ) => {
-    const { name, value } = event.target;
+    const {name, value} = event.target;
     setProductValues((prevState: any) => ({
       ...prevState,
       [name]: value,
@@ -182,7 +189,7 @@ export default function AddNewProduct() {
       category: value,
     }));
     const findSubcategory = subcategoriesData.find(
-      ({ name }) => name === value
+      ({name}) => name === value
     )?.Subcategories;
     setSelectedSubCategory(findSubcategory);
   };
@@ -190,13 +197,12 @@ export default function AddNewProduct() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     for (const key of Object.keys(productValues)) {
-      const missingFields = [];
       if (
         !productValues[key as keyof ProductUrl] &&
-        key !== "free_shipping" &&
-        key !== "_id"
+        key !== 'free_shipping' &&
+        key !== '_id'
       ) {
-        alert("Please fill all the fields");
+        alert('Please fill all the fields');
         return;
       }
     }
@@ -204,81 +210,82 @@ export default function AddNewProduct() {
       setLoading(true);
       await addProduct(productValues);
       setProductValues({
-        _id: "",
-        user_id: "",
-        title: "",
-        description: "",
-        category: "",
-        subcategory: "",
-        item_type: "",
-        shipping_time: "",
+        _id: '',
+        user_id: '',
+        seller_id: '',
+        title: '',
+        description: '',
+        category: '',
+        subcategory: '',
+        item_type: '',
+        shipping_time: '',
         free_shipping: false,
         price: 0,
         quantity: 0,
         images: [],
-        style: "",
-        primary_color: "",
-        secondary_color: "",
+        style: '',
+        primary_color: '',
+        secondary_color: '',
         formData: [],
       });
       setBrowsedImages([]);
       setLoading(false);
-      router.navigate("/Dashboard/Products");
+      router.navigate('/Dashboard/Products');
     } catch (error) {
       // Handle error (display error message, log, etc.)
-      console.error("Error submitting product:", error);
+      console.error('Error submitting product:', error);
     }
   };
 
   return (
     <>
       {loading ? (
-        <div className="flex items-center justify-center relative">
-          <Lottie animationData={loader} className="absolute top-48 w-64" />
+        <div className='flex items-center justify-center relative'>
+          <Lottie animationData={loader} className='absolute top-48 w-64' />
         </div>
       ) : (
-        <section className="flex flex-col z-0 relative">
+        <section className='flex flex-col z-0 relative'>
           <div>
-            <div className="md:grid md:grid-cols-3 md:gap-6">
-              <div className="md:col-span-1">
-                <div className="px-4 sm:px-0">
-                  <h3 className="text-lg font-medium leading-6 text-gray-900">
+            <div className='md:grid md:grid-cols-3 md:gap-6'>
+              <div className='md:col-span-1'>
+                <div className='px-4 sm:px-0'>
+                  <h3 className='text-lg font-medium leading-6 text-gray-900'>
                     Product details
                   </h3>
-                  <p className="mt-1 text-sm text-gray-600">
+                  <p className='mt-1 text-sm text-gray-600'>
                     This information will be displayed publicly so be careful
                     what you share.
                   </p>
                 </div>
               </div>
-              <div className="mt-5 md:col-span-2 md:mt-0">
-                <div className="shadow sm:overflow-hidden sm:rounded-md">
-                  <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
-                    <div className="flex flex-col gap-6">
+              <div className='mt-5 md:col-span-2 md:mt-0'>
+                <div className='shadow sm:overflow-hidden sm:rounded-md'>
+                  <div className='space-y-6 bg-white px-4 py-5 sm:p-6'>
+                    <div className='flex flex-col gap-6'>
                       <Input
-                        label="Title"
+                        label='Title'
                         onChange={handleChange}
                         value={productValues.title}
-                        color="brown"
-                        name="title"
+                        color='brown'
+                        name='title'
                         crossOrigin={true}
                       />
 
                       <div>
                         <Textarea
-                          label="Description"
-                          name="description"
+                          label='Description'
+                          name='description'
                           onChange={handleChange}
                           value={productValues.description}
-                          color="brown"
+                          color='brown'
                         />
-                        <Typography variant="small" color="blue-gray">
+                        <Typography variant='small' color='blue-gray'>
                           Brief description for your Product.
                         </Typography>
                       </div>
                       <Select
-                        label="Type"
-                        name="Type"
+                        label='Type'
+                        name='Type'
                         value={productValues.item_type}
                         onChange={(event) => {
                           setProductValues({
@@ -286,20 +293,20 @@ export default function AddNewProduct() {
                             item_type: event,
                           });
                         }}
-                        color="brown"
+                        color='brown'
                       >
-                        <Option value="Handmade">Handmade</Option>
-                        <Option value="Vintage">Vintage</Option>
+                        <Option value='Handmade'>Handmade</Option>
+                        <Option value='Vintage'>Vintage</Option>
                       </Select>
 
                       <Select
-                        label="Category"
-                        name="category"
+                        label='Category'
+                        name='category'
                         value={productValues.category}
                         onChange={handleSelectCategory}
-                        color="brown"
+                        color='brown'
                       >
-                        {subcategoriesData.map(({ name }) => (
+                        {subcategoriesData.map(({name}) => (
                           <Option key={name} value={name}>
                             {name}
                           </Option>
@@ -308,15 +315,15 @@ export default function AddNewProduct() {
 
                       {selectedSubCategory && (
                         <Select
-                          label="Subcategory"
-                          name="subcategory"
+                          label='Subcategory'
+                          name='subcategory'
                           onChange={(event) => {
                             setProductValues({
                               ...productValues,
                               subcategory: event,
                             });
                           }}
-                          color="brown"
+                          color='brown'
                         >
                           {selectedSubCategory.map((subcategory) => (
                             <Option key={subcategory} value={subcategory}>
@@ -326,15 +333,15 @@ export default function AddNewProduct() {
                         </Select>
                       )}
                       <Select
-                        label="Style"
-                        name="Style"
+                        label='Style'
+                        name='Style'
                         onChange={(event) => {
                           setProductValues({
                             ...productValues,
                             style: event,
                           });
                         }}
-                        color="brown"
+                        color='brown'
                       >
                         {styles.map((style) => (
                           <Option key={style} value={style}>
@@ -343,38 +350,38 @@ export default function AddNewProduct() {
                         ))}
                       </Select>
                       <Select
-                        label="Primary Color"
-                        name="Primary Color"
+                        label='Primary Color'
+                        name='Primary Color'
                         onChange={(event) => {
                           setProductValues({
                             ...productValues,
                             primary_color: event,
                           });
                         }}
-                        color="brown"
+                        color='brown'
                       >
                         {Colors.map((color) => (
                           <Option value={color}>{color}</Option>
                         ))}
                       </Select>
                       <Select
-                        label="Secondary Color"
-                        name="Secondary Color"
+                        label='Secondary Color'
+                        name='Secondary Color'
                         onChange={(event) => {
                           setProductValues({
                             ...productValues,
                             secondary_color: event,
                           });
                         }}
-                        color="brown"
+                        color='brown'
                       >
                         {Colors.map((color) => (
                           <Option value={color}>{color}</Option>
                         ))}
                       </Select>
                       <Select
-                        label="Shipping Time"
-                        name="Shipping Time"
+                        label='Shipping Time'
+                        name='Shipping Time'
                         onChange={(event) => {
                           console.log(productValues);
 
@@ -383,14 +390,14 @@ export default function AddNewProduct() {
                             shipping_time: event,
                           });
                         }}
-                        color="brown"
+                        color='brown'
                       >
-                        <Option value="Three Days">Three Days</Option>
-                        <Option value="One Day">One Day</Option>
+                        <Option value='Three Days'>Three Days</Option>
+                        <Option value='One Day'>One Day</Option>
                       </Select>
 
                       <Checkbox
-                        label="Free Shipping"
+                        label='Free Shipping'
                         onChange={() => {
                           setProductValues({
                             ...productValues,
@@ -398,53 +405,53 @@ export default function AddNewProduct() {
                           });
                         }}
                         crossOrigin
-                        color="brown"
+                        color='brown'
                       />
-                      <label className="block text-sm font-medium text-gray-700">
+                      <label className='block text-sm font-medium text-gray-700'>
                         Photos
                       </label>
-                      <div className="mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
-                        <div className="space-y-1 text-center">
+                      <div className='mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6'>
+                        <div className='space-y-1 text-center'>
                           <svg
-                            className="mx-auto h-12 w-12 text-gray-400"
-                            stroke="currentColor"
-                            fill="none"
-                            viewBox="0 0 48 48"
-                            aria-hidden="true"
+                            className='mx-auto h-12 w-12 text-gray-400'
+                            stroke='currentColor'
+                            fill='none'
+                            viewBox='0 0 48 48'
+                            aria-hidden='true'
                           >
                             <path
-                              d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                              d='M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02'
                               strokeWidth={2}
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
                             />
                           </svg>
-                          <div className="flex text-sm text-gray-600">
-                            <label className="relative cursor-pointer rounded-md bg-white font-medium text-gold-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-gold-500 focus-within:ring-offset-2 hover:text-gold-500">
+                          <div className='flex text-sm text-gray-600'>
+                            <label className='relative cursor-pointer rounded-md bg-white font-medium text-gold-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-gold-500 focus-within:ring-offset-2 hover:text-gold-500'>
                               <span>Upload a file</span>
                               <input
-                                type="file"
-                                name="image"
-                                className="sr-only"
+                                type='file'
+                                name='image'
+                                className='sr-only'
                                 multiple
                                 onChange={handleFileUpload}
                               />
                             </label>
-                            <p className="pl-1">or drag and drop</p>
+                            <p className='pl-1'>or drag and drop</p>
                           </div>
-                          <p className="text-xs text-gray-500">
+                          <p className='text-xs text-gray-500'>
                             PNG, JPG, GIF up to 10MB
                           </p>
                         </div>
                       </div>
                     </div>
 
-                    <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+                    <div className='mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8'>
                       {browsedImages.map((photo, index) => (
-                        <div key={index} className="relative">
-                          <div className="w-full overflow-hidden rounded-md">
+                        <div key={index} className='relative'>
+                          <div className='w-full overflow-hidden rounded-md'>
                             <button
-                              className="absolute -right-2 -top-2 rounded-full bg-gray-200 shadow-md h-8 w-8 flex items-center justify-center"
+                              className='absolute -right-2 -top-2 rounded-full bg-gray-200 shadow-md h-8 w-8 flex items-center justify-center'
                               onClick={() => {
                                 setProductValues({
                                   ...productValues,
@@ -463,8 +470,8 @@ export default function AddNewProduct() {
                             </button>
                             <img
                               src={photo}
-                              alt=""
-                              className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                              alt=''
+                              className='h-full w-full object-cover object-center lg:h-full lg:w-full'
                             />
                           </div>
                         </div>
@@ -476,52 +483,52 @@ export default function AddNewProduct() {
             </div>
           </div>
 
-          <div className="hidden sm:block" aria-hidden="true">
-            <div className="py-5">
-              <div className="border-t border-gray-200" />
+          <div className='hidden sm:block' aria-hidden='true'>
+            <div className='py-5'>
+              <div className='border-t border-gray-200' />
             </div>
           </div>
 
-          <div className="mt-10 sm:mt-0">
-            <div className="md:grid md:grid-cols-3 md:gap-6">
-              <div className="md:col-span-1">
-                <div className="px-4 sm:px-0">
-                  <h3 className="text-lg font-medium leading-6 text-gray-900">
+          <div className='mt-10 sm:mt-0'>
+            <div className='md:grid md:grid-cols-3 md:gap-6'>
+              <div className='md:col-span-1'>
+                <div className='px-4 sm:px-0'>
+                  <h3 className='text-lg font-medium leading-6 text-gray-900'>
                     Inventory and pricing
                   </h3>
-                  <p className="mt-1 text-sm text-gray-600">
+                  <p className='mt-1 text-sm text-gray-600'>
                     Please enter the inventory and pricing details.
                   </p>
                 </div>
               </div>
-              <div className="mt-5 md:col-span-2 md:mt-0">
+              <div className='mt-5 md:col-span-2 md:mt-0'>
                 <form onSubmit={handleSubmit}>
-                  <div className="overflow-hidden shadow sm:rounded-md">
-                    <div className="bg-white px-4 py-5 sm:p-6">
-                      <div className="flex flex-col gap-6">
+                  <div className='overflow-hidden shadow sm:rounded-md'>
+                    <div className='bg-white px-4 py-5 sm:p-6'>
+                      <div className='flex flex-col gap-6'>
                         <Input
-                          label="Price"
-                          name="price"
-                          type="number"
+                          label='Price'
+                          name='price'
+                          type='number'
                           onChange={handleChange}
                           value={productValues.price}
                           crossOrigin
                         />
 
                         <Input
-                          label="Quantity"
-                          name="quantity"
+                          label='Quantity'
+                          name='quantity'
                           onChange={handleChange}
                           value={productValues.quantity}
                           crossOrigin
                         />
                       </div>
                     </div>
-                    <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
+                    <div className='bg-gray-50 px-4 py-3 text-right sm:px-6'>
                       <Button
-                        type="submit"
-                        color="brown"
-                        className="mr-4 hover:bg-colorGold"
+                        type='submit'
+                        color='brown'
+                        className='mr-4 hover:bg-colorGold'
                       >
                         Save
                       </Button>

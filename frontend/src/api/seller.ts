@@ -77,3 +77,21 @@ export async function denySeller(id: string) {
   console.log(response);
   return response;
 }
+
+export async function editSeller(id: string) {
+  const url: string = endpoint + '/edit/' + id;
+
+  const params: RequestInit = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    mode: 'cors',
+  };
+
+  const edit = await fetch(url, params);
+  const response = await edit.json();
+
+  console.log(response);
+  return response;
+}

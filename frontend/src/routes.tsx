@@ -5,6 +5,7 @@ import Privacy from './pages/Privacy';
 import Register from './pages/Register';
 import Termsofuse from './pages/TermsOfUse';
 import GlobalLayout from './layouts/GlobalLayout';
+import ProfileLayout from './layouts/ProfileLayout';
 import ProductDetail from './pages/ProductDetail';
 import SearchResult from './pages/SearchResults';
 import ProductsList from './pages/ProductsList';
@@ -34,9 +35,11 @@ import Stats from './views/sellerdashboard/Stats';
 import Helps from './views/sellerdashboard/Helps';
 import Finance from './views/sellerdashboard/Finance';
 import Listings from './components/dashboard/Listings';
-import LoginAdmin from './components/admin/SellerStatus';
+import LoginAdmin from './views/admin/SellerStatus';
 import AdminLayout from './layouts/AdminLayout';
 import AdminLinks from './dashboardlinks/AdminLinks';
+import Profile from './views/profile/Profile';
+import ProfileLinks from './dashboardlinks/ProfileLinks';
 export default [
   {
     path: '/',
@@ -224,6 +227,16 @@ export default [
         pageTitle={'Dashboard'}
         Component={Stats}
         links={SellerLinks}
+      />
+    ),
+  },
+  {
+    path: 'Profile/',
+    element: (
+      <ProfileLayout
+        pageTitle={'Profile'}
+        Component={Profile}
+        links={ProfileLinks}
       />
     ),
   },

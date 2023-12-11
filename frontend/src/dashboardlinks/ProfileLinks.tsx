@@ -3,7 +3,7 @@ import {IoHome} from 'react-icons/io5';
 export default [
   {
     icon: <IoHome />,
-    path: '/Admin',
-    title: 'Admin',
+    path: '/Profile',
+    title: 'Profile',
   },
 ] as Link[];

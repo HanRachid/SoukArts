@@ -9,7 +9,7 @@ export default class SellerModel extends BaseModel<SellerInterface> {
     business_email: {type: String, required: true},
     cardHolder: {type: String, required: true},
     cardNumber: {type: String, required: true},
-    banner: {type: Object, required: true},
+    banner: {type: Object, required: false},
     expirationDate: {type: String, required: true},
     cvc: {type: Number, required: true},
     language: {type: String, required: true},

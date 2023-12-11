@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
 import {approveSeller, denySeller, getPendingSeller} from '../../api/seller';
 import {CheckCircleIcon, XCircleIcon} from '@heroicons/react/24/outline';
-import ModalComponent from '../../views/alert/ModalComponent';
+import ModalComponent from '../alert/ModalComponent';
 import {Seller} from '../../../types';
 import {router} from '../../App';
 import {useSelector} from 'react-redux';

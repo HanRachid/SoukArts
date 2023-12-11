@@ -18,6 +18,7 @@ export default function Products() {
   const [toEdit, setToEdit] = useState<ProductUrl>({
     _id: '',
     user_id: '',
+    seller_id: '',
     title: '',
     description: '',
     category: '',
@@ -33,9 +34,7 @@ export default function Products() {
     secondary_color: '',
     formData: [],
   });
-  const productses = useSelector((state: any) =>
-    state.auth.user ? state.auth.user.user : null
-  );
+  const allProducts = useSelector((state: any) => state.products.products);
   async function handleDelete(id: string) {
     deleteProduct(id).then(() => {
       const user = useSelector((state: any) =>
