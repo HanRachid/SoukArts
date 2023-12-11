@@ -56,15 +56,11 @@ export async function editProduct(data: ProductUrl) {
     const uploadedImage = await uploadImage(image);
     uploadedImages.push(uploadedImage);
   }
-  console.log(uploadedImages);
 
   const uploadedProduct = {
     ...data,
     images: [...uploadedImages, ...data.images],
   };
-  console.log('uploadedProduct:');
-
-  console.log(uploadedProduct);
 
   const params: RequestInit = {
     method: 'POST',

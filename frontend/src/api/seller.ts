@@ -77,21 +77,44 @@ export async function denySeller(id: string) {
   console.log(response);
   return response;
 }
+async function uploadImage(image: FormData) {
+  const url = 'http://api.cloudinary.com/v1_1/dmgfba0uv/image/upload';
+  const params: RequestInit = {
+    method: 'POST',
+    body: image,
+  };
+  const upload = await fetch(url, params);
+  const result = await upload.json();
+  console.log(result);
 
-export async function editSeller(id: string) {
-  const url: string = endpoint + '/edit/' + id;
+  return result;
+}
+export async function editSeller(
+  seller: Seller & {localUrl: string | null},
+  image: FormData
+) {
+  const url: string = endpoint + '/edit/' + seller._id;
+
+  const sellerToEdit = seller;
+  if (
+    sellerToEdit.localUrl !== null &&
+    sellerToEdit.localUrl.split(':')[0] !== 'http'
+  ) {
+    const uploadedImage = await uploadImage(image);
+    sellerToEdit.banner = uploadedImage;
+  }
 
   const params: RequestInit = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
+    body: JSON.stringify(sellerToEdit),
     mode: 'cors',
   };
 
-  const edit = await fetch(url, params);
-  const response = await edit.json();
+  const editedSeller = await fetch(url, params);
+  const response = await editedSeller.json();
 
-  console.log(response);
   return response;
 }

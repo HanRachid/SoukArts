@@ -21,7 +21,7 @@ export default function Register() {
     values: Partial<User>,
     {setSubmitting}: {setSubmitting: (isSubmitting: boolean) => void}
   ) => {
-    registerUser(values)
+    registerUser({...values, profile_image: undefined})
       .then(() => {
         loginUser({username: values.username, password: values.password}).then(
           (response) => {

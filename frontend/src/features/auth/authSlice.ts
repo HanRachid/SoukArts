@@ -17,7 +17,7 @@ export const authSlice = createSlice({
       state.user = action.payload;
     },
     setLogoutState: (state) => {
-      state.user = {role: 'disconnected'};
+      state.user = {user: {role: 'disconnected'}} as any;
     },
   },
 });

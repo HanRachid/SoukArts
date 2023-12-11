@@ -126,6 +126,7 @@ export default function EditProduct({
     title: '',
     description: '',
     category: '',
+    seller_id: '',
     subcategory: '',
     item_type: '',
     shipping_time: '',
@@ -208,17 +209,19 @@ export default function EditProduct({
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(e);
+
     for (const key of Object.keys(productValues)) {
       if (
         !productValues[key as keyof ProductUrl] &&
         key !== 'free_shipping' &&
         key !== '_id' &&
-        key !== '__v'
+        key !== '__v' &&
+        key !== 'user_id'
       ) {
         return;
       }
     }
-    e.preventDefault();
     await editProduct(productValues);
     getProducts(product.user_id!).then((res) => {
       setProducts(res);
@@ -227,6 +230,7 @@ export default function EditProduct({
         user_id: '',
         title: '',
         description: '',
+        seller_id: '',
         category: '',
         subcategory: '',
         item_type: '',

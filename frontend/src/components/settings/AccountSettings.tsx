@@ -12,8 +12,11 @@ export default function AccountSettings() {
   const dispatch = useDispatch();
   const [formData, setFormData] = useState<FormData>(new FormData());
   useEffect(() => {
-    if (user) {
-      setUserInfo({...user.user, localUrl: user.user.profile_image.url});
+    if (user.user) {
+      setUserInfo({...user.user});
+      if (user.user.profile_image) {
+        setUserInfo({...user.user, localUrl: user.user.profile_image.url});
+      }
     }
   }, [user]);
 

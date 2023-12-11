@@ -1,6 +1,5 @@
 import {RiMessage2Line} from 'react-icons/ri';
 import {MdOutlineLocalOffer} from 'react-icons/md';
-import avatarNavbar from '../../assets/navbar/avatarNavbar.svg';
 import {MdOutlineLogout} from 'react-icons/md';
 import {RiSettings3Line} from 'react-icons/ri';
 import {LuCreditCard} from 'react-icons/lu';
@@ -11,7 +10,7 @@ import {router} from '../../App';
 import {setLogoutState} from '../../features/auth/authSlice';
 import {Link} from 'react-router-dom';
 
-const NavbarSellerProfile = () => {
+const NavbarProfile = () => {
   const dispatch = useDispatch();
   const user = useSelector((state: any) => state.auth.user);
   return (
@@ -21,7 +20,7 @@ const NavbarSellerProfile = () => {
         <div>
           <img
             src={
-              user.user
+              user.user && user.user.profile_image
                 ? user.user.profile_image.url
                 : 'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2.5&w=256&h=256&q=80'
             }
@@ -77,6 +76,7 @@ const NavbarSellerProfile = () => {
             onClick={() =>
               logoutUser().then(() => {
                 dispatch(setLogoutState());
+
                 router.navigate('/');
               })
             }
@@ -94,4 +94,4 @@ const NavbarSellerProfile = () => {
   );
 };
 
-export default NavbarSellerProfile;
+export default NavbarProfile;
