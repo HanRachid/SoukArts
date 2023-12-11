@@ -89,8 +89,9 @@ async function uploadImage(image: FormData) {
 
   return result;
 }
+
 export async function editSeller(
-  seller: Seller & {localUrl: string | null},
+  seller: Seller & {localUrl: string | null} & {destroy_id: string | null},
   image: FormData
 ) {
   const url: string = endpoint + '/edit/' + seller._id;
@@ -101,6 +102,7 @@ export async function editSeller(
     sellerToEdit.localUrl.split(':')[0] !== 'http'
   ) {
     const uploadedImage = await uploadImage(image);
+    sellerToEdit.destroy_id = sellerToEdit.banner.public_id;
     sellerToEdit.banner = uploadedImage;
   }
 

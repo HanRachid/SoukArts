@@ -12,6 +12,9 @@ export default interface SellerInterface extends Document {
   expirationDate: string;
   cvc: number;
   language: string;
+  address: string;
+  slogan: string;
+  annoucements: string;
   status: string;
   description: string;
   created_at: Date;

@@ -98,6 +98,9 @@ type Seller = {
   language: string;
   status: string;
   description: string;
+  address: string;
+  slogan: string;
+  annoucements: string;
   created_at: Date;
   updated_at: Date;
 };

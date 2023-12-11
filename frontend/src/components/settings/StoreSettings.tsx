@@ -143,6 +143,31 @@ export default function StoreSettings() {
               </Select>
             </div>
           </div>
+          <div className='sm:col-span-3'>
+            <Input
+              value={userInfo.slogan}
+              onChange={handleChange}
+              label='Slogan'
+              name='slogan'
+              crossOrigin='false'
+            />
+          </div>
+
+          <div className='sm:col-span-3'>
+            <Input
+              value={userInfo.address}
+              onChange={handleChange}
+              label='Address'
+              name='address'
+              crossOrigin='false'
+            />
+          </div>
+          <Textarea
+            value={userInfo.annoucements}
+            onChange={handleChange}
+            label='Announcements'
+            name='annoucements'
+          />
           <label className='text-xl font-medium mt-5 text-gray-900'>
             Banner
           </label>
