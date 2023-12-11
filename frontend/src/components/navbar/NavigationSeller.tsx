@@ -4,17 +4,25 @@ import CartSVG from '../../assets/navbar/cart.svg?react';
 import BottomIcon from '../../assets/icons/bottomIcon.png';
 import avatarNavbar from '../../assets/navbar/avatarNavbar.svg';
 import NavbarProfile from './NavbarProfile';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {BsShop} from 'react-icons/bs';
 import {Link} from 'react-router-dom';
 import Button from '../Button';
 import Homenavigation from './HomeNavigation';
+import {User} from '../../../types';
+import {useSelector} from 'react-redux';
 
 const NavigationSeller = () => {
   const [showProfile, setShowProfile] = useState(false);
   const handleProfileClick = () => {
     setShowProfile(!showProfile);
   };
+
+  const [userInfo, setUserInfo] = useState({} as User); // [1
+  const user = useSelector((state: any) => state.auth.user);
+  useEffect(() => {
+    setUserInfo(user.user);
+  }, [user]);
 
   return (
     <>

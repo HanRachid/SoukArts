@@ -74,7 +74,6 @@ productRouter.get('/allproducts', async (req: Request, res: Response) => {
     'seller',
     UserModel.schema
   );
-  console.log(allProducts);
 
   res.send(allProducts);
 });
@@ -110,12 +109,10 @@ productRouter.post('/editproduct/:id', async (req: Request, res: Response) => {
       price: price,
       quantity: quantity,
     });
-    console.log(editProduct);
 
     const removedImages = product.images.filter((image) => {
       return editProduct.images.includes(image);
     });
-    console.log(removedImages);
 
     for (let image of removedImages) {
       await cloudinary.uploader.destroy(image.public_id);

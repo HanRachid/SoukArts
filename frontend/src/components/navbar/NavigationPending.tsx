@@ -4,18 +4,24 @@ import CartSVG from '../../assets/navbar/cart.svg?react';
 import BottomIcon from '../../assets/icons/bottomIcon.png';
 import avatarNavbar from '../../assets/navbar/avatarNavbar.svg';
 import NavbarProfile from './NavbarProfile';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {BsShop} from 'react-icons/bs';
 import {Link} from 'react-router-dom';
 import Button from '../Button';
 import Homenavigation from './HomeNavigation';
+import {useSelector} from 'react-redux';
+import {User} from '../../../types';
 
 const NavigationSeller = () => {
   const [showProfile, setShowProfile] = useState(false);
   const handleProfileClick = () => {
     setShowProfile(!showProfile);
   };
-
+  const [userInfo, setUserInfo] = useState({} as User);
+  const user = useSelector((state: any) => state.auth.user);
+  useEffect(() => {
+    setUserInfo(user.user);
+  }, [user]);
   return (
     <>
       <div className='flex items-center gap-10 w-full'>
@@ -43,7 +49,15 @@ const NavigationSeller = () => {
         </Link>
 
         <div className='flex items-center' onClick={handleProfileClick}>
-          <img src={avatarNavbar} className='w-8 h-8' alt='imgProfile' />
+          <img
+            className='inline-block h-10 w-10 rounded-full border-2 border-black-600'
+            src={
+              user.user.profile_image
+                ? user.user.profile_image.url
+                : 'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2.5&w=256&h=256&q=80'
+            }
+            alt=''
+          />
           <img src={BottomIcon} className='w-5 h-5' alt='BottomIcon' />
         </div>
 

@@ -15,7 +15,10 @@ const LoginAdmin: React.FC = () => {
     try {
       const response = await getPendingSeller();
       setSellers(
-        response.filter((seller: Seller) => seller.status === 'pending')
+        response.filter(
+          (seller: Seller) =>
+            seller.status === 'pending' || seller.status === 'denied'
+        )
       );
     } catch (error) {
       console.error('Error fetching sellers: ', error);
@@ -28,6 +31,7 @@ const LoginAdmin: React.FC = () => {
   if (!user || user!.role! !== 'Admin') {
     router.navigate('/login');
   }
+
   useEffect(() => {
     fetchSellers();
   }, []);
