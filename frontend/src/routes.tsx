@@ -39,6 +39,7 @@ import AdminLayout from "./layouts/AdminLayout";
 import AdminLinks from "./dashboardlinks/AdminLinks";
 import Profile from "./views/profile/Profile";
 import ProfileLinks from "./dashboardlinks/ProfileLinks";
+import ProductByStyle from "./pages/ProductsByStyle";
 export default [
   {
     path: "/",

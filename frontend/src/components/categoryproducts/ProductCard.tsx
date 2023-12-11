@@ -13,12 +13,12 @@ export default function ProductCard({
   isNew: boolean;
 }) {
   console.log(product);
-  console.log(product.seller_id.shop_name);
+  console.log(product._id);
 
   return (
     <>
       <div className="group relative overflow-hidden w-[456.55px] h-[691.18] font-secondary flex flex-col rounded-xl shadow-md z-0">
-        <Link to="#">
+        <Link to={`/products/product/${product._id}`}>
           <button className="absolute end-12 top-8 z-10  hover:bg-white/60 hover:scale-[1.06] ">
             <div className="relative">
               <div className="w-9 h-9 rounded-full bg-white p-1.5 text-gray-900 transition absolute"></div>
