@@ -100,7 +100,7 @@ export default [
     element: <GlobalLayout Component={Pending} hasLayout={true} />,
   },
   {
-    path: "/products/:product",
+    path: "/products/product/:id",
     element: <GlobalLayout Component={ProductDetail} hasLayout={true} />,
   },
   {
