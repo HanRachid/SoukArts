@@ -46,15 +46,6 @@ export default function Searchbar(): React.ReactElement {
   function handleSearch(event: ChangeEvent<HTMLInputElement>) {
     const value: string = event.target.value;
     setSearchTerms(value);
-    console.log(searchTerms);
-    console.log(selectedCategory);
-    console.log(
-      matchProducts(
-        searchTerms as string,
-        products.products,
-        selectedCategory as string
-      )
-    );
 
     setMatchedProducts(
       matchProducts(
@@ -66,6 +57,8 @@ export default function Searchbar(): React.ReactElement {
   }
   function submitSearch(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setSearchTerms('');
+    setMatchedProducts([]);
     const routeUrl = '/search/' + selectedCategory + '/' + searchTerms;
     router.navigate(routeUrl);
   }

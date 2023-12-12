@@ -14,7 +14,7 @@ import rug7 from '../assets/rugs/rug 12.jpg';
 import Filter from '../components/categoryproducts/Filter';
 import {useSelector} from 'react-redux';
 import matchProducts from '../helpers/closest-match';
-import {ProductUrl} from '../../types';
+import {PopulatedProduct, ProductUrl} from '../../types';
 
 export default function SearchResult() {
   const {category, terms} = useParams();
@@ -72,14 +72,10 @@ export default function SearchResult() {
         </div>
 
         <div className='mt-11 grid grid-cols-3 gap-6'>
-          {matchedProducts.map((product: ProductUrl, index: number) => (
-            <ProductCard
-              key={index}
-              isNew={true}
-              image={product.images[0].url}
-              price={product.price}
-            />
+          {matchedProducts.map((product: PopulatedProduct, index: number) => (
+            <ProductCard key={index} isNew={true} product={product} />
           ))}
+          {/*<ProductCard isNew={true} image={rug6} price={600} />
           <ProductCard isNew={true} image={rug6} price={600} />
           <ProductCard isNew={true} image={rug6} price={600} />
           <ProductCard isNew={true} image={rug6} price={600} />
@@ -89,8 +85,7 @@ export default function SearchResult() {
           <ProductCard isNew={true} image={rug6} price={600} />
           <ProductCard isNew={true} image={rug6} price={600} />
           <ProductCard isNew={true} image={rug6} price={600} />
-          <ProductCard isNew={true} image={rug6} price={600} />
-          <ProductCard isNew={true} image={rug6} price={600} />
+          <ProductCard isNew={true} image={rug6} price={600} />*/}
         </div>
         <div className='mt-9 flex justify-center'>
           <Pagination count={10} variant='outlined' shape='rounded' />

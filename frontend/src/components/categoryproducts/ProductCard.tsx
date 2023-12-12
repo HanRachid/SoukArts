@@ -4,13 +4,13 @@ import {Tooltip} from 'react-tooltip';
 //import images
 import HeartSVG from '../../assets/navbar/heart.svg?react';
 import star from '../../assets/icons/icons8-star-50.png';
-import {ProductUrl, Seller} from '../../../types';
+import {PopulatedProduct} from '../../../types';
 
 export default function ProductCard({
   product,
   isNew,
 }: {
-  product: ProductUrl & {seller_id: Seller};
+  product: PopulatedProduct;
   isNew: boolean;
 }) {
   return (
