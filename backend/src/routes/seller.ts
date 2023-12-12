@@ -54,7 +54,10 @@ sellerRouter.post('/addseller', async (req: Request, res: Response) => {
 });
 
 sellerRouter.get('/getPendingSeller', async (req: Request, res: Response) => {
-  const sellers = await new SellerModel().getAllModels();
+  const sellers = await new SellerModel().getAllModelsPopulate(
+    'user',
+    UserModel.schema
+  );
   res.send(sellers);
 });
 

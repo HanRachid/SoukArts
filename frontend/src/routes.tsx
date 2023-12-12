@@ -24,7 +24,7 @@ import OrdersDetails from './components/orders/OrdersDetails';
 import Cart from './pages/Cart';
 import Becomeaseller from './layouts/BecomeASeller';
 import Welcomepage from './views/becomeaseller/Welcomepage';
-import Shop from './views/becomeaseller/Shop';
+import ShopBecomeASeller from './views/becomeaseller/Shop';
 import Sellerpayment from './views/becomeaseller/Sellerpayment';
 import StoreSeller from './pages/StoreSeller';
 import Pending from './views/becomeaseller/Pending';
@@ -89,10 +89,9 @@ export default [
     element: <Becomeaseller Component={Welcomepage} activeStep={0} />,
   },
   {
-    path: '/shop/:id',
-    element: <Becomeaseller Component={Shop} activeStep={1} />,
+    path: '/shop',
+    element: <Becomeaseller Component={ShopBecomeASeller} activeStep={1} />,
   },
-
   {
     path: '/sellerpayment',
     element: <Becomeaseller Component={Sellerpayment} activeStep={2} />,
@@ -206,7 +205,6 @@ export default [
       />
     ),
   },
-
   {
     path: '/Dashboard/Help',
     element: (

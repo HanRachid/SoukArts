@@ -29,7 +29,7 @@ const NavigationSeller = () => {
           <Homenavigation />
         </div>
 
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-10'>
           <Link to='/'>
             <HeartSVG className='xl:w-4 2xl:w-6 font-secondary hover:fill-colorGold' />
           </Link>
@@ -48,7 +48,7 @@ const NavigationSeller = () => {
           </button>
         </Link>
 
-        <div className='flex items-center' onClick={handleProfileClick}>
+        <div className='flex items-center gap-5' onClick={handleProfileClick}>
           <img
             className='inline-block h-10 w-10 rounded-full border-2 border-black-600'
             src={

@@ -71,8 +71,8 @@ export default function AdminLayout({
             />
           </div>
           <ul className='mt-8 space-y-2 tracking-wide'>
-            {links.map(({icon, title, path}: Link) => (
-              <li key={title} className='cursor-pointer'>
+            {links.map(({icon, title, path}: Link, index: number) => (
+              <li key={index} className='cursor-pointer'>
                 <div
                   onClick={() => {
                     router.navigate(path);
