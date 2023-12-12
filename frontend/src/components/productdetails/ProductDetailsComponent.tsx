@@ -29,8 +29,8 @@ export default function ProductDetailsComponent({
           <img src={profilShop} alt="shop image" className="w-full h-full" />
         </div>
         <div className="flex flex-col items-start gap-3">
-          <Link to={`/shop/${product.seller_id.shop_name}`}>
-            <p className=" font-secondary text-center text-base text-colorBlack tracking-widest">
+          <Link to={"/Store"}>
+            <p className=" font-secondary text-center text-base text-colorBlack tracking-widest hover:cursor-pointer hover:text-colorGold">
               {product.seller_id.shop_name}
             </p>
           </Link>
@@ -88,6 +88,7 @@ export default function ProductDetailsComponent({
           >
             Buy Now
           </Button>
+
           <button className="h-11 w-[243px] bg-colorGold text-white font-secondary tracking-widest rounded-none rounded-tr-[7px] rounded-bl-[7px] hover:bg-colorGold/90 hover:scale-[1.02]">
             Add to cart
           </button>
