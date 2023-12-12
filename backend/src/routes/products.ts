@@ -51,7 +51,6 @@ productRouter.post('/addproduct', async (req: Request, res: Response) => {
     free_shipping: free_shipping,
     seller_id: seller_id,
   });
-  console.log(product);
 
   res.send(product._id);
 });

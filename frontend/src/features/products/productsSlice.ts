@@ -1,21 +1,19 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {ProductUrl} from '../../../types';
 
 interface ProductState {
   products: {} | null;
 }
 
 const initialState: ProductState = {
-  products: {},
+  products: [],
 };
 
 export const productsSlice = createSlice({
   name: 'productsSlice',
   initialState,
   reducers: {
-    setProductsState: (
-      state,
-      action: PayloadAction<{_id: string; name: string}>
-    ) => {
+    setProductsState: (state, action: PayloadAction<ProductUrl>) => {
       state.products = action.payload;
     },
   },
