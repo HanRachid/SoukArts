@@ -4,6 +4,7 @@ import star from "../../assets/icons/icons8-star-50.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import BasicAccordion from "./Accordion";
+import { Link } from "react-router-dom";
 interface Product {
   title: string;
   seller_id: {
@@ -28,9 +29,11 @@ export default function ProductDetailsComponent({
           <img src={profilShop} alt="shop image" className="w-full h-full" />
         </div>
         <div className="flex flex-col items-start gap-3">
-          <p className=" font-secondary text-center text-base text-colorBlack tracking-widest">
-            {product.seller_id.shop_name}
-          </p>
+          <Link to={`/shop/${product.seller_id.shop_name}`}>
+            <p className=" font-secondary text-center text-base text-colorBlack tracking-widest">
+              {product.seller_id.shop_name}
+            </p>
+          </Link>
           <div className="flex gap-2">
             {starsArray.map((_, index) => (
               <img key={index} width="17" height="17" src={star} alt="star" />
@@ -91,7 +94,7 @@ export default function ProductDetailsComponent({
         </ConfigProvider>
       </div>
       <div className="w-full h-[1px] bg-colorBlack/20 "></div>
-      <BasicAccordion  product={product}/>
+      <BasicAccordion product={product} />
     </div>
   );
 }
