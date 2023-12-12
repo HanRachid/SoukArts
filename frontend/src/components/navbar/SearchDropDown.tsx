@@ -52,17 +52,15 @@ export default function SearchDropDown({
             <Menu.Items className='relative flex flex-col lg:top-0 top-60 z-50 right-16  h-auto gap-24 justify-between  mt-2 w-max p-8  origin-top-right rounded-sm  ring-black/5 focus:outline-none  border-t-4 border-b-4 border-colorGold bg-colorBeigeLight  font-secondary text-colorBlack '>
               {products.map((product: ProductUrl, index: number) => (
                 <Menu.Item key={index}>
-                  {({active}: {active: boolean}) => (
-                    <Link
-                      to={'/products/product/' + product._id}
-                      onClick={() => {
-                        setMatchedProducts([]);
-                        setSearchTerms('');
-                      }}
-                    >
-                      {firstSix(product.title)}
-                    </Link>
-                  )}
+                  <Link
+                    to={'/products/product/' + product._id}
+                    onClick={() => {
+                      setMatchedProducts([]);
+                      setSearchTerms('');
+                    }}
+                  >
+                    {firstSix(product.title)}
+                  </Link>
                 </Menu.Item>
               ))}
             </Menu.Items>
