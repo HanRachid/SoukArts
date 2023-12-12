@@ -10,7 +10,10 @@ import React, {
   MouseEvent,
 } from 'react';
 import {router} from '../../App';
-
+import SearchDropDown from '../navbar/SearchDropDown';
+import {useSelector} from 'react-redux';
+import matchProducts from '../../helpers/closest-match';
+import {ProductUrl} from '../../../types';
 export default function Searchbar(): React.ReactElement {
   const [selectedCategory, setSelectedCategory] = useState('Categories');
   const [searchTerms, setSearchTerms] = useState('');
@@ -24,6 +27,9 @@ export default function Searchbar(): React.ReactElement {
     'Bags',
     'Jewelry',
   ];
+  const [matchedProducts, setMatchedProducts] = useState([] as ProductUrl[]);
+  const products = useSelector((state: any) => state.products);
+
   const unselected: string =
     'pr-12 pl-6 categories group flex gap-3 w-full items-center rounded-md px-4 py-4 text-md ';
   const selected: string =
@@ -40,10 +46,19 @@ export default function Searchbar(): React.ReactElement {
   function handleSearch(event: ChangeEvent<HTMLInputElement>) {
     const value: string = event.target.value;
     setSearchTerms(value);
-    console.log(value);
+
+    setMatchedProducts(
+      matchProducts(
+        searchTerms as string,
+        products.products,
+        selectedCategory as string
+      )
+    );
   }
   function submitSearch(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setSearchTerms('');
+    setMatchedProducts([]);
     const routeUrl = '/search/' + selectedCategory + '/' + searchTerms;
     router.navigate(routeUrl);
   }
@@ -53,13 +68,18 @@ export default function Searchbar(): React.ReactElement {
 
       <form id='search' onSubmit={submitSearch}>
         <input
-          type='search'
+          type=''
           className=' p-3 pl-10 w-[180px] xl:w-[250] h-10 ml-3 rounded-2xl focus:outline-none bg-colorBeigeLight'
           value={searchTerms}
           onChange={handleSearch}
         />
       </form>
-
+      <SearchDropDown
+        products={matchedProducts}
+        isShowing={matchedProducts.length > 0}
+        setMatchedProducts={setMatchedProducts}
+        setSearchTerms={setSearchTerms}
+      />
       <Menu as={'div' as React.ElementType}>
         <div className=' transform '>
           <Menu.Button className='inline-flex items-center gap-2 w-full justify-center rounded-md p-2 focus:outline-none'>
