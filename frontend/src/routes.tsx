@@ -68,7 +68,6 @@ export default [
     path: '/categories/:category',
     element: <GlobalLayout Component={ProductsList} hasLayout={true} />,
   },
-
   {
     path: '/deliverypayment',
     element: <PaymentLayout Component={DeliveryPayment} activeStep={0} />,
@@ -86,7 +85,7 @@ export default [
     element: <Becomeaseller Component={Welcomepage} activeStep={0} />,
   },
   {
-    path: '/shop',
+    path: '/shop:id',
     element: <Becomeaseller Component={ShopBecomeASeller} activeStep={1} />,
   },
   {

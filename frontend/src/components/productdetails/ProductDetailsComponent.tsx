@@ -8,13 +8,7 @@ import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {setCartState} from '../../features/cart/cartSlice';
 import {PopulatedProduct} from '../../../types';
-interface Product {
-  title: string;
-  seller_id: {
-    shop_name: string;
-  };
-  price: number;
-}
+
 export default function ProductDetailsComponent({
   product,
 }: {
