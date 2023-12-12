@@ -6,6 +6,8 @@ import avatarNavbar from '../../assets/navbar/avatarNavbar.svg';
 import NavbarProfile from './NavbarProfile';
 import {useEffect, useState} from 'react';
 import {BsShop} from 'react-icons/bs';
+import {MdOutlineAdminPanelSettings} from 'react-icons/md';
+
 import {Link} from 'react-router-dom';
 import Button from '../Button';
 import Homenavigation from './HomeNavigation';
@@ -17,19 +19,19 @@ const NavigationSeller = () => {
   const handleProfileClick = () => {
     setShowProfile(!showProfile);
   };
-  const [userInfo, setUserInfo] = useState({} as User);
+  const [userInfo, setUserInfo] = useState({} as User); // [1
   const user = useSelector((state: any) => state.auth.user);
   useEffect(() => {
     setUserInfo(user.user);
   }, [user]);
   return (
     <>
-      <div className='flex items-center gap-10 w-full'>
+      <div className='flex items-center justify-around w-full'>
         <div className=''>
           <Homenavigation />
         </div>
 
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-12'>
           <Link to='/'>
             <HeartSVG className='xl:w-4 2xl:w-6 font-secondary hover:fill-colorGold' />
           </Link>
@@ -37,18 +39,14 @@ const NavigationSeller = () => {
             <CartSVG className='xl:w-4 2xl:w-6 font-secondary hover:fill-colorGold' />
           </Link>
         </div>
-        <Link to='/pending'>
-          <button>
-            <div className='group flex w-full items-center px-2 py-2  text-medium font-secondary hover:text-colorGold hover:scale-[1.02] transition-all duration-300'>
-              <span className=' z-10'>
-                Awaiting Approval
-                <span className='absolute bottom-0 left-0 w-full h-0.5 bg-colorGold transform scale-x-0 origin-left transition-transform group-hover:scale-x-100 duration-300'></span>
-              </span>
-            </div>
-          </button>
+        <Link to='/Dashboard'>
+          <BsShop className='w-6 h-6' />
+        </Link>
+        <Link to='/Admin'>
+          <MdOutlineAdminPanelSettings className='w-8 h-8' />
         </Link>
 
-        <div className='flex items-center' onClick={handleProfileClick}>
+        <div className='flex items-center gap-3' onClick={handleProfileClick}>
           <img
             className='inline-block h-10 w-10 rounded-full border-2 border-black-600'
             src={

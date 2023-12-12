@@ -3,12 +3,14 @@ import HeartSVG from '../../assets/navbar/heart.svg?react';
 import CartSVG from '../../assets/navbar/cart.svg?react';
 import BottomIcon from '../../assets/icons/bottomIcon.png';
 import avatarNavbar from '../../assets/navbar/avatarNavbar.svg';
-import NavbarSellerProfile from './NavbarSellerProfile';
-import {useState} from 'react';
+import NavbarProfile from './NavbarProfile';
+import {useEffect, useState} from 'react';
 import {BsShop} from 'react-icons/bs';
 import {Link} from 'react-router-dom';
 import Button from '../Button';
 import Homenavigation from './HomeNavigation';
+import {User} from '../../../types';
+import {useSelector} from 'react-redux';
 
 const NavigationSeller = () => {
   const [showProfile, setShowProfile] = useState(false);
@@ -16,14 +18,20 @@ const NavigationSeller = () => {
     setShowProfile(!showProfile);
   };
 
+  const [userInfo, setUserInfo] = useState({} as User); // [1
+  const user = useSelector((state: any) => state.auth.user);
+  useEffect(() => {
+    setUserInfo(user.user);
+  }, [user]);
+
   return (
     <>
-      <div className='flex items-center gap-10 w-full'>
+      <div className='flex items-center justify-around  w-full'>
         <div className=''>
           <Homenavigation />
         </div>
 
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-12'>
           <Link to='/'>
             <HeartSVG className='xl:w-4 2xl:w-6 font-secondary hover:fill-colorGold' />
           </Link>
@@ -47,7 +55,7 @@ const NavigationSeller = () => {
         </Link>
       </div>
 
-      {showProfile && <NavbarSellerProfile />}
+      {showProfile && <NavbarProfile />}
     </>
   );
 };

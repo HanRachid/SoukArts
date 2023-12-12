@@ -30,7 +30,7 @@ const orders = [
 
 export default function Example() {
   return (
-    <div className='bg-white h-screen w-full '>
+    <div className='bg-white h-screen w-full font-secondary'>
       <div className='mx-auto max-w-7xl py-16 px-4 sm:px-6 lg:px-8 lg:pb-24'>
         <div className='max-w-xl'>
           <h1 className='text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl'>

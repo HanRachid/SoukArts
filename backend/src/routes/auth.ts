@@ -3,6 +3,9 @@ import {NextFunction, Request, Response} from 'express';
 import UserModel from '../models/UserModel';
 import passport from '../middlewares/passport';
 import {getDays} from '../helpers/authHelpers';
+import SellerModel from '../models/SellerModel';
+import UserInterface from '../models/UserInterface';
+import SellerInterface from '../models/SellerInterface';
 
 const authRouter = express.Router();
 const session = require('express-session');
@@ -25,7 +28,7 @@ authRouter.use(express.urlencoded({extended: false}));
 authRouter.post(
   '/register',
   async (req: Request, res: Response, next: NextFunction) => {
-    const {username, email, password} = req.body;
+    const {username, email, password, profile_image} = req.body;
 
     const hashedPassword = await bcrypt.hash(password, saltRounds);
     const user = new UserModel();
@@ -42,6 +45,7 @@ authRouter.post(
       email: email,
       password: hashedPassword,
       role: 'Client',
+      profile_image: profile_image,
     });
     res.status(200).send(register);
   }
@@ -49,9 +53,19 @@ authRouter.post(
 
 authRouter.post(
   '/login',
-  (req: Request, res: Response, next: NextFunction) => {
+  async (req: Request, res: Response, next: NextFunction) => {
     if (req.isAuthenticated()) {
-      res.send({user: req.user});
+      const User = req.user as UserInterface & {seller: SellerInterface};
+
+      if (User.seller_id) {
+        const getSeller = await new SellerModel().findById(
+          User.seller_id.toString()
+        );
+        const response = {...User.toObject(), seller: getSeller};
+        res.send({user: response});
+      } else {
+        res.send({user: User});
+      }
     } else {
       next();
     }
@@ -64,11 +78,21 @@ authRouter.post(
 
 authRouter.post(
   '/refreshlogin',
-  (req: Request, res: Response, next: NextFunction) => {
+  async (req: Request, res: Response, next: NextFunction) => {
     if (req.isAuthenticated()) {
-      res.send({user: req.user});
+      const User = req.user as UserInterface & {seller: SellerInterface};
+
+      if (User.seller_id) {
+        const getSeller = await new SellerModel().findById(
+          User.seller_id.toString()
+        );
+        const response = {...User.toObject(), seller: getSeller};
+        res.send({user: response});
+      } else {
+        res.send({user: User});
+      }
     } else {
-      next();
+      res.send({user: {role: 'disconnected'}});
     }
   }
 );
@@ -86,8 +110,18 @@ authRouter.post(
   }
 );
 
-authRouter.get('/success', (req: Request, res: Response) => {
-  res.send({user: req.user});
+authRouter.get('/success', async (req: Request, res: Response) => {
+  const User = req.user as UserInterface & {seller: SellerInterface};
+
+  if (User.seller_id) {
+    const getSeller = await new SellerModel().findById(
+      User.seller_id.toString()
+    );
+    const response = {...User.toObject(), seller: getSeller};
+    res.send({user: response});
+  } else {
+    res.send({user: User});
+  }
 });
 
 authRouter.get('/:id/forgot', (req: Request, res: Response) => {

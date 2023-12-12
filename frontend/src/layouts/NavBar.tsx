@@ -9,6 +9,7 @@ import HomeNavigationMobile from '../components/navbar/HomeNavigationMobile';
 import Searchbar from '../components/navbar/SearchBar';
 import Navigation from '../components/navbar/Navigation';
 import NavigationPending from '../components/navbar/NavigationPending';
+import NavigationAdmin from '../components/navbar/NavigationAdmin';
 
 import {logoutUser} from '../api/auth';
 import {setLogoutState} from '../features/auth/authSlice';
@@ -75,6 +76,10 @@ const Navbar = () => {
         <div className='navbar-end w-1/3 xl:block hidden mt-10 pb-10'>
           {user! && user!.role! === 'Seller' && <NavigationSeller />}
           {user! && user!.role! === 'Client' && <Navigation />}
+          {user! && user!.role! === 'disconnected' && <Navigation />}
+
+          {user! && user!.role! === 'Admin' && <NavigationAdmin />}
+
           {user! && user!.role! === 'Pending' && <NavigationPending />}
           {(!user! || !user!.role) && <Navigation />}
         </div>

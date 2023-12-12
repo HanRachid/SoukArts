@@ -31,7 +31,7 @@ export async function addProduct(product: ProductUrl) {
   return response;
 }
 
-export async function uploadImage(image: FormData) {
+async function uploadImage(image: FormData) {
   const url = 'http://api.cloudinary.com/v1_1/dmgfba0uv/image/upload';
   const params: RequestInit = {
     method: 'POST',
@@ -47,7 +47,6 @@ export async function uploadImage(image: FormData) {
 export async function editProduct(data: ProductUrl) {
   const url: string = endpoint + '/editproduct/' + data._id;
   const uploadedImages: Object[] = [];
-  console.log('data:');
 
   console.log(data);
   for (let image of data.formData) {
@@ -56,15 +55,11 @@ export async function editProduct(data: ProductUrl) {
     const uploadedImage = await uploadImage(image);
     uploadedImages.push(uploadedImage);
   }
-  console.log(uploadedImages);
 
   const uploadedProduct = {
     ...data,
     images: [...uploadedImages, ...data.images],
   };
-  console.log('uploadedProduct:');
-
-  console.log(uploadedProduct);
 
   const params: RequestInit = {
     method: 'POST',

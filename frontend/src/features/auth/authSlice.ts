@@ -1,7 +1,8 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {User} from '../../../types';
 
 interface AuthState {
-  user: {_id: string; name: string} | null;
+  user: Partial<User> | null;
 }
 
 const initialState: AuthState = {
@@ -12,14 +13,11 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setLoginState: (
-      state,
-      action: PayloadAction<{_id: string; name: string}>
-    ) => {
+    setLoginState: (state, action: PayloadAction<Partial<User>>) => {
       state.user = action.payload;
     },
     setLogoutState: (state) => {
-      state.user = null;
+      state.user = {user: {role: 'disconnected'}} as any;
     },
   },
 });

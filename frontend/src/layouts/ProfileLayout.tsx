@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import Logo from '../assets/logolight.svg';
 import {useLocation} from 'react-router-dom';
 import {IoNotifications, IoSearch} from 'react-icons/io5';
@@ -6,12 +6,10 @@ import {RiMenu2Line} from 'react-icons/ri';
 import {BiMessageSquareDetail} from 'react-icons/bi';
 import {FiLogOut} from 'react-icons/fi';
 import {router} from '../App';
-import {Link, User} from '../../types';
-import {useDispatch, useSelector} from 'react-redux';
-import {refreshLog} from '../api/auth';
-import {setLoginState} from '../features/auth/authSlice';
+import {Link} from '../../types';
+import {useSelector} from 'react-redux';
 
-export default function DashboardLayout({
+export default function profileLayout({
   Component,
   pageTitle,
   links,
@@ -20,23 +18,19 @@ export default function DashboardLayout({
   pageTitle: String;
   links: Link[];
 }) {
+  const user = useSelector((state: any) => state.auth.user);
+
   const location = useLocation();
   const currentPage = location.pathname.slice(1);
 
-  const user = useSelector((state: any) => state.auth.user);
-
-  if (!user) {
-  } else if (user!.user.role! !== 'Seller' && user!.user.role! !== 'Admin') {
-    router.navigate('/');
-  }
-
   const [showSidebar, setShowSidebar] = useState(false);
+
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
   };
 
   const activeLinkStyle = (title: string) => {
-    const route = title === 'Dashboard' ? 'dashboard' : 'dashboard/' + title;
+    const route = title === 'Admin' ? 'admin' : 'admin/' + title;
 
     if (
       route === 'dashboard/Products' &&
@@ -49,7 +43,7 @@ export default function DashboardLayout({
       : 'text-black';
   };
   return (
-    <div className='bg-gray-50 font-secondary'>
+    <div className='bg-gray-50'>
       {showSidebar && (
         <div
           onClick={toggleSidebar}
@@ -79,9 +73,7 @@ export default function DashboardLayout({
                   onClick={() => {
                     router.navigate(path);
                   }}
-                  className={`${activeLinkStyle(
-                    title
-                  )} relative flex items-center space-x-4 rounded-xl px-4 py-3`}
+                  className={`bg-gradient-to-r from-colorBrown to-colorGold text-white relative flex items-center space-x-4 rounded-xl px-4 py-3`}
                 >
                   {icon}
                   <span className='-mr-1 font-medium'>{title}</span>
@@ -141,8 +133,8 @@ export default function DashboardLayout({
             </div>
           </div>
         </nav>
-        <div className='px-6 pt-6 2xl:container bg-gray-50 h-full -mb-16'>
-          <div className='flex flex-col items-center justify-center max-w-7xl mx-auto'>
+        <div className='px-6 pt-6 2xl:container bg-gray-50 h-full -mb- min-w-full'>
+          <div className=''>
             <Component />
           </div>
         </div>

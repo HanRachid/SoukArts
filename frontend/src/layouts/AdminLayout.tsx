@@ -6,12 +6,10 @@ import {RiMenu2Line} from 'react-icons/ri';
 import {BiMessageSquareDetail} from 'react-icons/bi';
 import {FiLogOut} from 'react-icons/fi';
 import {router} from '../App';
-import {Link, User} from '../../types';
-import {useDispatch, useSelector} from 'react-redux';
-import {refreshLog} from '../api/auth';
-import {setLoginState} from '../features/auth/authSlice';
+import {Link} from '../../types';
+import {useSelector} from 'react-redux';
 
-export default function DashboardLayout({
+export default function AdminLayout({
   Component,
   pageTitle,
   links,
@@ -20,28 +18,28 @@ export default function DashboardLayout({
   pageTitle: String;
   links: Link[];
 }) {
+  const user = useSelector((state: any) => state.auth.user);
+  console.log(user);
+
   const location = useLocation();
   const currentPage = location.pathname.slice(1);
-
-  const user = useSelector((state: any) => state.auth.user);
-
   if (!user) {
-  } else if (user!.user.role! !== 'Seller' && user!.user.role! !== 'Admin') {
+  } else if (user!.user.role! !== 'Admin') {
+    console.log(user.user);
     router.navigate('/');
   }
-
   const [showSidebar, setShowSidebar] = useState(false);
+
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
   };
 
   const activeLinkStyle = (title: string) => {
-    const route = title === 'Dashboard' ? 'dashboard' : 'dashboard/' + title;
+    const route = title === 'Admin' ? 'admin' : 'admin/' + title;
 
-    if (
-      route === 'dashboard/Products' &&
-      currentPage === 'Dashboard/products/addNewProduct'
-    )
+    if (route === 'admin/Pending Sellers' && currentPage === 'Admin')
+      return 'bg-gradient-to-r from-colorBrown to-colorGold text-white';
+    else if (route === 'admin/All users' && currentPage === 'Admin/Users')
       return 'bg-gradient-to-r from-colorBrown to-colorGold text-white';
 
     return currentPage.toLowerCase() === route.toLowerCase()
@@ -49,7 +47,7 @@ export default function DashboardLayout({
       : 'text-black';
   };
   return (
-    <div className='bg-gray-50 font-secondary'>
+    <div className='bg-gray-50'>
       {showSidebar && (
         <div
           onClick={toggleSidebar}
@@ -111,7 +109,6 @@ export default function DashboardLayout({
               <RiMenu2Line className='text-2xl' />
             </button>
             <div className='flex space-x-4'>
-              {/*search bar */}
               <div className='md:block'>
                 <div className='relative flex items-center text-gray-400 focus-within:text-colorBrown'>
                   <span className='absolute left-4 flex h-6 items-center border-r border-gray-300 pr-3 '>
@@ -124,7 +121,6 @@ export default function DashboardLayout({
                   />
                 </div>
               </div>
-              {/*/search bar */}
 
               <button
                 aria-label='chat'
@@ -141,8 +137,8 @@ export default function DashboardLayout({
             </div>
           </div>
         </nav>
-        <div className='px-6 pt-6 2xl:container bg-gray-50 h-full -mb-16'>
-          <div className='flex flex-col items-center justify-center max-w-7xl mx-auto'>
+        <div className='px-6 pt-6 2xl:container bg-gray-50 h-full -mb- min-w-full'>
+          <div className=''>
             <Component />
           </div>
         </div>

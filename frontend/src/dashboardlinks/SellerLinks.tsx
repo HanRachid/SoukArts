@@ -6,7 +6,7 @@ import {
   IoSettingsSharp,
 } from 'react-icons/io5';
 import {ImStatsDots} from 'react-icons/im';
-import {DashboardLink} from '../../types';
+import {Link} from '../../types';
 export default [
   {
     icon: <IoHome />,
@@ -38,14 +38,14 @@ export default [
     path: '/Dashboard/Settings',
     title: 'Settings',
   },
-  {
-    icon: <FaShop />,
-    path: '/Dashboard/Marketing',
-    title: 'Marketing',
-  },
+  // {
+  //   icon: <FaShop />,
+  //   path: '/Dashboard/Marketing',
+  //   title: 'Marketing',
+  // },
   {
     icon: <IoHelpCircleOutline />,
     path: '/Dashboard/Help',
     title: 'Help',
   },
-] as DashboardLink[];
+] as Link[];

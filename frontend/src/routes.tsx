@@ -5,6 +5,7 @@ import Privacy from './pages/Privacy';
 import Register from './pages/Register';
 import Termsofuse from './pages/TermsOfUse';
 import GlobalLayout from './layouts/GlobalLayout';
+import ProfileLayout from './layouts/ProfileLayout';
 import ProductDetail from './pages/ProductDetail';
 import SearchResult from './pages/SearchResults';
 import ProductsList from './pages/ProductsList';
@@ -28,6 +29,18 @@ import Shop from './views/becomeaseller/Shop';
 import Sellerpayment from './views/becomeaseller/Sellerpayment';
 import StoreSeller from './pages/StoreSeller';
 import Pending from './views/becomeaseller/Pending';
+import Orders from './views/sellerdashboard/Orders';
+import Settings from './views/sellerdashboard/Settings';
+import Stats from './views/sellerdashboard/Stats';
+import Helps from './views/sellerdashboard/Helps';
+import Finance from './views/sellerdashboard/Finance';
+import Listings from './components/dashboard/Listings';
+import LoginAdmin from './views/admin/SellerStatus';
+import AdminLayout from './layouts/AdminLayout';
+import AdminLinks from './dashboardlinks/AdminLinks';
+import Profile from './views/profile/Profile';
+import ProfileLinks from './dashboardlinks/ProfileLinks';
+import AllUsers from './views/admin/AllUsers';
 export default [
   {
     path: '/',
@@ -107,6 +120,27 @@ export default [
     path: '/Cart',
     element: <GlobalLayout Component={Cart} hasLayout={true} />,
   },
+
+  {
+    path: '/Admin',
+    element: (
+      <AdminLayout
+        pageTitle={'Home Admin'}
+        Component={LoginAdmin}
+        links={AdminLinks}
+      />
+    ),
+  },
+  {
+    path: '/Admin/Users',
+    element: (
+      <AdminLayout
+        pageTitle={'Home Admin'}
+        Component={AllUsers}
+        links={AdminLinks}
+      />
+    ),
+  },
   {
     path: '/dashboard',
     element: (
@@ -132,7 +166,7 @@ export default [
     element: (
       <DashboardLayout
         pageTitle={'/Dashboard/Orders'}
-        Component={Products}
+        Component={Orders}
         links={SellerLinks}
       />
     ),
@@ -142,7 +176,7 @@ export default [
     element: (
       <DashboardLayout
         pageTitle={'/Dashboard/Stats'}
-        Component={Products}
+        Component={Stats}
         links={SellerLinks}
       />
     ),
@@ -152,7 +186,7 @@ export default [
     element: (
       <DashboardLayout
         pageTitle={'/Dashboard/Finance'}
-        Component={Products}
+        Component={Finance}
         links={SellerLinks}
       />
     ),
@@ -162,17 +196,27 @@ export default [
     element: (
       <DashboardLayout
         pageTitle={'/Dashboard/Settings'}
-        Component={Products}
+        Component={Settings}
         links={SellerLinks}
       />
     ),
   },
+  // {
+  //   path: '/Dashboard/Marketing',
+  //   element: (
+  //     <DashboardLayout
+  //       pageTitle={'/Dashboard/Marketing'}
+  //       Component={Products}
+  //       links={SellerLinks}
+  //     />
+  //   ),
+  // },
   {
-    path: '/Dashboard/Marketing',
+    path: '/Dashboard/Help',
     element: (
       <DashboardLayout
-        pageTitle={'/Dashboard/Marketing'}
-        Component={Products}
+        pageTitle={'/Dashboard/Help'}
+        Component={Helps}
         links={SellerLinks}
       />
     ),
@@ -184,6 +228,26 @@ export default [
         pageTitle={'Dashboard/Products'}
         Component={AddNewProduct}
         links={SellerLinks}
+      />
+    ),
+  },
+  {
+    path: 'Dashboard/Stats',
+    element: (
+      <DashboardLayout
+        pageTitle={'Dashboard'}
+        Component={Stats}
+        links={SellerLinks}
+      />
+    ),
+  },
+  {
+    path: 'Profile/',
+    element: (
+      <ProfileLayout
+        pageTitle={'Profile'}
+        Component={Profile}
+        links={ProfileLinks}
       />
     ),
   },

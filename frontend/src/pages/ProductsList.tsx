@@ -43,9 +43,14 @@ export default function ProductsList() {
               <PopularCard isFirstCard={true} isNew={true} image={rug1} />
             </div>
             <div className='grid grid-cols-2 grid-rows-2 gap-6'>
-              {rugs.map((rug) => {
+              {rugs.map((rug, index) => {
                 return (
-                  <PopularCard isFirstCard={false} isNew={false} image={rug} />
+                  <PopularCard
+                    key={index}
+                    isFirstCard={false}
+                    isNew={false}
+                    image={rug}
+                  />
                 );
               })}
             </div>

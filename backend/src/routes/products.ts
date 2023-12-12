@@ -26,6 +26,7 @@ productRouter.post('/addproduct', async (req: Request, res: Response) => {
     style,
     item_type,
     free_shipping,
+    seller_id,
   } = req.body;
 
   const editProduct = await new ProductModel().findByQuery({title: title});
@@ -48,7 +49,9 @@ productRouter.post('/addproduct', async (req: Request, res: Response) => {
     style: style,
     item_type: item_type,
     free_shipping: free_shipping,
+    seller_id: seller_id,
   });
+  console.log(product);
 
   res.send(product._id);
 });
@@ -65,16 +68,13 @@ productRouter.get('/product/:id', async (req: Request, res: Response) => {
 });
 
 productRouter.get('/allproducts', async (req: Request, res: Response) => {
-  /*  const allProducts = await new ProductModel().getAllModelsPopulateTwice(
-    'user',
-    'seller'
-  );*/
   const allProducts = await new ProductModel().getAllModelsPopulateTwice(
     'user',
     UserModel.schema,
     'seller',
     UserModel.schema
   );
+
   res.send(allProducts);
 });
 
@@ -94,8 +94,22 @@ productRouter.post(
 );
 
 productRouter.post('/editproduct/:id', async (req: Request, res: Response) => {
-  const {category, title, description, images, price, quantity, user_id} =
-    req.body;
+  const {
+    category,
+    title,
+    description,
+    images,
+    price,
+    quantity,
+    user_id,
+    primary_color,
+    secondary_color,
+    shipping_time,
+    subcategory,
+    style,
+    item_type,
+    free_shipping,
+  } = req.body;
 
   const id = req.params.id;
   const product = await new ProductModel().findById(id);
@@ -108,13 +122,18 @@ productRouter.post('/editproduct/:id', async (req: Request, res: Response) => {
       images: images,
       price: price,
       quantity: quantity,
+      primary_color,
+      secondary_color,
+      shipping_time,
+      subcategory,
+      style,
+      item_type,
+      free_shipping,
     });
-    console.log(editProduct);
 
     const removedImages = product.images.filter((image) => {
       return editProduct.images.includes(image);
     });
-    console.log(removedImages);
 
     for (let image of removedImages) {
       await cloudinary.uploader.destroy(image.public_id);
