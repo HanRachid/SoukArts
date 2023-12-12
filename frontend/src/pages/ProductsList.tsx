@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useCallback, useState } from "react";
+// import { useState } from "react";
 // import Components
 import Filter from "../components/categoryproducts/Filter";
 import HeroSlider from "../components/categoryproducts/HeroSlider";
@@ -28,20 +28,10 @@ export default function ProductsList() {
   const products = useSelector((state) => state.products.products);
   console.log(products);
   const productsByCategory = products.filter(
-    (product) => product.category === category
+    (product) => product.category?.toLowerCase() === category
   );
-  const [productSubcategory, setSubcategory] = useState(productsByCategory);
-  const handleFilterBySubcategories = (subcategory) => {
-    if (productsByCategory.subcategory.toLowerCase() === subcategory) {
-      const productSub = productsByCategory.filter(
-        (product) => product.subcategory.toLowerCase() === subcategory
-      );
-      setSubcategory(productSub);
-    } else {
-      setSubcategory(productsByCategory);
-    }
-  };
-  console.log(productSubcategory);
+  console.log(productsByCategory);
+
   return (
     <>
       <div className="ml-[244px] mr-[244px] mt-8 ">
@@ -80,7 +70,6 @@ export default function ProductsList() {
             <div
               className="w-32 flex flex-col justify-start items-center"
               key={id}
-              onClick={() => handleFilterBySubcategories(subcategory?.name)}
             >
               <div className="h-32 w-32 rounded-full border-2 overflow-hidden hover:scale-[1.06] hover:-outline-offset-2 outline-2 outline outline-colorBlack ">
                 <img
@@ -113,7 +102,7 @@ export default function ProductsList() {
           />
         </div>
         <div className="mt-11 grid grid-cols-3 gap-6">
-          {productSubcategory.map((product, index) => (
+          {productsByCategory.map((product, index) => (
             <ProductCard key={index} isNew={true} product={product} />
           ))}
         </div>

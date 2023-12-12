@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 //import images
 import classicPic from "../assets/home/ShopByStyle/classic.webp";
@@ -31,21 +32,28 @@ const styles: {
 export default function ProductsByyStyle() {
   const { style } = useParams();
   const selectedStyle = styles.find((s) => s.name === style);
+  const products = useSelector((state) => state.products.products);
+  console.log(products);
 
+  const productsStyle = products.filter(
+    (p) => p.style?.toLowerCase() === style
+  );
   return (
     <>
       <div className="ml-[244px] mr-[244px] mt-8 ">
-        <div>
-          <div className="w-[1450px] h-[900px] rounded-tl-full rounded-tr-full overflow-hidden">
+        <div className="flex justify-center items-center gap-8">
+          <div className="w-[850px] h-[600px] rounded-tl-full rounded-tr-full overflow-hidden outline-offset-8 outline">
             <img
               src={selectedStyle.image}
               alt="image style"
               className="w-full h-full object-cover"
             />
           </div>
-          <h1 className="text-center text-6xl font-primary text-colorBlack">
-            {selectedStyle.name?.toUpperCase()} STYLE
-          </h1>
+          <div className="w-[850px]">
+            <h1 className="text-left tracking-widest leading-normal text-9xl font-primary text-colorBlack">
+              {selectedStyle.name?.toUpperCase()} STYLE
+            </h1>
+          </div>
         </div>
         {/* <div className="mt-8 border-b border-gray-500 my-4"></div>
         <div className="flex justify-around mt-16">
