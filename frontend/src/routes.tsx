@@ -19,7 +19,6 @@ import DashboardLayout from './layouts/DashboardLayout';
 import Dashboard from './views/sellerdashboard/Dashboard';
 import Products from './views/sellerdashboard/Products';
 import AddNewProduct from './components/products/AddNewProduct';
-
 import SellerLinks from './dashboardlinks/SellerLinks';
 import OrdersDetails from './components/orders/OrdersDetails';
 import Cart from './pages/Cart';
@@ -34,7 +33,6 @@ import Settings from './views/sellerdashboard/Settings';
 import Stats from './views/sellerdashboard/Stats';
 import Helps from './views/sellerdashboard/Helps';
 import Finance from './views/sellerdashboard/Finance';
-import Listings from './components/dashboard/Listings';
 import LoginAdmin from './views/admin/SellerStatus';
 import AdminLayout from './layouts/AdminLayout';
 import AdminLinks from './dashboardlinks/AdminLinks';
