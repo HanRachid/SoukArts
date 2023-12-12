@@ -89,7 +89,7 @@ export default [
     element: <Becomeaseller Component={Welcomepage} activeStep={0} />,
   },
   {
-    path: "/shop/:id",
+    path: "/shop",
     element: <Becomeaseller Component={Shop} activeStep={1} />,
   },
 
