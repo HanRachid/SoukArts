@@ -15,6 +15,7 @@ const AllUsers: React.FC = () => {
     try {
       const response = await getPendingSeller();
       setSellers(response);
+      console.log(response);
     } catch (error) {
       console.error('Error fetching sellers: ', error);
     }
@@ -77,11 +78,11 @@ const AllUsers: React.FC = () => {
             </thead>
 
             <tbody className='divide-y divide-gray-200'>
-              {sellers.map((seller) => (
+              {sellers.map((seller, index) => (
                 <tr
                   onMouseEnter={(e) => handleMouseEnter(e, seller)}
                   onMouseLeave={handleMouseLeave}
-                  key={seller.user_id}
+                  key={index}
                 >
                   <td className='whitespace-nowrap px-28 py-2 font-medium text-gray-900 text-center'>
                     {seller.shop_name}
