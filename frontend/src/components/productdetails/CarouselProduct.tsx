@@ -62,12 +62,12 @@ export default function CarouselProduct({ images }: CarouselProductProps) {
           </div>
         ))}
       </Carousel>
-      <div className="flex gap-6 mt-7">
+      <div className="flex gap-6 mt-7 h-[151px]">
         {images.map((image, index) => (
           <img
             src={image}
             alt={`image ${index + 1}`}
-            className={`w-[151px] rounded-md ${
+            className={`h-full w-[151px] object-cover rounded-md ${
               imageActiveIndex === index
                 ? "outline-colorBlack overflow-hidden border-2 outline-3 outline -outline-offset-3 border-white"
                 : ""
