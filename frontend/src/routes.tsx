@@ -40,6 +40,8 @@ import Profile from './views/profile/Profile';
 import ProfileLinks from './dashboardlinks/ProfileLinks';
 import AllUsers from './views/admin/AllUsers';
 import NotFound from './pages/NotFound';
+
+import ProductByStyle from './pages/ProductsByStyle';
 export default [
   {
     path: '/',
@@ -87,7 +89,7 @@ export default [
     element: <Becomeaseller Component={Welcomepage} activeStep={0} />,
   },
   {
-    path: '/shop',
+    path: '/shop/:id',
     element: <Becomeaseller Component={Shop} activeStep={1} />,
   },
 
@@ -100,7 +102,7 @@ export default [
     element: <GlobalLayout Component={Pending} hasLayout={true} />,
   },
   {
-    path: '/products/:product',
+    path: '/products/product/:id',
     element: <GlobalLayout Component={ProductDetail} hasLayout={true} />,
   },
   {
@@ -110,6 +112,10 @@ export default [
   {
     path: '/search/:category/:terms',
     element: <GlobalLayout Component={SearchResult} hasLayout={true} />,
+  },
+  {
+    path: '/:style',
+    element: <GlobalLayout Component={ProductByStyle} hasLayout={true} />,
   },
   {
     path: '/favorite',
@@ -200,16 +206,7 @@ export default [
       />
     ),
   },
-  // {
-  //   path: '/Dashboard/Marketing',
-  //   element: (
-  //     <DashboardLayout
-  //       pageTitle={'/Dashboard/Marketing'}
-  //       Component={Products}
-  //       links={SellerLinks}
-  //     />
-  //   ),
-  // },
+
   {
     path: '/Dashboard/Help',
     element: (

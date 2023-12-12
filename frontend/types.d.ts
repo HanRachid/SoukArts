@@ -104,3 +104,5 @@ type Seller = {
   created_at: Date;
   updated_at: Date;
 };
+
+type PopulatedProduct = ProductUrl & {seller_id: Seller};

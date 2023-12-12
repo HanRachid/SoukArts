@@ -1,4 +1,4 @@
-import {ProductUrl} from '../../types';
+import {PopulatedProduct, ProductUrl} from '../../types';
 
 const distance = function (a: string, b: string) {
   let _a;
@@ -48,10 +48,10 @@ const distance = function (a: string, b: string) {
  */
 export default function matchProducts(
   string_: string,
-  array: ProductUrl[],
+  array: PopulatedProduct[],
   category: string
-) {
-  const closeMatches: ProductUrl[] = [];
+): PopulatedProduct[] {
+  const closeMatches: PopulatedProduct[] = [];
 
   for (const element of array) {
     if (
