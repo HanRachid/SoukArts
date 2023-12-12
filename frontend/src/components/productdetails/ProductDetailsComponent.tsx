@@ -47,7 +47,7 @@ export default function ProductDetailsComponent({
             {`${product.price * 0.4}DH`}
           </h1>
           <p className="line-through text-lg font-secondary text-colorGold tracking-widest">
-            {`${product.price}DH`}
+            {`${Math.floor(product.price)}DH`}
           </p>
         </div>
         <p className="font-secondary text-colorGold text-lg tracking-widest">
