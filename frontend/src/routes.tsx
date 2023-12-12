@@ -41,6 +41,7 @@ import AdminLinks from './dashboardlinks/AdminLinks';
 import Profile from './views/profile/Profile';
 import ProfileLinks from './dashboardlinks/ProfileLinks';
 import AllUsers from './views/admin/AllUsers';
+import NotFound from './pages/NotFound';
 export default [
   {
     path: '/',
@@ -264,5 +265,9 @@ export default [
   {
     path: '/Store',
     element: <GlobalLayout Component={StoreSeller} hasLayout={true} />,
+  },
+  {
+    path: '*',
+    element: <GlobalLayout Component={NotFound} hasLayout={true} />,
   },
 ] as RouteObj[];
