@@ -55,9 +55,9 @@ export default function ProductCard({
                 {product.seller_id.shop_name}
               </h4>
 
-              <p className="mt-4 text-xl text-colorGold">{`${
+              <p className="mt-4 text-xl text-colorGold">{`${Math.floor(
                 product.price * 0.4
-              }DH`}</p>
+              )}DH`}</p>
             </div>
             <div className="flex justify-between">
               <div className="flex items-center gap-2 font-bold text-black">
@@ -65,7 +65,9 @@ export default function ProductCard({
                 <p className="font-medium text-xl text-black">4.7 (1.5K)</p>
               </div>
               <p className="font-thin text-sm font-secondary text-colorGold">
-                <span className="line-through">{`${product.price}DH`}</span>
+                <span className="line-through">{`${Math.floor(
+                  product.price
+                )}DH`}</span>
                 (60%)
               </p>
             </div>
