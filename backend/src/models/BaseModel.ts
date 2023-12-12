@@ -1,7 +1,5 @@
 import {Document} from 'mongodb';
 import mongoose, {Model, Schema, Types} from 'mongoose';
-import UserModel from './UserModel';
-import SellerModel from './SellerModel';
 
 export default class BaseModel<T extends Document> {
   private model: Model<T>;
