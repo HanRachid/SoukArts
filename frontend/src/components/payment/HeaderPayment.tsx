@@ -9,6 +9,7 @@ import {
   ClipboardDocumentCheckIcon,
 } from '@heroicons/react/24/outline';
 import {router} from '../../App';
+import {Link} from 'react-router-dom';
 
 const HeaderBecomeaseller = ({isActive}: {isActive: number}) => {
   const [activeStep, setActiveStep] = React.useState(isActive);
@@ -38,7 +39,9 @@ const HeaderBecomeaseller = ({isActive}: {isActive: number}) => {
       }`}
     >
       <div className='flex justify-center items-center'>
-        <img src={logolight} className='w-48' alt='logolight' />
+        <Link to='/'>
+          <img src={logolight} className='w-48' alt='logolight' />
+        </Link>
         <div className='flex justify-center items-center'>
           <img src={cadenas} className='w-5 h-5 me-1' alt='cadenas' />
           <p className='text-small'>Secure checkout</p>

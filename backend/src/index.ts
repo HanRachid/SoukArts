@@ -3,6 +3,7 @@ import usersRouter from './routes/users';
 import authRouter from './routes/auth';
 import productRouter from './routes/products';
 import sellerRouter from './routes/seller';
+import orderRouter from './routes/orders';
 const express = require('express');
 const cors = require('cors');
 
@@ -21,7 +22,7 @@ app.use('/users', usersRouter);
 app.use('/auth', authRouter);
 app.use('/products', productRouter);
 app.use('/seller', sellerRouter);
-
+app.use('/orders/', orderRouter);
 app.listen(3000, (): void => {
   console.log('server running on port ' + port);
   connectToDB();

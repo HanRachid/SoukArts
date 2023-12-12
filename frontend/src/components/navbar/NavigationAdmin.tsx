@@ -35,7 +35,7 @@ const NavigationSeller = () => {
           <Link to='/'>
             <HeartSVG className='xl:w-4 2xl:w-6 font-secondary hover:fill-colorGold' />
           </Link>
-          <Link to='/'>
+          <Link to='/Cart'>
             <CartSVG className='xl:w-4 2xl:w-6 font-secondary hover:fill-colorGold' />
           </Link>
         </div>

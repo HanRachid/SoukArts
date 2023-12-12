@@ -21,7 +21,6 @@ import Products from './views/sellerdashboard/Products';
 import AddNewProduct from './components/products/AddNewProduct';
 import SellerLinks from './dashboardlinks/SellerLinks';
 import OrdersDetails from './components/orders/OrdersDetails';
-import Cart from './pages/Cart';
 import Becomeaseller from './layouts/BecomeASeller';
 import Welcomepage from './views/becomeaseller/Welcomepage';
 import ShopBecomeASeller from './views/becomeaseller/Shop';
@@ -42,6 +41,7 @@ import AllUsers from './views/admin/AllUsers';
 import NotFound from './pages/NotFound';
 
 import ProductByStyle from './pages/ProductsByStyle';
+import CartItems from './components/cart/CartItems';
 export default [
   {
     path: '/',
@@ -68,10 +68,7 @@ export default [
     path: '/categories/:category',
     element: <GlobalLayout Component={ProductsList} hasLayout={true} />,
   },
-  {
-    path: '/cart',
-    element: <GlobalLayout Component={Cart} hasLayout={true} />,
-  },
+
   {
     path: '/deliverypayment',
     element: <PaymentLayout Component={DeliveryPayment} activeStep={0} />,
@@ -122,7 +119,7 @@ export default [
   },
   {
     path: '/Cart',
-    element: <GlobalLayout Component={Cart} hasLayout={true} />,
+    element: <GlobalLayout Component={CartItems} hasLayout={true} />,
   },
 
   {

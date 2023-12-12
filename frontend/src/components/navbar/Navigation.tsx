@@ -33,10 +33,10 @@ export default function Navigation(): React.ReactElement {
           </button>
         </Link>
 
-        <Link to='/'>
+        <Link to='/Favorite'>
           <HeartSVG className='w-6 font-secondary hover:fill-colorGold' />
         </Link>
-        <Link to='/'>
+        <Link to='/Cart'>
           <CartSVG className='w-6 font-secondary hover:fill-colorGold' />
         </Link>
         {user && user.user.role === 'Client' ? (

@@ -12,6 +12,8 @@ import visa from '../../assets/icons/visa.png';
 import mastercard from '../../assets/icons/mastercard.png';
 import paypal from '../../assets/icons/paypal.png';
 import google from '../../assets/icons/google.png';
+import {useSelector} from 'react-redux';
+import {PopulatedProduct} from '../../../types';
 
 const CartItems = () => {
   const [isGiftSelected, setIsGiftSelected] = useState(false);
@@ -25,14 +27,14 @@ const CartItems = () => {
   const handlePaymentOptionChange = (option: string | null) => {
     setSelectedPaymentOption(option);
   };
-
+  const cart = useSelector((state: any) => state.cart.cart);
   return (
     <section>
-      <div className='mt-14'>
+      <div className='mt-14 flex flex-col items-center gap-8'>
         <h2 className='text-large px-5 lg:px-24 xl:ms-20 text-bold'>
-          1 item in your cart
+          {cart.length} item{cart.length > 1 && 's'} in your cart
         </h2>
-        <div className='flex flex-col px-5 lg:px-24 xl:flex-row justify-center gap-12'>
+        {cart.map((product: PopulatedProduct, index: number) => (
           <div className='w-full md:w-5/6 xl:w-3/6 bg-white rounded-tr-lg rounded-bl-lg px-5 py-5 shadow-lg'>
             <div className='flex justify-between'>
               <div className='flex items-center'>
@@ -128,206 +130,200 @@ const CartItems = () => {
               </div>
             </div>
           </div>
-
-          <div className='xl:w-2/6'>
-            <h2 className='text-large'>Payment</h2>
-            <div className='flex flex-col sm:flex-row xl:flex-col mx-auto sm:items-center xl:items-stretch sm:gap-16'>
-              <div className='sm:order-1'>
-                <div className='flex gap-5 items-center mt-2'>
-                  <input
-                    type='radio'
-                    id='paymentCheckbox1'
-                    checked={selectedPaymentOption === 'paymentCheckbox1'}
-                    onChange={() =>
-                      handlePaymentOptionChange('paymentCheckbox1')
-                    }
-                    className='hidden'
-                  />
-                  <label
-                    htmlFor='paymentCheckbox1'
-                    className={`cursor-pointer relative flex items-center ${
+        ))}
+      </div>
+      <div className='flex flex-col px-5 lg:px-24 xl:flex-row justify-center gap-12 p-10'>
+        <div className='xl:w-2/6'>
+          <h2 className='text-large'>Payment</h2>
+          <div className='flex flex-col sm:flex-row xl:flex-col mx-auto sm:items-center xl:items-stretch sm:gap-16'>
+            <div className='sm:order-1'>
+              <div className='flex gap-5 items-center mt-2'>
+                <input
+                  type='radio'
+                  id='paymentCheckbox1'
+                  checked={selectedPaymentOption === 'paymentCheckbox1'}
+                  onChange={() => handlePaymentOptionChange('paymentCheckbox1')}
+                  className='hidden'
+                />
+                <label
+                  htmlFor='paymentCheckbox1'
+                  className={`cursor-pointer relative flex items-center ${
+                    selectedPaymentOption === 'paymentCheckbox1'
+                      ? 'text-colorGold'
+                      : 'text-colorBrown'
+                  }`}
+                >
+                  <div
+                    className={`w-4 h-4 border-2 rounded ${
                       selectedPaymentOption === 'paymentCheckbox1'
-                        ? 'text-colorGold'
-                        : 'text-colorBrown'
+                        ? 'bg-white border-colorGold'
+                        : 'bg-white border-colorGold'
                     }`}
                   >
-                    <div
-                      className={`w-4 h-4 border-2 rounded ${
-                        selectedPaymentOption === 'paymentCheckbox1'
-                          ? 'bg-white border-colorGold'
-                          : 'bg-white border-colorGold'
-                      }`}
-                    >
-                      {selectedPaymentOption === 'paymentCheckbox1' && (
-                        <span className='text-xs absolute top-0 left-0'>
-                          <svg
-                            xmlns='http://www.w3.org/2000/svg'
-                            className='h-4 w-4 text-black'
-                            viewBox='0 0 24 24'
-                            fill='none'
-                            stroke='currentColor'
-                            strokeWidth='3'
-                            strokeLinecap='round'
-                            strokeLinejoin='round'
-                          >
-                            <path d='M5 13l4 4L19 7' />
-                          </svg>
-                        </span>
-                      )}
-                    </div>
-                  </label>
-                  <label className='border border-colorBeige px-3'>
-                    <img src={visa} className='w-10 h-10' alt='visa' />
-                  </label>
-                  <label className='border border-colorBeige px-3'>
-                    <img
-                      src={mastercard}
-                      className='w-10 h-10'
-                      alt='mastercard'
-                    />
-                  </label>
-                </div>
-
-                <div className='flex gap-5 items-center mt-2'>
-                  <input
-                    type='radio'
-                    id='paymentCheckbox2'
-                    checked={selectedPaymentOption === 'paymentCheckbox2'}
-                    onChange={() =>
-                      handlePaymentOptionChange('paymentCheckbox2')
-                    }
-                    className='hidden'
+                    {selectedPaymentOption === 'paymentCheckbox1' && (
+                      <span className='text-xs absolute top-0 left-0'>
+                        <svg
+                          xmlns='http://www.w3.org/2000/svg'
+                          className='h-4 w-4 text-black'
+                          viewBox='0 0 24 24'
+                          fill='none'
+                          stroke='currentColor'
+                          strokeWidth='3'
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                        >
+                          <path d='M5 13l4 4L19 7' />
+                        </svg>
+                      </span>
+                    )}
+                  </div>
+                </label>
+                <label className='border border-colorBeige px-3'>
+                  <img src={visa} className='w-10 h-10' alt='visa' />
+                </label>
+                <label className='border border-colorBeige px-3'>
+                  <img
+                    src={mastercard}
+                    className='w-10 h-10'
+                    alt='mastercard'
                   />
-                  <label
-                    htmlFor='paymentCheckbox2'
-                    className={`cursor-pointer relative flex items-center ${
+                </label>
+              </div>
+
+              <div className='flex gap-5 items-center mt-2'>
+                <input
+                  type='radio'
+                  id='paymentCheckbox2'
+                  checked={selectedPaymentOption === 'paymentCheckbox2'}
+                  onChange={() => handlePaymentOptionChange('paymentCheckbox2')}
+                  className='hidden'
+                />
+                <label
+                  htmlFor='paymentCheckbox2'
+                  className={`cursor-pointer relative flex items-center ${
+                    selectedPaymentOption === 'paymentCheckbox2'
+                      ? 'text-colorGold'
+                      : 'text-colorBrown'
+                  }`}
+                >
+                  <div
+                    className={`w-4 h-4 border-2 rounded ${
                       selectedPaymentOption === 'paymentCheckbox2'
-                        ? 'text-colorGold'
-                        : 'text-colorBrown'
+                        ? 'bg-white border-colorGold'
+                        : 'bg-white border-colorGold'
                     }`}
                   >
-                    <div
-                      className={`w-4 h-4 border-2 rounded ${
-                        selectedPaymentOption === 'paymentCheckbox2'
-                          ? 'bg-white border-colorGold'
-                          : 'bg-white border-colorGold'
-                      }`}
-                    >
-                      {selectedPaymentOption === 'paymentCheckbox2' && (
-                        <span className='text-xs absolute top-0 left-0'>
-                          <svg
-                            xmlns='http://www.w3.org/2000/svg'
-                            className='h-4 w-4 text-black'
-                            viewBox='0 0 24 24'
-                            fill='none'
-                            stroke='currentColor'
-                            strokeWidth='3'
-                            strokeLinecap='round'
-                            strokeLinejoin='round'
-                          >
-                            <path d='M5 13l4 4L19 7' />
-                          </svg>
-                        </span>
-                      )}
-                    </div>
-                  </label>
-                  <label className='border border-colorBeige px-3'>
-                    <img src={paypal} className='w-10 h-10' alt='paypal' />
-                  </label>
+                    {selectedPaymentOption === 'paymentCheckbox2' && (
+                      <span className='text-xs absolute top-0 left-0'>
+                        <svg
+                          xmlns='http://www.w3.org/2000/svg'
+                          className='h-4 w-4 text-black'
+                          viewBox='0 0 24 24'
+                          fill='none'
+                          stroke='currentColor'
+                          strokeWidth='3'
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                        >
+                          <path d='M5 13l4 4L19 7' />
+                        </svg>
+                      </span>
+                    )}
+                  </div>
+                </label>
+                <label className='border border-colorBeige px-3'>
+                  <img src={paypal} className='w-10 h-10' alt='paypal' />
+                </label>
+              </div>
+
+              <div className='flex gap-5 items-center mt-2'>
+                <input
+                  type='radio'
+                  id='paymentCheckbox3'
+                  checked={selectedPaymentOption === 'paymentCheckbox3'}
+                  onChange={() => handlePaymentOptionChange('paymentCheckbox3')}
+                  className='hidden'
+                />
+                <label
+                  htmlFor='paymentCheckbox3'
+                  className={`cursor-pointer relative flex items-center ${
+                    selectedPaymentOption === 'paymentCheckbox3'
+                      ? 'text-colorGold'
+                      : 'text-colorBrown'
+                  }`}
+                >
+                  <div
+                    className={`w-4 h-4 border-2 rounded ${
+                      selectedPaymentOption === 'paymentCheckbox3'
+                        ? 'bg-white border-colorGold'
+                        : 'bg-white border-colorGold'
+                    }`}
+                  >
+                    {selectedPaymentOption === 'paymentCheckbox3' && (
+                      <span className='text-xs absolute top-0 left-0'>
+                        <svg
+                          xmlns='http://www.w3.org/2000/svg'
+                          className='h-4 w-4 text-black'
+                          viewBox='0 0 24 24'
+                          fill='none'
+                          stroke='currentColor'
+                          strokeWidth='3'
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                        >
+                          <path d='M5 13l4 4L19 7' />
+                        </svg>
+                      </span>
+                    )}
+                  </div>
+                </label>
+                <label className='border border-colorBeige px-3 flex items-center h-10'>
+                  <img src={google} className='w-5 h-5' alt='google' />
+                  <span>Pay</span>
+                </label>
+              </div>
+            </div>
+
+            <div className='order-1 xl:order-1'>
+              <div className='border-b border-colorGold mt-5'>
+                <div className='flex justify-between'>
+                  <p>Items Total</p>
+                  <p>1700 DH</p>
                 </div>
 
-                <div className='flex gap-5 items-center mt-2'>
-                  <input
-                    type='radio'
-                    id='paymentCheckbox3'
-                    checked={selectedPaymentOption === 'paymentCheckbox3'}
-                    onChange={() =>
-                      handlePaymentOptionChange('paymentCheckbox3')
-                    }
-                    className='hidden'
-                  />
-                  <label
-                    htmlFor='paymentCheckbox3'
-                    className={`cursor-pointer relative flex items-center ${
-                      selectedPaymentOption === 'paymentCheckbox3'
-                        ? 'text-colorGold'
-                        : 'text-colorBrown'
-                    }`}
-                  >
-                    <div
-                      className={`w-4 h-4 border-2 rounded ${
-                        selectedPaymentOption === 'paymentCheckbox3'
-                          ? 'bg-white border-colorGold'
-                          : 'bg-white border-colorGold'
-                      }`}
-                    >
-                      {selectedPaymentOption === 'paymentCheckbox3' && (
-                        <span className='text-xs absolute top-0 left-0'>
-                          <svg
-                            xmlns='http://www.w3.org/2000/svg'
-                            className='h-4 w-4 text-black'
-                            viewBox='0 0 24 24'
-                            fill='none'
-                            stroke='currentColor'
-                            strokeWidth='3'
-                            strokeLinecap='round'
-                            strokeLinejoin='round'
-                          >
-                            <path d='M5 13l4 4L19 7' />
-                          </svg>
-                        </span>
-                      )}
-                    </div>
-                  </label>
-                  <label className='border border-colorBeige px-3 flex items-center h-10'>
-                    <img src={google} className='w-5 h-5' alt='google' />
-                    <span>Pay</span>
-                  </label>
+                <div className='flex justify-between'>
+                  <p>Shop Discount</p>
+                  <p>-1100 DH</p>
                 </div>
               </div>
 
-              <div className='order-1 xl:order-1'>
-                <div className='border-b border-colorGold mt-5'>
-                  <div className='flex justify-between'>
-                    <p>Items Total</p>
-                    <p>1700 DH</p>
-                  </div>
-
-                  <div className='flex justify-between'>
-                    <p>Shop Discount</p>
-                    <p>-1100 DH</p>
-                  </div>
+              <div className='border-b border-colorGold mt-2'>
+                <div className='flex justify-between'>
+                  <p>Subtotal</p>
+                  <p>600 DH</p>
                 </div>
 
-                <div className='border-b border-colorGold mt-2'>
-                  <div className='flex justify-between'>
-                    <p>Subtotal</p>
-                    <p>600 DH</p>
-                  </div>
+                <div className='flex justify-between'>
+                  <p>Delivery</p>
+                  <p>52 DH</p>
+                </div>
+              </div>
 
-                  <div className='flex justify-between'>
-                    <p>Delivery</p>
-                    <p>52 DH</p>
-                  </div>
-                </div>
-
-                <div className='flex justify-between font-bold text-medium mt-3'>
-                  <p>Total</p>
-                  <p>652 DH</p>
-                </div>
-                <div className='text-center mt-5'>
-                  <Link to='/deliverypayment'>
-                    <button className='bg-colorGold text-colorLight rounded-tr-lg rounded-bl-lg py-2 px-6'>
-                      Proceed to Checkout
-                    </button>
-                  </Link>
-                </div>
+              <div className='flex justify-between font-bold text-medium mt-3'>
+                <p>Total</p>
+                <p>652 DH</p>
+              </div>
+              <div className='text-center mt-5'>
+                <Link to='/deliverypayment'>
+                  <button className='bg-colorGold text-colorLight rounded-tr-lg rounded-bl-lg py-2 px-6'>
+                    Proceed to Checkout
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
         </div>
       </div>
-
       <div className='mt-36'>
         <ShopAffiliate />
       </div>
