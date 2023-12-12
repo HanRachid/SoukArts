@@ -49,14 +49,12 @@ sellerRouter.post('/addseller', async (req: Request, res: Response) => {
     role: 'Pending',
     seller_id: newSeller._id,
   });
-  console.log(updatedUser);
 
   res.send(newSeller);
 });
 
 sellerRouter.get('/getPendingSeller', async (req: Request, res: Response) => {
   const sellers = await new SellerModel().getAllModels();
-  console.log(sellers);
   res.send(sellers);
 });
 
@@ -90,7 +88,6 @@ async function destroyImage(id: string) {
   };
   const destroy = await fetch(url, params);
   const result = await destroy.json();
-  console.log(result);
 
   return result;
 }

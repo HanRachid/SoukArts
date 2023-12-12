@@ -11,9 +11,11 @@ const ProductTitle =
 export default function ProductCard({
   image,
   isNew,
+  price,
 }: {
   image: string;
   isNew: boolean;
+  price: number;
 }) {
   return (
     <>
@@ -55,7 +57,7 @@ export default function ProductCard({
                 By MarrakechGallery
               </h4>
 
-              <p className='mt-4 text-xl text-colorGold'>600 DH</p>
+              <p className='mt-4 text-xl text-colorGold'>{price} DH</p>
             </div>
             <div className='flex justify-between'>
               <div className='flex items-center gap-2 font-bold text-black'>
