@@ -1,39 +1,41 @@
-import CarouselProduct from '../components/productdetails/CarouselProduct';
-import ProductDetailsComponent from '../components/productdetails/ProductDetailsComponent';
-import ReviewsSection from '../components/productdetails/ReviewsSection';
-import MoreFromShop from '../components/productdetails/MoreFromShop';
-import YouMayLike from '../components/productdetails/YouMayLike';
-import PhotoReviews from '../components/productdetails/PhotoReviews';
+import CarouselProduct from "../components/productdetails/CarouselProduct";
+import ProductDetailsComponent from "../components/productdetails/ProductDetailsComponent";
+import ReviewsSection from "../components/productdetails/ReviewsSection";
+import MoreFromShop from "../components/productdetails/MoreFromShop";
+import YouMayLike from "../components/productdetails/YouMayLike";
+import PhotoReviews from "../components/productdetails/PhotoReviews";
 
-//images
-import carousel1 from '../assets/jewelry/carousel1.jpg';
-import carousel2 from '../assets/jewelry/carousel2.jpg';
-import carousel3 from '../assets/jewelry/carousel3.jpg';
-import carousel4 from '../assets/jewelry/carousel4.jpg';
-import carousel5 from '../assets/jewelry/carousel5.webp';
-
-const carousel = [carousel1, carousel2, carousel3, carousel4, carousel5];
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 export default function ProductDetail() {
-  // const { product } = useParams();
+  const { id } = useParams();
+  const Products = useSelector((state) => state.products.products);
+  const currentProduct = Products.find((p) => p._id === id);
+  console.log(currentProduct);
+  // Check if currentProduct has images property
+  const images = currentProduct?.images || [];
+
+  // Extract the 'url' property from each object in the 'images' array
+  const imageURLs = images.map((image) => image.url);
   return (
     <>
-      <div className='mt-24 flex gap-16 justify-center'>
-        <div className='flex flex-col gap-7 w-[853px]'>
-          <CarouselProduct images={carousel} />
+      <section className="mt-24 flex gap-16 justify-center">
+        <div className="flex flex-col gap-7 w-[853px]">
+          <CarouselProduct images={imageURLs} />
           <div>
             <ReviewsSection />
             <PhotoReviews />
           </div>
         </div>
         <div>
-          <ProductDetailsComponent />
+          <ProductDetailsComponent product={currentProduct} />
         </div>
-      </div>
-      <div className='flex mt-8 justify-center'>
+      </section>
+      <div className="flex mt-20 justify-center">
         <MoreFromShop />
       </div>
-      <div className='flex mt-8 justify-center'>
+      <div className="flex mt-8 justify-center">
         <YouMayLike />
       </div>
     </>

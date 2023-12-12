@@ -89,7 +89,7 @@ export async function deleteProduct(id: string) {
 }
 
 export async function getProducts(id: string) {
-  const url: string = endpoint + '/product/' + id;
+  const url: string = endpoint + '/product/' + id; // ${endpoint}/product/${id}
   const products = await fetch(url);
   const result = await products.json();
 
@@ -97,7 +97,7 @@ export async function getProducts(id: string) {
 }
 
 export async function getAllProducts() {
-  const url: string = endpoint + '/allproducts/';
+  const url: string = `${endpoint}/allproducts`;
   const product = await fetch(url);
   const result = await product.json();
 

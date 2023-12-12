@@ -14,7 +14,7 @@ export default function SearchDropDown({
   setMatchedProducts: Function;
   setSearchTerms: Function;
 }): React.ReactElement {
-  function firstFour(string: string): string {
+  function firstSix(string: string): string {
     return (
       string.split(' ')[0] +
       ' ' +
@@ -22,7 +22,9 @@ export default function SearchDropDown({
       ' ' +
       string.split(' ')[2] +
       ' ' +
-      string.split(' ')[3]
+      string.split(' ')[3] +
+      string.split(' ')[4] +
+      string.split(' ')[5]
     );
   }
   return (
@@ -52,13 +54,13 @@ export default function SearchDropDown({
                 <Menu.Item key={index}>
                   {({active}: {active: boolean}) => (
                     <Link
-                      to={'/products/' + product._id}
+                      to={'/products/product/' + product._id}
                       onClick={() => {
                         setMatchedProducts([]);
                         setSearchTerms('');
                       }}
                     >
-                      {firstFour(product.title)}
+                      {firstSix(product.title)}
                     </Link>
                   )}
                 </Menu.Item>
