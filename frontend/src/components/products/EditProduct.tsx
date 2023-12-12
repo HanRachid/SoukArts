@@ -323,8 +323,8 @@ export default function EditProduct({
                       }}
                       color='brown'
                     >
-                      {selectedSubCategory.map((subcategory) => (
-                        <Option key={subcategory} value={subcategory}>
+                      {selectedSubCategory.map((subcategory, index) => (
+                        <Option key={index} value={subcategory}>
                           {subcategory}
                         </Option>
                       ))}
@@ -360,8 +360,10 @@ export default function EditProduct({
                     }}
                     color='brown'
                   >
-                    {Colors.map((color) => (
-                      <Option value={color}>{color}</Option>
+                    {Colors.map((color, index) => (
+                      <Option key={index} value={color}>
+                        {color}
+                      </Option>
                     ))}
                   </Select>
                   <Select
