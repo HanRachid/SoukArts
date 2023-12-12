@@ -18,8 +18,6 @@ export default function App(): React.ReactElement {
       dispatch(setLoginState(result));
     });
     getAllProducts().then((result) => {
-      console.log(result);
-
       dispatch(setProductsState(result));
     });
   });
