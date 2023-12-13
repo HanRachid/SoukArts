@@ -75,6 +75,9 @@ export default class BaseModel<T extends Document> {
   async findByQuery(query: Record<string, any>): Promise<T | null> {
     return this.model.findOne(query).exec();
   }
+  async findManyByQuery(query: Record<string, any>): Promise<T[] | null> {
+    return this.model.find(query).exec();
+  }
   async registerModel(modelName: string, schema: Schema<T>): Promise<void> {
     mongoose.model<T>(modelName, schema);
   }

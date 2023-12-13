@@ -42,6 +42,7 @@ import NotFound from './pages/NotFound';
 
 import ProductByStyle from './pages/ProductsByStyle';
 import CartItems from './components/cart/CartItems';
+import ProfileOrders from './views/profile/ProfileOrders';
 export default [
   {
     path: '/',
@@ -85,7 +86,7 @@ export default [
     element: <Becomeaseller Component={Welcomepage} activeStep={0} />,
   },
   {
-    path: '/shop:id',
+    path: '/shop',
     element: <Becomeaseller Component={ShopBecomeASeller} activeStep={1} />,
   },
   {
@@ -109,7 +110,7 @@ export default [
     element: <GlobalLayout Component={SearchResult} hasLayout={true} />,
   },
   {
-    path: '/:style',
+    path: '/style/:style',
     element: <GlobalLayout Component={ProductByStyle} hasLayout={true} />,
   },
   {
@@ -237,6 +238,16 @@ export default [
       <ProfileLayout
         pageTitle={'Profile'}
         Component={Profile}
+        links={ProfileLinks}
+      />
+    ),
+  },
+  {
+    path: 'Profile/Orders',
+    element: (
+      <ProfileLayout
+        pageTitle={'Profile'}
+        Component={ProfileOrders}
         links={ProfileLinks}
       />
     ),

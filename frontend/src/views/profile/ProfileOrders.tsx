@@ -1,56 +1,16 @@
-import {useState, useEffect} from 'react';
-import {approveSeller, denySeller, getPendingSeller} from '../../api/seller';
-import {CheckCircleIcon, XCircleIcon} from '@heroicons/react/24/outline';
-import ModalComponent from '../alert/ModalComponent';
-import {Seller} from '../../../types';
-import {router} from '../../App';
+import {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
-const AllUsers: React.FC = () => {
-  const [sellers, setSellers] = useState<Seller[]>([]);
-  const [hoveredSeller, setHoveredSeller] = useState<Seller | null>(null);
-  const [isHovering, setIsHovering] = useState(false);
-  const [mousePosition, setMousePosition] = useState({x: 0, y: 0});
+import {getOrders} from '../../api/orders';
+import {CheckCircleIcon, XCircleIcon} from '@heroicons/react/24/outline';
 
-  const fetchSellers = async () => {
-    try {
-      const response = await getPendingSeller();
-      setSellers(response);
-      console.log(response);
-    } catch (error) {
-      console.error('Error fetching sellers: ', error);
-    }
-  };
-  const user = useSelector((state: any) =>
-    state.auth.user ? state.auth.user.user : null
-  );
-
-  if (!user || user!.role! !== 'Admin') {
-    router.navigate('/login');
-  }
-
+const ProfileOrders: React.FC = () => {
+  const user = useSelector((state: any) => state.auth.user.user);
+  const [orders, setOrders] = useState([]);
   useEffect(() => {
-    fetchSellers();
-  }, []);
-
-  const handleMouseEnter = (e: React.MouseEvent, sellerName: Seller) => {
-    const viewportWidth = window.innerWidth;
-    const cursorX = e.clientX;
-    const spaceLeft = cursorX;
-    const spaceRight = viewportWidth - cursorX;
-    const isSpaceOnRight = spaceRight >= spaceLeft;
-
-    setIsHovering(true);
-    setMousePosition({
-      x: isSpaceOnRight ? cursorX : cursorX - 500, // Adjust width as needed
-      y: e.clientY,
+    getOrders(user._id).then((res) => {
+      setOrders(res);
     });
-    setHoveredSeller(sellerName);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovering(false);
-    setHoveredSeller(null);
-  };
+  });
 
   return (
     <div className='flex flex-col h-screen'>
@@ -78,14 +38,10 @@ const AllUsers: React.FC = () => {
             </thead>
 
             <tbody className='divide-y divide-gray-200'>
-              {sellers.map((seller, index) => (
-                <tr
-                  onMouseEnter={(e) => handleMouseEnter(e, seller)}
-                  onMouseLeave={handleMouseLeave}
-                  key={index}
-                >
+              {orders.map((seller, index) => (
+                <tr key={index}>
                   <td className='whitespace-nowrap px-28 py-2 font-medium text-gray-900 text-center'>
-                    {seller.shop_name}
+                    {seller.order[0].seller_id.shop_name}
                   </td>
                   <td className='sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-14 py-2 text-gray-700 overflow-hidden text-ellipsis align-middle max-w-[90%] text-center'>
                     {seller.language}
@@ -97,41 +53,8 @@ const AllUsers: React.FC = () => {
                     {seller.status}
                   </td>
                   <td className='sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-14 py-2 text-gray-700 overflow-hidden text-ellipsis align-middle max-w-[90%] text-center'>
-                    <span className='inline-flex overflow-hidden rounded-md border bg-white shadow-sm'>
-                      {seller.status !== 'approved' && (
-                        <button
-                          className='inline-block border-e p-3 text-gray-700 hover:bg-green-300 hover:text-white focus:relative'
-                          title='approve'
-                          onClick={() => {
-                            approveSeller(seller._id).then(() => {
-                              fetchSellers();
-                            });
-                          }}
-                        >
-                          <CheckCircleIcon className='h-6 w-6' />
-                        </button>
-                      )}
-
-                      <button
-                        className='inline-block border-e p-3 text-gray-700 hover:bg-red-500 hover:text-white focus:relative'
-                        title='deny'
-                        onClick={() => {
-                          denySeller(seller._id).then(() => {
-                            fetchSellers();
-                          });
-                        }}
-                      >
-                        <XCircleIcon className='h-6 w-6' />
-                      </button>
-                    </span>
+                    <span className='inline-flex overflow-hidden rounded-md border bg-white shadow-sm'></span>
                   </td>
-
-                  {isHovering && (
-                    <ModalComponent
-                      content={hoveredSeller}
-                      position={mousePosition}
-                    />
-                  )}
                 </tr>
               ))}
             </tbody>
@@ -206,4 +129,4 @@ const AllUsers: React.FC = () => {
   );
 };
 
-export default AllUsers;
+export default ProfileOrders;

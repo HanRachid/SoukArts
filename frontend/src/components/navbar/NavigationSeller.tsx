@@ -35,7 +35,7 @@ const NavigationSeller = () => {
           <Link to='/'>
             <HeartSVG className='xl:w-4 2xl:w-6 font-secondary hover:fill-colorGold' />
           </Link>
-          <Link to='/'>
+          <Link to='/Cart'>
             <CartSVG className='xl:w-4 2xl:w-6 font-secondary hover:fill-colorGold' />
           </Link>
         </div>
@@ -43,8 +43,16 @@ const NavigationSeller = () => {
           <BsShop className='w-6 h-6' />
         </Link>
 
-        <div className='flex items-center' onClick={handleProfileClick}>
-          <img src={avatarNavbar} className='w-8 h-8' alt='imgProfile' />
+        <div className='flex items-center gap-3' onClick={handleProfileClick}>
+          <img
+            src={
+              user.user.profile_image
+                ? user.user.profile_image.url
+                : 'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2.5&w=256&h=256&q=80'
+            }
+            className='inline-block h-10 w-10 rounded-full border-2 border-black-600'
+            alt='imgProfile'
+          />
           <img src={BottomIcon} className='w-5 h-5' alt='BottomIcon' />
         </div>
 

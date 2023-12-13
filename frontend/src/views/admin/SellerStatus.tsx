@@ -1,15 +1,11 @@
 import {useState, useEffect} from 'react';
 import {approveSeller, denySeller, getPendingSeller} from '../../api/seller';
 import {CheckCircleIcon, XCircleIcon} from '@heroicons/react/24/outline';
-import ModalComponent from '../alert/ModalComponent';
 import {Seller} from '../../../types';
 import {router} from '../../App';
 import {useSelector} from 'react-redux';
 const LoginAdmin: React.FC = () => {
   const [sellers, setSellers] = useState<Seller[]>([]);
-  const [hoveredSeller, setHoveredSeller] = useState<Seller | null>(null);
-  const [isHovering, setIsHovering] = useState(false);
-  const [mousePosition, setMousePosition] = useState({x: 0, y: 0});
 
   const fetchSellers = async () => {
     try {
@@ -35,26 +31,6 @@ const LoginAdmin: React.FC = () => {
   useEffect(() => {
     fetchSellers();
   }, []);
-
-  const handleMouseEnter = (e: React.MouseEvent, sellerName: Seller) => {
-    const viewportWidth = window.innerWidth;
-    const cursorX = e.clientX;
-    const spaceLeft = cursorX;
-    const spaceRight = viewportWidth - cursorX;
-    const isSpaceOnRight = spaceRight >= spaceLeft;
-
-    setIsHovering(true);
-    setMousePosition({
-      x: isSpaceOnRight ? cursorX : cursorX - 500, // Adjust width as needed
-      y: e.clientY,
-    });
-    setHoveredSeller(sellerName);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovering(false);
-    setHoveredSeller(null);
-  };
 
   return (
     <div className='flex flex-col h-screen'>
@@ -83,11 +59,7 @@ const LoginAdmin: React.FC = () => {
 
             <tbody className='divide-y divide-gray-200'>
               {sellers.map((seller, index) => (
-                <tr
-                  onMouseEnter={(e) => handleMouseEnter(e, seller)}
-                  onMouseLeave={handleMouseLeave}
-                  key={index}
-                >
+                <tr key={index}>
                   <td className='whitespace-nowrap px-28 py-2 font-medium text-gray-900 text-center'>
                     {seller.shop_name}
                   </td>
@@ -127,13 +99,6 @@ const LoginAdmin: React.FC = () => {
                       </button>
                     </span>
                   </td>
-
-                  {isHovering && (
-                    <ModalComponent
-                      content={hoveredSeller}
-                      position={mousePosition}
-                    />
-                  )}
                 </tr>
               ))}
             </tbody>

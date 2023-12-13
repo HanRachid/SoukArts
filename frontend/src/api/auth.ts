@@ -15,15 +15,8 @@ export async function registerUser(user: Partial<User>) {
     body: JSON.stringify(user),
     mode: 'cors',
   };
-
-  const register = await fetch(url, params);
-
-  const response = await register.json();
-  if (response.error) {
-    if (response.error === 'exists') {
-      throw new Error('User already exists!');
-    }
-  }
+  const loginResponse = await fetch(url, params);
+  const response = await loginResponse.json();
   return response;
 }
 

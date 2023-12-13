@@ -43,10 +43,10 @@ const CartItems = () => {
                     M
                   </span>
                 </div>
-                <p>MarrakechGallery</p>
+                <p>{product.seller_id.shop_name}</p>
               </div>
               <p>
-                <Link to='' className='underline'>
+                <Link to='#' className='underline'>
                   Contact Shop
                 </Link>
               </p>
@@ -56,15 +56,15 @@ const CartItems = () => {
               <div className='flex gap-5'>
                 <div>
                   <img
-                    src={itemImage}
+                    src={product.images[0].url}
                     className='w-36 rounded-tr-lg rounded-bl-lg'
                     alt='itemImage'
                   />
                 </div>
                 <div>
                   <p className='text-red-700'>63 SOLD IN THE PAST 24 HOURS</p>
-                  <p>Custom rug, Fabulous Boujad rug</p>
-                  <p>Primary Color: Brown</p>
+                  <p>{product.title}</p>
+                  <p>Primary Color: {product.primary_color}</p>
                   <p>Size: 2m sur 3m</p>
                   <p className='text-colorGold font-bold text-large'>600dh</p>
                   <p>

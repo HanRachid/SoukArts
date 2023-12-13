@@ -106,3 +106,9 @@ type Seller = {
 };
 
 type PopulatedProduct = ProductUrl & {seller_id: Seller};
+
+type Cart = {product: PopulatedProduct} & {quantity: number};
+
+interface ProductState {
+  cart: Cart[];
+}

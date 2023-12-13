@@ -1,11 +1,12 @@
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import itemImage from '../assets/rugs/rug 10.jpg';
 import {addOrder} from '../api/orders';
 import {router} from '../App';
+import {setCartState} from '../features/cart/cartSlice';
 const ReviewPayment = () => {
   const cart = useSelector((state: any) => state.cart.cart);
   const user = useSelector((state: any) => state.auth.user.user);
-
+  const dispatch = useDispatch();
   console.log(user);
   console.log(cart);
 
@@ -14,6 +15,9 @@ const ReviewPayment = () => {
       router.navigate('/login');
     } else {
       const order = await addOrder(cart, user._id);
+      const confirm = cart;
+      dispatch(setCartState([]));
+      router.navigate('/');
       console.log(order);
     }
   }

@@ -29,30 +29,34 @@ productRouter.post('/addproduct', async (req: Request, res: Response) => {
     seller_id,
   } = req.body;
 
-  const editProduct = await new ProductModel().findByQuery({title: title});
-  if (editProduct) {
-    res.status(409).send({error: 'exists'});
-    return;
-  }
-  const product = await new ProductModel().create({
-    user_id: user_id,
-    title: title,
-    description: description,
-    category: category,
-    images: images,
-    price: price,
-    quantity: quantity,
-    primary_color: primary_color,
-    secondary_color: secondary_color,
-    shipping_time: shipping_time,
-    subcategory: subcategory,
-    style: style,
-    item_type: item_type,
-    free_shipping: free_shipping,
-    seller_id: seller_id,
-  });
+  try {
+    const editProduct = await new ProductModel().findByQuery({title: title});
+    if (editProduct) {
+      res.status(409).send({error: 'exists'});
+      return;
+    }
+    const product = await new ProductModel().create({
+      user_id: user_id,
+      title: title,
+      description: description,
+      category: category,
+      images: images,
+      price: price,
+      quantity: quantity,
+      primary_color: primary_color,
+      secondary_color: secondary_color,
+      shipping_time: shipping_time,
+      subcategory: subcategory,
+      style: style,
+      item_type: item_type,
+      free_shipping: free_shipping,
+      seller_id: seller_id,
+    });
 
-  res.send(product._id);
+    res.send(product._id);
+  } catch (err) {
+    res.status(500).send({error: err});
+  }
 });
 
 // get specific product

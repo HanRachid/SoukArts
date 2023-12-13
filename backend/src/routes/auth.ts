@@ -32,42 +32,50 @@ authRouter.post(
 
     const hashedPassword = await bcrypt.hash(password, saltRounds);
     const user = new UserModel();
-    const checkExists = await user.findByQuery({
-      $or: [{username: username}, {email: email}],
-    });
+    try {
+      const checkExists = await user.findByQuery({
+        $or: [{username: username}, {email: email}],
+      });
 
-    if (checkExists) {
-      res.status(409).send({error: 'exists'});
-      return;
+      if (checkExists) {
+        res.status(409).send({error: 'exists'});
+        return;
+      }
+      const register = await user.create({
+        username: username,
+        email: email,
+        password: hashedPassword,
+        role: 'Client',
+        profile_image: profile_image,
+      });
+      res.status(200).send(register);
+    } catch (err) {
+      res.status(500).send({error: err});
     }
-    const register = await user.create({
-      username: username,
-      email: email,
-      password: hashedPassword,
-      role: 'Client',
-      profile_image: profile_image,
-    });
-    res.status(200).send(register);
   }
 );
 
 authRouter.post(
   '/login',
   async (req: Request, res: Response, next: NextFunction) => {
-    if (req.isAuthenticated()) {
-      const User = req.user as UserInterface & {seller: SellerInterface};
+    try {
+      if (req.isAuthenticated()) {
+        const User = req.user as UserInterface & {seller: SellerInterface};
 
-      if (User.seller_id) {
-        const getSeller = await new SellerModel().findById(
-          User.seller_id.toString()
-        );
-        const response = {...User.toObject(), seller: getSeller};
-        res.send({user: response});
+        if (User.seller_id) {
+          const getSeller = await new SellerModel().findById(
+            User.seller_id.toString()
+          );
+          const response = {...User.toObject(), seller: getSeller};
+          res.send({user: response});
+        } else {
+          res.send({user: User});
+        }
       } else {
-        res.send({user: User});
+        next();
       }
-    } else {
-      next();
+    } catch (err) {
+      res.status(500).send({error: err});
     }
   },
   passport.authenticate('local', {
@@ -79,20 +87,24 @@ authRouter.post(
 authRouter.post(
   '/refreshlogin',
   async (req: Request, res: Response, next: NextFunction) => {
-    if (req.isAuthenticated()) {
-      const User = req.user as UserInterface & {seller: SellerInterface};
+    try {
+      if (req.isAuthenticated()) {
+        const User = req.user as UserInterface & {seller: SellerInterface};
 
-      if (User.seller_id) {
-        const getSeller = await new SellerModel().findById(
-          User.seller_id.toString()
-        );
-        const response = {...User.toObject(), seller: getSeller};
-        res.send({user: response});
+        if (User.seller_id) {
+          const getSeller = await new SellerModel().findById(
+            User.seller_id.toString()
+          );
+          const response = {...User.toObject(), seller: getSeller};
+          res.send({user: response});
+        } else {
+          res.send({user: User});
+        }
       } else {
-        res.send({user: User});
+        res.send({user: {role: 'disconnected'}});
       }
-    } else {
-      res.send({user: {role: 'disconnected'}});
+    } catch (err) {
+      res.status(500).send({error: err});
     }
   }
 );

@@ -9,6 +9,7 @@ import fusionPic from '../assets/home/ShopByStyle/Fusion.jpg';
 import {Pagination} from 'antd';
 import ProductCard from '../components/categoryproducts/ProductCard';
 import SelectOptions from '../components/categoryproducts/Select';
+import {PopulatedProduct} from '../../types';
 
 const styles: {
   name: string;
@@ -35,7 +36,7 @@ const styles: {
 export default function ProductsByyStyle() {
   const {style} = useParams();
   const selectedStyle = styles.find((s) => s.name === style);
-  const products = useSelector((state) => state.products.products);
+  const products = useSelector((state: any) => state.products.products);
   console.log(products);
   console.log(selectedStyle);
 
