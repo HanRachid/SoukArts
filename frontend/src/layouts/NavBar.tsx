@@ -113,7 +113,7 @@ const Navbar = () => {
                   <Link to='/'>
                     <HeartSVG className='w-6 font-secondary hover:fill-colorGold' />
                   </Link>
-                  <Link to='/'>
+                  <Link to='/Cart'>
                     <CartSVG className='w-6 font-secondary hover:fill-colorGold' />
                   </Link>
                 </div>
@@ -137,7 +137,15 @@ const Navbar = () => {
                         </span>
                       </div>
                     </button>
-                    <ProfileDropdown />
+                    <img
+                      src={
+                        user && user.profile_image
+                          ? user.profile_image.url
+                          : 'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2.5&w=256&h=256&q=80'
+                      }
+                      className='inline-block h-10 w-10 rounded-full border-2'
+                      alt='imgProfile'
+                    />
                   </div>
                 ) : (
                   <Link to='/login'>

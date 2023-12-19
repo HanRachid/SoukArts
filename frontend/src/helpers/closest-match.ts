@@ -57,7 +57,7 @@ export default function matchProducts(
     if (
       element.title.toLowerCase().includes(string_.toLowerCase()) &&
       closeMatches.length < 15 &&
-      element.category === category
+      (element.category === category || category === 'Categories')
     ) {
       closeMatches.push(element);
     }
@@ -72,7 +72,7 @@ export default function matchProducts(
     if (
       splitmatch <= 2 &&
       closeMatches.length < 15 &&
-      element.category === category &&
+      (element.category === category || category === 'Categories') &&
       !element.title.toLowerCase().includes(string_.toLowerCase())
     ) {
       closeMatches.push(element);

@@ -12,8 +12,9 @@ import visa from '../../assets/icons/visa.png';
 import mastercard from '../../assets/icons/mastercard.png';
 import paypal from '../../assets/icons/paypal.png';
 import google from '../../assets/icons/google.png';
-import {useSelector} from 'react-redux';
-import {PopulatedProduct} from '../../../types';
+import {useDispatch, useSelector} from 'react-redux';
+import {Cart, PopulatedProduct} from '../../../types';
+import {setCartState} from '../../features/cart/cartSlice';
 
 const CartItems = () => {
   const [isGiftSelected, setIsGiftSelected] = useState(false);
@@ -27,6 +28,8 @@ const CartItems = () => {
   const handlePaymentOptionChange = (option: string | null) => {
     setSelectedPaymentOption(option);
   };
+  const dispatch = useDispatch();
+
   const cart = useSelector((state: any) => state.cart.cart);
   return (
     <section>
@@ -83,7 +86,19 @@ const CartItems = () => {
                       <img src={editIcon} className='w-4 h-4' alt='editIcon' />
                       <span>Edit</span>
                     </div>
-                    <p>Remove</p>
+                    <button
+                      onClick={() => {
+                        dispatch(
+                          setCartState(
+                            cart.filter(
+                              (item: Cart) => index !== cart.indexOf(item)
+                            )
+                          )
+                        );
+                      }}
+                    >
+                      Remove
+                    </button>
                   </div>
                 </div>
               </div>
@@ -315,7 +330,13 @@ const CartItems = () => {
               </div>
               <div className='text-center mt-5'>
                 <Link to='/deliverypayment'>
-                  <button className='bg-colorGold text-colorLight rounded-tr-lg rounded-bl-lg py-2 px-6'>
+                  <button
+                    className={
+                      cart.length > 0
+                        ? 'bg-colorGold text-colorBlack rounded-tr-lg rounded-bl-lg py-2 px-6'
+                        : 'bg-colorGold text-colorBeigeLight rounded-tr-lg rounded-bl-lg py-2 px-6'
+                    }
+                  >
                     Proceed to Checkout
                   </button>
                 </Link>

@@ -154,7 +154,6 @@ export default function EditProduct({
       formData: [],
       user_id: store.getState().auth.user?._id,
     });
-    console.log(product);
 
     for (let image of product.images) {
       const newImages = browsedImages;

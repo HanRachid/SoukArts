@@ -12,16 +12,16 @@ import fusionPic from '../../assets/home/ShopByStyle/Fusion.jpg';
 
 const ShopByStyle = () => {
   return (
-    <>
-      <div>
+    <div className='lg:block hidden'>
+      <div className=''>
         <h1 className='text-7xl mb-14 ml-36 mt-9 font-primary text-colorBlack tracking-widest'>
-          Shop by style
+          Shop by styleaa
         </h1>
       </div>
       <div className='bg-colorBeigeLight/67'>
         <HorizontalScrollCarousel />
       </div>
-    </>
+    </div>
   );
 };
 

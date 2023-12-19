@@ -28,7 +28,6 @@ export default function SearchResult() {
     products.products,
     category as string
   );
-  console.log(matchedProducts);
 
   const subcategories = selectedCategory?.subcategory;
   return (

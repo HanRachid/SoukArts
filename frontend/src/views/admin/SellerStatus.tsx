@@ -11,10 +11,7 @@ const LoginAdmin: React.FC = () => {
     try {
       const response = await getPendingSeller();
       setSellers(
-        response.filter(
-          (seller: Seller) =>
-            seller.status === 'pending' || seller.status === 'denied'
-        )
+        response.filter((seller: Seller) => seller.status === 'pending')
       );
     } catch (error) {
       console.error('Error fetching sellers: ', error);

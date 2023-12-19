@@ -34,7 +34,7 @@ export default function ProductDetailsComponent({
           <img src={profilShop} alt='shop image' className='w-full h-full' />
         </div>
         <div className='flex flex-col items-start gap-3'>
-          <Link to={`/shop/${product.seller_id.shop_name}`}>
+          <Link to={`/store`}>
             <p className=' font-secondary text-center text-base text-colorBlack tracking-widest'>
               {product.seller_id.shop_name}
             </p>

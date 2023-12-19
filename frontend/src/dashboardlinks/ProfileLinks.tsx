@@ -7,9 +7,4 @@ export default [
     path: '/Profile',
     title: 'Profile',
   },
-  {
-    icon: <FaCartShopping />,
-    path: '/Profile/Orders',
-    title: 'Orders',
-  },
 ] as Link[];

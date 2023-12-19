@@ -14,6 +14,8 @@ import spain from '../assets/icons/spain.png';
 import usa from '../assets/icons/usa.png';
 
 import './css/DeliveryPayment.css';
+import {useSelector} from 'react-redux';
+import {router} from '../App';
 
 const DeliveryPayment = () => {
   {
@@ -34,7 +36,13 @@ const DeliveryPayment = () => {
     postalCode: '',
     city: '',
   });
+  const user = useSelector((state: any) =>
+    state.auth.user ? state.auth.user.user : null
+  );
 
+  if (user && user.role === 'disconnected') {
+    router.navigate('/login');
+  }
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {name, value} = e.target;
     setFormData((prevData) => ({
